@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.Common.Jwt;
 using Services.Common.Names;
+using Services.RabbitMq.Extensions;
 
 namespace Services.Identity
 {
@@ -31,6 +32,8 @@ namespace Services.Identity
 
             services.AddHttpContextAccessor();
 
+            services.AddServiceBus();
+
             services.AddCustomAuth(_configuration);
         }
 
@@ -45,6 +48,7 @@ namespace Services.Identity
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseServiceBus(ServiceNames.IdentityService);
 
             app.UseEndpoints(endpoints =>
             {

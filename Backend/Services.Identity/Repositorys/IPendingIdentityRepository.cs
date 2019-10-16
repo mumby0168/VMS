@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace Services.Identity.Repositorys
 {
-    public interface IIdentityRepository
+    public interface IPendingIdentityRepository
     {
         Task<bool> IsEmailInUse(string email);
-
-        Task<Domain.Identity> GetByEmailAndRole(string email, string role);
     }
 }

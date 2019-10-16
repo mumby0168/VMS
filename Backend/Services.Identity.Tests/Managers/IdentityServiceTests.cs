@@ -2,17 +2,31 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using Services.Common.Exceptions;
 using Services.Common.Jwt;
+using Services.Identity.Managers;
+using Services.Identity.Repositorys;
 using Services.Identity.Services;
+using Services.RabbitMq.Messages;
 using Shouldly;
 
 namespace Services.Identity.Tests.Managers
 {
     public class IdentityServiceTests
     {
+        private Mock<IIdentityRepository> _identityRepo;
+        private Mock<IJwtManager> _jwtManager;
+        private Mock<IPendingIdentityRepository> _pendingRepo;
+        private Mock<IServiceBusMessagePublisher> _serviceBusMessagePublisher;
+        private Mock<IPasswordManager> _passwordManager;
+
+        private Mock<Domain.Identity> _identity;
+
+
+
         private const string TestEmail = "test@test.com";
         private const string TestInUseEmail = "test1@test.com";
         private const string TestInValidEmail = "test12@test.com";
@@ -23,7 +37,18 @@ namespace Services.Identity.Tests.Managers
         [SetUp]
         public void Setup()
         {
+            _identityRepo = new Mock<IIdentityRepository>();
+            _jwtManager = new Mock<IJwtManager>();
+            _passwordManager = new Mock<IPasswordManager>();
+            _pendingRepo = new Mock<IPendingIdentityRepository>();
+            _serviceBusMessagePublisher = new Mock<IServiceBusMessagePublisher>();
 
+            _identityRepo.Setup(o => o.IsEmailInUse(TestInUseEmail)).Returns(Task.FromResult(true));
+            _identityRepo.Setup(o => o.IsEmailInUse(TestEmail)).Returns(Task.FromResult(false));
+            _pendingRepo.Setup(o => o.IsEmailInUse(TestInUseEmail)).Returns(Task.FromResult(true));
+            _pendingRepo.Setup(o => o.IsEmailInUse(TestEmail)).Returns(Task.FromResult(false));
+
+            _identity = new Mock<Domain.Identity>();
         }
 
 
@@ -46,6 +71,10 @@ namespace Services.Identity.Tests.Managers
         {
             //Arrange
             var sut = CreateSut();
+            _identityRepo.Setup(o => o.GetByEmailAndRole(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(Task.FromResult(_identity.Object));
+            _passwordManager.Setup(o => o.IsPasswordCorrect(It.IsAny<string>(), It.IsAny<byte[]>(), It.IsAny<byte[]>()))
+                .Returns(false);
 
             //Act
             var exception = Assert.ThrowsAsync<VmsException>(() => sut.SignIn(TestEmail, TestPassword, Roles.SystemAdmin));
@@ -54,10 +83,17 @@ namespace Services.Identity.Tests.Managers
             exception.Code.ShouldBe(Codes.InvalidCredentials);
         }
 
+        [Test]
         public async Task SignIn_Always_ReturnsTokenIfSignInValid()
         {
             //Arrange
             var sut = CreateSut();
+            _jwtManager.Setup(o => o.CreateToken(It.IsAny<Guid>(), It.IsAny<string>(), It.IsAny<string>()))
+                .Returns("TOKEN");
+            _identityRepo.Setup(o => o.GetByEmailAndRole(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(Task.FromResult(_identity.Object));
+            _passwordManager.Setup(o => o.IsPasswordCorrect(It.IsAny<string>(), It.IsAny<byte[]>(), It.IsAny<byte[]>()))
+                .Returns(true);
 
             //Act
             var result = await sut.SignIn(TestEmail, TestPassword, Roles.SystemAdmin);
@@ -160,6 +196,7 @@ namespace Services.Identity.Tests.Managers
             //TODO: verify call to add method on identity repo.
         }
 
-        public IIdentityService CreateSut() => new IdentityService();
+        public IIdentityService CreateSut() => 
+            new IdentityService(_serviceBusMessagePublisher.Object, _identityRepo.Object, _pendingRepo.Object, _passwordManager.Object ,_jwtManager.Object);
     }
 }

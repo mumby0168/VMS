@@ -7,16 +7,16 @@ using Services.Common.Jwt;
 
 namespace Services.Identity.Domain
 {
-    public class Identity : IIdentifiable
+    public class Identity : IDomain
     {
-        public Guid Id { get; }
-        public string Email { get; }
+        public Guid Id { get; private set; }
+        public string Email { get; private set; }
 
-        public byte[] Hash { get; }
+        public byte[] Hash { get; private set; }
 
-        public byte[] Salt { get; }
+        public byte[] Salt { get; private set; }
 
-        public string Role { get; }
+        public string Role { get; private set; }
 
         public Identity(string email, byte[] hash, byte[] salt, string role)
         {
@@ -32,6 +32,11 @@ namespace Services.Identity.Domain
             Hash = hash;
             Salt = salt;
             Role = role;
+        }
+
+        public Identity()
+        {
+            
         }
 
     }

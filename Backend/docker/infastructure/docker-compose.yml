@@ -1,0 +1,45 @@
+version: "3.5"
+
+services:
+  mongo:
+    image: mongo:4
+    container_name: mongo
+    ports:
+      - 27017:27017
+    networks:
+      - cruncher    
+    volumes:
+      - mongo:/data/db
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbit
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - cruncher  
+    volumes: 
+      - rabbitmq:/var/lib/rabbitmq
+
+  # redis:
+  #   image: redis
+  #   container_name: redis
+  #   ports:
+  #     - 6379:6379
+  #   networks:
+  #     - cruncher  
+  #   volumes: 
+  #     - redis:/data
+
+networks:
+  cruncher:
+    name: credit-cruncher-network
+
+volumes:
+  mongo:
+    driver: local
+  rabbitmq:
+    driver: local
+  # redis:
+  #   driver: local

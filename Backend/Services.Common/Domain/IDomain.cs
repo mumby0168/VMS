@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Services.Common.Domain
 {
-    public interface IIdentifiable
+    public interface IDomain
     {
         Guid Id { get; }
     }

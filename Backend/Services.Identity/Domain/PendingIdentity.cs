@@ -6,7 +6,7 @@ using Services.Common.Domain;
 
 namespace Services.Identity.Domain
 {
-    public class PendingIdentity : IIdentifiable
+    public class PendingIdentity : IDomain
     {
         public Guid Id { get; }
 
