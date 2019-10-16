@@ -150,7 +150,7 @@ namespace Services.RabbitMq.Tests
 
             //Assert
             _subscriber.Verify(o =>
-                o.Subscribe<MockCommand>(TestServiceName, It.IsAny<Func<ServiceBusMessageBase<MockCommand>, Task>>()));
+                o.Subscribe<MockCommand>(TestServiceName, It.IsAny<Func<MockCommand, IRequestInfo, Task>>()));
         }
 
         [Test]
@@ -207,7 +207,7 @@ namespace Services.RabbitMq.Tests
             sut.SubscribeEvent<MockEvent>();
 
             //Assert
-            _subscriber.Verify(o => o.Subscribe<MockEvent>(TestServiceName, It.IsAny<Func<ServiceBusMessageBase<MockEvent>, Task>>()));
+            _subscriber.Verify(o => o.Subscribe<MockEvent>(TestServiceName, It.IsAny<Func<MockEvent, IRequestInfo, Task>>()));
         }
 
         [Test]

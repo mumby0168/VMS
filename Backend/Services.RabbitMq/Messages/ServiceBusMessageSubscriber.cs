@@ -22,13 +22,15 @@ namespace Services.RabbitMq.Messages
             _serviceBusConnectionFactory = serviceBusConnectionFactory;
             _serviceBusMessageHandler = serviceBusMessageHandler;
             _factory = factory;
-        }
-        public void Subscribe<T>(string queueName, Func<ServiceBusMessageBase<T>, Task> callback) where T : IServiceBusMessage
+        } 
+
+        public void Subscribe<T>(string queueName, Func<T,IRequestInfo, Task> callback) where T : IServiceBusMessage
         {
             var connection = _serviceBusConnectionFactory.ResolveServiceBusConnection();
             var consumer = _factory.CreateBasicConsumer(connection.Channel);
             consumer.Received += (sender, args) => _serviceBusMessageHandler.Handle(sender, args, callback);
             connection.Channel.BasicConsume(queueName, false, consumer);
         }
+
     }
 }

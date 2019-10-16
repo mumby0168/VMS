@@ -28,20 +28,23 @@ namespace Services.RabbitMq.Messages
             _utf8Wrapper = utf8Wrapper;
         }
 
-        public void PublishCommand<T>(ServiceBusMessageBase<T> message) where T : ICommand
-            => Publish(message);
 
-        public void PublishEvent<T>(ServiceBusMessageBase<T> message) where T : IEvent => Publish(message);
-
-        void Publish<T>(ServiceBusMessageBase<T> message) where T : IServiceBusMessage
+        void Publish<T>(T message, IRequestInfo requestInfo) where T : IServiceBusMessage
         { 
             string routingKey = $"{_serviceSettings.Name}.{typeof(T).Name}";
-            var json = _jsonConvertWrapper.Serialize(message);
+            var messageJson = _jsonConvertWrapper.Serialize(message);
+            var requestJson = _jsonConvertWrapper.Serialize(requestInfo);
+            var json = requestJson + "." + message;
             var body = _utf8Wrapper.GetBytes(json);
             var connection = _serviceBusConnectionFactory.ResolveServiceBusConnection();
             connection.Channel.BasicPublish("micro-service-exchange", routingKey, true, new BasicProperties(), body);
         }
 
-        
+
+        public void PublishCommand<T>(T message, IRequestInfo requestInfo) where T : ICommand =>
+            Publish(message, requestInfo);
+
+        public void PublishEvent<T>(T message, IRequestInfo requestInfo) where T : IEvent =>
+            Publish(message, requestInfo);
     }
 }

@@ -24,7 +24,7 @@ namespace Services.RabbitMq.Tests.Messages
         private Mock<MockCommand> _mockCommand;
         private const string TestDefaultServiceName = "test-service";
         private Mock<MockEvent> _event;
-
+        private Mock<IRequestInfo> _requestInfo;
 
         [SetUp]
         public void Setup()
@@ -40,6 +40,7 @@ namespace Services.RabbitMq.Tests.Messages
             _connection.SetupGet(o => o.Channel).Returns(_model.Object);
             _connectionFactory.Setup(o => o.ResolveServiceBusConnection()).Returns(_connection.Object);
             _event = new Mock<MockEvent>();
+            _requestInfo = new Mock<IRequestInfo>();
         }
 
         [TestCase]
@@ -47,11 +48,9 @@ namespace Services.RabbitMq.Tests.Messages
         {   
             //Arrange
             var sut = CreateSut();
-            var @base = CreateCommandBase<MockCommand>();
-            @base.ServiceBusMessage = _mockCommand.Object;
 
             //Act   
-            sut.PublishCommand(@base);
+            sut.PublishCommand(_mockCommand.Object, _requestInfo.Object);
 
             //Assert
             _model.Verify(o => o.BasicPublish(It.IsAny<string>(), "test-service.MockCommand", true, It.IsAny<IBasicProperties>(), It.IsAny<byte[]>()));
@@ -65,11 +64,10 @@ namespace Services.RabbitMq.Tests.Messages
             var sut = CreateSut();
             var bytes = new byte[] {10, 20, 30, 40};
             _utf8Wrapper.Setup(o => o.GetBytes(It.IsAny<string>())).Returns(bytes);
-            var @base = CreateCommandBase<MockCommand>();
-            @base.ServiceBusMessage = _mockCommand.Object;
+
 
             //Act
-            sut.PublishCommand(@base);
+            sut.PublishCommand(_mockCommand.Object, _requestInfo.Object);
 
             //Assert
             _model.Verify(o => o.BasicPublish("micro-service-exchange", "test-service.MockCommand", true, It.IsAny<IBasicProperties>(), bytes));
@@ -80,11 +78,9 @@ namespace Services.RabbitMq.Tests.Messages
         {
             //Arrange
             var sut = CreateSut();
-            var @base = CreateEventBase<MockEvent>();
-            @base.ServiceBusMessage = _event.Object;
 
             //Act   
-            sut.PublishEvent(@base);
+            sut.PublishEvent(_event.Object, _requestInfo.Object);
 
             //Assert
             _model.Verify(o => o.BasicPublish(It.IsAny<string>(), "test-service.MockEvent", true, It.IsAny<IBasicProperties>(), It.IsAny<byte[]>()));
@@ -95,20 +91,16 @@ namespace Services.RabbitMq.Tests.Messages
         {
             //Arrange
             var sut = CreateSut();
-            var bytes = new byte[] { 10, 20, 30, 40 };
+            var bytes = new byte[] {10, 20, 30, 40};
             _utf8Wrapper.Setup(o => o.GetBytes(It.IsAny<string>())).Returns(bytes);
-            var @base = CreateEventBase<MockEvent>();
-            @base.ServiceBusMessage = _event.Object;
 
             //Act
-            sut.PublishEvent(@base);
+            sut.PublishEvent(_event.Object, _requestInfo.Object);
 
             //Assert
-            _model.Verify(o => o.BasicPublish("micro-service-exchange", "test-service.MockEvent", true, It.IsAny<IBasicProperties>(), bytes));
+            _model.Verify(o => o.BasicPublish("micro-service-exchange", "test-service.MockEvent", true,
+                It.IsAny<IBasicProperties>(), bytes));
         }
-
-        private ServiceBusMessageBase<T> CreateCommandBase<T>() where T : ICommand => new ServiceBusMessageBase<T>();
-        private ServiceBusMessageBase<T> CreateEventBase<T>() where T : IEvent => new ServiceBusMessageBase<T>();
 
         public ServiceBusMessagePublisher CreateSut() => new ServiceBusMessagePublisher(_connectionFactory.Object, _serviceSettings.Object, _jsonWrapper.Object, _utf8Wrapper.Object);
     }

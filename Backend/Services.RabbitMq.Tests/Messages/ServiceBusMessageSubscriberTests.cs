@@ -52,20 +52,7 @@ namespace Services.RabbitMq.Tests.Messages
             _model.Verify(o => o.BasicConsume(TestServiceName, false, It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>(), It.IsAny<IDictionary<string, object>>(), _consumer.Object));
         }
 
-        //[Test]
-        //public void SubscribeAsync_Always_AddsCallbackToConsumer()
-        //{
-        //    //Arrange   
-        //    var sut = CreateSut();  
-
-        //    //Act
-        //    sut.Subscribe<IServiceBusMessage>(TestServiceName, Callback);
-
-        //    //Assert
-        //    _consumer.Verify(o => o.Received += ca);
-        //}
-
-        private Task Callback(ServiceBusMessageBase<IServiceBusMessage> message) => Task.CompletedTask;
+        private Task Callback(IServiceBusMessage message, IRequestInfo requestInfo) => Task.CompletedTask;
 
         
         public ServiceBusMessageSubscriber CreateSut() => new ServiceBusMessageSubscriber(_connectionFactory.Object, _handler.Object, _factory.Object);

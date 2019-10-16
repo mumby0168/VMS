@@ -8,6 +8,6 @@ namespace Services.RabbitMq.Messages
 {
     public interface IServiceBusMessageSubscriber
     {
-        void Subscribe<T>(string queueName, Func<ServiceBusMessageBase<T>, Task> callback) where T : IServiceBusMessage;
+        void Subscribe<T>(string queueName, Func<T,IRequestInfo, Task> callback) where T : IServiceBusMessage;
     }
 }

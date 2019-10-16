@@ -17,11 +17,13 @@ namespace Services.RabbitMq.Messages
             _utf8Wrapper = utf8Wrapper;
         }
 
-        public async Task Handle<T>(object sender, BasicDeliverEventArgs args, Func<ServiceBusMessageBase<T>, Task> callback) where T : IServiceBusMessage
+        public async Task Handle<T>(object sender, BasicDeliverEventArgs args, Func<T, IRequestInfo, Task> callback) where T : IServiceBusMessage
         {
             string json = _utf8Wrapper.GetString(args.Body);
-            var messageBase = _jsonConvertWrapper.Deserialize<ServiceBusMessageBase<T>>(json);
-            await callback.Invoke(messageBase);
+            var split = json.Split('.');
+            var requestInfo = _jsonConvertWrapper.Deserialize<IRequestInfo>(split[0]);
+            var command = _jsonConvertWrapper.Deserialize<T>(split[1]);
+            await callback.Invoke(command, requestInfo);
         }
     }
 }

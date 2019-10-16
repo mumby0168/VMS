@@ -56,7 +56,7 @@ namespace Services.RabbitMq.Managers
             var handler = _handlerFactory.ResolveCommandHandler<T>();
             var serviceFrom = GetServiceName<T>() ?? serviceNamespace;
             if (serviceFrom == null) throw new InvalidOperationException("Please specify the namespace the message is coming from through the [MicroService] attribute or by passing it through this function");
-            _serviceBusMessageSubscriber.Subscribe<T>(_serviceSettings.Name, async messageBase => await handler.HandleAsync(messageBase));
+            _serviceBusMessageSubscriber.Subscribe<T>(_serviceSettings.Name, async (message, info) => await handler.HandleAsync(message, info));
             _serviceBusQueue.Bind(ExchangeName, $"{serviceFrom}.{typeof(T).Name}");
             return this;
         }
@@ -66,7 +66,7 @@ namespace Services.RabbitMq.Managers
             var handler = _handlerFactory.ResolveEventHandler<T>();
             var serviceFrom = GetServiceName<T>() ?? serviceNamespace;
             if(serviceFrom == null) throw new InvalidOperationException("Please specify the namespace the message is coming from through the [MicroService] attribute or by passing it through this function");
-            _serviceBusMessageSubscriber.Subscribe<T>(_serviceSettings.Name, async messageBase => await handler.HandleAsync(messageBase));
+            _serviceBusMessageSubscriber.Subscribe<T>(_serviceSettings.Name, async (message, info) => await handler.HandleAsync(message, info));
             _serviceBusQueue.Bind(ExchangeName, $"{serviceFrom}.{typeof(T).Name}");
             return this;
         }

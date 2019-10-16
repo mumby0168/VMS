@@ -5,7 +5,7 @@ namespace Services.Tests.Mocks.Messaging
 {
     public class MockCommandHandler : ICommandHandler<MockCommand>
     {
-        public virtual Task HandleAsync(ServiceBusMessageBase<MockCommand> messageBase)
+        public Task HandleAsync(MockCommand message, IRequestInfo requestInfo)
         {
             return Task.CompletedTask;
         }

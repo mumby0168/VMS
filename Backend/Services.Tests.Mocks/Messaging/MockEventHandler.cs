@@ -8,10 +8,10 @@ namespace Services.Tests.Mocks.Messaging
 {
     public class MockEventHandler : IEventHandler<MockEvent>
     {
-        public virtual Task HandleAsync(ServiceBusMessageBase<MockEvent> message)
+
+        public Task HandleAsync(MockEvent message, IRequestInfo requestInfo)
         {
             return Task.CompletedTask;
-            
         }
     }
 }

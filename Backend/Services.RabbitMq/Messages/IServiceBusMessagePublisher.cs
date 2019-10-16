@@ -4,8 +4,8 @@ namespace Services.RabbitMq.Messages
 {
     public interface IServiceBusMessagePublisher
     {
-        void PublishCommand<T>(ServiceBusMessageBase<T> message) where T : ICommand;
+        void PublishCommand<T>(T message, IRequestInfo requestInfo) where T : ICommand;
 
-        void PublishEvent<T>(ServiceBusMessageBase<T> message) where T : IEvent;
+        void PublishEvent<T>(T message, IRequestInfo requestInfo) where T : IEvent;
     }
 }
