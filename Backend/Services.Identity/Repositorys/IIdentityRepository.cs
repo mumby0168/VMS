@@ -10,5 +10,6 @@ namespace Services.Identity.Repositorys
         Task<bool> IsEmailInUse(string email);
 
         Task<Domain.Identity> GetByEmailAndRole(string email, string role);
+        Task AddAsync(Domain.Identity identity);
     }
 }

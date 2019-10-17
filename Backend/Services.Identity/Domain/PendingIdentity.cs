@@ -18,5 +18,10 @@ namespace Services.Identity.Domain
             Id = id;
             Email = email;
         }
+
+        public PendingIdentity()
+        {
+            
+        }
     }
 }

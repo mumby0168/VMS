@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Services.Common.Exceptions;
 using Services.Common.Jwt;
+using Services.Identity.Domain;
 using Services.Identity.Managers;
+using Services.Identity.Messages.Events;
 using Services.Identity.Repositorys;
 using Services.RabbitMq.Messages;
 
@@ -43,12 +45,23 @@ namespace Services.Identity.Services
             if(await _identityRepository.IsEmailInUse(email) || await _pendingIdentityRepository.IsEmailInUse(email))
                 throw new VmsException(Codes.EmailInUse, "The email supplied is already in use.");
 
+            var pending = new PendingIdentity(Guid.NewGuid(), email);
 
+            await _pendingIdentityRepository.AddAsync(pending);
+
+            _serviceBus.PublishEvent(new PendingAdminCreated(pending.Id, pending.Email), new RequestInfo());
         }
 
-        public Task CompleteAdmin(Guid code, string password, string passwordMatch, string email)
+        public async Task CompleteAdmin(Guid code, string password, string passwordMatch, string email)
         {
-            throw new NotImplementedException();
+            var pendingIdentity = await _pendingIdentityRepository.GetAsync(code, email);
+            if(pendingIdentity is null) throw new VmsException(Codes.InvalidCredentials, "The credentials are invalid.");
+            if(password != passwordMatch) throw new VmsException(Codes.InvalidCredentials, "The credentials are invalid.");
+
+            var pword = _passwordManager.EncryptPassword(password);
+            var identity = new Domain.Identity(email, pword.Hash, pword.Salt, Roles.SystemAdmin);
+
+            await _identityRepository.AddAsync(identity);
         }
     }
 }

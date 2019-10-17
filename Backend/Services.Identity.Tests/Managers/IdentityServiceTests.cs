@@ -7,9 +7,13 @@ using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using Services.Common.Exceptions;
 using Services.Common.Jwt;
+using Services.Identity.Domain;
 using Services.Identity.Managers;
+using Services.Identity.Messages.Events;
+using Services.Identity.Models;
 using Services.Identity.Repositorys;
 using Services.Identity.Services;
+using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 using Shouldly;
 
@@ -24,6 +28,8 @@ namespace Services.Identity.Tests.Managers
         private Mock<IPasswordManager> _passwordManager;
 
         private Mock<Domain.Identity> _identity;
+        private Mock<PendingIdentity> _pendingIdentity;
+        private Mock<IPassword> _password;
 
 
 
@@ -43,12 +49,17 @@ namespace Services.Identity.Tests.Managers
             _pendingRepo = new Mock<IPendingIdentityRepository>();
             _serviceBusMessagePublisher = new Mock<IServiceBusMessagePublisher>();
 
+            _identity = new Mock<Domain.Identity>();
+            _pendingIdentity = new Mock<PendingIdentity>();
+            _password = new Mock<IPassword>();
+            _password.SetupAllProperties();
+
             _identityRepo.Setup(o => o.IsEmailInUse(TestInUseEmail)).Returns(Task.FromResult(true));
             _identityRepo.Setup(o => o.IsEmailInUse(TestEmail)).Returns(Task.FromResult(false));
             _pendingRepo.Setup(o => o.IsEmailInUse(TestInUseEmail)).Returns(Task.FromResult(true));
             _pendingRepo.Setup(o => o.IsEmailInUse(TestEmail)).Returns(Task.FromResult(false));
-
-            _identity = new Mock<Domain.Identity>();
+            _pendingRepo.Setup(o => o.GetAsync(_validCode, TestEmail)).Returns(Task.FromResult(_pendingIdentity.Object));
+            _passwordManager.Setup(o => o.EncryptPassword(TestPassword)).Returns(_password.Object);
         }
 
 
@@ -126,6 +137,7 @@ namespace Services.Identity.Tests.Managers
 
             //Assert
             //TODO: verify call to add repo method.
+            _pendingRepo.Verify(o => o.AddAsync(It.IsAny<PendingIdentity>()));
         }
 
         [Test]
@@ -138,7 +150,7 @@ namespace Services.Identity.Tests.Managers
             await sut.CreateAdmin(TestEmail);
 
             //Assert
-            //TODO: verify email sent message with correct subject.
+            _serviceBusMessagePublisher.Verify(o => o.PublishEvent(It.IsAny<PendingAdminCreated>(), It.IsAny<IRequestInfo>()));
         }
 
         [Test]
@@ -152,7 +164,7 @@ namespace Services.Identity.Tests.Managers
                 sut.CompleteAdmin(_invalidCode, TestPassword, TestPassword, TestEmail));
 
             //Assert
-            exception.Code.ShouldBe(Codes.InvalidCode);
+            exception.Code.ShouldBe(Codes.InvalidCredentials);
         }
 
         [Test]
@@ -163,10 +175,10 @@ namespace Services.Identity.Tests.Managers
 
             //Act
             var exception = Assert.ThrowsAsync<VmsException>(() =>
-                sut.CompleteAdmin(_invalidCode, TestPassword, "A", TestEmail));
+                sut.CompleteAdmin(_validCode, TestPassword, "A", TestEmail));
 
             //Assert
-            exception.Code.ShouldBe(Codes.InvalidPasswords);
+            exception.Code.ShouldBe(Codes.InvalidCredentials);
         }
 
         [Test]
@@ -180,7 +192,7 @@ namespace Services.Identity.Tests.Managers
                 sut.CompleteAdmin(_validCode, TestPassword, TestPassword, TestInValidEmail));
 
             //Assert
-            exception.Code.ShouldBe(Codes.InvalidEmail);
+            exception.Code.ShouldBe(Codes.InvalidCredentials);
         }
 
         [Test]
@@ -193,7 +205,7 @@ namespace Services.Identity.Tests.Managers
             await sut.CompleteAdmin(_validCode, TestPassword, TestPassword, TestEmail);
 
             //Assert
-            //TODO: verify call to add method on identity repo.
+            _identityRepo.Verify(o => o.AddAsync(It.IsAny<Domain.Identity>()));
         }
 
         public IIdentityService CreateSut() => 
