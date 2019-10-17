@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
@@ -26,6 +27,8 @@ namespace Services.Identity.Tests.Managers
         private Mock<IPendingIdentityRepository> _pendingRepo;
         private Mock<IServiceBusMessagePublisher> _serviceBusMessagePublisher;
         private Mock<IPasswordManager> _passwordManager;
+        private Mock<ILogger<IdentityService>> _logger;
+        private Mock<IRefreshTokenService> _refreshTokenService;
 
         private Mock<Domain.Identity> _identity;
         private Mock<PendingIdentity> _pendingIdentity;
@@ -48,6 +51,8 @@ namespace Services.Identity.Tests.Managers
             _passwordManager = new Mock<IPasswordManager>();
             _pendingRepo = new Mock<IPendingIdentityRepository>();
             _serviceBusMessagePublisher = new Mock<IServiceBusMessagePublisher>();
+            _refreshTokenService = new Mock<IRefreshTokenService>();
+            _logger = new Mock<ILogger<IdentityService>>();
 
             _identity = new Mock<Domain.Identity>();
             _pendingIdentity = new Mock<PendingIdentity>();
@@ -110,7 +115,26 @@ namespace Services.Identity.Tests.Managers
             var result = await sut.SignIn(TestEmail, TestPassword, Roles.SystemAdmin);
 
             //Assert
-            result.ShouldNotBeEmpty();
+            result.ShouldNotBeNull();
+        }
+
+        [Test]
+        public async Task SignIn_Always_CreatesRefreshTokenIfSignInValid()
+        {
+            //Arrange
+            var sut = CreateSut();
+            _jwtManager.Setup(o => o.CreateToken(It.IsAny<Guid>(), It.IsAny<string>(), It.IsAny<string>()))
+                .Returns("TOKEN");
+            _identityRepo.Setup(o => o.GetByEmailAndRole(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(Task.FromResult(_identity.Object));
+            _passwordManager.Setup(o => o.IsPasswordCorrect(It.IsAny<string>(), It.IsAny<byte[]>(), It.IsAny<byte[]>()))
+                .Returns(true);
+
+            //Act
+            await sut.SignIn(TestEmail, TestPassword, Roles.SystemAdmin);
+
+            //Assert
+            _refreshTokenService.Verify(o => o.CreateRefreshToken(_identity.Object.Email));
         }
 
         [Test]
@@ -209,6 +233,6 @@ namespace Services.Identity.Tests.Managers
         }
 
         public IIdentityService CreateSut() => 
-            new IdentityService(_serviceBusMessagePublisher.Object, _identityRepo.Object, _pendingRepo.Object, _passwordManager.Object ,_jwtManager.Object);
+            new IdentityService(_serviceBusMessagePublisher.Object, _identityRepo.Object, _pendingRepo.Object, _passwordManager.Object ,_jwtManager.Object, _logger.Object, _refreshTokenService.Object);
     }
 }

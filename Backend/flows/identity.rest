@@ -1,0 +1,37 @@
+@url = http://localhost:5000
+
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbmRib3hAZG1haW4uY28udWsiLCJuYW1laWQiOiI1MmNjMDEyYy1mY2YxLTQzMjgtYWY5MS1lNGU2OTQ1MzA5MWEiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzEzMTk5NDIsImV4cCI6MTU3MTMzMDc0MiwiaWF0IjoxNTcxMzE5OTQyfQ._pIxO_7cSZOR5WGprrBuZPI0v-w3UxS-riRR0cAxah3eGjeTHG7BsnseSVhXOide0PhJGYfyMDcJKSCa_aYaIA
+
+
+### sign in admin
+
+POST {{url}}/api/admin/sign-in-system
+Content-Type: application/json
+
+{
+    "email": "sandbox@dmain.co.uk",
+    "password": "Pa$$word123"
+}
+
+### create admin
+
+POST {{url}}/api/admin/create
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "email": "test@test.com",
+}
+
+### complete admin
+
+POST {{url}}/api/admin/complete
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "email": "test@test.com",
+    "code": "2a2877a4-c085-40c0-8a44-e04147288808",
+    "password": "Test123",
+    "passwordMatch": "Test123"
+}

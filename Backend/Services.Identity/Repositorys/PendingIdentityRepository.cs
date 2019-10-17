@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using MongoDB.Driver;
+using Services.Common.Mongo;
+using Services.Identity.Domain;
+
+namespace Services.Identity.Repositorys
+{
+    public class PendingIdentityRepository : IPendingIdentityRepository
+    {
+        private readonly IMongoRepository<PendingIdentity> _repository;
+
+        public PendingIdentityRepository(IMongoRepository<PendingIdentity> repository)
+        {
+            _repository = repository;
+        }
+
+        public async Task<bool> IsEmailInUse(string email) => 
+            await _repository.GetAsync(i => i.Email == email) != null;
+
+        public Task AddAsync(PendingIdentity pending) => 
+            _repository.AddAsync(pending);
+
+        public Task<PendingIdentity> GetAsync(Guid code, string email) =>
+            _repository.GetAsync(p => p.Email == email && p.Id == code);
+    }
+}

@@ -14,10 +14,12 @@ using Services.RabbitMq.Interfaces.Factories;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Interfaces.Queues;
 using Services.RabbitMq.Interfaces.Settings;
+using Services.RabbitMq.Interfaces.Wrappers;
 using Services.RabbitMq.Managers;
 using Services.RabbitMq.Messages;
 using Services.RabbitMq.Queue;
 using Services.RabbitMq.Settings;
+using Services.RabbitMq.Wrappers;
 
 namespace Services.RabbitMq.Extensions
 {
@@ -29,7 +31,9 @@ namespace Services.RabbitMq.Extensions
             services.AddSingleton<IServiceBusConnection, ServiceBusConnection>();
             services.AddSingleton<IServiceSettings, ServiceSettings>();
             services.AddSingleton<IServiceBusManager, ServiceBusManager>();
-
+            services.AddTransient<IJsonConvertWrapper, JsonConvertWrapper>();
+            services.AddTransient<IUtf8Wrapper, Utf8Wrapper>();
+            services.AddTransient<IBase64Wrapper, Base64Wrapper>();
             services.AddTransient<IServiceBusQueueFactory, ServiceBusQueueFactory>();
             services.AddTransient<IServiceBusExchangeFactory, ServiceBusExchangeFactory>();
             services.AddTransient<IServiceBusQueue, ServiceBusQueue>();

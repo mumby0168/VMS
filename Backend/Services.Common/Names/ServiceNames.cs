@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SharpCompress.Archives.SevenZip;
 
 namespace Services.Common.Names
 {
     public static class ServiceNames
     {
-        public static string IdentityService => nameof(IdentityService);
+        private const string Prefix = "Services.";
+        public static string Identity => Prefix + nameof(Identity);
     }
 }

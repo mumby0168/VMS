@@ -7,5 +7,6 @@ namespace Services.RabbitMq.Messages
 {
     public class RequestInfo : IRequestInfo
     {
+        public static IRequestInfo Empty => new RequestInfo();
     }
 }
