@@ -1,3 +1,4 @@
+using System;
 using System.Security.Claims;
 using System.Collections.Generic;
 
@@ -9,6 +10,8 @@ namespace System_Admin.Areas.Account.Models
 
          string Role { get; }   
 
-         IEnumerable<Claim> Claims { get; }      
+         IEnumerable<Claim> Claims { get; }     
+
+         DateTime Expiry { get; } 
     }
 }

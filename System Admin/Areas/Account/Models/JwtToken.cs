@@ -8,6 +8,9 @@ namespace System_Admin.Areas.Account.Models
 {
     public class JwtToken : IJwtToken
     {
+
+        private readonly DateTime DateFrom = new DateTime(1970, 1, 1);
+
         private JwtToken(string raw)
         {
             RawToken = raw;
@@ -24,6 +27,15 @@ namespace System_Admin.Areas.Account.Models
             {
                 Role = role.ToString();
             }
+            if(dictionary.TryGetValue("exp", out object expiryInSeconds))
+            {
+                CalculateExpiry((Int64)expiryInSeconds);
+            }
+        }
+
+        private void CalculateExpiry(Int64 secondsSince)
+        {
+            Expiry = DateFrom.AddSeconds(secondsSince);
         }
 
         private byte[] ParseBase64WithoutPadding(string base64)
@@ -43,5 +55,7 @@ namespace System_Admin.Areas.Account.Models
         public string Role { get; private set; }
 
         public IEnumerable<Claim> Claims { get; private set; }
+
+        public DateTime Expiry { get; private set; }
     }
 }
