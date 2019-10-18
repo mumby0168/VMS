@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System_Admin.Clients.Account;
-using System_Admin.Data;
 using System_Admin.Services;
 
 namespace System_Admin
@@ -26,14 +25,13 @@ namespace System_Admin
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddHttpClient();
-            services.AddSingleton<WeatherForecastService>();
             services.AddScoped<AuthenticationStateProvider, SystemAdminAuthenticationStateProvider>();
             services.AddSingleton<ITokenStorageService, TokenStorageService>();
             services.AddSingleton<IAccountClient, AccountClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
