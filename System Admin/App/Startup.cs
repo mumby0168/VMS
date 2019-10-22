@@ -25,7 +25,7 @@ namespace Manager
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddHttpClient();
-            services.AddScoped<AuthenticationStateProvider, SystemAdminAuthenticationStateProvider>();    
+            services.AddScoped<AuthenticationStateProvider, SystemAdminAuthenticationStateProvider>();           
 
             services.AddAccount();
         }
@@ -50,7 +50,7 @@ namespace Manager
 
             var tokenService = app.ApplicationServices.GetService<ITokenStorageService>();
 
-            tokenService.SaveToken("eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbmRib3hAZG1haW4uY28udWsiLCJuYW1laWQiOiI1MmNjMDEyYy1mY2YxLTQzMjgtYWY5MS1lNGU2OTQ1MzA5MWEiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzE3Mzg5OTcsImV4cCI6MTU3MTc0OTc5NywiaWF0IjoxNTcxNzM4OTk3fQ.uMuXL5v8WvV9KkVHAoyfMUsSnt_M0CX43-th-9Ck_El0c_AVIYhgddh3RX1uL7PYbrxIK5vEW_bBl1fETDcI6A");
+            tokenService.SaveToken("eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbmRib3hAZG1haW4uY28udWsiLCJuYW1laWQiOiI1MmNjMDEyYy1mY2YxLTQzMjgtYWY5MS1lNGU2OTQ1MzA5MWEiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzE3NTM2ODgsImV4cCI6MTU3MTc2NDQ4OCwiaWF0IjoxNTcxNzUzNjg4fQ.Bg0lmbc6mZw1c--fxkqAfORkXVYVx1xj874LFXO69c5ydfvlKyxOPG-Jt8Hzzgi5M0ST8P50LLSj-SvjS4oqjA");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

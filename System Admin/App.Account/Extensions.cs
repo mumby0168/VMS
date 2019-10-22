@@ -1,6 +1,7 @@
 using Account.Interfaces.Jwt;
 using Account.Jwt;
 using Account.ViewModels;
+using App.Account.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Account
@@ -10,7 +11,8 @@ namespace Account
         public  static IServiceCollection AddAccount(this IServiceCollection servies)
         {
             servies.AddSingleton<ITokenStorageService, TokenStorageService>();
-            servies.AddScoped<LoginViewModel>();
+            servies.AddScoped<LoginViewModel>();    
+            servies.AddHttpClient<AccountService>();
             return servies;
         }   
     }

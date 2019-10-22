@@ -1,4 +1,4 @@
-@url = http://localhost:5000
+@url = http://localhost:5010
 
 @jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbmRib3hAZG1haW4uY28udWsiLCJuYW1laWQiOiI1MmNjMDEyYy1mY2YxLTQzMjgtYWY5MS1lNGU2OTQ1MzA5MWEiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzEzMTk5NDIsImV4cCI6MTU3MTMzMDc0MiwiaWF0IjoxNTcxMzE5OTQyfQ._pIxO_7cSZOR5WGprrBuZPI0v-w3UxS-riRR0cAxah3eGjeTHG7BsnseSVhXOide0PhJGYfyMDcJKSCa_aYaIA
 

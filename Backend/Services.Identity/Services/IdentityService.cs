@@ -38,10 +38,18 @@ namespace Services.Identity.Services
         {
             var identity = await _identityRepository.GetByEmailAndRole(email, role);
             if (identity is null) 
-                throw new VmsException(Codes.InvalidCredentials, "The credentials provided where incorrect.");
+            {
+                _logger.LogWarning($"No user found with email: {email} role: {role}");
+                throw new VmsException(Codes.InvalidCredentials, "The credentials provided where incorrect.");                
+            }
+                
 
             if(!_passwordManager.IsPasswordCorrect(password, identity.Hash, identity.Salt)) 
+            {
+                _logger.LogWarning($"Incorrect password for: {email}");
                 throw new VmsException(Codes.InvalidCredentials, "The credentials provided where incorrect.");
+            }
+                
 
             var jwt = _jwtManager.CreateToken(identity.Id, identity.Email, identity.Role);
             var refreshToken = await _tokenService.CreateRefreshToken(identity.Email);

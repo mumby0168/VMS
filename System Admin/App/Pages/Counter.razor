@@ -1,4 +1,5 @@
-﻿@page "/counter-test"
+﻿@page "/counter"
+@inject NavigationManager NavigationManager;
 @attribute [Authorize(Roles = "SystemAdmin")]
 
 <h1>Counter</h1>
@@ -7,11 +8,18 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
+<button @onclick="@GoHome">Go Home</button>
+
 @code {
     int currentCount = 0;
 
     void IncrementCount()
     {
         currentCount++;
+    }
+
+    void GoHome()
+    {
+        NavigationManager.NavigateTo("/");
     }
 }

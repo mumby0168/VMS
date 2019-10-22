@@ -1,4 +1,4 @@
-namespace Manager.Clients.Account
+namespace Account.Interfaces.Models
 {
     public class TokenResponse
     {
