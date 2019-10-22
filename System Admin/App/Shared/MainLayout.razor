@@ -1,23 +1,15 @@
 ﻿@inherits LayoutComponentBase
+@namespace Manager.Shared
 
- <AuthorizeView Roles="SystemAdmin">
-    <Authorized>                
+
         <div class="sidebar">
             <NavMenu />
         </div>
-    </Authorized>
-</AuthorizeView>
 
 
-<div class="main">
-     <AuthorizeView Roles="SystemAdmin">
-    <Authorized>                
+
+<div class="main">       
     <div class="content px-4">
         @Body
-    </div>
-    </Authorized>
-    <NotAuthorized>
-        <System_Admin.Pages.Login></System_Admin.Pages.Login>
-    </NotAuthorized>
-</AuthorizeView>
+    </div>   
 </div>

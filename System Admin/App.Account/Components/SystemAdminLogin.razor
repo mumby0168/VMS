@@ -16,23 +16,29 @@
             <div class="form-group">
                 <label for="email">Email:</label>
                 <InputText class="form-control" id="email" @bind-Value="@Model.Email"/>
+                <ValidationMessage For="@(() => Model.Email)"/>
             </div>        
 
             <div class="form-group">
                 <label for="password">Password:</label>
                 <InputText type="password" class="form-control" id="password" @bind-Value="@Model.Password"/>
-            </div>        
+                <ValidationMessage For="@(() => Model.Password)"/>
+            </div>       
 
-            <ValidationSummary/>
+            @if(Model.Error != string.Empty) 
+            {
+                <div class="alert alert-danger" role="alert">
+                    @Model.Error
+                </div>
+            }                         
             
-            <input type="submit" class="btn btn-default"/>
+            <input type="submit" class="btn btn-primary"/>
 
         </EditForm>
 
+       
+        
+                   
         </div>
     </div>
 </div>
-
-@code {
-
-}

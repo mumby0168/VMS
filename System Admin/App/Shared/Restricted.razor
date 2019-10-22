@@ -1,0 +1,15 @@
+@namespace Manager.Shared
+
+<AuthorizeView Roles="SystemAdmin">
+    <Authorized>
+        @ChildContent
+    </Authorized>
+    <NotAuthorized>
+        <SystemAdminLogin></SystemAdminLogin>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set;}
+}

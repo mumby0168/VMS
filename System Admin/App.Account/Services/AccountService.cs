@@ -19,7 +19,11 @@ namespace App.Account.Services
         {
             this._tokenStorage = tokenStorage;            
             client.BaseAddress = new System.Uri(IdentityContext.IdentityBaseUrl);
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {_tokenStorage.Token.RawToken}");
+            if(_tokenStorage.Token != null)
+            {
+                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {_tokenStorage.Token.RawToken}");
+            }
+            
             Client = client;
         }
 
