@@ -1,0 +1,21 @@
+@page "/login"
+@inject LoginViewModel Model;
+@using Account.ViewModels
+
+<h1>Login Here</h1>
+
+<div class="card">
+
+    <EditForm Model="@Model" OnValidSubmit="@Model.Submit">
+
+        <InputText @bind-Value="@Model.Email"/>
+        
+        <button type="submit" class="btn">Submit</button>
+
+    </EditForm>
+
+</div>
+
+@code {
+
+}

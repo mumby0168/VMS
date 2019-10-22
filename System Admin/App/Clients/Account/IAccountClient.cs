@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-namespace System_Admin.Clients.Account
+namespace Manager.Clients.Account
 {
     public interface IAccountClient
     {

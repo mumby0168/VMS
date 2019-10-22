@@ -1,11 +1,11 @@
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
+using Account.Interfaces.Jwt;
 using Newtonsoft.Json;
-using System_Admin.Services;
 using Microsoft.Extensions.Logging;
 
-namespace System_Admin.Clients.Account
+namespace Manager.Clients.Account
 {
     public class AccountClient : IAccountClient
     {

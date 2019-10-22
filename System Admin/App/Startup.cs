@@ -1,13 +1,13 @@
+using Account;
+using Account.Interfaces.Jwt;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System_Admin.Clients.Account;
-using System_Admin.Services;
 
-namespace System_Admin
+namespace Manager
 {
     public class Startup
     {
@@ -25,9 +25,9 @@ namespace System_Admin
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddHttpClient();
-            services.AddScoped<AuthenticationStateProvider, SystemAdminAuthenticationStateProvider>();
-            services.AddSingleton<ITokenStorageService, TokenStorageService>();
-            services.AddSingleton<IAccountClient, AccountClient>();
+            services.AddScoped<AuthenticationStateProvider, SystemAdminAuthenticationStateProvider>();    
+
+            services.AddAccount();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +48,9 @@ namespace System_Admin
 
             // await accountClient.SignIn("sandbox@dmain.co.uk", "Pa$$word123");
 
-            // tokenService.SaveToken("eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbmRib3hAZG1haW4uY28udWsiLCJuYW1laWQiOiI1MmNjMDEyYy1mY2YxLTQzMjgtYWY5MS1lNGU2OTQ1MzA5MWEiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzEzMTk5NDIsImV4cCI6MTU3MTMzMDc0MiwiaWF0IjoxNTcxMzE5OTQyfQ._pIxO_7cSZOR5WGprrBuZPI0v-w3UxS-riRR0cAxah3eGjeTHG7BsnseSVhXOide0PhJGYfyMDcJKSCa_aYaIA");
+            var tokenService = app.ApplicationServices.GetService<ITokenStorageService>();
+
+            tokenService.SaveToken("eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbmRib3hAZG1haW4uY28udWsiLCJuYW1laWQiOiI1MmNjMDEyYy1mY2YxLTQzMjgtYWY5MS1lNGU2OTQ1MzA5MWEiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzE3Mzg5OTcsImV4cCI6MTU3MTc0OTc5NywiaWF0IjoxNTcxNzM4OTk3fQ.uMuXL5v8WvV9KkVHAoyfMUsSnt_M0CX43-th-9Ck_El0c_AVIYhgddh3RX1uL7PYbrxIK5vEW_bBl1fETDcI6A");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

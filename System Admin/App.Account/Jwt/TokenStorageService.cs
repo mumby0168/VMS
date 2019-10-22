@@ -1,6 +1,8 @@
-using System_Admin.Areas.Account.Models;
+using Account.Interfaces.Jwt;
+using Account.Interfaces.Models;
+using Account.Models;
 
-namespace System_Admin.Services
+namespace Account.Jwt
 {
     public class TokenStorageService : ITokenStorageService
     {

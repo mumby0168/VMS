@@ -1,4 +1,4 @@
-namespace System_Admin.Names
+namespace Manager.Names
 {
     public static class Roles
     {

@@ -1,6 +1,6 @@
-using System_Admin.Areas.Account.Models;
+using Account.Interfaces.Models;
 
-namespace System_Admin.Services
+namespace Account.Interfaces.Jwt
 {
     public interface ITokenStorageService
     {

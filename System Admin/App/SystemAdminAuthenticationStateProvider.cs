@@ -1,11 +1,11 @@
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Account.Interfaces.Jwt;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Logging;
-using System_Admin.Services;
 
-namespace System_Admin
+namespace Manager
 {
     public class SystemAdminAuthenticationStateProvider : AuthenticationStateProvider
     {
@@ -33,6 +33,10 @@ namespace System_Admin
             return Task.FromResult(new AuthenticationState(user));
         }
 
-        private Task<AuthenticationState> Invalid() => Task.FromResult(new AuthenticationState(new ClaimsPrincipal()));
+        private Task<AuthenticationState> Invalid()
+        {
+            _logger.LogWarning("Invalid user requested restricted route.");
+            return Task.FromResult(new AuthenticationState(new ClaimsPrincipal()));
+        } 
     }
 }
