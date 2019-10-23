@@ -1,15 +1,37 @@
 @namespace Manager.Shared
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
-<AuthorizeView Roles="SystemAdmin">
-    <Authorized>
-        @ChildContent
-    </Authorized>
-    <NotAuthorized>
-        <SystemAdminLogin></SystemAdminLogin>
-    </NotAuthorized>
-</AuthorizeView>
+@if(IsAuthenticated)
+{
+    @ChildContent
+}
+else
+{
+    <p>You are not authorized to view this page.</p>
+}
+
+
+
+
 
 @code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        if(state is null)
+        {
+            IsAuthenticated = false;
+        }
+        if(state.User.IsInRole("SystemAdmin"))
+        {
+            IsAuthenticated = true;
+        }
+    }
+
+
+    public bool IsAuthenticated { get; set; }
+
     [Parameter]
     public RenderFragment ChildContent { get; set;}
 }

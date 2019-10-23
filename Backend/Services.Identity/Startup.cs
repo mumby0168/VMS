@@ -64,6 +64,7 @@ namespace Services.Identity
             app.UseServiceBus(ServiceNames.Identity);
             app.UseMongo(ServiceNames.Identity);
 
+            CheckSeed(app.ApplicationServices.GetService<IIdentityRepository>(), app.ApplicationServices.GetService<IPasswordManager>());
 
             app.UseEndpoints(endpoints =>
             {
@@ -73,6 +74,15 @@ namespace Services.Identity
                     await context.Response.WriteAsync(ServiceNames.Identity);
                 });
             });
+        }
+
+        private void CheckSeed(IIdentityRepository repo, IPasswordManager passwordManager)
+        {
+            if(repo.GetByEmailAndRole("test@test.com", Roles.SystemAdmin).Result == null)
+            {
+                var password = passwordManager.EncryptPassword("Test123");
+                repo.AddAsync(new Domain.Identity("test@test.com", password.Hash, password.Salt, Roles.SystemAdmin));
+            }
         }
     }
 }

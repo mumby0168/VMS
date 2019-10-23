@@ -1,3 +1,4 @@
+using System.Threading;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -5,16 +6,20 @@ using App.Account.Services;
 using Microsoft.AspNetCore.Blazor.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Account.ViewModels {
     public class LoginViewModel {
         private readonly AccountService _accountService;
         private readonly NavigationManager _navigationManager;
         private readonly ILogger<LoginViewModel> _logger;
-        public LoginViewModel (AccountService accountService, NavigationManager navigationManager, ILogger<LoginViewModel> logger) {
-            this._logger = logger;
-            this._navigationManager = navigationManager;
-            this._accountService = accountService;
+        private readonly AuthenticationStateProvider _authenticationStateProvider;
+
+        public LoginViewModel (AccountService accountService, NavigationManager navigationManager, ILogger<LoginViewModel> logger, AuthenticationStateProvider authenticationStateProvider) {
+            _logger = logger;
+            _authenticationStateProvider = authenticationStateProvider;
+            _navigationManager = navigationManager;
+            _accountService = accountService;
             Error = string.Empty;
         }
 
@@ -33,8 +38,9 @@ namespace Account.ViewModels {
 
             var success = await _accountService.SignIn(Email, Password);
             if (success) {
-                _logger.LogInformation($"Succesful login for: {Email}.");
-                _navigationManager.NavigateTo ("counter");
+                _logger.LogInformation($"Succesful login for: {Email}.");       
+                     
+                _navigationManager.NavigateTo("counter");            
                 return;
             }
         

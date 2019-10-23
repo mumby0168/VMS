@@ -10,7 +10,7 @@
     </div>
     <div class="card-body">
 
-        <EditForm Model="@Model" OnValidSubmit="@Model.Submit">
+        <EditForm Model="@Model" OnValidSubmit="@Submit">
             <DataAnnotationsValidator/>            
 
             <div class="form-group">
@@ -34,11 +34,14 @@
             
             <input type="submit" class="btn btn-primary"/>
 
-        </EditForm>
-
-       
-        
-                   
+        </EditForm>             
         </div>
     </div>
 </div>
+
+@code {
+    private async Task Submit()
+    {
+        await Model.Submit();        
+    }
+}
