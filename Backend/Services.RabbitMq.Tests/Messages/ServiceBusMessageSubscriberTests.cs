@@ -49,7 +49,7 @@ namespace Services.RabbitMq.Tests.Messages
             sut.Subscribe<IServiceBusMessage>(TestServiceName, Callback);
 
             //Assert
-            _model.Verify(o => o.BasicConsume(TestServiceName, false, It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>(), It.IsAny<IDictionary<string, object>>(), _consumer.Object));
+            _model.Verify(o => o.BasicConsume(TestServiceName, true, It.IsAny<string>(), It.IsAny<bool>(), It.IsAny<bool>(), It.IsAny<IDictionary<string, object>>(), _consumer.Object));
         }
 
         private Task Callback(IServiceBusMessage message, IRequestInfo requestInfo) => Task.CompletedTask;

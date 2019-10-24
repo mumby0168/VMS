@@ -29,7 +29,7 @@ namespace Services.RabbitMq.Messages
             var connection = _serviceBusConnectionFactory.ResolveServiceBusConnection();
             var consumer = _factory.CreateBasicConsumer(connection.Channel);
             consumer.Received += (sender, args) => _serviceBusMessageHandler.Handle(sender, args, callback);
-            connection.Channel.BasicConsume(queueName, false, consumer);
+            connection.Channel.BasicConsume(queueName, true, consumer);
         }
 
     }

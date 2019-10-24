@@ -13,7 +13,8 @@ namespace Account
         {
             servies.AddSingleton<ITokenStorageService, TokenStorageService>();
             servies.AddScoped<LoginViewModel>();    
-            servies.AddScoped<CreateAdminViewModel>();    
+            servies.AddScoped<CreateAdminViewModel>(); 
+            servies.AddScoped<CompleteAdminViewModel>();    
             servies.AddHttpClient<AccountService>();
             return servies;
         }   

@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Microsoft.Extensions.Logging;
+using Moq;
 using NUnit.Framework;
 using RabbitMQ.Client;
 using Services.RabbitMq.Interfaces;
@@ -25,11 +26,13 @@ namespace Services.RabbitMq.Tests.Messages
         private const string TestDefaultServiceName = "test-service";
         private Mock<MockEvent> _event;
         private Mock<IRequestInfo> _requestInfo;
+        private Mock<ILogger<ServiceBusMessagePublisher>> _logger;
 
         [SetUp]
         public void Setup()
         {
             _model = new Mock<IModel>();
+            _logger = new Mock<ILogger<ServiceBusMessagePublisher>>();
             _connection = new Mock<IServiceBusConnection>();
             _connectionFactory = new Mock<IServiceBusConnectionFactory>();
             _jsonWrapper = new Mock<IJsonConvertWrapper>();
@@ -102,6 +105,6 @@ namespace Services.RabbitMq.Tests.Messages
                 It.IsAny<IBasicProperties>(), bytes));
         }
 
-        public ServiceBusMessagePublisher CreateSut() => new ServiceBusMessagePublisher(_connectionFactory.Object, _serviceSettings.Object, _jsonWrapper.Object, _utf8Wrapper.Object);
+        public ServiceBusMessagePublisher CreateSut() => new ServiceBusMessagePublisher(_connectionFactory.Object, _serviceSettings.Object, _jsonWrapper.Object, _utf8Wrapper.Object, _logger.Object);
     }
 }

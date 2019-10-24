@@ -20,8 +20,8 @@ namespace Services.RabbitMq.Messages
         public async Task Handle<T>(object sender, BasicDeliverEventArgs args, Func<T, IRequestInfo, Task> callback) where T : IServiceBusMessage
         {
             string json = _utf8Wrapper.GetString(args.Body);
-            var split = json.Split('.');
-            var requestInfo = _jsonConvertWrapper.Deserialize<IRequestInfo>(split[0]);
+            var split = json.Split('\t');
+            var requestInfo = _jsonConvertWrapper.Deserialize<RequestInfo>(split[0]);
             var command = _jsonConvertWrapper.Deserialize<T>(split[1]);
             await callback.Invoke(command, requestInfo);
         }

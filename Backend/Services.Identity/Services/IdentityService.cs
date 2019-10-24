@@ -75,6 +75,10 @@ namespace Services.Identity.Services
         {
             var pendingIdentity = await _pendingIdentityRepository.GetAsync(code, email);
             if(pendingIdentity is null) throw new VmsException(Codes.InvalidCredentials, "The credentials are invalid.");
+
+            var existing = await _identityRepository.GetByEmailAndRole(email, Roles.SystemAdmin);
+            if(existing != null) throw  new VmsException(Codes.EmailInUse, "Their has already been an account created with this email.");
+
             if(password != passwordMatch) throw new VmsException(Codes.InvalidCredentials, "The credentials are invalid.");
 
             var pword = _passwordManager.EncryptPassword(password);

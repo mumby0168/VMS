@@ -54,6 +54,7 @@ namespace Services.RabbitMq.Managers
         public IServiceBusManager SubscribeCommand<T>(string serviceNamespace = null) where T : ICommand
         {
             var handler = _handlerFactory.ResolveCommandHandler<T>();
+            if (handler is null) throw new InvalidOperationException("Please register the command handler for: " + typeof(T).Name);
             var serviceFrom = GetServiceName<T>() ?? serviceNamespace;
             if (serviceFrom == null) throw new InvalidOperationException("Please specify the namespace the message is coming from through the [MicroService] attribute or by passing it through this function");
             _serviceBusMessageSubscriber.Subscribe<T>(_serviceSettings.Name, async (message, info) => await handler.HandleAsync(message, info));
@@ -64,6 +65,7 @@ namespace Services.RabbitMq.Managers
         public IServiceBusManager SubscribeEvent<T>(string serviceNamespace = null) where T : IEvent
         {
             var handler = _handlerFactory.ResolveEventHandler<T>();
+            if (handler is null) throw new InvalidOperationException("Please register the event handler for: " + typeof(T).Name);
             var serviceFrom = GetServiceName<T>() ?? serviceNamespace;
             if(serviceFrom == null) throw new InvalidOperationException("Please specify the namespace the message is coming from through the [MicroService] attribute or by passing it through this function");
             _serviceBusMessageSubscriber.Subscribe<T>(_serviceSettings.Name, async (message, info) => await handler.HandleAsync(message, info));

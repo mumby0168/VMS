@@ -20,7 +20,7 @@ Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
-    "email": "test13@test.com",
+    "email": "test57563@test.com",
 }
 
 ### complete admin

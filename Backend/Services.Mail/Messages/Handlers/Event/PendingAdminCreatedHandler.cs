@@ -16,7 +16,7 @@ namespace Services.Mail.Messages.Handlers.Event
         
         public Task HandleAsync(PendingAdminCreated message, IRequestInfo requestInfo)
         {
-            _logger.LogInformation(message.Email);
+            _logger.LogInformation($"Email sent with code: {message.Code}");
             return  Task.CompletedTask;
         }
     }

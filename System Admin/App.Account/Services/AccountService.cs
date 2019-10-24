@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -47,7 +48,15 @@ namespace App.Account.Services
         public async Task<bool> SignIn(string username, string password)
         {
             var message = new StringContent(JsonConvert.SerializeObject(new {Email = username, Password = password}), Encoding.UTF8, "application/json");            
-            var response = await Client.PostAsync("admin/sign-in-system", message);
+            HttpResponseMessage response;
+            try
+            {
+                response = await Client.PostAsync("admin/sign-in-system", message);    
+            }
+            catch (HttpRequestException)
+            {
+                return false;
+            }  
 
             if(response.IsSuccessStatusCode)
             {
@@ -64,23 +73,46 @@ namespace App.Account.Services
         {
             CheckHeaders();
             var message = new StringContent(JsonConvert.SerializeObject(new {Email = email}), Encoding.UTF8, "application/json");
-            var response = await Client.PostAsync("admin/create", message);
+            HttpResponseMessage response;
+            try
+            {
+                response = await Client.PostAsync("admin/create", message);    
+            }
+            catch (HttpRequestException)
+            {
+                return ServiceError.Standard;
+            }  
 
             if(response.IsSuccessStatusCode)
             {
                 return null;
             }
-            else if(response.StatusCode == System.Net.HttpStatusCode.BadRequest)
-            {
-                var json = await response.Content.ReadAsStringAsync();
-                var res = JsonConvert.DeserializeObject<ServiceError>(json);
-                return res;
-            }
-            else 
-            {
-                return new ServiceError(string.Empty, "The service may be down. Please try again later.");
-            }
+            else if(response.StatusCode == System.Net.HttpStatusCode.BadRequest) 
+                return await ServiceError.Deserialize(response);
+            return ServiceError.Standard;
 
+        }
+
+        public async Task<ServiceError> CompleteAdmin(string email, Guid code, string password, string passwordMatch)
+        {
+            var message = new StringContent(JsonConvert.SerializeObject(new {Email = email, Code = code, Password = password, PasswordMatch = passwordMatch}), Encoding.UTF8, "application/json");
+            HttpResponseMessage response;
+            try
+            {
+                response = await Client.PostAsync("admin/complete", message);    
+            }
+            catch (HttpRequestException)
+            {
+                return ServiceError.Standard;
+            }            
+            if(response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+            else if(response.StatusCode == System.Net.HttpStatusCode.BadRequest) 
+                return await ServiceError.Deserialize(response);
+            
+            return ServiceError.Standard;
         }
     }
 }

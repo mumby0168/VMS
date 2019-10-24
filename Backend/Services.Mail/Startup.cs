@@ -12,7 +12,9 @@ using Services.Common.Jwt;
 using Services.Common.Middleware;
 using Services.Common.Names;
 using Services.Mail.Messages.Events;
+using Services.Mail.Messages.Handlers.Event;
 using Services.RabbitMq.Extensions;
+using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Services.Mail
 {
@@ -32,6 +34,7 @@ namespace Services.Mail
             services.AddServiceBus();
             services.AddCustomAuth(config);
             services.AddTransient<VmsExceptionMiddleware>();
+            services.AddTransient<IEventHandler<PendingAdminCreated>, PendingAdminCreatedHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

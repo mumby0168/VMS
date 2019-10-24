@@ -37,7 +37,7 @@ namespace Services.RabbitMq.Messages
             string routingKey = $"{_serviceSettings.Name}.{typeof(T).Name}";
             var messageJson = _jsonConvertWrapper.Serialize(message);
             var requestJson = _jsonConvertWrapper.Serialize(requestInfo);
-            var json = requestJson + "." + message;
+            var json = requestJson + "\t" + messageJson;
             var body = _utf8Wrapper.GetBytes(json);
             var connection = _serviceBusConnectionFactory.ResolveServiceBusConnection();
             connection.Channel.BasicPublish("micro-service-exchange", routingKey, true, new BasicProperties(), body);
