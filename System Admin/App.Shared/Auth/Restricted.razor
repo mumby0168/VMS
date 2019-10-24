@@ -1,0 +1,64 @@
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IPubSubService PubSubService;
+@namespace App.Shared.Auth
+
+@if(IsAuthenticated)
+{
+    @Yes
+}
+else
+{
+    @No    
+}
+
+
+
+
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        PubSubService.Subscribe<SuccessfulLoginEvent>(Notfiy);
+        await CheckState();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await CheckState();
+        await base.OnParametersSetAsync();
+    }
+
+    public async Task Notfiy()
+    {
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+    private async Task CheckState()
+    {
+        var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        if(state is null)
+        {
+            IsAuthenticated = false;
+        }
+        if(state.User.IsInRole("SystemAdmin"))
+        {
+            IsAuthenticated = true;
+        }
+        else {
+            IsAuthenticated = false;
+        }        
+    }
+
+    
+
+
+    public bool IsAuthenticated { get; set; }
+
+    [Parameter]
+    public RenderFragment Yes { get; set;}
+
+    [Parameter]
+    public RenderFragment No { get; set;}
+}

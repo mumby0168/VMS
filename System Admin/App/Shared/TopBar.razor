@@ -1,0 +1,29 @@
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+
+<div class="top-row">
+    @if(IsLoggedIn)    
+    {             
+            <NavLink class="nav-link" href="create-admin">
+                <span class="oi oi-plus" aria-hidden="true"></span> Create Admin
+            </NavLink>        
+            <NavLink class="nav-link" href="system-admin-login">
+                <span class="oi oi-account-logout" aria-hidden="true"></span> Logout
+            </NavLink>
+    }
+    else
+    {
+        <NavLink class="nav-link" href="system-admin-login">
+                <span class="oi oi-account-login" aria-hidden="true"></span> Login
+        </NavLink>        
+    }
+</div>
+
+
+@code {
+    [Parameter]
+    public bool IsLoggedIn { get; set; }
+}
+
+
+

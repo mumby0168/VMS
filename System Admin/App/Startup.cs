@@ -1,5 +1,7 @@
 using Account;
 using Account.Interfaces.Jwt;
+using App.Shared;
+using Blazored.Toast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -25,7 +27,9 @@ namespace Manager
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddHttpClient();            
-            services.AddScoped<AuthenticationStateProvider, SystemAdminAuthenticationStateProvider>();           
+            services.AddScoped<AuthenticationStateProvider, SystemAdminAuthenticationStateProvider>();     
+            services.AddPubSubService();      
+            services.AddBlazoredToast();
 
             services.AddAccount();
         }

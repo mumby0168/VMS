@@ -1,11 +1,17 @@
 ﻿@page "/counter"
+@inject IToastService ToastService
 
 
 <Restricted>
-  <p>Current count: @currentCount</p>
+    <Yes>
+        <p>Current count: @currentCount</p>
 
-    <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>    
+        <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>    
+    </Yes>
+  
 </Restricted>
+
+<button @onclick="@(() => ToastService.ShowSuccess("Success Toast"))">Display Toast</button>
  
     
 @code {

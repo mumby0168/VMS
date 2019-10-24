@@ -2,14 +2,40 @@
 @namespace Manager.Shared
 
 
+        
+
+<Restricted>
+    <Yes>
         <div class="sidebar">
             <NavMenu />
         </div>
+    </Yes>    
+</Restricted>
 
 
 
-<div class="main">       
+
+<div class="main">   
+
+<BlazoredToasts Position="ToastPosition.TopRight"
+                Timeout="5"
+                SuccessIconClass="oi oi-thumb-up">
+
+</BlazoredToasts>
+
+<Restricted>
+    <Yes>
+        <System_Admin.Shared.TopBar IsLoggedIn="true"></System_Admin.Shared.TopBar>    
+    </Yes>
+    <No>
+        <System_Admin.Shared.TopBar IsLoggedIn="false"></System_Admin.Shared.TopBar>    
+    </No>
+</Restricted>
+    
+
     <div class="content px-4">
         @Body
     </div>   
 </div>
+
+

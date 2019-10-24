@@ -1,0 +1,41 @@
+@page "/create-admin"
+@inject CreateAdminViewModel Model
+
+<Restricted>
+    <Yes>
+        <div class="card">
+            <div class="card-header">
+                <h2>Create System Admin</h2>
+            </div>
+            <div class="card-body">
+                <EditForm  Model="@Model" OnValidSubmit="@Model.Submit">
+
+                    <DataAnnotationsValidator/>            
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <InputText class="form-control" id="email" @bind-Value="@Model.Email"/>
+                        <ValidationMessage For="@(() => Model.Email)"/>
+                    </div>        
+
+                    @if(Model.Error != string.Empty) 
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @Model.Error
+                        </div>
+                    } 
+
+                    <input type="submit" class="btn btn-primary"/>
+
+                </EditForm>
+            </div>
+        </div>
+        
+    </Yes>
+</Restricted>
+
+
+
+@code {
+
+}
