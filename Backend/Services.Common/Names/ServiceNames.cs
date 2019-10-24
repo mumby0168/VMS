@@ -9,5 +9,7 @@ namespace Services.Common.Names
     {
         private const string Prefix = "Services.";
         public static string Identity => Prefix + nameof(Identity);
+
+        public static string Mail => Prefix + nameof(Mail);
     }
 }

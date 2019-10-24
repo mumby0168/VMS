@@ -1,6 +1,6 @@
 @url = http://localhost:5010
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbmRib3hAZG1haW4uY28udWsiLCJuYW1laWQiOiI1MmNjMDEyYy1mY2YxLTQzMjgtYWY5MS1lNGU2OTQ1MzA5MWEiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzEzMTk5NDIsImV4cCI6MTU3MTMzMDc0MiwiaWF0IjoxNTcxMzE5OTQyfQ._pIxO_7cSZOR5WGprrBuZPI0v-w3UxS-riRR0cAxah3eGjeTHG7BsnseSVhXOide0PhJGYfyMDcJKSCa_aYaIA
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIxM2Y1MjQzZi1hZTRiLTRkNTEtYmQ5Yy0yMmI3MTU3M2VkZjEiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzE5MTA4ODQsImV4cCI6MTU3MTkyMTY4NCwiaWF0IjoxNTcxOTEwODg0fQ.STkMcdC-07WbKP9IShJl1fIj9tSYpoPXRDxzxaBYatsC-70McILscprYJ7N9J1HtbTdBc27jtywQwa5LPphv3Q
 
 
 ### sign in admin
@@ -9,8 +9,8 @@ POST {{url}}/api/admin/sign-in-system
 Content-Type: application/json
 
 {
-    "email": "sandbox@dmain.co.uk",
-    "password": "Pa$$word123"
+    "email": "test@test.com",
+    "password": "Test123"
 }
 
 ### create admin
@@ -20,7 +20,7 @@ Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
-    "email": "test@test.com",
+    "email": "test13@test.com",
 }
 
 ### complete admin

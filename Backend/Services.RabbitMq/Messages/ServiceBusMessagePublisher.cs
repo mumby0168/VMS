@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using RabbitMQ.Client.Framing;
 using Services.RabbitMq.Attributes;
 using Services.RabbitMq.Interfaces;
@@ -19,13 +20,15 @@ namespace Services.RabbitMq.Messages
         private readonly IServiceSettings _serviceSettings;
         private readonly IJsonConvertWrapper _jsonConvertWrapper;
         private readonly IUtf8Wrapper _utf8Wrapper;
+        private readonly ILogger<ServiceBusMessagePublisher> _logger;
 
-        public ServiceBusMessagePublisher(IServiceBusConnectionFactory serviceBusConnectionFactory, IServiceSettings serviceSettings, IJsonConvertWrapper jsonConvertWrapper, IUtf8Wrapper utf8Wrapper)
+        public ServiceBusMessagePublisher(IServiceBusConnectionFactory serviceBusConnectionFactory, IServiceSettings serviceSettings, IJsonConvertWrapper jsonConvertWrapper, IUtf8Wrapper utf8Wrapper, ILogger<ServiceBusMessagePublisher> logger)
         {
             _serviceBusConnectionFactory = serviceBusConnectionFactory;
             _serviceSettings = serviceSettings;
             _jsonConvertWrapper = jsonConvertWrapper;
             _utf8Wrapper = utf8Wrapper;
+            this._logger = logger;
         }
 
 
@@ -38,6 +41,7 @@ namespace Services.RabbitMq.Messages
             var body = _utf8Wrapper.GetBytes(json);
             var connection = _serviceBusConnectionFactory.ResolveServiceBusConnection();
             connection.Channel.BasicPublish("micro-service-exchange", routingKey, true, new BasicProperties(), body);
+            _logger.LogInformation($"Published: {routingKey}");
         }
 
 
