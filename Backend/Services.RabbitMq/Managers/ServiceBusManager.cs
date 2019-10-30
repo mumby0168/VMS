@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using Services.RabbitMq.Attributes;
 using Services.RabbitMq.Interfaces;
@@ -20,11 +21,12 @@ namespace Services.RabbitMq.Managers
         private readonly IServiceSettings _serviceSettings;
         private readonly IServiceBusConnectionFactory _serviceBusConnectionFactory;
         private readonly IHandlerFactory _handlerFactory;
+        private readonly IServiceProvider _serviceProvider;
         private IServiceBusQueue _serviceBusQueue;
         private const string ExchangeName = "micro-service-exchange";
 
         public ServiceBusManager(IServiceBusConnection connection, IServiceBusExchangeFactory serviceBusExchangeFactory,
-            IServiceBusQueueFactory serviceBusQueueFactory, IServiceBusMessageSubscriber serviceBusMessageSubscriber, IServiceSettings serviceSettings, IServiceBusConnectionFactory serviceBusConnectionFactory, IHandlerFactory handlerFactory)
+            IServiceBusQueueFactory serviceBusQueueFactory, IServiceBusMessageSubscriber serviceBusMessageSubscriber, IServiceSettings serviceSettings, IServiceBusConnectionFactory serviceBusConnectionFactory, IHandlerFactory handlerFactory, IServiceProvider serviceProvider)
         {
             _connection = connection;
             _serviceBusExchangeFactory = serviceBusExchangeFactory;
@@ -33,9 +35,10 @@ namespace Services.RabbitMq.Managers
             _serviceSettings = serviceSettings;
             _serviceBusConnectionFactory = serviceBusConnectionFactory;
             _handlerFactory = handlerFactory;
+            _serviceProvider = serviceProvider;
         }
 
-        public void CreateConnection(IServiceBusSettings serviceBusSettings, IServiceSettings serviceSettings)
+        public void CreateConnection(IServiceBusSettings serviceBusSettings, IServiceSettings serviceSettings, bool declareQueue = true)
         {
             var factory = _serviceBusConnectionFactory.CreateConnectionFactory(serviceBusSettings.HostName);
             var connection = factory.CreateConnection();
@@ -46,8 +49,12 @@ namespace Services.RabbitMq.Managers
             var exchange = _serviceBusExchangeFactory.CreateServiceBusExchange();
             exchange.CreateExchange(ExchangeName, "topic");
 
-            _serviceBusQueue =_serviceBusQueueFactory.CreateServiceBusQueue();
-            _serviceBusQueue.DeclareQueue(serviceSettings.Name);
+            if (declareQueue)
+            {
+                _serviceBusQueue = _serviceBusQueueFactory.CreateServiceBusQueue();
+                _serviceBusQueue.DeclareQueue(serviceSettings.Name);
+            }
+
             _serviceSettings.Name = serviceSettings.Name;
         }
 
@@ -71,6 +78,27 @@ namespace Services.RabbitMq.Managers
             _serviceBusMessageSubscriber.Subscribe<T>(_serviceSettings.Name, async (message, info) => await handler.HandleAsync(message, info));
             _serviceBusQueue.Bind(ExchangeName, $"{serviceFrom}.{typeof(T).Name}");
             return this;
+        }
+
+        public IServiceBusManager SubscribeAllEvents<T>(Assembly currentAssembly) where T : IGenericEventHandler
+        {
+            var types = currentAssembly.GetTypes();
+            var eventTypes = types.Where(t => typeof(IEvent).IsAssignableFrom(t));
+            foreach (var eventType in eventTypes)
+            {
+                var handler = (T)_serviceProvider.GetService(typeof(T));
+                _serviceBusMessageSubscriber.CustomSubscribe(_serviceSettings.Name, async (message, info) => await handler.HandleAsync(message, info));
+                var serviceName = eventType.GetCustomAttribute<MicroService>()?.ServiceName;
+                if(serviceName is null) throw new InvalidOperationException($"Please add a [MicroService] attribute to type: {eventType.Name}");
+                _serviceBusQueue.Bind(ExchangeName, $"{serviceName}.{eventType.Name}");
+            }
+
+            return this;
+        }
+
+        public IServiceBusManager SubscribeAllCommands<T>(Assembly currentAssembly)
+        {
+            throw new NotImplementedException();
         }
 
         private string GetServiceName<T>() where T : IServiceBusMessage

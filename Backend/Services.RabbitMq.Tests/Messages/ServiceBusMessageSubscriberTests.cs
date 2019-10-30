@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using RabbitMQ.Client;
@@ -19,6 +20,7 @@ namespace Services.RabbitMq.Tests.Messages
         private Mock<IServiceBusMessageHandler> _handler;
         private Mock<IServiceBusConsumerFactory> _factory;
         private Mock<IServiceBusMessage> _message;
+        private Mock<ILogger<ServiceBusMessageSubscriber>> _logger;
         private const string TestServiceName = "Services.Test";
         private Mock<EventingBasicConsumer> _consumer;
 
@@ -32,6 +34,7 @@ namespace Services.RabbitMq.Tests.Messages
             _connection.SetupGet(o => o.Channel).Returns(_model.Object);
             _connectionFactory.Setup(o => o.ResolveServiceBusConnection()).Returns(_connection.Object);
             _handler = new Mock<IServiceBusMessageHandler>();
+            _logger = new Mock<ILogger<ServiceBusMessageSubscriber>>();
             _factory = new Mock<IServiceBusConsumerFactory>();
             _message = new Mock<IServiceBusMessage>();
             _consumer = new Mock<EventingBasicConsumer>(null);
@@ -55,6 +58,6 @@ namespace Services.RabbitMq.Tests.Messages
         private Task Callback(IServiceBusMessage message, IRequestInfo requestInfo) => Task.CompletedTask;
 
         
-        public ServiceBusMessageSubscriber CreateSut() => new ServiceBusMessageSubscriber(_connectionFactory.Object, _handler.Object, _factory.Object);
+        public ServiceBusMessageSubscriber CreateSut() => new ServiceBusMessageSubscriber(_connectionFactory.Object, _handler.Object, _factory.Object, _logger.Object);
     }
 }

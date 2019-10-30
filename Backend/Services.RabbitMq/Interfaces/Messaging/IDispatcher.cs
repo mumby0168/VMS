@@ -6,6 +6,6 @@ namespace Services.RabbitMq.Interfaces.Messaging
     {
         Task DispatchCommand<TCommand>(TCommand message, IRequestInfo requestInfo) where TCommand : ICommand;
 
-        Task<TReturns> DispatchQuery<TReturns, TQuery>(TQuery query) where TQuery : IQuery;
+        //Task<TReturns> DispatchQuery<TReturns, TQuery>(TQuery query) where TQuery : IQuery;
     }
 }

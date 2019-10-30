@@ -7,5 +7,9 @@ namespace Services.RabbitMq.Interfaces.Factories
         ICommandHandler<T> ResolveCommandHandler<T>() where T : ICommand;
 
         IEventHandler<T> ResolveEventHandler<T>() where T : IEvent;
+
+        ICommandHandler<ICommand> ResolveCustomCommandHandler<T>() where T : ICommandHandler<ICommand>;
+
+        IEventHandler<IEvent> ResolveCustomEventHandler<T>() where T : IEventHandler<IEvent>;
     }
 }

@@ -10,5 +10,7 @@ namespace Services.RabbitMq.Messages
     public interface IServiceBusMessageHandler
     {
         Task Handle<T>(object sender, BasicDeliverEventArgs args, Func<T, IRequestInfo, Task> callback) where T : IServiceBusMessage;
+
+        Task HandleUsingRoutingKey<T>(object sender, BasicDeliverEventArgs args, Func<T, IRequestInfo, Task> callback);
     }
 }

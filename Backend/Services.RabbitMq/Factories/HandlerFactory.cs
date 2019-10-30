@@ -19,5 +19,11 @@ namespace Services.RabbitMq.Factories
 
         public IEventHandler<T> ResolveEventHandler<T>() where T : IEvent =>
             _serviceProvider.GetService<IEventHandler<T>>();
+
+        public ICommandHandler<ICommand> ResolveCustomCommandHandler<T>() where T : ICommandHandler<ICommand>
+            => _serviceProvider.GetService<T>();
+
+        public IEventHandler<IEvent> ResolveCustomEventHandler<T>() where T : IEventHandler<IEvent>
+            => _serviceProvider.GetService<T>();
     }
 }

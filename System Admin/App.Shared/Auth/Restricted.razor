@@ -1,6 +1,7 @@
 
 @inject AuthenticationStateProvider AuthenticationStateProvider
-@inject IPubSubService PubSubService;
+@inject IPubSubService PubSubService
+@inject NavigationManager NavigationManager
 @namespace App.Shared.Auth
 
 @if(IsAuthenticated)
@@ -40,7 +41,7 @@ else
         var state = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         if(state is null)
         {
-            IsAuthenticated = false;
+            IsAuthenticated = false;            
         }
         if(state.User.IsInRole("SystemAdmin"))
         {
@@ -48,8 +49,18 @@ else
         }
         else {
             IsAuthenticated = false;
+            
         }        
     }
+
+    private void CheckSendToHome()
+    {
+        if(No is null)
+        {
+            NavigationManager.NavigateTo("index");
+        }
+    }
+
 
     
 

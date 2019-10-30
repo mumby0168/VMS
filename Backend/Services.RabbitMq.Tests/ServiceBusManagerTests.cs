@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using RabbitMQ.Client;
@@ -35,6 +36,8 @@ namespace Services.RabbitMq.Tests
         private Mock<IServiceBusQueue> _queue;
         private Mock<MockCommandHandler> _commandHandler;
         private Mock<MockEventHandler> _mockEventHandler;
+        private Mock<ILogger<ServiceBusManager>> _logger;
+        private Mock<IServiceProvider> _serviceProvider;
 
         private const string TestHostName = "testhost";
         private const string TestServiceName = "testservicename";
@@ -53,11 +56,13 @@ namespace Services.RabbitMq.Tests
             _serviceBusConnectionFactory = new Mock<IServiceBusConnectionFactory>();
             _settings.SetupAllProperties();
             _serviceSettings = new Mock<IServiceSettings>();
+            _serviceProvider = new Mock<IServiceProvider>();
             _busSettings = new Mock<IServiceBusSettings>();
             _busSettings.SetupAllProperties();
             _serviceSettings.SetupAllProperties();
             _busSettings.Object.HostName = TestHostName;
             _serviceSettings.Object.Name = TestServiceName;
+            _logger = new Mock<ILogger<ServiceBusManager>>();
             _queue = new Mock<IServiceBusQueue>();
             _queueFactory.Setup(o => o.CreateServiceBusQueue()).Returns(_queue.Object);
             _commandHandler = new Mock<MockCommandHandler>();
@@ -224,6 +229,6 @@ namespace Services.RabbitMq.Tests
             _queue.Verify(o => o.Bind(ExchangeName, "test.MockEvent"));
         }
 
-        public ServiceBusManager CreateSut() => new ServiceBusManager(_serviceConnection.Object, _exchangeFactory.Object, _queueFactory.Object, _subscriber.Object, _settings.Object, _serviceBusConnectionFactory.Object, _handlerFactory.Object);
+        public ServiceBusManager CreateSut() => new ServiceBusManager(_serviceConnection.Object, _exchangeFactory.Object, _queueFactory.Object, _subscriber.Object, _settings.Object, _serviceBusConnectionFactory.Object, _handlerFactory.Object, _serviceProvider.Object);
     }
 }

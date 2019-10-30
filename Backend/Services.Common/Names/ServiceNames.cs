@@ -11,5 +11,9 @@ namespace Services.Common.Names
         public static string Identity => Prefix + nameof(Identity);
 
         public static string Mail => Prefix + nameof(Mail);
+        public static string Operations => Prefix + nameof(Operations);
+        public static string Gateway => Prefix + nameof(Gateway);
+
+        public static string Test => Prefix + nameof(Test);
     }
 }

@@ -44,6 +44,7 @@ namespace Services.RabbitMq.Extensions
             services.AddTransient<IServiceBusConnectionFactory, ServiceBusConnectionFactory>();
             services.AddTransient<IHandlerFactory, HandlerFactory>();
             services.AddTransient<IServiceBusConsumerFactory, ServiceBusConsumerFactory>();
+            services.AddTransient<IDispatcher, Dispatcher>();
             return services;
         }
 
@@ -81,7 +82,14 @@ namespace Services.RabbitMq.Extensions
             return services;
         }
 
-        public static IServiceBusManager UseServiceBus(this IApplicationBuilder app, string serviceName)
+        public static IServiceCollection RegisterGenericEventHandler<T>(this IServiceCollection serviceCollection)
+            where T : IGenericEventHandler
+        {
+            serviceCollection.AddTransient(typeof(IGenericEventHandler), typeof(T));
+            return serviceCollection;
+        }
+    
+    public static IServiceBusManager UseServiceBus(this IApplicationBuilder app, string serviceName, bool declareQueue = true)
         {
             var manager = (IServiceBusManager)app.ApplicationServices.GetService(typeof(IServiceBusManager));
             manager.CreateConnection(

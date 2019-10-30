@@ -9,5 +9,6 @@ namespace Services.RabbitMq.Messages
     public interface IServiceBusMessageSubscriber
     {
         void Subscribe<T>(string queueName, Func<T,IRequestInfo, Task> callback) where T : IServiceBusMessage;
+        void CustomSubscribe(string queueName, Func<IServiceBusMessage, IRequestInfo, Task> callback);
     }
 }

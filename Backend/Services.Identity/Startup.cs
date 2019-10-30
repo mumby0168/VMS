@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,9 +15,11 @@ using Services.Common.Mongo;
 using Services.Common.Names;
 using Services.Identity.Domain;
 using Services.Identity.Managers;
+using Services.Identity.Messages.Events;
 using Services.Identity.Repositorys;
 using Services.Identity.Services;
 using Services.RabbitMq.Extensions;
+using Services.RabbitMq.Messages;
 
 namespace Services.Identity
 {
@@ -74,8 +77,10 @@ namespace Services.Identity
                     await context.Response.WriteAsync(ServiceNames.Identity);
                 });
             });
+            
+            app.ApplicationServices.GetService<IServiceBusMessagePublisher>().PublishEvent(new TestEvent("Hello Billy", "code_1", "This is a test"), RequestInfo.Empty);
         }
-
+        
         private void CheckSeed(IIdentityRepository repo, IPasswordManager passwordManager)
         {
             if(repo.GetByEmailAndRole("test@test.com", Roles.SystemAdmin).Result == null)

@@ -1,0 +1,22 @@
+@url = http://localhost:5020
+
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzI0NzI5MjIsImV4cCI6MTU3MjQ4MzcyMiwiaWF0IjoxNTcyNDcyOTIyfQ.TVcYEnW8kx9Cd5HMbHi7d43FA2O5vVEAoI4GDXhGjprEXvA8a6binTU1yB-wIj3t6XcAle8QpVGn1HodUbJpTg
+
+
+### Hit Api Test Controller Pass
+POST {{url}}/api/test/pass
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "isPass": "true",    
+}
+
+### Hit Api Test Controller Fail
+POST {{url}}/api/test/pass
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "isPass": "false",    
+}
