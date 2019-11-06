@@ -8,5 +8,7 @@ namespace Services.Identity.Services
     public interface IRefreshTokenService
     {
         Task<string> CreateRefreshToken(string email);
+
+        Task RevokeToken(string token, string email);
     }
 }

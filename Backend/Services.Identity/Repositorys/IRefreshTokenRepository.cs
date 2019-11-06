@@ -9,5 +9,6 @@ namespace Services.Identity.Repositorys
     public interface IRefreshTokenRepository
     {
         Task AddAsync(RefreshToken refreshToken);
+        Task RemoveAsync(string token, string email);
     }
 }

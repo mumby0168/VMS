@@ -26,5 +26,7 @@ namespace Services.Identity.Services
             await _repository.AddAsync(new RefreshToken(token, email));
             return token;
         }
+
+        public Task RevokeToken(string token, string email) => _repository.RemoveAsync(token, email);
     }
 }

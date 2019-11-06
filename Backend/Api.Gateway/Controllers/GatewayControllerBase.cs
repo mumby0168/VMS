@@ -7,16 +7,16 @@ namespace Api.Gateway.Controllers
 {
     public abstract class GatewayControllerBase : ControllerBase
     {
+        private const string OperationHeader = "X-Operation";   
         protected IDispatcher Dispatcher { get; }
 
-        public GatewayControllerBase(IDispatcher dispatcher)
+        protected GatewayControllerBase(IDispatcher dispatcher)
         {
             Dispatcher = dispatcher;
         }
         protected IActionResult Accepted(IRequestInfo requestInfo)
         {
-            //TODO: add a header for operation id for user to check.
-
+            HttpContext.Response.Headers.Add(OperationHeader, requestInfo.OperationId.ToString());
             return base.Accepted();
         }
 

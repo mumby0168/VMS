@@ -16,5 +16,7 @@ namespace Services.Identity
         public const string InvalidEmail = "invalid_email";
 
         public const string InvalidCredentials = "invalid_credentials";
+
+        public const string NoRefreshToken = "no_refresh_token_found";
     }
 }
