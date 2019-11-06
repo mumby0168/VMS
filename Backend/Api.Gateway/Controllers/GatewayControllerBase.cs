@@ -1,11 +1,12 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using Services.Common.Base;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 
 namespace Api.Gateway.Controllers
 {
-    public abstract class GatewayControllerBase : ControllerBase
+    public abstract class GatewayControllerBase : VmsControllerBase
     {
         private const string OperationHeader = "X-Operation";   
         protected IDispatcher Dispatcher { get; }

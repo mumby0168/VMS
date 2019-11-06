@@ -13,4 +13,9 @@
     <Folder Include="Messages\Commands\Test\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Convey.Persistence.Redis" Version="0.3.106" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
+  </ItemGroup>
+
 </Project>

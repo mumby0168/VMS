@@ -15,20 +15,28 @@ namespace Services.RabbitMq.Messages
         public Guid UserId { get; }
         public DateTime Created { get; }
         public DateTime Completed { get; private set; }
-        public RequestState State { get; }
-        public string Code { get; private set; }
-        public string Reason { get; private set; }
+        public RequestState State { get; private set; }
+        public void Complete()
+        {
+            State = RequestState.Complete;
+            Completed = DateTime.Now;
+        }
+
+        public void Fail()
+        {
+            State = RequestState.Failed;
+            Completed = DateTime.Now;
+        }
+
 
         [JsonConstructor]
-        public RequestInfo(Guid operationId, Guid userId, DateTime created, DateTime completed, RequestState state, string code, string reason)
+        public RequestInfo(Guid operationId, Guid userId, DateTime created, DateTime completed, RequestState state)
         {
             OperationId = operationId;
             UserId = userId;
             Created = created;
             Completed = completed;
             State = state;
-            Code = code;
-            Reason = reason;
         }
 
         public RequestInfo()

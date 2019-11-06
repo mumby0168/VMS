@@ -22,15 +22,15 @@ services:
     volumes: 
       - rabbitmq:/var/lib/rabbitmq
 
-  # redis:
-  #   image: redis
-  #   container_name: redis
-  #   ports:
-  #     - 6379:6379
-  #   networks:
-  #     - cruncher  
-  #   volumes: 
-  #     - redis:/data
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - 6379:6379
+    networks:
+      - cruncher  
+    volumes: 
+      - redis:/data
 
 networks:
   cruncher:
@@ -41,5 +41,5 @@ volumes:
     driver: local
   rabbitmq:
     driver: local
-  # redis:
-  #   driver: local
+  redis:
+    driver: local

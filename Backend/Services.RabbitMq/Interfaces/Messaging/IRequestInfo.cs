@@ -17,8 +17,8 @@ namespace Services.RabbitMq.Interfaces.Messaging
         DateTime Created { get; }
         DateTime Completed { get; }
         RequestState State { get; }
-        string Code { get; }
-        string Reason { get; }
+        void Complete();
+        void Fail();
 
     }
 }

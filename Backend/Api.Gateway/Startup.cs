@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Api.Gateway.Clients;
+using Api.Gateway.Clients.Interfaces;
+using Convey;
+using Convey.HTTP;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -30,6 +30,9 @@ namespace Api.Gateway
             services.AddControllers();
             services.AddCustomAuth(_configuration);
             services.AddServiceBus();
+            services.AddConvey().AddHttpClient();
+
+            services.AddTransient<IOperationsClient, OperationsClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

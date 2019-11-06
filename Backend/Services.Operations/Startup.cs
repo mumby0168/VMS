@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Convey;
+using Convey.Persistence.Redis;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.Common.Names;
 using Services.Operations.Handlers;
+using Services.Operations.Services;
 using Services.RabbitMq.Extensions;
 
 namespace Services.Operations
@@ -22,6 +25,13 @@ namespace Services.Operations
         {
             services.AddServiceBus().RegisterGenericEventHandler<GenericEventHandler>();
             services.AddTransient<GenericEventHandler>();
+            services
+                .AddConvey()
+                .AddRedis();
+
+            services.AddControllers();
+
+            services.AddTransient<IOperationsCache, OperationsCache>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,9 +46,10 @@ namespace Services.Operations
                 .SubscribeAllEvents<GenericEventHandler>(Assembly.GetExecutingAssembly());
 
             app.UseRouting();
-
+                
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapDefaultControllerRoute();
                 endpoints.MapGet("/", async context =>
                 {
                     await context.Response.WriteAsync(ServiceNames.Operations);
