@@ -7,5 +7,7 @@ namespace Account.Interfaces.Jwt
          void SaveToken(string token);
 
          IJwtToken Token { get; }
+
+         void RemoveToken();
     }
 }

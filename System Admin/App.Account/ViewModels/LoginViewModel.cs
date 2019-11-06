@@ -47,7 +47,7 @@ namespace Account.ViewModels
             var success = await _accountService.SignIn(Email, Password);
             if (success)
             {
-                await _pubSubService.Publish<SuccessfulLoginEvent>();
+                await _pubSubService.Publish<UpdateRestrictedViewsEvent>();
                 _logger.LogInformation($"Succesful login for: {Email}.");
                 _navigationManager.NavigateTo("counter");                
                 return;

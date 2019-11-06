@@ -12,5 +12,7 @@ namespace Account.Jwt
         {
             Token = JwtToken.Process(token);
         }
+
+        public void RemoveToken() => Token = null;
     }
 }
