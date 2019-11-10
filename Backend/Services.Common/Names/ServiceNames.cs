@@ -8,11 +8,11 @@ namespace Services.Common.Names
     public static class ServiceNames
     {
         private const string Prefix = "Services.";
-        public static string Identity => Prefix + nameof(Identity);
+        public const string Identity = Prefix + nameof(Identity);
 
-        public static string Mail => Prefix + nameof(Mail);
+        public const string Mail = Prefix + nameof(Mail);
         public static string Operations => Prefix + nameof(Operations);
-        public static string Gateway => Prefix + nameof(Gateway);
+        public const string Gateway = Prefix + nameof(Gateway);
 
         public static string Test => Prefix + nameof(Test);
 

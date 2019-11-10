@@ -1,0 +1,13 @@
+@url = http://localhost:5020/gateway
+
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzM0MjcwNzgsImV4cCI6MTU3MzQzNzg3OCwiaWF0IjoxNTczNDI3MDc4fQ.BCYYqnPv7fHbcmQ9qRuJQVxM7ZlUS_ESKHkqGrvf14bU-NUT5178A5nu3qgsnYaJkHzhgTE-VDAHJEtedV8cKw
+
+### Create Business
+POST {{url}}/api/businesses/create
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "Name": "Test Business"
+}
+

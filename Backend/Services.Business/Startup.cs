@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.Businesses.Domain;
+using Services.Businesses.Messages.Commands;
 using Services.Common.Mongo;
 using Services.Common.Names;
 using Services.RabbitMq.Extensions;
@@ -33,7 +34,8 @@ namespace Services.Businesses
 
 
             app.UseMongo(ServiceNames.Businesses);
-            app.UseServiceBus(ServiceNames.Businesses);
+            app.UseServiceBus(ServiceNames.Businesses)
+                .SubscribeCommand<CreateBusiness>();
 
             app.UseRouting();
 
