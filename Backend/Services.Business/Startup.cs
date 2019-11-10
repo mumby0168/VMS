@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Services.Businesses.Domain;
 using Services.Common.Mongo;
 using Services.Common.Names;
 using Services.RabbitMq.Extensions;
@@ -17,7 +18,7 @@ namespace Services.Businesses
         {
             services.AddServiceBus();
             services.AddControllers();
-            services.AddMongo();
+            services.AddMongo().AddMongoCollection<Business>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
