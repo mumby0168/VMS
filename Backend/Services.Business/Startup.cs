@@ -19,6 +19,8 @@ namespace Services.Businesses
             services.AddServiceBus();
             services.AddControllers();
             services.AddMongo().AddMongoCollection<Business>();
+            //Adds service specific services.
+            ServiceRegistry.RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
