@@ -16,7 +16,7 @@ namespace Services.Common.Names
 
         public static string Test => Prefix + nameof(Test);
 
-        public static string Businesses => Prefix + nameof(Businesses);
+        public const string Businesses = Prefix + nameof(Businesses);
 
         public static string Sites => Prefix + nameof(Sites);
     }
