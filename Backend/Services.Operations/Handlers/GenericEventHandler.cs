@@ -23,7 +23,7 @@ namespace Services.Operations.Handlers
             if (message is IRejectedEvent rejected)
             {
                 requestInfo.Fail();
-                _logger.LogInformation($"Rejected Event code: [{rejected.Code}] Reason: {rejected.Reason}");
+                _logger.LogInformation($"Operation [{requestInfo.OperationId}]: Rejected Event code: [{rejected.Code}] Reason: {rejected.Reason}");
                 _operationsCache.SaveAsync(requestInfo.OperationId, requestInfo.State.ToString().ToLower(), rejected.Code, rejected.Reason);
             }
             else
