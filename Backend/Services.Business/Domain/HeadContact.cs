@@ -12,13 +12,13 @@ namespace Services.Businesses.Domain
 {
     public class HeadContact
     {
-        public string FirstName { get; }
+        public string FirstName { get; private set; }
 
-        public string SecondName { get; }
+        public string SecondName { get; private set; }
 
-        public string ContactNumber { get; }
+        public string ContactNumber { get; private set; }
 
-        public string Email { get; }
+        public string Email { get; private set; }
 
         public HeadContact(string firstName, string secondName, string contactNumber, string email)
         {

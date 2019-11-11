@@ -10,11 +10,11 @@ namespace Services.Businesses.Domain
 {
     public class HeadOffice
     {
-        public string PostCode { get; }
+        public string PostCode { get; private set; }
 
-        public string AddressLine1 { get; }
+        public string AddressLine1 { get; private set; }
 
-        public string AddressLine2 { get; }
+        public string AddressLine2 { get; private set; }
 
         public HeadOffice(string postCode, string addressLine1, string addressLine2)
         {

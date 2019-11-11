@@ -11,17 +11,22 @@ namespace Services.Businesses.Domain
 {
     public class Business : IDomain
     {
-        public Guid Id { get; }
+        public Guid Id { get; private set; }
 
-        public string Name { get; }
+        public string Name { get; private set; }
 
-        public string TradingName { get; }
+        public string TradingName { get; private set; }
 
-        public Uri WebAddress { get; }
+        public Uri WebAddress { get; private set; }
 
-        public HeadOffice HeadOffice { get; }
+        public HeadOffice HeadOffice { get; private set; }
 
-        public HeadContact HeadContact { get; }
+        public HeadContact HeadContact { get; private set; }
+
+        public Business()
+        {
+            
+        }
 
         public Business(string name, string tradingName, string webAddress, HeadOffice headOffice, HeadContact headContact)
         {
