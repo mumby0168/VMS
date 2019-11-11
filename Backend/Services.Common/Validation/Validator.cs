@@ -23,7 +23,7 @@ namespace Services.Common.Validation
             {
                 new MailAddress(email);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

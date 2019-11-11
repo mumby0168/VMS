@@ -23,8 +23,10 @@ namespace Services.Operations
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddServiceBus().RegisterGenericEventHandler<GenericEventHandler>();
-            services.AddTransient<GenericEventHandler>();
+            services.AddServiceBus()
+                .RegisterGenericMessageHandler<GenericBusHandler>();
+
+            services.AddTransient<GenericBusHandler>();
             services
                 .AddConvey()
                 .AddRedis();
@@ -43,7 +45,7 @@ namespace Services.Operations
             }
 
             app.UseServiceBus(ServiceNames.Operations)
-                .SubscribeAllEvents<GenericEventHandler>(Assembly.GetExecutingAssembly());
+                .SubscribeAllMessages<GenericBusHandler>(Assembly.GetExecutingAssembly());
 
             app.UseRouting();
                 

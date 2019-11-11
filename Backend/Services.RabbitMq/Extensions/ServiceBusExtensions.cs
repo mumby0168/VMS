@@ -82,14 +82,14 @@ namespace Services.RabbitMq.Extensions
             return services;
         }
 
-        public static IServiceCollection RegisterGenericEventHandler<T>(this IServiceCollection serviceCollection)
-            where T : IGenericEventHandler
+        public static IServiceCollection RegisterGenericMessageHandler<T>(this IServiceCollection serviceCollection)
+            where T : IGenericBusHandler
         {
-            serviceCollection.AddTransient(typeof(IGenericEventHandler), typeof(T));
+            serviceCollection.AddTransient(typeof(IGenericBusHandler), typeof(T));
             return serviceCollection;
         }
-    
-    public static IServiceBusManager UseServiceBus(this IApplicationBuilder app, string serviceName, bool declareQueue = true)
+
+        public static IServiceBusManager UseServiceBus(this IApplicationBuilder app, string serviceName, bool declareQueue = true)
         {
             var manager = (IServiceBusManager)app.ApplicationServices.GetService(typeof(IServiceBusManager));
             manager.CreateConnection(

@@ -17,7 +17,7 @@ namespace Services.Operations.Tests.Handlers
     public class GenericEventHandlerTests
     {
 
-        private Mock<ILogger<GenericEventHandler>> _logger;
+        private Mock<ILogger<GenericBusHandler>> _logger;
         private Mock<IOperationsCache> _cache;
 
         private MockRejectedEvent _rejectedEvent;
@@ -27,7 +27,7 @@ namespace Services.Operations.Tests.Handlers
         [SetUp]
         public void Setup()
         {
-            _logger = new Mock<ILogger<GenericEventHandler>>();
+            _logger = new Mock<ILogger<GenericBusHandler>>();
             _cache = new Mock<IOperationsCache>();
             _rejectedEvent = new MockRejectedEvent();
             _event = new Mock<IEvent>();
@@ -67,7 +67,7 @@ namespace Services.Operations.Tests.Handlers
 
 
 
-        public GenericEventHandler CreateSut() => new GenericEventHandler(_logger.Object, _cache.Object);
+        public GenericBusHandler CreateSut() => new GenericBusHandler(_logger.Object, _cache.Object);
 
     }
 }

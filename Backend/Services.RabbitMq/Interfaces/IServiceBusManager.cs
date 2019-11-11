@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using Services.RabbitMq.Interfaces.Messaging;
@@ -19,7 +20,6 @@ namespace Services.RabbitMq.Interfaces
 
         IServiceBusManager SubscribeEvent<T>(string serviceNamespace = null) where T : IEvent;
 
-        IServiceBusManager SubscribeAllEvents<T>(Assembly currentAssembly) where T : IGenericEventHandler;
-        IServiceBusManager SubscribeAllCommands<T>(Assembly currentAssembly);
+        IServiceBusManager SubscribeAllMessages<T>(Assembly currentAssembly) where T : IGenericBusHandler;
     }
 }   

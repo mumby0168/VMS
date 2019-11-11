@@ -80,25 +80,24 @@ namespace Services.RabbitMq.Managers
             return this;
         }
 
-        public IServiceBusManager SubscribeAllEvents<T>(Assembly currentAssembly) where T : IGenericEventHandler
+        public IServiceBusManager SubscribeAllMessages<T>(Assembly currentAssembly) where T : IGenericBusHandler
         {
             var types = currentAssembly.GetTypes();
-            var eventTypes = types.Where(t => typeof(IEvent).IsAssignableFrom(t));
+            var eventTypes =
+                types.Where(t => typeof(IEvent).IsAssignableFrom(t) || typeof(ICommand).IsAssignableFrom(t));
             foreach (var eventType in eventTypes)
             {
-                var handler = (T)_serviceProvider.GetService(typeof(T));
-                _serviceBusMessageSubscriber.CustomSubscribe(_serviceSettings.Name, async (message, info) => await handler.HandleAsync(message, info));
+                var handler = (T) _serviceProvider.GetService(typeof(IGenericBusHandler));
+                _serviceBusMessageSubscriber.CustomSubscribe(_serviceSettings.Name,
+                    async (message, info) => await handler.HandleAsync(message, info));
                 var serviceName = eventType.GetCustomAttribute<MicroService>()?.ServiceName;
-                if(serviceName is null) throw new InvalidOperationException($"Please add a [MicroService] attribute to type: {eventType.Name}");
+                if (serviceName is null)
+                    throw new InvalidOperationException(
+                        $"Please add a [MicroService] attribute to type: {eventType.Name}");
                 _serviceBusQueue.Bind(ExchangeName, $"{serviceName}.{eventType.Name}");
             }
 
             return this;
-        }
-
-        public IServiceBusManager SubscribeAllCommands<T>(Assembly currentAssembly)
-        {
-            throw new NotImplementedException();
         }
 
         private string GetServiceName<T>() where T : IServiceBusMessage

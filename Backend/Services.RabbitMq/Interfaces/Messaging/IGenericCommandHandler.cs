@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace Services.RabbitMq.Interfaces.Messaging
 {
-    public interface IGenericEventHandler
+    public interface IGenericCommandHandler
     {
         Task HandleAsync(object message, IRequestInfo requestInfo);
+        
     }
 }
