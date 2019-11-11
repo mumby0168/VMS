@@ -10,7 +10,7 @@ namespace Services.Common.Validation
     public static class Validator
     {
         public static bool IsPostCodeValid(string postCode) 
-            => !postCode.IsEmpty() && Regex.IsMatch(postCode, 
+            => !postCode.IsEmpty() && Regex.IsMatch(postCode.Replace(" ", ""), 
                    @"([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([AZa-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))[0-9][A-Za-z]{2})");
 
         public static bool IsUkPhoneNumberValid(string phoneNumber)

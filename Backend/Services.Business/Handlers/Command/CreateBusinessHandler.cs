@@ -30,11 +30,17 @@ namespace Services.Businesses.Handlers.Command
         }
         public async Task HandleAsync(CreateBusiness message, IRequestInfo requestInfo)
         {
+            if (message == null)
+            {
+                _logger.LogError("The message read was null request: " + requestInfo.OperationId);
+                return;
+            }
+            Business business;
             try
             {
-                var business = _businessesFactory.CreateBusiness(message.Name, message.TradingName, message.WebAddress,
-                    message.HeadOfficePostCode, message.HeadOfficeAddressLine1, message.HeadOfficeAddressLine2, message.HeadContactFirstName, message.HeadContactSecondName,
-                    message.HeadContactContactNumber, message.HeadContactEmail);
+                business = _businessesFactory.CreateBusiness(message.Name, message.TradingName, message.WebAddress,
+                    message.HeadContactFirstName, message.HeadContactSecondName,
+                    message.HeadContactContactNumber, message.HeadContactEmail, message.HeadOfficePostCode, message.HeadOfficeAddressLine1, message.HeadOfficeAddressLine2);
 
                 await _repository.Add(business);
             }
@@ -44,7 +50,7 @@ namespace Services.Businesses.Handlers.Command
                 return;
             }
 
-            _publisher.PublishEvent(new BusinessCreated(), requestInfo);
+            _publisher.PublishEvent(new BusinessCreated(business.Id), requestInfo);
         }
     }
 }

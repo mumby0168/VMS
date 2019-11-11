@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Services.Common.Names;
+using Services.RabbitMq.Attributes;
 using Services.RabbitMq.Interfaces.Messaging;
 
-namespace Services.Businesses.Handlers.Events
+namespace Services.Operations.Messages.Events.Businesses
 {
+    [MicroService(ServiceNames.Businesses)]
     public class BusinessCreated : IEvent
     {
+        [JsonConstructor]
         public BusinessCreated(Guid id)
         {
             Id = id;
