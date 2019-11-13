@@ -26,5 +26,10 @@ namespace Services.Common.Jwt
             services.AddTransient<IJwtFactory, JwtFactory>();
             services.AddTransient<IJwtManager, JwtManager>();
         }
+
+        public static void AddAuthCore(this IServiceCollection services)
+        {
+            services.AddTransient<IJwtReader, JwtReader>();
+        }
     }
 }

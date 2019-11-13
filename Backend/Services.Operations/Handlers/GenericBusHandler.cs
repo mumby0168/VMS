@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Services.Operations.Messages.Events.Push;
 using Services.Operations.Services;
 using Services.RabbitMq.Interfaces.Messaging;
+using Services.RabbitMq.Messages;
 
 namespace Services.Operations.Handlers
 {
@@ -12,30 +14,36 @@ namespace Services.Operations.Handlers
     {
         private readonly ILogger<GenericBusHandler> _logger;
         private readonly IOperationsCache _operationsCache;
+        private readonly IServiceBusMessagePublisher _publisher;
 
-        public GenericBusHandler(ILogger<GenericBusHandler> logger, IOperationsCache operationsCache)
+        public GenericBusHandler(ILogger<GenericBusHandler> logger, IOperationsCache operationsCache, IServiceBusMessagePublisher publisher)
         {
             _logger = logger;
             _operationsCache = operationsCache;
+            _publisher = publisher;
         }
         public async Task HandleAsync(object message, IRequestInfo requestInfo)
         {
-            if (message is IRejectedEvent rejected)
+            switch (message)
             {
-                requestInfo.Fail();
-                _logger.LogInformation($"Operation [{requestInfo.OperationId}]: Rejected Event code: [{rejected.Code}] Reason: {rejected.Reason}");
-                await _operationsCache.SaveAsync(requestInfo.OperationId, requestInfo.State.ToString().ToLower(), rejected.Code, rejected.Reason);
-            }
-            else if(message is ICommand)
-            {
-                _logger.LogInformation($"Operation [{requestInfo.OperationId}]: PENDING");
-                await _operationsCache.SaveAsync(requestInfo.OperationId, requestInfo.State.ToString().ToLower());
-            }
-            else if(message is IEvent)
-            {
-                54.requestInfo.Complete();
-                _logger.LogInformation($"Operation: [{requestInfo.OperationId}] COMPLETE");
-                await _operationsCache.SaveAsync(requestInfo.OperationId, requestInfo.State.ToString().ToLower());
+                case IRejectedEvent rejected:
+                    requestInfo.Fail();
+                    _logger.LogInformation($"Operation [{requestInfo.OperationId}]: Rejected Event code: [{rejected.Code}] Reason: {rejected.Reason}");
+                    await _operationsCache.SaveAsync(requestInfo.OperationId, requestInfo.State.ToString().ToLower(), rejected.Code, rejected.Reason);
+                    _publisher.PublishEvent(new OperationFailed(rejected.Code, rejected.Reason), requestInfo);
+                    break;
+                case ICommand _:
+                    _logger.LogInformation($"Operation [{requestInfo.OperationId}]: PENDING");
+                    await _operationsCache.SaveAsync(requestInfo.OperationId, requestInfo.State.ToString().ToLower());
+                    break;
+                case IEvent _:
+                    requestInfo.Complete();
+                    _logger.LogInformation($"Operation: [{requestInfo.OperationId}] COMPLETE");
+                    await _operationsCache.SaveAsync(requestInfo.OperationId, requestInfo.State.ToString().ToLower());
+                    _publisher.PublishEvent(new OperationComplete(), requestInfo);
+                    break;
+                default:
+                    break;
             }
         }
 

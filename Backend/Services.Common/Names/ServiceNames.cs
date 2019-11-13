@@ -11,7 +11,7 @@ namespace Services.Common.Names
         public const string Identity = Prefix + nameof(Identity);
 
         public const string Mail = Prefix + nameof(Mail);
-        public static string Operations => Prefix + nameof(Operations);
+        public const string Operations = Prefix + nameof(Operations);
         public const string Gateway = Prefix + nameof(Gateway);
 
         public static string Test => Prefix + nameof(Test);
@@ -19,5 +19,6 @@ namespace Services.Common.Names
         public const string Businesses = Prefix + nameof(Businesses);
 
         public static string Sites => Prefix + nameof(Sites);
+        public static string Push => Prefix + nameof(Push);
     }
 }

@@ -30,5 +30,10 @@ namespace Services.Identity.Controllers
 
             return Accepted();
         }
+
+        [Authorize]
+        [HttpPost("validate")]
+        public Task Validate() 
+            => Task.FromResult(Ok());
     }
 }

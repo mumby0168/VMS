@@ -19,6 +19,7 @@ namespace Services.Operations.Tests.Handlers
 
         private Mock<ILogger<GenericBusHandler>> _logger;
         private Mock<IOperationsCache> _cache;
+        private Mock<IServiceBusMessagePublisher> _publisher;
 
         private MockRejectedEvent _rejectedEvent;
         private Mock<IEvent> _event;
@@ -31,7 +32,7 @@ namespace Services.Operations.Tests.Handlers
             _cache = new Mock<IOperationsCache>();
             _rejectedEvent = new MockRejectedEvent();
             _event = new Mock<IEvent>();
-            
+            _publisher = new Mock<IServiceBusMessagePublisher>();
             _requestInfo = new Mock<IRequestInfo>();
         }
 
@@ -67,7 +68,7 @@ namespace Services.Operations.Tests.Handlers
 
 
 
-        public GenericBusHandler CreateSut() => new GenericBusHandler(_logger.Object, _cache.Object);
+        public GenericBusHandler CreateSut() => new GenericBusHandler(_logger.Object, _cache.Object, _publisher.Object);
 
     }
 }
