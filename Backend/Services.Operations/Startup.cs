@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.Common.Names;
 using Services.Operations.Handlers;
+using Services.Operations.Messages.Events.Push;
 using Services.Operations.Services;
 using Services.RabbitMq.Extensions;
 
@@ -45,7 +46,8 @@ namespace Services.Operations
             }
 
             app.UseServiceBus(ServiceNames.Operations)
-                .SubscribeAllMessages<GenericBusHandler>(Assembly.GetExecutingAssembly());
+                .SubscribeAllMessages<GenericBusHandler>(Assembly.GetExecutingAssembly()
+                    ,new [] { typeof(OperationComplete), typeof(OperationFailed), typeof(OperationPending) });
 
             app.UseRouting();
                 

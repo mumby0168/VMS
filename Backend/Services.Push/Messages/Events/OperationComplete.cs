@@ -8,6 +8,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Services.Push.Messages.Events
 {
+    [MicroService(ServiceNames.Operations)]
     public class OperationComplete : IEvent
     {
     }

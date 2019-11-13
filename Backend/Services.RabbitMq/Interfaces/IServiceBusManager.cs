@@ -20,6 +20,6 @@ namespace Services.RabbitMq.Interfaces
 
         IServiceBusManager SubscribeEvent<T>(string serviceNamespace = null) where T : IEvent;
 
-        IServiceBusManager SubscribeAllMessages<T>(Assembly currentAssembly) where T : IGenericBusHandler;
+        IServiceBusManager SubscribeAllMessages<T>(Assembly currentAssembly, IEnumerable<Type> excludedTypes = null) where T : IGenericBusHandler;
     }
 }   

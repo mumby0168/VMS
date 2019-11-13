@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Services.RabbitMq.Attributes;
@@ -80,11 +81,17 @@ namespace Services.RabbitMq.Managers
             return this;
         }
 
-        public IServiceBusManager SubscribeAllMessages<T>(Assembly currentAssembly) where T : IGenericBusHandler
+        public IServiceBusManager SubscribeAllMessages<T>(Assembly currentAssembly, IEnumerable<Type> excludedTypes = null) where T : IGenericBusHandler
         {
             var types = currentAssembly.GetTypes();
             var eventTypes =
                 types.Where(t => typeof(IEvent).IsAssignableFrom(t) || typeof(ICommand).IsAssignableFrom(t));
+
+            if (excludedTypes != null)
+            {
+                eventTypes = eventTypes.Where(t => !excludedTypes.Contains(t));
+            }
+
             foreach (var eventType in eventTypes)
             {
                 var handler = (T) _serviceProvider.GetService(typeof(IGenericBusHandler));

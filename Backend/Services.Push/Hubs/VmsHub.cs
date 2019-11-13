@@ -15,20 +15,18 @@ namespace Services.Push.Hubs
     {
         private readonly ILogger<VmsHub> _logger;
         private readonly ITokensClient _client;
-        private readonly IJwtReader _tokenReader;
 
-        public VmsHub(ILogger<VmsHub> logger, ITokensClient client, IJwtReader tokenReader)
+        public VmsHub(ILogger<VmsHub> logger, ITokensClient client)
         {
             _logger = logger;
             _client = client;
-            _tokenReader = tokenReader;
         }
 
         public async Task Connect(string jwt)
         {
             try
             {
-                if(!await _client.IsTokenValid(jwt))
+                if (!await _client.IsTokenValid(jwt))
                 {
                     await Failed("The token was invalid");
                     return;
@@ -40,7 +38,8 @@ namespace Services.Push.Hubs
                 return;
             }
 
-            var id = _tokenReader.GetUserId(jwt);
+            var token = JwtToken.Process(raw: jwt);
+            var id = token.Id;
             if (id == Guid.Empty) await Failed("The id provided through the token was empty");
             await Success(id);
         }

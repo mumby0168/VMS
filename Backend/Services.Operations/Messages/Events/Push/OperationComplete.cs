@@ -4,6 +4,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Services.Operations.Messages.Events.Push
 {
+    
     public class OperationComplete : IEvent
     {
     }

@@ -15,7 +15,7 @@ namespace Services.Push.Clients
         public TokensClient(IHttpClient client, HttpClientOptions options)
         {
             _client = client;
-            _baseAddress = options.Services["identity:tokens"];
+            _baseAddress = options.Services["identity-tokens"];
         }
 
         public async Task<bool> IsTokenValid(string token)
