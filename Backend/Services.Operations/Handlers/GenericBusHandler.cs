@@ -33,7 +33,7 @@ namespace Services.Operations.Handlers
             }
             else if(message is IEvent)
             {
-                requestInfo.Complete();
+                54.requestInfo.Complete();
                 _logger.LogInformation($"Operation: [{requestInfo.OperationId}] COMPLETE");
                 await _operationsCache.SaveAsync(requestInfo.OperationId, requestInfo.State.ToString().ToLower());
             }

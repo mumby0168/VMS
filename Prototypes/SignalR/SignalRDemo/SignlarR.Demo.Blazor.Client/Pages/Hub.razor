@@ -1,0 +1,65 @@
+﻿
+@page "/hub"
+@inject HubDemoListener HubService
+
+
+<h3>Hub</h3>
+
+<button @onclick="Start">Start Connection</button>
+
+<h2>Status Updates</h2>
+
+<section>
+    <ul>
+    @foreach (var status in StatusMessages)
+    {
+        <li>@status</li>
+    }
+    </ul>
+</section>
+
+<h3>Messages</h3>
+
+<section>
+    <ul>
+        @foreach (var message in Messages)
+        {
+            <li>@message</li>
+        }
+    </ul>
+</section>
+
+
+
+
+@code {
+
+
+    List<string> StatusMessages = new List<string>();
+
+    List<string> Messages = new List<string>();
+    
+
+    protected override async Task OnInitializedAsync()
+    {
+        HubService.MessageReceived += MessageUpdate;
+        HubService.ConnectionStatusEvent += StatusUpdate;        
+    }
+
+    public async void Start()
+    {
+        await HubService.CreateConnection();
+    }
+
+    public async void StatusUpdate(object sender, string message)
+    {
+        StatusMessages.Add(message);        
+        await InvokeAsync(() => StateHasChanged()); 
+    }
+
+    public async void MessageUpdate(object sender, string message)
+    {
+        Messages.Add(message);   
+        await InvokeAsync(() => StateHasChanged());
+    }
+}
