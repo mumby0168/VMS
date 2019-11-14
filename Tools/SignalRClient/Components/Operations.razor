@@ -1,0 +1,77 @@
+
+@inject IOperationService OperationService;
+
+
+
+<div class="card">
+
+    <div class="card-header">
+        <h3>Operation Updates</h3>
+    </div>
+
+    <div class="card-body">
+
+        <ul class="list-group">
+
+        @foreach (var item in Messages)
+        {
+            if(item is IOperationFailed failed)
+            {
+                  <li class="list-group-item list-group-item-warning">
+                      <h4>@failed.Id</h4>
+                      <p>The opearation failed with code: @failed.Code and the reason was: @failed.Reason</p>
+                  </li>
+            }
+            else
+            {
+                  <li class="list-group-item list-group-item-success">
+                    <h4>@item.Id</h4>
+                    <p>The operation was succesful</p>
+                  </li>
+            }
+        }
+
+        </ul>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@code {
+
+    List<IOperationMessage> Messages;
+
+    protected override void OnInitialized()
+    {   
+        Messages = new List<IOperationMessage>();
+        OperationService.SubscribeOperationFailed(OperationReceived);
+        OperationService.SubscribeOperationSuccess(OperationReceived);
+    } 
+
+    private void OperationReceived(IOperationMessage message)   
+    {
+        Messages.Add(message);
+        Update();
+    }
+
+    private async void Update() => await InvokeAsync(() => StateHasChanged());
+
+}

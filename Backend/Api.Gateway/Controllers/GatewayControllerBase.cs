@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Services.Common.Base;
 using Services.RabbitMq.Interfaces.Messaging;
@@ -30,7 +33,8 @@ namespace Api.Gateway.Controllers
 
         protected IRequestInfo CreateRequestInfo()
         {
-            return RequestInfo.Create(Guid.NewGuid());
+            var id = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            return RequestInfo.Create(Guid.Parse(id));
         }
     }
 }

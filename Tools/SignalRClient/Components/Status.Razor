@@ -1,0 +1,60 @@
+@inject IOperationService OperationService
+@inject ITokenStore TokenStore
+
+<div class="card">
+    <div class="card-header">
+    <h2>Status: @(IsConnected ? "Connected" : "Disconnected")</h2>
+    </div>
+
+
+    <div class="card-body">
+    <h3>Make your connection here</h3>
+
+    <div class="form-group">
+        <label for="url">Connection Url</label>
+        <input type="text" required class="form-control" id="url" @bind="@Address" />
+    </div>
+
+     <div class="form-group">
+        <label for="url">Jwt Token</label>
+        <input type="text" required class="form-control" id="url" @bind="@TokenStore.Token" />
+    </div>
+
+    @if(IsConnected)
+    {
+        <button disabled class="btn btn-default">Make Connection</button>
+    }
+    else 
+    {
+        <button class="btn btn-default" @onclick="Connect"> Make Connection</button>        
+    }
+    </div>
+</div>
+
+
+
+
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        OperationService.ConnectionStatusUpdated +=  async (connected) => 
+        {
+            IsConnected = connected;
+            await InvokeAsync(() => StateHasChanged());
+        };
+    }        
+
+    string Address { get; set; } = "http://localhost:5015/operations";
+
+    private async void Connect()
+    {
+        if(!string.IsNullOrEmpty(Address) && !string.IsNullOrEmpty(TokenStore.Token))
+        {
+            await OperationService.CreateConnection(Address);
+        }
+    }
+
+    bool IsConnected { get; set; }
+}
