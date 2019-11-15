@@ -62,6 +62,7 @@ namespace App.Account.Services
             {
                 var json = await response.Content.ReadAsStringAsync();
                 var res = JsonConvert.DeserializeObject<TokenResponse>(json);
+                _logger.LogInformation("Token stored: " + res.Jwt);
                 _tokenStorage.SaveToken(res.Jwt);
                 return true;
             }

@@ -12,10 +12,10 @@ namespace App.Shared
         public static IServiceCollection AddUserContext(this IServiceCollection services) => services.AddSingleton<IUserContext, UserContext>();
 
         public static IServiceCollection AddOperationsServices(this IServiceCollection services)
-        {
-            //services.AddSingleton<IOperationsService, OpeationsService>();
+        {            
+            services.AddSingleton<IOperationsService, OperationsService>();
             services.AddSingleton<IOperationsManager, OperationsManager>();
-            services.AddSingleton<IOperationsClient, OperationsClient>();
+            services.AddHttpClient<IOperationsClient, OperationsClient>();
             return services;
         }
     }

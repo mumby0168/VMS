@@ -10,7 +10,7 @@ namespace Account.Models {
 
         private readonly DateTime DateFrom = new DateTime (1970, 1, 1);
 
-        private JwtToken (string raw) {
+        private JwtToken (string raw) {            
             RawToken = raw;
             ProcessToken ();
         }

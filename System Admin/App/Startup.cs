@@ -2,6 +2,7 @@ using Account;
 using Account.Interfaces.Jwt;
 using App.Businesses;
 using App.Shared;
+using App.Shared.Operations;
 using Blazored.Toast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -50,7 +51,9 @@ namespace Manager
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-    
+
+            var ops = app.ApplicationServices.GetService<IOperationsService>();
+            var manager = app.ApplicationServices.GetService<IOperationsManager>();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();    
