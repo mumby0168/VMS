@@ -13,8 +13,9 @@ namespace App.Shared
 
         public static IServiceCollection AddOperationsServices(this IServiceCollection services)
         {
-            services.AddSingleton<IOperationsService, OpeationsService>();
+            //services.AddSingleton<IOperationsService, OpeationsService>();
             services.AddSingleton<IOperationsManager, OperationsManager>();
+            services.AddSingleton<IOperationsClient, OperationsClient>();
             return services;
         }
     }

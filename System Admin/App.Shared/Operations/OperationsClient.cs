@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace App.Shared.Operations
 {
-    public class OperationsClient
+    public class OperationsClient : IOperationsClient
     {
-        public HttpClient Client { get; }
+        public HttpClient Client { get; } 
         public OperationsClient(HttpClient client)
         {            
             Client = client;

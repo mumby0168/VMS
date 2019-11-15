@@ -1,4 +1,5 @@
-﻿using App.Shared.Operations.Models;
+﻿using App.Shared.Exceptions;
+using App.Shared.Operations.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,12 @@ namespace App.Shared.Operations
     public class OperationsManager : IOperationsManager
     {        
         private readonly ILogger<OperationsManager> _logger;
-        private readonly OperationsClient _operationsClient;
-        private List<IOperationMessage> _messages;
+        private readonly IOperationsClient _operationsClient;
+        public List<IOperationMessage> Messages { get; private set; }
 
-        public OperationsManager(IOperationsService operationsService, ILogger<OperationsManager> logger, OperationsClient operationsClient)
+        public OperationsManager(IOperationsService operationsService, ILogger<OperationsManager> logger, IOperationsClient operationsClient)
         {
-            _messages = new List<IOperationMessage>();            
+            Messages = new List<IOperationMessage>();            
             _logger = logger;
             _operationsClient = operationsClient;
             operationsService.ConnectionStatusUpdated += ConnectionStatusUpdatedHandler;
@@ -27,13 +28,14 @@ namespace App.Shared.Operations
 
         public async Task<IOperationMessage> GetOperationStatus(Guid id)
         {
-            if(!_messages.Any(m => m.Id == id))
+            if(!Messages.Any(m => m.Id == id))
             {
                 IOperationMessage message = null; ;
                 await Task.Run( async () =>
-                {                    
+                {     
+                    //TODO: Possibly use a timer here may underload fail and always fallback.
                     Thread.Sleep(300);
-                    if(_messages.Any(m => m.Id == id))
+                    if(Messages.Any(m => m.Id == id))
                     {
                         message = PopMessage(id);
                         return;
@@ -46,7 +48,7 @@ namespace App.Shared.Operations
 
                 if(message is null)
                 {
-                    //throw something.
+                    throw new OperationNotFoundException(id);
                 }
 
                 return message;
@@ -58,7 +60,7 @@ namespace App.Shared.Operations
         private void MessageRecievedHandler(object sender, IOperationMessage message)
         {
             _logger.LogInformation("Message recived with status: " + message.Status);
-            _messages.Add(message);
+            Messages.Add(message);
         }
         
         private void ConnectionStatusUpdatedHandler(object sender, ConnectionStatusUpdatedEventArgs args)
@@ -71,9 +73,9 @@ namespace App.Shared.Operations
 
         IOperationMessage PopMessage(Guid id)
         {
-            var message = _messages.FirstOrDefault(m => m.Id == id);
+            var message = Messages.FirstOrDefault(m => m.Id == id);
             _logger.LogInformation($"Message {message.Id} processed.");
-            _messages.Remove(message);
+            Messages.Remove(message);
             return message;
         }
     }

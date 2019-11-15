@@ -21,8 +21,8 @@ namespace App.Shared.Operations
     {
         Task CreateConnection();
 
-        EventHandler<ConnectionStatusUpdatedEventArgs> ConnectionStatusUpdated { get; set; }
+        event EventHandler<ConnectionStatusUpdatedEventArgs> ConnectionStatusUpdated;
 
-        EventHandler<IOperationMessage> MessageReceived { get; set; }
+        event EventHandler<IOperationMessage> MessageReceived;
     }
 }
