@@ -17,6 +17,5 @@ namespace App.Shared.Operations.Models
 
         OperationStatus Status { get; }
 
-
     }
 }
