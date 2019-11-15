@@ -16,6 +16,8 @@
       <ProjectReference Include="..\App.Account.Interfaces\Account.Interfaces.csproj" />
       <ProjectReference Include="..\App.Account\Account.csproj" />  
       <ProjectReference Include="..\App.Shared\App.Shared.csproj" />  
+      <ProjectReference Include="..\App.Businesses.Interfaces\App.Businesses.Interfaces.csproj" />  
+      <ProjectReference Include="..\App.Businesses\App.Businesses.csproj" />  
   </ItemGroup>
 
 </Project>

@@ -11,5 +11,9 @@ namespace Account.Interfaces.Models {
         IEnumerable<Claim> Claims { get; }
 
         DateTime Expiry { get; }
+
+        Guid Id { get;  }
+
+        string Email { get;  }
     }
 }

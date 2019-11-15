@@ -1,5 +1,6 @@
 using Account;
 using Account.Interfaces.Jwt;
+using App.Businesses;
 using App.Shared;
 using Blazored.Toast;
 using Microsoft.AspNetCore.Builder;
@@ -30,8 +31,10 @@ namespace Manager
             services.AddScoped<AuthenticationStateProvider, SystemAdminAuthenticationStateProvider>();     
             services.AddPubSubService();      
             services.AddBlazoredToast();
-
+            services.AddBusinesses();
             services.AddAccount();
+            services.AddUserContext();
+            services.AddOperationsServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,14 +50,7 @@ namespace Manager
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
-            // var accountClient = app.ApplicationServices.GetService<IAccountClient>();
-
-            // await accountClient.SignIn("sandbox@dmain.co.uk", "Pa$$word123");
-
-            // var tokenService = app.ApplicationServices.GetService<ITokenStorageService>();
-
-            // tokenService.SaveToken("eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbmRib3hAZG1haW4uY28udWsiLCJuYW1laWQiOiI1MmNjMDEyYy1mY2YxLTQzMjgtYWY5MS1lNGU2OTQ1MzA5MWEiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzE3NTM2ODgsImV4cCI6MTU3MTc2NDQ4OCwiaWF0IjoxNTcxNzUzNjg4fQ.Bg0lmbc6mZw1c--fxkqAfORkXVYVx1xj874LFXO69c5ydfvlKyxOPG-Jt8Hzzgi5M0ST8P50LLSj-SvjS4oqjA");
+    
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();    

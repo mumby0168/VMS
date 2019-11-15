@@ -26,6 +26,10 @@ namespace Account.Models {
             if (dictionary.TryGetValue ("exp", out object expiryInSeconds)) {
                 CalculateExpiry ((Int64) expiryInSeconds);
             }
+            if (dictionary.TryGetValue("nameid", out object id))
+            {
+                Id = Guid.Parse(id.ToString());
+            }
         }
 
         private void CalculateExpiry (Int64 secondsSince) {
@@ -53,5 +57,9 @@ namespace Account.Models {
         public IEnumerable<Claim> Claims { get; private set; }
 
         public DateTime Expiry { get; private set; }
+
+        public string Email { get; set; }
+
+        public Guid Id { get; set; }
     }
 }

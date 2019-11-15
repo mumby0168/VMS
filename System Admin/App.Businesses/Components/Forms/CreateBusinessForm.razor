@@ -1,0 +1,91 @@
+@inject CreateBusinessViewModel Model;
+
+<EditForm Model="@Model" OnValidSubmit="@Model.Submit">
+
+    <DataAnnotationsValidator/> 
+
+
+    <h3>Business Information</h3>
+    <hr/>
+    <div class="row">
+        <div class="col">   
+            <label for="name">Business Name:</label>         
+            <InputText class="form-control" type="text" id="name" @bind-Value="@Model.Business.Name"/>
+            <ValidationMessage For="@(() => Model.Business.Name)"/>
+        </div>
+        <div class="col">   
+            <label for="Tradingname">Trading Name:</label>         
+            <InputText class="form-control" type="text" id="Tradingname" @bind-Value="@Model.Business.TradingName"/>
+            <ValidationMessage For="@(() => Model.Business.TradingName)"/>
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="webAddress">Website Name:</label>         
+            <InputText class="form-control" type="text" id="webAddress" @bind-Value="@Model.Business.WebAddress"/>
+            <ValidationMessage For="@(() => Model.Business.WebAddress)"/>
+        </div>
+    </div>
+
+    <br/>
+
+    <h3>Business Point of Contact</h3>
+    <hr/>
+    <div class="row">
+        <div class="col">   
+            <label for="f-name">First Name:</label>         
+            <InputText class="form-control" type="text" id="f-name" @bind-Value="@Model.Business.Contact.FirstName"/>
+            <ValidationMessage For="@(() => Model.Business.Contact.FirstName)"/>
+        </div>
+        <div class="col">   
+            <label for="s-name">Second Name:</label>         
+            <InputText class="form-control" type="text" id="s-name" @bind-Value="@Model.Business.Contact.SecondName"/>
+            <ValidationMessage For="@(() => Model.Business.Contact.SecondName)"/>
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col">               
+            <label for="email">Email:</label>         
+            <InputText class="form-control" type="text" id="email" @bind-Value="@Model.Business.Contact.Email"/>
+            <ValidationMessage For="@(() => Model.Business.Contact.Email)"/>
+        </div>
+        <div class="col">   
+            <label for="phone">Contact Number:</label>         
+            <InputText class="form-control" type="text" id="phone" @bind-Value="@Model.Business.Contact.ContactNumber"/>
+            <ValidationMessage For="@(() => Model.Business.Contact.ContactNumber)"/>
+        </div>        
+    </div>
+
+    <br/>
+
+    <h3>Head Office</h3>
+    <hr/>
+    <div class="row">
+        <div class="col">   
+            <label for="postcode">Postcode:</label>         
+            <InputText class="form-control" type="text" id="postcode" @bind-Value="@Model.Business.Office.PostCode"/>
+            <ValidationMessage For="@(() => Model.Business.Office.PostCode)"/>
+        </div>
+        <div class="col">   
+            <label for="add-line-1">Address Line 1:</label>         
+            <InputText class="form-control" type="text" id="add-line-1" @bind-Value="@Model.Business.Office.AddressLine1"/>
+            <ValidationMessage For="@(() => Model.Business.Office.AddressLine1)"/>
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="add-line-2">Address Line 2:</label>         
+            <InputText class="form-control" type="text" id="add-line-2" @bind-Value="@Model.Business.Office.AddressLine2"/>            
+        </div>
+    </div>
+
+    <br/>
+
+    <input type="submit" class="btn btn-primary"/>
+
+</EditForm>
+
+
+@code {
+    
+}
