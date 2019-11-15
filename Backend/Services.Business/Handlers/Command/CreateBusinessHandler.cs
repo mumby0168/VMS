@@ -46,10 +46,12 @@ namespace Services.Businesses.Handlers.Command
             }
             catch (VmsException e)
             {
+                _logger.LogInformation("Create business rejected: " + e.Code);
                 _publisher.PublishEvent(new CreateBusinessRejected(e.Code, e.Message), requestInfo);
                 return;
             }
 
+            _logger.LogInformation("Create business succeeded.");
             _publisher.PublishEvent(new BusinessCreated(business.Id), requestInfo);
         }
     }

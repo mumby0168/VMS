@@ -42,7 +42,7 @@ namespace App.Businesses.Services
             HttpResponseMessage response;
             try
             {
-                response = await Client.PostAsync("/create", message);
+                response = await Client.PostAsync("create", message);
             }
             catch(HttpRequestException e)
             {

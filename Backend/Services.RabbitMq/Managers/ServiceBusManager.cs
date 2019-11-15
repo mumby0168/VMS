@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using Services.RabbitMq.Attributes;
 using Services.RabbitMq.Interfaces;
 using Services.RabbitMq.Interfaces.Exchange;
@@ -23,11 +24,12 @@ namespace Services.RabbitMq.Managers
         private readonly IServiceBusConnectionFactory _serviceBusConnectionFactory;
         private readonly IHandlerFactory _handlerFactory;
         private readonly IServiceProvider _serviceProvider;
+        private readonly ILogger<ServiceBusManager> _logger;
         private IServiceBusQueue _serviceBusQueue;
         private const string ExchangeName = "micro-service-exchange";
 
         public ServiceBusManager(IServiceBusConnection connection, IServiceBusExchangeFactory serviceBusExchangeFactory,
-            IServiceBusQueueFactory serviceBusQueueFactory, IServiceBusMessageSubscriber serviceBusMessageSubscriber, IServiceSettings serviceSettings, IServiceBusConnectionFactory serviceBusConnectionFactory, IHandlerFactory handlerFactory, IServiceProvider serviceProvider)
+            IServiceBusQueueFactory serviceBusQueueFactory, IServiceBusMessageSubscriber serviceBusMessageSubscriber, IServiceSettings serviceSettings, IServiceBusConnectionFactory serviceBusConnectionFactory, IHandlerFactory handlerFactory, IServiceProvider serviceProvider, ILogger<ServiceBusManager> logger)
         {
             _connection = connection;
             _serviceBusExchangeFactory = serviceBusExchangeFactory;
@@ -37,6 +39,7 @@ namespace Services.RabbitMq.Managers
             _serviceBusConnectionFactory = serviceBusConnectionFactory;
             _handlerFactory = handlerFactory;
             _serviceProvider = serviceProvider;
+            _logger = logger;
         }
 
         public void CreateConnection(IServiceBusSettings serviceBusSettings, IServiceSettings serviceSettings, bool declareQueue = true)
@@ -55,6 +58,8 @@ namespace Services.RabbitMq.Managers
                 _serviceBusQueue = _serviceBusQueueFactory.CreateServiceBusQueue();
                 _serviceBusQueue.DeclareQueue(serviceSettings.Name);
             }
+
+            _logger.LogInformation("Connection made to rabbit MQ bus.");
 
             _serviceSettings.Name = serviceSettings.Name;
         }

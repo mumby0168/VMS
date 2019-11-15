@@ -1,43 +1,51 @@
 @page "/system-admin-login"
-@inject LoginViewModel Model;
+@inject LoginViewModel Model
+@inject IUserContext User;
 @using Account.ViewModels
 
-<div class="container align-middle">
+    <div class="container align-middle">
 
-<div class="card">
-    <div class="card-header">
-        <h2>System Admin Login</h2>
-    </div>
-    <div class="card-body">
-
-        <EditForm Model="@Model" OnValidSubmit="@Submit">
-            <DataAnnotationsValidator/>            
-
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <InputText class="form-control" id="email" @bind-Value="@Model.Email"/>
-                <ValidationMessage For="@(() => Model.Email)"/>
-            </div>        
-
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <InputText type="password" class="form-control" id="password" @bind-Value="@Model.Password"/>
-                <ValidationMessage For="@(() => Model.Password)"/>
-            </div>       
-
-            @if(Model.Error != string.Empty) 
-            {
-                <div class="alert alert-danger" role="alert">
-                    @Model.Error
+        @if (!User.IsLoggedIn)
+        {
+            <div class="card">
+                <div class="card-header">
+                    <h2>System Admin Login</h2>
                 </div>
-            }                         
-            
-            <input type="submit" class="btn btn-primary"/>
+                <div class="card-body">
 
-        </EditForm>             
-        </div>
+                    <EditForm Model="@Model" OnValidSubmit="@Submit">
+                        <DataAnnotationsValidator />
+
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <InputText class="form-control" id="email" @bind-Value="@Model.Email" />
+                            <ValidationMessage For="@(() => Model.Email)" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <InputText type="password" class="form-control" id="password" @bind-Value="@Model.Password" />
+                            <ValidationMessage For="@(() => Model.Password)" />
+                        </div>
+
+                        @if (Model.Error != string.Empty)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                @Model.Error
+                            </div>
+                        }
+
+                        <input type="submit" class="btn btn-primary" value="Login" />
+
+                    </EditForm>
+                </div>
+            </div>
+        }
+        else
+        {
+            <h2>Hello, @User.Email your are already logged in :)</h2>
+        }
     </div>
-</div>
 
 @code {
     private async Task Submit()

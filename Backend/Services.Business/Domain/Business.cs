@@ -32,7 +32,15 @@ namespace Services.Businesses.Domain
         {
             if (name.IsEmpty()) throw new VmsException(Codes.EmptyProperty, "The name cannot be empty");
             if (tradingName.IsEmpty()) throw new VmsException(Codes.EmptyProperty, "The tradingName cannot be empty");
-            WebAddress = new Uri(webAddress);
+            try
+            {
+                WebAddress = new Uri(webAddress);
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+
             Id = new Guid();
             Name = name;
             TradingName = tradingName;

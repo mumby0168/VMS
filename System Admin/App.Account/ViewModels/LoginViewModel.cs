@@ -50,7 +50,9 @@ namespace Account.ViewModels
                 await _pubSubService.Publish<LoginSuccesfulEvent>();
                 await _pubSubService.Publish<UpdateRestrictedViewsEvent>();               
                 _logger.LogInformation($"Succesful login for: {Email}.");
-                _navigationManager.NavigateTo("counter");                
+                _navigationManager.NavigateTo("counter");
+                Email = string.Empty;
+                Password = string.Empty;
                 return;
             }
 

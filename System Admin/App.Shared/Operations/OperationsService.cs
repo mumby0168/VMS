@@ -65,7 +65,7 @@ namespace App.Shared.Operations
 
             _connection.On<Failure>("operationFailed", failure =>
             {
-                var operation = new OperationMessageFailed(failure.OperationId, failure.Status, failure.Reason, failure.Code);
+                var operation = new OperationMessageFailed(failure.OperationId, failure.Status, failure.Code, failure.Reason);
                 MessageReceived?.Invoke(this, operation);
             });
         }

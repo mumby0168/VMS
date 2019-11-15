@@ -32,12 +32,21 @@ namespace App.Shared.Operations
             {
                 IOperationMessage message = null; ;
                 await Task.Run( async () =>
-                {     
+                {
+                    int counter = 0;
                     //TODO: Possibly use a timer here may underload fail and always fallback.
-                    Thread.Sleep(300);
+                    while (!Messages.Any(m => m.Id == id))
+                    {
+                        if(counter == 5)
+                        {
+                            break;
+                        }
+                        counter++;
+                        Thread.Sleep(300);
+                    }
                     if(Messages.Any(m => m.Id == id))
                     {
-                        message = PopMessage(id);
+                        message = PopMessage(id, counter);
                         return;
                     }
                     else
@@ -46,10 +55,7 @@ namespace App.Shared.Operations
                     }
                 });
 
-                if(message is null)
-                {
-                    throw new OperationNotFoundException(id);
-                }
+               
 
                 return message;
             }
@@ -71,10 +77,10 @@ namespace App.Shared.Operations
             IsConnected = args.IsConnected;
         }
 
-        IOperationMessage PopMessage(Guid id)
+        IOperationMessage PopMessage(Guid id, int waits = 0)
         {
             var message = Messages.FirstOrDefault(m => m.Id == id);
-            _logger.LogInformation($"Message {message.Id} processed.");
+            _logger.LogInformation($"Message {message.Id} processed " + ((waits == 0) ? "first time" : $"after {waits} attempts"));
             Messages.Remove(message);
             return message;
         }

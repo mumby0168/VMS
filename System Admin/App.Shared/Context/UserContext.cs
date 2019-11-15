@@ -10,5 +10,14 @@ namespace App.Shared.Context
         public Guid Id { get; set; }
 
         public  string Token { get; set; }
+        public bool IsLoggedIn { get; set; }
+
+        public void Clear()
+        {
+            IsLoggedIn = false;
+            Email = string.Empty;
+            Id = Guid.Empty;
+            Token = string.Empty;
+        }
     }
 }

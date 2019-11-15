@@ -22,8 +22,15 @@ namespace Account.Jwt
             _context.Id = Token.Id;
             //TODO: This will be null.
             _context.Email = Token.Email;
+            _context.IsLoggedIn = true;
         }
 
-        public void RemoveToken() => Token = null;
+        public void RemoveToken()
+        {
+            Token = null;
+            _context.Clear();
+        }
+
+
     }
 }

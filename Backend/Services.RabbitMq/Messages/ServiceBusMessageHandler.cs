@@ -15,12 +15,14 @@ namespace Services.RabbitMq.Messages
         private readonly IJsonConvertWrapper _jsonConvertWrapper;
         private readonly IUtf8Wrapper _utf8Wrapper;
         private readonly ILogger<ServiceBusMessageHandler> _logger;
+        private readonly IServiceProvider _serviceProvider;
 
-        public ServiceBusMessageHandler(IJsonConvertWrapper jsonConvertWrapper, IUtf8Wrapper utf8Wrapper, ILogger<ServiceBusMessageHandler> logger)
+        public ServiceBusMessageHandler(IJsonConvertWrapper jsonConvertWrapper, IUtf8Wrapper utf8Wrapper, ILogger<ServiceBusMessageHandler> logger, IServiceProvider serviceProvider)
         {
             _jsonConvertWrapper = jsonConvertWrapper;
             _utf8Wrapper = utf8Wrapper;
             _logger = logger;
+            _serviceProvider = serviceProvider;
         }
 
         public async Task Handle<T>(object sender, BasicDeliverEventArgs args, Func<T, IRequestInfo, Task> callback) where T : IServiceBusMessage
@@ -32,6 +34,7 @@ namespace Services.RabbitMq.Messages
 
             var command = _jsonConvertWrapper.Deserialize<T>(split[1]);
             await callback.Invoke(command, requestInfo);
+
         }
 
         public async Task HandleUsingRoutingKey<T>(object sender, BasicDeliverEventArgs args, Func<T, IRequestInfo, Task> callback)
