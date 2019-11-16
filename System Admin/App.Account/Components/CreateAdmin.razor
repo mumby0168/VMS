@@ -1,38 +1,41 @@
 @page "/create-admin"
 @inject CreateAdminViewModel Model
 
-<Restricted IsPageRestriction="true">
-    <Yes>
-        <div class="card">
-            <div class="card-header">
-                <h2>Create System Admin</h2>
-            </div>
-            <div class="card-body">
-                <EditForm  Model="@Model" OnValidSubmit="@Model.Submit">
+    <div class="padder">
 
-                    <DataAnnotationsValidator/>            
+        <Restricted IsPageRestriction="true">
+            <Yes>
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h2>Create System Admin</h2>
+                    </div>
+                    <div class="card-body">
+                        <EditForm Model="@Model" OnValidSubmit="@Model.Submit">
 
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <InputText class="form-control" id="email" @bind-Value="@Model.Email"/>
-                        <ValidationMessage For="@(() => Model.Email)"/>
-                    </div>        
+                            <DataAnnotationsValidator />
 
-                    @if(Model.Error != string.Empty) 
-                    {
-                        <div class="alert alert-danger" role="alert">
-                            @Model.Error
-                        </div>
-                    } 
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <InputText class="form-control" id="email" @bind-Value="@Model.Email" />
+                                <ValidationMessage For="@(() => Model.Email)" />
+                            </div>
 
-                    <input type="submit" class="btn btn-primary" value="Create Admin"/>
+                            @if (Model.Error != string.Empty)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    @Model.Error
+                                </div>
+                            }
 
-                </EditForm>
-            </div>
-        </div>
-        
-    </Yes>
-</Restricted>
+                            <input type="submit" class="btn btn-primary" value="Create Admin" />
+
+                        </EditForm>
+                    </div>
+                </div>
+
+            </Yes>
+        </Restricted>
+    </div>
 
 
 

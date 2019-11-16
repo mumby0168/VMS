@@ -1,20 +1,23 @@
 @page "/create-business"
+    <div class="padder">
+        <Restricted IsPageRestriction="true">
 
-<Restricted IsPageRestriction="true">
+            <Yes>
 
-<Yes>
+                <div class="container">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <div class="card-text">
+                                <h4> Create Business</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <CreateBusinessForm></CreateBusinessForm>
+                        </div>
+                    </div>
+                </div>
 
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h3>Create Business</h3>
-            </div>
-            <div class="card-body">
-                <CreateBusinessForm></CreateBusinessForm>
-            </div>
-        </div>
+            </Yes>
+
+        </Restricted>
     </div>
-
-</Yes>
-
-</Restricted>
