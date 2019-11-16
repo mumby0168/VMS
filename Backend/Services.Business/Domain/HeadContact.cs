@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
-using Services.Common.Exceptions;
+﻿using Services.Common.Exceptions;
 using Services.Common.Extensions;
 using Validator = Services.Common.Validation.Validator;
 
-namespace Services.Businesses.Domain
+namespace Services.Business.Domain
 {
     public class HeadContact
     {

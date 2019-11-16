@@ -16,5 +16,15 @@ namespace Services.Common.Base
 
             return Ok(dto);
         }
+
+        protected ActionResult<IEnumerable<T>> Collection<T>(IEnumerable<T> items)
+        {
+            if (items == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(items);
+        }
     }
 }

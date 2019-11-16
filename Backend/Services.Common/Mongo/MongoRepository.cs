@@ -19,6 +19,7 @@ namespace Services.Common.Mongo
 
 
         public Task<T> GetAsync(Guid id) => _collection.AsQueryable().FirstOrDefaultAsync(e => e.Id == id);
+        public async Task<IEnumerable<T>> GetAllAsync() => await _collection.AsQueryable().ToListAsync();
 
         public Task<T> GetAsync(Expression<Func<T, bool>> predicate) =>
             _collection.AsQueryable().FirstOrDefaultAsync(predicate);

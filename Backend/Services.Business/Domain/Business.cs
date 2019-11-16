@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Services.Common.Domain;
 using Services.Common.Exceptions;
 using Services.Common.Extensions;
 using Uri = System.Uri;
 
-namespace Services.Businesses.Domain
+namespace Services.Business.Domain
 {
     public class Business : IDomain
     {

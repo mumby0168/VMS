@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Services.Common.Exceptions;
+﻿using Services.Common.Exceptions;
 using Services.Common.Extensions;
 using Services.Common.Validation;
 
-namespace Services.Businesses.Domain
+namespace Services.Business.Domain
 {
     public class HeadOffice
     {

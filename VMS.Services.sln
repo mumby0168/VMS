@@ -37,7 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Prototype", "Prototype", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Test", "Backend\Prototype\Services.Test\Services.Test.csproj", "{5CE98475-D647-47CA-A9DD-7E59D2CB8AC8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Businesses", "Backend\Services.Business\Services.Businesses.csproj", "{5CDA6572-F87D-411E-9DB9-7A49400ACE54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Business", "Backend\Services.Business\Services.Business.csproj", "{5CDA6572-F87D-411E-9DB9-7A49400ACE54}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Sites", "Backend\Services.Site\Services.Sites.csproj", "{21767D7C-7706-421A-8B73-2D5A4A34CE6A}"
 EndProject
@@ -47,9 +47,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Businesses.Tests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Sites.Tests", "Backend\Services.Sites.Tests\Services.Sites.Tests.csproj", "{0DE6D89B-933D-4613-B425-AC2C68242ADC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Push", "Backend\Services.Push\Services.Push.csproj", "{E4D1E615-898E-4EBF-89F8-085789C50B44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Push", "Backend\Services.Push\Services.Push.csproj", "{E4D1E615-898E-4EBF-89F8-085789C50B44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Push.Tests", "Backend\Services.Push.Tests\Services.Push.Tests.csproj", "{34710E27-8D49-4C07-912B-09A38C6EDA48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Push.Tests", "Backend\Services.Push.Tests\Services.Push.Tests.csproj", "{34710E27-8D49-4C07-912B-09A38C6EDA48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

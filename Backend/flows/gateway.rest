@@ -7,3 +7,25 @@
 ### Get Operations
 
 GET {{url}}operations/2f85fbe8-e8c2-42d1-aab7-01ace68db08c
+
+
+### Create Business
+POST {{url}}/businesses/create
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "Name": "Test Business",
+    "TradingName": "Test Trading Name",
+    "WebAddress" : "http://wwww.google.co.ul",
+    "HeadContactFirstName": "Joe",
+    "HeadContactSecondName": "Bloggs",
+    "HeadContactContactNumber": "07568512675",
+    "HeadContactEmail": "joe.bloggs@outlook.com",
+    "HeadOfficeAddressLine1": " 56 Bond Street",
+    "HeadOfficeAddressLine2": "Hull"
+}
+
+### Get Business Summaries
+
+GET {{url}}/businesses

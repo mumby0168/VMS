@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
-using Services.Businesses.Domain;
-using Services.Businesses.Factories;
-using Services.Businesses.Handlers.Command;
-using Services.Businesses.Handlers.Events;
-using Services.Businesses.Messages.Commands;
-using Services.Businesses.Repositorys;
+using Services.Business.Factories;
+using Services.Business.Handlers.Command;
+using Services.Business.Messages.Commands;
+using Services.Business.Messages.Events;
+using Services.Business.Repositorys;
 using Services.Common.Exceptions;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
@@ -26,7 +25,7 @@ namespace Services.Businesses.Tests.Handlers
         private Mock<IBusinessRepository> _repo;
         private Mock<IRequestInfo> _request;
         private Mock<IBusinessesFactory> _factory;
-        private Mock<Business> _business;
+        private Mock<Business.Domain.Business> _business;
 
         private const string TestCode = "TestCode";
         private const string TestReason = "TestReason";
@@ -42,7 +41,7 @@ namespace Services.Businesses.Tests.Handlers
             _message = new Mock<CreateBusiness>();
             _request = new Mock<IRequestInfo>();
             _factory = new Mock<IBusinessesFactory>();
-            _business = new Mock<Business>();
+            _business = new Mock<Business.Domain.Business>();
             _factory.Setup(o => o.CreateBusiness(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
                 It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
                 It.IsAny<string>(), It.IsAny<string>())).Returns(_business.Object);

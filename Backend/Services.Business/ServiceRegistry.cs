@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
-using Services.Businesses.Factories;
-using Services.Businesses.Handlers.Command;
-using Services.Businesses.Messages.Commands;
-using Services.Businesses.Repositorys;
+using Services.Business.Dtos;
+using Services.Business.Factories;
+using Services.Business.Handlers.Command;
+using Services.Business.Handlers.Query;
+using Services.Business.Messages.Commands;
+using Services.Business.Messages.Queries;
+using Services.Business.Repositorys;
+using Services.Common.Queries;
 using Services.RabbitMq.Interfaces.Messaging;
 
-namespace Services.Businesses
+namespace Services.Business
 {
     internal static class ServiceRegistry
     {
@@ -20,6 +21,9 @@ namespace Services.Businesses
 
             //command handlers
             serviceCollection.AddTransient<ICommandHandler<CreateBusiness>, CreateBusinessHandler>();
+            //query handlers
+            serviceCollection
+                .AddTransient<IQueryHandler<BusinessesSummary, IEnumerable<BusinessSummaryDto>>, BusinessesSummaryHandler>();
             return serviceCollection;
         }
     }

@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Services.Businesses.Domain;
-using Services.Businesses.Factories;
-using Services.Businesses.Handlers.Events;
-using Services.Businesses.Messages.Commands;
-using Services.Businesses.Repositorys;
+using Services.Business.Factories;
+using Services.Business.Messages.Commands;
+using Services.Business.Messages.Events;
+using Services.Business.Repositorys;
 using Services.Common.Exceptions;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 
-namespace Services.Businesses.Handlers.Command
+namespace Services.Business.Handlers.Command
 {
     public class CreateBusinessHandler : ICommandHandler<CreateBusiness>
     {
@@ -35,7 +31,7 @@ namespace Services.Businesses.Handlers.Command
                 _logger.LogError("The message read was null request: " + requestInfo.OperationId);
                 return;
             }
-            Business business;
+            Domain.Business business;
             try
             {
                 business = _businessesFactory.CreateBusiness(message.Name, message.TradingName, message.WebAddress,

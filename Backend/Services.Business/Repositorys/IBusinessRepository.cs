@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Services.Businesses.Domain;
 
-namespace Services.Businesses.Repositorys
+namespace Services.Business.Repositorys
 {
     public interface IBusinessRepository
     {
-        Task Add(Business business);
+        Task Add(Domain.Business business);
+
+        Task<IEnumerable<Domain.Business>> GetBusinessesAsync();
     }
 }

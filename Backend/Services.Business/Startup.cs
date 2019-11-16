@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Services.Businesses.Domain;
-using Services.Businesses.Messages.Commands;
+using Services.Business.Messages.Commands;
 using Services.Common.Mongo;
 using Services.Common.Names;
+using Services.Common.Queries;
 using Services.RabbitMq.Extensions;
 
-namespace Services.Businesses
+namespace Services.Business
 {
     public class Startup
     {
@@ -19,7 +19,8 @@ namespace Services.Businesses
         {
             services.AddServiceBus();
             services.AddControllers();
-            services.AddMongo().AddMongoCollection<Business>();
+            services.AddMongo().AddMongoCollection<Domain.Business>();
+            services.AddQuerySupport();
             //Adds service specific services.
             ServiceRegistry.RegisterServices(services);
         }
