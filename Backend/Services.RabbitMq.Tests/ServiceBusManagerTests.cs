@@ -14,6 +14,7 @@ using Services.RabbitMq.Interfaces.Queues;
 using Services.RabbitMq.Interfaces.Settings;
 using Services.RabbitMq.Managers;
 using Services.RabbitMq.Messages;
+using Services.Tests.Mocks;
 using Services.Tests.Mocks.Messaging;
 using Shouldly;
 
@@ -229,6 +230,6 @@ namespace Services.RabbitMq.Tests
             _queue.Verify(o => o.Bind(ExchangeName, "test.MockEvent"));
         }
 
-        public ServiceBusManager CreateSut() => new ServiceBusManager(_serviceConnection.Object, _exchangeFactory.Object, _queueFactory.Object, _subscriber.Object, _settings.Object, _serviceBusConnectionFactory.Object, _handlerFactory.Object, _serviceProvider.Object);
+        public ServiceBusManager CreateSut() => new ServiceBusManager(_serviceConnection.Object, _exchangeFactory.Object, _queueFactory.Object, _subscriber.Object, _settings.Object, _serviceBusConnectionFactory.Object, _handlerFactory.Object, _serviceProvider.Object, LoggerMock.Create<ServiceBusManager>());
     }
 }

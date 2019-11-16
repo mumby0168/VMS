@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Services.RabbitMq.Interfaces.Messaging
+namespace Services.Common.Queries
 {
     public interface IQueryDispatcher
     {

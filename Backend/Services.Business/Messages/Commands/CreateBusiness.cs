@@ -49,7 +49,7 @@ namespace Services.Businesses.Messages.Commands
 
         //public CreateBusiness()
         //{
-            
+
         //}
 
     }
