@@ -59,7 +59,7 @@ namespace Services.Operations.Tests.Handlers
             _requestInfo.SetupGet(o => o.State).Returns(RequestState.Complete);
 
             //Act
-            await sut.HandleAsync(_event, _requestInfo.Object);
+            await sut.HandleAsync(_event.Object, _requestInfo.Object);
 
             //Assert
             _requestInfo.Verify(o => o.Complete());

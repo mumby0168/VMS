@@ -43,10 +43,10 @@ namespace Services.Business.Messages.Commands
             HeadOfficeAddressLine2 = headOfficeAddressLine2;
         }
 
-        //public CreateBusiness()
-        //{
+        public CreateBusiness()
+        {
 
-        //}
+        }
 
     }
 }
