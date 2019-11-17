@@ -1,0 +1,50 @@
+﻿@page "/business-profile/{id}"
+
+
+<style>        
+    .business-header {
+        margin-bottom: 0px;
+    }
+</style>
+
+
+<section class="jumbotron business-header">
+    <App.Businesses.Components.BusinessProfileHeader></App.Businesses.Components.BusinessProfileHeader>
+</section>
+
+<section class="bg-light sites-list">
+    <div background-color: red">
+        <h2>Test</h2>
+        <h2>Test</h2>
+        <h2>Test</h2><h2>Test</h2>
+        <h2>Test</h2>
+        <h2>Test</h2>
+        <h2>Test</h2>
+        <h2>Test</h2>
+        <h2>Test</h2><h2>Test</h2>
+        <h2>Test</h2>
+        <h2>Test</h2><h2>Test</h2>
+        <h2>Test</h2>
+        <h2>Test</h2><h2>Test</h2>
+        <h2>Test</h2>
+        <h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2>
+        <h2>Test</h2>
+
+
+        <h2>Test</h2>
+        <h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2>
+    </div>
+</section>
+
+
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+}

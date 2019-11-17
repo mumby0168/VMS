@@ -1,0 +1,93 @@
+﻿
+
+
+<style>
+    /* Header Styles */
+    .jumbotron {
+        background-color: white;
+    }
+
+    .business-header {
+        height: 50%;
+    }
+
+    .header-grid {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-gap: 1rem;        
+        margin: auto;
+    }
+
+    .business-core-info {
+        text-align: center;
+    }
+
+    .contact-info {
+        text-align: left;
+    }
+
+    .edit-btn {
+        background-color: transparent;
+    }
+
+    .edit-btn:hover {
+        background-color: lightgray;
+    }
+
+    .business-address {
+        text-align: right;
+    }
+
+
+    @@media screen and (min-width: 1200px) {
+        .header-grid {
+            width: 60%;
+        }
+    }
+
+    @@media screen and (max-width: 750px) {
+        .header-grid {
+            width: 60%;
+            grid-template-columns: 100%;
+        }
+        .business-address {
+            text-align: center;
+            word-wrap: break-word;
+        }        
+        .contact-info {
+            text-align: center;
+            word-wrap: break-word;
+        }
+    }
+</style>
+
+
+<div class="business-info-wrapper">
+    <div class="business-core-info">
+        <h1>Company Name</h1>
+        <h4>Trading Name</h4>
+        <a href="www.google.co.uk">www.google.co.uk</a>
+        <br />
+        <button class="btn edit-btn"><i class="fas fa-edit"></i></button>
+    </div>
+    <hr />
+    <div class="header-grid">
+        <div class="contact-info">
+            <h2>John Doe</h2>
+            <h4>john.doe@hotmail.com</h4>
+            <h6>07568512672</h6>
+            <button class="btn edit-btn"><i class="fas fa-edit"></i></button>
+        </div>
+        <div class="business-address">
+            <h2>Address Line 1</h2>
+            <h4>Address Line 2</h4>
+            <h6>Postcode</h6>
+            <button class="btn edit-btn"><i class="fas fa-edit"></i></button>
+        </div>
+    </div>
+</div>
+
+
+@code {
+
+}
