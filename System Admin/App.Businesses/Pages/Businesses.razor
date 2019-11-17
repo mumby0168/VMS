@@ -1,11 +1,67 @@
 @page "/businesses"
+@inject BusinessService  BusinessService
+@inject DevelopmentSettings  Settings
 
 <h3>Businesses</h3>
 
-<header>
+<header style="height: 10%; background-color: red;">
     <NavLink href="create-business" class="btn btn-primary">Create Business</NavLink>
 </header>
 
-<section>
+<section style="height: 30%; background-color: lightgray">
     This is where I am planning to look like GitHub :)
 </section>
+
+<section style="height: 60%;">
+    <App.Businesses.Components.BusinessSummaries Summaries="@Summaries"></App.Businesses.Components.BusinessSummaries>
+</section>
+
+@code {
+
+    IEnumerable<BusinessSummary> Summaries { get; set; } = new List<BusinessSummary>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Settings.IsMockData) CreateMockData();
+        else Summaries = await BusinessService.GetBusinessSummariesAsync();
+        await base.OnInitializedAsync();
+    }
+
+
+    private void CreateMockData()
+    {
+        Summaries = new List<BusinessSummary>
+{
+            new BusinessSummary
+            {
+                Name = "Business 1",
+                TradingName = "Business 1 LTD",
+                SiteCount = 2
+            },
+            new BusinessSummary
+            {
+                Name = "Business 2",
+                TradingName = "Business 2 LTD",
+                SiteCount = 100
+            },
+            new BusinessSummary
+            {
+                Name = "Business 3",
+                TradingName = "Business 3 LTD",
+                SiteCount = 0
+            },
+            new BusinessSummary
+            {
+                Name = "Business 4",
+                TradingName = "Business 4 LTD",
+                SiteCount = 1
+            },
+            new BusinessSummary
+            {
+                Name = "Business 5",
+                TradingName = "Business 5 LTD",
+                SiteCount = 25
+            }
+        };
+    }
+}

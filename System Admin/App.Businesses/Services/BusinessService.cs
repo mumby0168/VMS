@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using App.Shared.Exceptions;
 using App.Shared.Extensions;
+using System.Collections.Generic;
 
 namespace App.Businesses.Services
 {
@@ -51,6 +52,25 @@ namespace App.Businesses.Services
             }
 
             return response.GetOperationId();
+        }
+
+        public async Task<IEnumerable<BusinessSummary>> GetBusinessSummariesAsync()
+        {            
+            try
+            {
+                var response = await Client.GetAsync("");
+                if(response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return JsonConvert.DeserializeObject<IEnumerable<BusinessSummary>>(await response.Content.ReadAsStringAsync());
+                }                
+            }
+            catch (HttpRequestException e)
+            {
+                _logger.LogError("The request failed to get business summaries: " + e.Message);
+                throw new InternalHttpRequestException(e);                
+            }
+
+            throw new NotImplementedException("This should do something to offer a reload of the data.");
         }
     }
 }

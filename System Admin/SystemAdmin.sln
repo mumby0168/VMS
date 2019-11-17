@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Businesses", "App.Busin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Shared", "App.Shared\App.Shared.csproj", "{E789F67F-A19D-4C91-BD49-526B14B1D460}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Shared.Tests", "App.Shared.Tests\App.Shared.Tests.csproj", "{D95F25B9-DF86-4232-AE60-AC3337C6E830}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Shared.Tests", "App.Shared.Tests\App.Shared.Tests.csproj", "{D95F25B9-DF86-4232-AE60-AC3337C6E830}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F0BD984F-E739-4259-A13D-900EFDE8676F}"
 EndProject

@@ -1,6 +1,8 @@
 using App.Shared.Context;
 using App.Shared.Operations;
 using App.Shared.Services;
+using App.Shared.Settings;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace App.Shared
@@ -16,6 +18,14 @@ namespace App.Shared
             services.AddSingleton<IOperationsService, OperationsService>();
             services.AddSingleton<IOperationsManager, OperationsManager>();
             services.AddHttpClient<IOperationsClient, OperationsClient>();
+            return services;
+        }
+        
+        public static IServiceCollection AddDevelopmentSettings(this IServiceCollection services, IConfiguration configuration)
+        {
+            var settings = new DevelopmentSettings();
+            configuration.GetSection(typeof(DevelopmentSettings).Name).Bind(settings);
+            services.AddSingleton<DevelopmentSettings>(settings);
             return services;
         }
     }

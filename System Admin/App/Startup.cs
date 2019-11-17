@@ -36,6 +36,7 @@ namespace Manager
             services.AddAccount();
             services.AddUserContext();
             services.AddOperationsServices();
+            services.AddDevelopmentSettings(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

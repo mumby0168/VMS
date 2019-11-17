@@ -1,0 +1,85 @@
+﻿<style>
+    .overflow-container {
+        height: 100%;
+        overflow-y: auto;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+    }
+
+    .grid-wrapper {
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: 30% 30% 10% 30%;
+        margin: 0px;
+    }
+
+    .grid-item {
+        justify-self: center;
+        align-self: center;
+        text-align: center;
+        word-wrap: break-word;
+    }
+
+    .list-group-item {
+        padding: 0.5rem;
+    }
+
+    @@media only screen and (max-width: 900) {
+        .grid-wrapper {
+            grid-template-columns: 50% 50%;
+        }
+
+        .grid-item {
+            justify-self: start;
+        }
+    }
+
+    .summary-header {
+        text-align: center;
+    }
+</style>
+
+<div class="summary-header">
+    <h2> Business Summaries</h2>
+</div>
+
+
+<div class="overflow-container">
+
+    <ul class="list-group list-group-flush">
+        @foreach (var summary in Summaries)
+        {
+            <li class="list-group-item">
+                <div class="grid-wrapper">
+                    <div class="grid-item">
+                        @summary.Name
+                    </div>
+                    <div class="grid-item">
+                        @summary.TradingName
+                    </div>
+                    <div class="grid-item">
+                        @summary.SiteCount
+                    </div>
+                    <div class="grid-item">
+                        @{ string id = summary.Id.ToString(); string route = "business-profile/" + id;}
+                        <NavLink class="btn btn-primary" href="@route">
+                            View
+                        </NavLink>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+
+</div>
+
+
+
+@code {
+    [Parameter]
+    public IEnumerable<BusinessSummary> Summaries { get; set; }
+
+
+
+}
