@@ -27,8 +27,13 @@ namespace Api.Gateway.Controllers
         public Task<IActionResult> Create([FromBody] CreateBusiness command) 
             => Task.FromResult(PublishCommand(command));
 
+        [Authorize(Roles = Roles.SystemAdmin)]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BusinessSummaryDto>>> Get() => Collection(await _client.GetBusinessSummaries());
+
+        [Authorize(Roles = Roles.SystemAdmin)]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get([FromRoute]Guid id) => Single(await _client.GetBusiness(id));
 
     }
 }

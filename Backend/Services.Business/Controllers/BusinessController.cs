@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Services.Business.Dtos;
@@ -22,6 +23,12 @@ namespace Services.Business.Controllers
         public Task<IEnumerable<BusinessSummaryDto>> Get()
         {
             return _dispatcher.Dispatch<BusinessesSummary, IEnumerable<BusinessSummaryDto>>(new BusinessesSummary());
+        }
+
+        [HttpGet("{id}")]
+        public Task<BusinessDto> Get([FromRoute] Guid id)
+        {
+            return _dispatcher.Dispatch<GetBusiness, BusinessDto>(new GetBusiness() {Id = id});
         }
     }
 }

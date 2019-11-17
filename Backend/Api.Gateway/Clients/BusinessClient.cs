@@ -20,5 +20,6 @@ namespace Api.Gateway.Clients
         }
         public Task<IEnumerable<BusinessSummaryDto>> GetBusinessSummaries() 
             => _client.GetAsync<IEnumerable<BusinessSummaryDto>>($"{_baseAddress}");
+        public Task<BusinessDto> GetBusiness(Guid id) => _client.GetAsync<BusinessDto>($"{_baseAddress}/{id}");
     }
 }

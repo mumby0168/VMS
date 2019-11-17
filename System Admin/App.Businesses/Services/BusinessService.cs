@@ -72,5 +72,25 @@ namespace App.Businesses.Services
 
             throw new NotImplementedException("This should do something to offer a reload of the data.");
         }
+
+        public async Task<Business> GetBusiness(Guid id)
+        {
+            try
+            {
+                var response = await Client.GetAsync(id.ToString());
+                if(response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<Business>(json);
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                _logger.LogError($"The request failed to get business with id: {id} error: " + e.Message);
+                throw new InternalHttpRequestException(e);
+                throw;
+            }
+            throw new NotImplementedException("This should do something to offer a reload of the data.");
+        }
     }
 }

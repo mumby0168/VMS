@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Services.Business.Repositorys
@@ -8,5 +9,6 @@ namespace Services.Business.Repositorys
         Task Add(Domain.Business business);
 
         Task<IEnumerable<Domain.Business>> GetBusinessesAsync();
+        Task<Domain.Business> GetBusinessAsync(Guid queryId);
     }
 }

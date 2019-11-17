@@ -11,7 +11,7 @@ namespace Services.Common.Base
         {
             if (dto == null)
             {
-                return NotFound();
+                return NoContent();
             }
 
             return Ok(dto);
@@ -21,7 +21,7 @@ namespace Services.Common.Base
         {
             if (items == null)
             {
-                return NotFound();
+                return NoContent();
             }
 
             return Ok(items);

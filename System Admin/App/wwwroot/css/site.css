@@ -4,7 +4,7 @@
 
 html,
 body {
-    height: 100%;
+    height: calc(100% - 60px);
 }
 
 
@@ -25,4 +25,14 @@ body {
 .validation-message {
     font-size: 0.75rem;
     color: red;
+}
+
+.navbar {
+    line-height: 50px;
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    height: 100%;
 }

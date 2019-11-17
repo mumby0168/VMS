@@ -9,5 +9,6 @@ namespace Api.Gateway.Clients.Interfaces
     public interface IBusinessClient
     {
         Task<IEnumerable<BusinessSummaryDto>> GetBusinessSummaries();
+        Task<BusinessDto> GetBusiness(Guid id);
     }
 }

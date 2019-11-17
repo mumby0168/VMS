@@ -1,7 +1,8 @@
-﻿@page "/business-profile/{id}"
+﻿@inject DevelopmentSettings DevelopmentSettings
+@inject BusinessService BusinessService
+@page "/business-profile/{id}"
 
-
-<style>        
+<style>
     .business-header {
         margin-bottom: 0px;
     }
@@ -9,31 +10,11 @@
 
 
 <section class="jumbotron business-header">
-    <App.Businesses.Components.BusinessProfileHeader></App.Businesses.Components.BusinessProfileHeader>
+    <App.Businesses.Components.BusinessProfileHeader Business="@Business"></App.Businesses.Components.BusinessProfileHeader>
 </section>
 
 <section class="bg-light sites-list">
-    <div background-color: red">
-        <h2>Test</h2>
-        <h2>Test</h2>
-        <h2>Test</h2><h2>Test</h2>
-        <h2>Test</h2>
-        <h2>Test</h2>
-        <h2>Test</h2>
-        <h2>Test</h2>
-        <h2>Test</h2><h2>Test</h2>
-        <h2>Test</h2>
-        <h2>Test</h2><h2>Test</h2>
-        <h2>Test</h2>
-        <h2>Test</h2><h2>Test</h2>
-        <h2>Test</h2>
-        <h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2>
-        <h2>Test</h2>
-
-
-        <h2>Test</h2>
-        <h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2><h2>Test</h2>
-    </div>
+    
 </section>
 
 
@@ -42,9 +23,47 @@
     [Parameter]
     public string Id { get; set; }
 
+    Guid Guid { get; set; }
 
-    protected override Task OnInitializedAsync()
+    public Business Business { get; set; }
+
+    protected async override Task OnInitializedAsync()
     {
-        return base.OnInitializedAsync();
+        if (DevelopmentSettings.IsMockData) await LoadMockData();
+        else await GetBusiness();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task GetBusiness()
+    {
+        Guid = Guid.Parse(Id);
+        Business = await BusinessService.GetBusiness(Guid);
+    }
+
+    private async Task LoadMockData()
+    {
+        await Task.Run(() =>
+        {
+            Thread.Sleep(1000);
+        });
+        Business = new Business
+        {
+            Name = "Pro Sports Cars",
+            TradingName = "Sports Cars LTD",
+            WebAddress = "http://www.google.co.uk",
+            Contact = new HeadContact()
+            {
+                FirstName = "John",
+                SecondName = "Wheelan",
+                Email = "john.wheelan@outlook.com",
+                ContactNumber = "07568765123"
+            },
+            Office = new HeadOffice
+            {
+                AddressLine1 = "100 Chest Street",
+                AddressLine2 = "Hull",
+                PostCode = "HU13 7YJ"
+            }
+        };
     }
 }
