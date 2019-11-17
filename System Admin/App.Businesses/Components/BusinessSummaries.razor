@@ -34,20 +34,31 @@
             justify-self: start;
         }
     }
-
-    .summary-header {
-        text-align: center;
-    }
 </style>
 
-<div class="summary-header">
-    <h2> Business Summaries</h2>
-</div>
 
 
 <div class="overflow-container">
 
     <ul class="list-group list-group-flush">
+
+        <li class="list-group-item" style="padding-bottom: 1rem;">
+            <div class="grid-wrapper">
+                <div class="grid-item">
+                    <p class="font-weight-bold">Name</p>
+                </div>
+                <div class="grid-item">
+                    <p class="font-weight-bold">Trading Name</p>
+                </div>
+                <div class="grid-item">
+                    <p class="font-weight-bold">Sites</p>
+                </div>
+                <div class="grid-item">
+                    <p class="font-weight-bold">Actions</p>
+                </div>
+            </div>
+        </li>
+
         @foreach (var summary in Summaries)
         {
             <li class="list-group-item">

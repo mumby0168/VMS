@@ -2,19 +2,39 @@
 @inject BusinessService  BusinessService
 @inject DevelopmentSettings  Settings
 
-<h3>Businesses</h3>
+<style>
+    .header-section {
+        height: 40%;
+        margin-bottom: 0px;        
+        background-color: #fff;
+    }    
+    .summaries-section {
+        height: 60%;
+        padding-top: 1rem;
+    }
+</style>
 
-<header style="height: 10%; background-color: red;">
-    <NavLink href="create-business" class="btn btn-primary">Create Business</NavLink>
-</header>
+<Restricted>
+    <Yes>
+        <section class="jumbotron text-center header-section">
+            <div class="container">
+                <h1 class="jumbotron-heading">Business Management</h1>
+                <p class="lead text-muted">This area will allow for the management of businesses. You can creata new one below and view existing in the section below.</p>
+                <p>
+                    <NavLink class="btn btn-primary" href="create-business">
+                        <i class="fas fa-add"></i> Add Business
+                    </NavLink>
+                </p>
+            </div>
+        </section>
 
-<section style="height: 30%; background-color: lightgray">
-    This is where I am planning to look like GitHub :)
-</section>
+        <section class="bg-light summaries-section">
+            <App.Businesses.Components.BusinessSummaries Summaries="@Summaries"></App.Businesses.Components.BusinessSummaries>
+        </section>
+    </Yes>
+</Restricted>
 
-<section style="height: 60%;">
-    <App.Businesses.Components.BusinessSummaries Summaries="@Summaries"></App.Businesses.Components.BusinessSummaries>
-</section>
+
 
 @code {
 
