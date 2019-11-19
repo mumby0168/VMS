@@ -1,0 +1,3 @@
+[submodule "External/BlazorLoadingFork"]
+	path = External/BlazorLoadingFork
+	url = https://github.com/mumby0168/Blazor.LoadingIndicator.git
