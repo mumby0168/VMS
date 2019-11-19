@@ -56,7 +56,7 @@ namespace Services.RabbitMq.Tests.Messages
             sut.PublishCommand(_mockCommand.Object, _requestInfo.Object);
 
             //Assert
-            _model.Verify(o => o.BasicPublish(It.IsAny<string>(), "test-service.MockCommand", true, It.IsAny<IBasicProperties>(), It.IsAny<byte[]>()));
+            _model.Verify(o => o.BasicPublish(It.IsAny<string>(), "test.MockCommand", true, It.IsAny<IBasicProperties>(), It.IsAny<byte[]>()));
 
         }
 
@@ -73,7 +73,7 @@ namespace Services.RabbitMq.Tests.Messages
             sut.PublishCommand(_mockCommand.Object, _requestInfo.Object);
 
             //Assert
-            _model.Verify(o => o.BasicPublish("micro-service-exchange", "test-service.MockCommand", true, It.IsAny<IBasicProperties>(), bytes));
+            _model.Verify(o => o.BasicPublish("test", "test.MockCommand", true, It.IsAny<IBasicProperties>(), bytes));
         }
 
         [Test]
@@ -101,7 +101,7 @@ namespace Services.RabbitMq.Tests.Messages
             sut.PublishEvent(_event.Object, _requestInfo.Object);
 
             //Assert
-            _model.Verify(o => o.BasicPublish("micro-service-exchange", "test-service.MockEvent", true,
+            _model.Verify(o => o.BasicPublish(It.IsAny<string>(), It.IsAny<string>(), true,
                 It.IsAny<IBasicProperties>(), bytes));
         }
 

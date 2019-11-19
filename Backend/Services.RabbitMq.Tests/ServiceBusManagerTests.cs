@@ -114,11 +114,11 @@ namespace Services.RabbitMq.Tests
             sut.CreateConnection(_busSettings.Object, _serviceSettings.Object);
 
             //Assert
-            _exchange.Verify(o => o.CreateExchange(ExchangeName, "topic"));
+            _exchange.Verify(o => o.CreateExchange(TestServiceName, "topic"));
         }
 
         [Test]
-        public void CreateConnection_Always_DeclaresQueue()
+        public void CreateConnection_Always_DeclaresExchange()
         {
             //Arrange
             var sut = CreateSut();
@@ -127,7 +127,7 @@ namespace Services.RabbitMq.Tests
             sut.CreateConnection(_busSettings.Object, _serviceSettings.Object);
 
             //Assert
-            _queue.Verify(o => o.DeclareQueue(_serviceSettings.Object.Name));
+            _exchange.Verify(o => o.CreateExchange(_serviceSettings.Object.Name, "topic"));
         }
 
         [Test]
@@ -156,22 +156,7 @@ namespace Services.RabbitMq.Tests
 
             //Assert
             _subscriber.Verify(o =>
-                o.Subscribe<MockCommand>(TestServiceName, It.IsAny<Func<MockCommand, IRequestInfo, Task>>()));
-        }
-
-        [Test]
-        public void SubscribeCommand_Always_CreatesAnExchangeBinding()
-        {
-            //Arrange   
-            var sut = CreateSut();
-            sut.CreateConnection(_busSettings.Object, _serviceSettings.Object);
-            _serviceSettings.Object.Name = TestServiceName;
-
-            //Act
-            sut.SubscribeCommand<MockCommand>();
-
-            //Assert
-            _queue.Verify(o => o.Bind(ExchangeName, $"test.MockCommand"));
+                o.Subscribe<MockCommand>(TestServiceName + "/MockCommand", It.IsAny<Func<MockCommand, IRequestInfo, Task>>()));
         }
 
         [Test]
@@ -213,7 +198,7 @@ namespace Services.RabbitMq.Tests
             sut.SubscribeEvent<MockEvent>();
 
             //Assert
-            _subscriber.Verify(o => o.Subscribe<MockEvent>(TestServiceName, It.IsAny<Func<MockEvent, IRequestInfo, Task>>()));
+            _subscriber.Verify(o => o.Subscribe<MockEvent>(TestServiceName + "/MockEvent", It.IsAny<Func<MockEvent, IRequestInfo, Task>>()));
         }
 
         [Test]
@@ -227,7 +212,7 @@ namespace Services.RabbitMq.Tests
             sut.SubscribeEvent<MockEvent>();
 
             //Assert
-            _queue.Verify(o => o.Bind(ExchangeName, "test.MockEvent"));
+            _queue.Verify(o => o.Bind("test", "test.MockEvent"));
         }
 
         public ServiceBusManager CreateSut() => new ServiceBusManager(_serviceConnection.Object, _exchangeFactory.Object, _queueFactory.Object, _subscriber.Object, _settings.Object, _serviceBusConnectionFactory.Object, _handlerFactory.Object, _serviceProvider.Object, LoggerMock.Create<ServiceBusManager>());

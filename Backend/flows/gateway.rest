@@ -1,6 +1,6 @@
 @url = http://localhost:5020/gateway/api/
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzQwNjgwNzAsImV4cCI6MTU3NDA3ODg3MCwiaWF0IjoxNTc0MDY4MDcwfQ.HthgdegRhpg0trxRBtH-0bHHdPjboIU0Gg7uVuDmFp1YLdYtuHSoVIGuZ_FsBlsXicmPdkhw53AqPxQHfdLtCw
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzQxNjM2NzksImV4cCI6MTU3NDE3NDQ3OSwiaWF0IjoxNTc0MTYzNjc5fQ.8DnPt1VXdmk8WWs3NVnPf9xKF2eSfULcgapbbe55Y9OkqCzZEPq1fwTICYBoDdUp3plIn3ZVRVboa3JbdKUZQw
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
@@ -42,7 +42,7 @@ Authorization: Bearer {{jwt}}
 
 ### Update Business Details
 
-@businessiD = 2f85fbe8-e8c2-42d1-aab7-01ace68db08c
+@businessiD = a36d08ce-a2cb-4787-933b-1ddb8eeaafd3
 
 POST {{url}}businesses/update-details
 Content-Type: application/json
@@ -64,7 +64,7 @@ Authorization: Bearer {{jwt}}
 {
     "businessId": "{{businessiD}}",
     "firstName": "John",
-    "lastName": "Goodman",
+    "secondName": "Goodman",
     "email": "john.goodman@outlook.com",
     "contactNumber": "07456987456"
 }
