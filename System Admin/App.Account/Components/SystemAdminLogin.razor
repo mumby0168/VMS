@@ -1,6 +1,7 @@
 @page "/system-admin-login"
 @inject LoginViewModel Model
-@inject IUserContext User;
+@inject IUserContext User
+@inject ILoadingService LoadingService
 @using Account.ViewModels
 
 <style>
@@ -33,34 +34,36 @@
                                     <h4 class="card-title">Login</h4>
                                 </div>
                             </div>
-                            <div class="card-body">
+                            <Blazor.LoadingIndicator.Indicator Context="login">
+                                <div class="card-body">
 
-                                <EditForm class="login-form" Model="@Model" OnValidSubmit="@Submit">
-                                    <DataAnnotationsValidator />
+                                    <EditForm class="login-form" Model="@Model" OnValidSubmit="@Submit">
+                                        <DataAnnotationsValidator />
 
-                                    <div class="form-group">
-                                        <label for="email">Email:</label>
-                                        <InputText class="form-control" id="email" @bind-Value="@Model.Email" />
-                                        <ValidationMessage For="@(() => Model.Email)" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="password">Password:</label>
-                                        <InputText type="password" class="form-control" id="password" @bind-Value="@Model.Password" />
-                                        <ValidationMessage For="@(() => Model.Password)" />
-                                    </div>
-
-                                    @if (Model.Error != string.Empty)
-                                    {
-                                        <div class="alert alert-danger" role="alert">
-                                            @Model.Error
+                                        <div class="form-group">
+                                            <label for="email">Email:</label>
+                                            <InputText class="form-control" id="email" @bind-Value="@Model.Email" />
+                                            <ValidationMessage For="@(() => Model.Email)" />
                                         </div>
-                                    }
 
-                                    <input type="submit" class="btn btn-primary" value="Login" />
+                                        <div class="form-group">
+                                            <label for="password">Password:</label>
+                                            <InputText type="password" class="form-control" id="password" @bind-Value="@Model.Password" />
+                                            <ValidationMessage For="@(() => Model.Password)" />
+                                        </div>
 
-                                </EditForm>
-                            </div>
+                                        @if (Model.Error != string.Empty)
+                                        {
+                                            <div class="alert alert-danger" role="alert">
+                                                @Model.Error
+                                            </div>
+                                        }
+
+                                        <input type="submit" class="btn btn-primary" value="Login" />
+
+                                    </EditForm>
+                                </div>
+                            </Blazor.LoadingIndicator.Indicator>
                         </div>
                     </div>
                     <div class="col-sm-4"></div>
@@ -77,6 +80,9 @@
 @code {
     private async Task Submit()
     {
-        await Model.Submit();        
+        await LoadingService.StartTaskAsync(async (task) =>
+        {            
+            await Model.Submit();            
+        }, "login", "Logging you in...");
     }
 }

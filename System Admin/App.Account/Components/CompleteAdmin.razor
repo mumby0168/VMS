@@ -1,5 +1,6 @@
 @page "/complete-admin"
-@inject CompleteAdminViewModel Model;
+@inject CompleteAdminViewModel Model
+@inject ILoadingService LoadingService
 
 
 <div class="container">
@@ -9,44 +10,49 @@
         <h2>System Admin Login</h2>
     </div>
     <div class="card-body">
+        <Blazor.LoadingIndicator.Indicator Context="complete-admin">
+            <EditForm Model="@Model" OnValidSubmit="@Submit">
+                <DataAnnotationsValidator />
 
-        <EditForm Model="@Model" OnValidSubmit="@Model.Submit">
-            <DataAnnotationsValidator/>            
-
-            <div class="form-group">
-                <label for="code">Code:</label>
-                <InputText class="form-control" id="code" @bind-Value="@Model.Code"/>
-                <ValidationMessage For="@(() => Model.Code)"/>
-            </div>        
-
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <InputText class="form-control" id="email" @bind-Value="@Model.Email"/>
-                <ValidationMessage For="@(() => Model.Email)"/>
-            </div>        
-
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <InputText type="password" class="form-control" id="password" @bind-Value="@Model.Password"/>
-                <ValidationMessage For="@(() => Model.Password)"/>
-            </div>       
-
-            <div class="form-group">
-                <label for="passwordMatch">Confirm Password:</label>
-                <InputText type="password" class="form-control" id="passwordMatch" @bind-Value="@Model.PasswordMatch"/>
-                <ValidationMessage For="@(() => Model.PasswordMatch)"/>
-            </div>       
-
-            @if(Model.Error != string.Empty) 
-            {
-                <div class="alert alert-danger" role="alert">
-                    @Model.Error
+                <div class="form-group">
+                    <label for="code">Code:</label>
+                    <InputText class="form-control" id="code" @bind-Value="@Model.Code" />
+                    <ValidationMessage For="@(() => Model.Code)" />
                 </div>
-            }                         
-            
-            <input type="submit" class="btn btn-primary"/>
 
-        </EditForm>             
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <InputText class="form-control" id="email" @bind-Value="@Model.Email" />
+                    <ValidationMessage For="@(() => Model.Email)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <InputText type="password" class="form-control" id="password" @bind-Value="@Model.Password" />
+                    <ValidationMessage For="@(() => Model.Password)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="passwordMatch">Confirm Password:</label>
+                    <InputText type="password" class="form-control" id="passwordMatch" @bind-Value="@Model.PasswordMatch" />
+                    <ValidationMessage For="@(() => Model.PasswordMatch)" />
+                </div>
+
+                @if (Model.Error != string.Empty)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @Model.Error
+                    </div>
+                }
+
+                <input type="submit" class="btn btn-primary" />
+
+            </EditForm>
+        </Blazor.LoadingIndicator.Indicator>
         </div>
     </div>
 </div>
+
+@code {
+    async Task Submit() => await LoadingService.StartTaskAsync(async (task) => await Model.Submit(), "create-admin");
+}

@@ -1,98 +1,103 @@
 @inject CreateBusinessViewModel Model;
+@inject ILoadingService  LoadingService
 
-    <EditForm Model="@Model" OnValidSubmit="@Model.Submit">
+    <Blazor.LoadingIndicator.Indicator Context="create-business">
 
-        <DataAnnotationsValidator />
+        <EditForm Model="@Model" OnValidSubmit="@Submit">
+
+            <DataAnnotationsValidator />
 
 
-        <h3>Business Information</h3>
-        <hr />
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="name">Business Name:</label>
-                    <InputText class="form-control" type="text" id="name" @bind-Value="@Model.Name" />
-                    <ValidationMessage For="@(() => Model.Name)" />
+            <h3>Business Information</h3>
+            <hr />
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="name">Business Name:</label>
+                        <InputText class="form-control" type="text" id="name" @bind-Value="@Model.Name" />
+                        <ValidationMessage For="@(() => Model.Name)" />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+
+                        <label for="Tradingname">Trading Name:</label>
+                        <InputText class="form-control" type="text" id="Tradingname" @bind-Value="@Model.TradingName" />
+                        <ValidationMessage For="@(() => Model.TradingName)" />
+                    </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="form-group">
-
-                    <label for="Tradingname">Trading Name:</label>
-                    <InputText class="form-control" type="text" id="Tradingname" @bind-Value="@Model.TradingName" />
-                    <ValidationMessage For="@(() => Model.TradingName)" />
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="webAddress">Website Name:</label>
+                        <InputText class="form-control" type="text" id="webAddress" @bind-Value="@Model.WebAddress" />
+                        <ValidationMessage For="@(() => Model.WebAddress)" />
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="webAddress">Website Name:</label>
-                    <InputText class="form-control" type="text" id="webAddress" @bind-Value="@Model.WebAddress" />
-                    <ValidationMessage For="@(() => Model.WebAddress)" />
+
+            <br />
+
+            <h3>Business Point of Contact</h3>
+            <hr />
+            <div class="row">
+                <div class="col">
+                    <label for="f-name">First Name:</label>
+                    <InputText class="form-control" type="text" id="f-name" @bind-Value="@Model.FirstName" />
+                    <ValidationMessage For="@(() => Model.FirstName)" />
+                </div>
+                <div class="col">
+                    <label for="s-name">Second Name:</label>
+                    <InputText class="form-control" type="text" id="s-name" @bind-Value="@Model.SecondName" />
+                    <ValidationMessage For="@(() => Model.SecondName)" />
                 </div>
             </div>
-        </div>
-
-        <br />
-
-        <h3>Business Point of Contact</h3>
-        <hr />
-        <div class="row">
-            <div class="col">
-                <label for="f-name">First Name:</label>
-                <InputText class="form-control" type="text" id="f-name" @bind-Value="@Model.FirstName" />
-                <ValidationMessage For="@(() => Model.FirstName)" />
+            <div class="row">
+                <div class="col">
+                    <label for="email">Email:</label>
+                    <InputText class="form-control" type="text" id="email" @bind-Value="@Model.Email" />
+                    <ValidationMessage For="@(() => Model.Email)" />
+                </div>
+                <div class="col">
+                    <label for="phone">Contact Number:</label>
+                    <InputText class="form-control" type="text" id="phone" @bind-Value="@Model.ContactNumber" />
+                    <ValidationMessage For="@(() => Model.ContactNumber)" />
+                </div>
             </div>
-            <div class="col">
-                <label for="s-name">Second Name:</label>
-                <InputText class="form-control" type="text" id="s-name" @bind-Value="@Model.SecondName" />
-                <ValidationMessage For="@(() => Model.SecondName)" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label for="email">Email:</label>
-                <InputText class="form-control" type="text" id="email" @bind-Value="@Model.Email" />
-                <ValidationMessage For="@(() => Model.Email)" />
-            </div>
-            <div class="col">
-                <label for="phone">Contact Number:</label>
-                <InputText class="form-control" type="text" id="phone" @bind-Value="@Model.ContactNumber" />
-                <ValidationMessage For="@(() => Model.ContactNumber)" />
-            </div>
-        </div>
 
-        <br />
+            <br />
 
-        <h3>Head Office</h3>
-        <hr />
-        <div class="row">
-            <div class="col">
-                <label for="postcode">Postcode:</label>
-                <InputText class="form-control" type="text" id="postcode" @bind-Value="@Model.PostCode" />
-                <ValidationMessage For="@(() => Model.PostCode)" />
+            <h3>Head Office</h3>
+            <hr />
+            <div class="row">
+                <div class="col">
+                    <label for="postcode">Postcode:</label>
+                    <InputText class="form-control" type="text" id="postcode" @bind-Value="@Model.PostCode" />
+                    <ValidationMessage For="@(() => Model.PostCode)" />
+                </div>
+                <div class="col">
+                    <label for="add-line-1">Address Line 1:</label>
+                    <InputText class="form-control" type="text" id="add-line-1" @bind-Value="@Model.AddressLine1" />
+                    <ValidationMessage For="@(() => Model.AddressLine1)" />
+                </div>
             </div>
-            <div class="col">
-                <label for="add-line-1">Address Line 1:</label>
-                <InputText class="form-control" type="text" id="add-line-1" @bind-Value="@Model.AddressLine1" />
-                <ValidationMessage For="@(() => Model.AddressLine1)" />
+            <div class="row">
+                <div class="col">
+                    <label for="add-line-2">Address Line 2:</label>
+                    <InputText class="form-control" type="text" id="add-line-2" @bind-Value="@Model.AddressLine2" />
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label for="add-line-2">Address Line 2:</label>
-                <InputText class="form-control" type="text" id="add-line-2" @bind-Value="@Model.AddressLine2" />
-            </div>
-        </div>
 
-        <br />
+            <br />
 
-        <input type="submit" class="btn btn-primary" value="Create Business" />
+            <input type="submit" class="btn btn-primary" value="Create Business" />
 
-    </EditForm>
+        </EditForm>
+
+    </Blazor.LoadingIndicator.Indicator>
 
 
 @code {
-    
+    async Task Submit() => await LoadingService.StartTaskAsync(async (task) => await Model.Submit(), "create-business", "Creating business ...");
 }

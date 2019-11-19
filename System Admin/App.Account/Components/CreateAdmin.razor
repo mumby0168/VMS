@@ -1,5 +1,6 @@
 @page "/create-admin"
 @inject CreateAdminViewModel Model
+@inject ILoadingService LoadingService
 
 <div class="padder">
     <Restricted IsPageRestriction="true">
@@ -9,26 +10,28 @@
                         <h2>Create System Admin</h2>
                     </div>
                     <div class="card-body">
-                        <EditForm Model="@Model" OnValidSubmit="@Model.Submit">
+                        <Blazor.LoadingIndicator.Indicator Context="create-admin">
+                            <EditForm Model="@Model" OnValidSubmit="@Submit">
 
-                            <DataAnnotationsValidator />
+                                <DataAnnotationsValidator />
 
-                            <div class="form-group">
-                                <label for="email">Email:</label>
-                                <InputText class="form-control" id="email" @bind-Value="@Model.Email" />
-                                <ValidationMessage For="@(() => Model.Email)" />
-                            </div>
-
-                            @if (Model.Error != string.Empty)
-                            {
-                                <div class="alert alert-danger" role="alert">
-                                    @Model.Error
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <InputText class="form-control" id="email" @bind-Value="@Model.Email" />
+                                    <ValidationMessage For="@(() => Model.Email)" />
                                 </div>
-                            }
 
-                            <input type="submit" class="btn btn-primary" value="Create Admin" />
+                                @if (Model.Error != string.Empty)
+                                {
+                                    <div class="alert alert-danger" role="alert">
+                                        @Model.Error
+                                    </div>
+                                }
 
-                        </EditForm>
+                                <input type="submit" class="btn btn-primary" value="Create Admin" />
+
+                            </EditForm>
+                        </Blazor.LoadingIndicator.Indicator>
                     </div>
                 </div>
 
@@ -39,5 +42,7 @@
 
 
 @code {
-
+    async Task Submit()
+    => await LoadingService.StartTaskAsync(async (task) => { await Model.Submit(); }, "create-admin");
+    
 }

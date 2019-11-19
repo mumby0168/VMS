@@ -1,6 +1,7 @@
 @page "/businesses"
 @inject BusinessService  BusinessService
 @inject DevelopmentSettings  Settings
+@inject ILoadingService LoadingService
 
 <style>
     .header-section {
@@ -28,9 +29,11 @@
             </div>
         </section>
 
-        <section class="bg-light summaries-section">
-            <App.Businesses.Components.BusinessSummaries Summaries="@Summaries"></App.Businesses.Components.BusinessSummaries>
-        </section>
+        <Indicator Context="businesses">
+            <section class="bg-light summaries-section">
+                <App.Businesses.Components.BusinessSummaries Summaries="@Summaries"></App.Businesses.Components.BusinessSummaries>
+            </section>
+        </Indicator>
     </Yes>
 </Restricted>
 
@@ -42,8 +45,12 @@
 
     protected override async Task OnInitializedAsync()
     {
-        if (Settings.IsMockData) CreateMockData();
-        else Summaries = await BusinessService.GetBusinessSummariesAsync();
+        await LoadingService.StartTaskAsync(async (task) =>
+        {
+            if (Settings.IsMockData) CreateMockData();
+            else Summaries = await BusinessService.GetBusinessSummariesAsync();
+        }, "businesses");
+        
         await base.OnInitializedAsync();
     }
 

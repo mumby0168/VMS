@@ -3,6 +3,7 @@ using Account.Interfaces.Jwt;
 using App.Businesses;
 using App.Shared;
 using App.Shared.Operations;
+using Blazor.LoadingIndicator;
 using Blazored.Toast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -36,6 +37,7 @@ namespace Manager
             services.AddAccount();
             services.AddUserContext();
             services.AddOperationsServices();
+            services.AddLoadingIndicator();
             services.AddDevelopmentSettings(Configuration);
         }
 

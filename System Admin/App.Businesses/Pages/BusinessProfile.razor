@@ -1,5 +1,6 @@
 ﻿@inject DevelopmentSettings DevelopmentSettings
 @inject BusinessService BusinessService
+@inject ILoadingService LoadingService
 @page "/business-profile/{id}"
 
 <style>
@@ -8,14 +9,14 @@
     }
 </style>
 
+<Indicator Context="business-profile">
+    <section class="jumbotron business-header">
+        <App.Businesses.Components.BusinessProfileHeader Business="@Business"></App.Businesses.Components.BusinessProfileHeader>
+    </section>
 
-<section class="jumbotron business-header">
-    <App.Businesses.Components.BusinessProfileHeader Business="@Business"></App.Businesses.Components.BusinessProfileHeader>
-</section>
-
-<section class="bg-light sites-list">
-    
-</section>
+    <section class="bg-light sites-list">
+    </section>
+</Indicator>
 
 
 
@@ -29,8 +30,11 @@
 
     protected async override Task OnInitializedAsync()
     {
-        if (DevelopmentSettings.IsMockData) await LoadMockData();
-        else await GetBusiness();
+        await LoadingService.StartTaskAsync(async (task) => { 
+            if (DevelopmentSettings.IsMockData) await LoadMockData();
+            else await GetBusiness();
+        }, "business-profile");
+        
         await base.OnInitializedAsync();
     }
 
