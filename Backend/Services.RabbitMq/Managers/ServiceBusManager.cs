@@ -25,7 +25,6 @@ namespace Services.RabbitMq.Managers
         private readonly IHandlerFactory _handlerFactory;
         private readonly IServiceProvider _serviceProvider;
         private readonly ILogger<ServiceBusManager> _logger;
-        private IServiceBusQueue _serviceBusQueue;
         private const string ExchangeName = "micro-service-exchange";
 
         public ServiceBusManager(IServiceBusConnection connection, IServiceBusExchangeFactory serviceBusExchangeFactory,
@@ -42,7 +41,7 @@ namespace Services.RabbitMq.Managers
             _logger = logger;
         }
 
-        public void CreateConnection(IServiceBusSettings serviceBusSettings, IServiceSettings serviceSettings, bool declareQueue = true)
+        public void CreateConnection(IServiceBusSettings serviceBusSettings, IServiceSettings serviceSettings, bool declareExchange = true)
         {
             var factory = _serviceBusConnectionFactory.CreateConnectionFactory(serviceBusSettings.HostName);
             var connection = factory.CreateConnection();
@@ -50,13 +49,10 @@ namespace Services.RabbitMq.Managers
             _connection.RegisterConnection(connection);
             _connection.ServiceSetting = serviceSettings;
 
-            var exchange = _serviceBusExchangeFactory.CreateServiceBusExchange();
-            exchange.CreateExchange(ExchangeName, "topic");
-
-            if (declareQueue)
+            if (declareExchange)
             {
-                _serviceBusQueue = _serviceBusQueueFactory.CreateServiceBusQueue();
-                _serviceBusQueue.DeclareQueue(serviceSettings.Name);
+                var exchange = _serviceBusExchangeFactory.CreateServiceBusExchange();
+                exchange.CreateExchange(serviceSettings.Name, "topic");
             }
 
             _logger.LogInformation("Connection made to rabbit MQ bus.");
@@ -68,10 +64,12 @@ namespace Services.RabbitMq.Managers
         {
             var handler = _handlerFactory.ResolveCommandHandler<T>();
             if (handler is null) throw new InvalidOperationException("Please register the command handler for: " + typeof(T).Name);
-            var serviceFrom = GetServiceName<T>() ?? serviceNamespace;
-            if (serviceFrom == null) throw new InvalidOperationException("Please specify the namespace the message is coming from through the [MicroService] attribute or by passing it through this function");
-            _serviceBusMessageSubscriber.Subscribe<T>(_serviceSettings.Name, async (message, info) => await handler.HandleAsync(message, info));
-            _serviceBusQueue.Bind(ExchangeName, $"{serviceFrom}.{typeof(T).Name}");
+            var serviceFrom = _serviceSettings.Name;
+            var queue = _serviceBusQueueFactory.CreateServiceBusQueue();
+            var name = $"{serviceFrom}/{typeof(T).Name}";
+            queue.DeclareQueue(name);
+            queue.Bind(_serviceSettings.Name, $"{serviceFrom}.{typeof(T).Name}");
+            _serviceBusMessageSubscriber.Subscribe<T>(name, async (message, info) => await handler.HandleAsync(message, info));
             return this;
         }
 
@@ -80,9 +78,15 @@ namespace Services.RabbitMq.Managers
             var handler = _handlerFactory.ResolveEventHandler<T>();
             if (handler is null) throw new InvalidOperationException("Please register the event handler for: " + typeof(T).Name);
             var serviceFrom = GetServiceName<T>() ?? serviceNamespace;
+
             if(serviceFrom == null) throw new InvalidOperationException("Please specify the namespace the message is coming from through the [MicroService] attribute or by passing it through this function");
-            _serviceBusMessageSubscriber.Subscribe<T>(_serviceSettings.Name, async (message, info) => await handler.HandleAsync(message, info));
-            _serviceBusQueue.Bind(ExchangeName, $"{serviceFrom}.{typeof(T).Name}");
+
+            string queueName = $"{_serviceSettings.Name}/{typeof(T).Name}";
+            var queue = _serviceBusQueueFactory.CreateServiceBusQueue();
+            queue.DeclareQueue(queueName);
+            queue.Bind(serviceFrom, $"{serviceFrom}.{typeof(T).Name}");
+
+            _serviceBusMessageSubscriber.Subscribe<T>(queueName, async (message, info) => await handler.HandleAsync(message, info));
             return this;
         }
 
@@ -97,16 +101,18 @@ namespace Services.RabbitMq.Managers
                 eventTypes = eventTypes.Where(t => !excludedTypes.Contains(t));
             }
 
+
+            var handler = (T)_serviceProvider.GetService(typeof(IGenericBusHandler));
+
             foreach (var eventType in eventTypes)
             {
-                var handler = (T) _serviceProvider.GetService(typeof(IGenericBusHandler));
-                _serviceBusMessageSubscriber.CustomSubscribe(_serviceSettings.Name,
-                    async (message, info) => await handler.HandleAsync(message, info));
-                var serviceName = eventType.GetCustomAttribute<MicroService>()?.ServiceName;
-                if (serviceName is null)
-                    throw new InvalidOperationException(
-                        $"Please add a [MicroService] attribute to type: {eventType.Name}");
-                _serviceBusQueue.Bind(ExchangeName, $"{serviceName}.{eventType.Name}");
+                var serviceFrom = GetServiceName(eventType);
+                if (serviceFrom == null) throw new InvalidOperationException("Please specify the namespace the message is coming from through the [MicroService] attribute or by passing it through this function");
+                string queueName = $"{_serviceSettings.Name}/{typeof(T).Name}";
+                var queue = _serviceBusQueueFactory.CreateServiceBusQueue();
+                queue.DeclareQueue(queueName);
+                queue.Bind(serviceFrom, $"{serviceFrom}.{eventType.Name}");
+                _serviceBusMessageSubscriber.CustomSubscribe(queueName, async (message, info) => await handler.HandleAsync(message, info));
             }
 
             return this;
@@ -114,6 +120,10 @@ namespace Services.RabbitMq.Managers
 
         private string GetServiceName<T>() where T : IServiceBusMessage
             => typeof(T).GetCustomAttribute<MicroService>()?.ServiceName;
+
+
+        private string GetServiceName(Type t)
+            => t.GetCustomAttribute<MicroService>()?.ServiceName;
 
         public void CloseConnection()
         {

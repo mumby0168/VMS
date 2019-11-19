@@ -9,7 +9,6 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Services.Business.Messages.Commands
 {
-    [MicroService(ServiceNames.Gateway)]
     public class UpdateHeadOffice : ICommand
     {
         public Guid BusinessId { get; }

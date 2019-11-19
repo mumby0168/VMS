@@ -41,6 +41,5 @@ namespace Services.RabbitMq.Messages
             consumer.Received += (sender, args) => _serviceBusMessageHandler.HandleUsingRoutingKey(sender, args, callback);
             connection.Channel.BasicConsume(queueName, true, consumer);
         }
-
     }
 }

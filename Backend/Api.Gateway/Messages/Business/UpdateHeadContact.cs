@@ -1,9 +1,12 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Services.Common.Names;
+using Services.RabbitMq.Attributes;
 using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Api.Gateway.Messages.Business
 {
+    [MicroService(ServiceNames.Businesses)]
     public class UpdateHeadContact : ICommand
     {
         public Guid BusinessId { get; }

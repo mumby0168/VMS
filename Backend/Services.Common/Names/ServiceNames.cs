@@ -14,7 +14,7 @@ namespace Services.Common.Names
         public const string Operations = Prefix + nameof(Operations);
         public const string Gateway = Prefix + nameof(Gateway);
 
-        public static string Test => Prefix + nameof(Test);
+        public const string Test = Prefix + nameof(Test);
 
         public const string Businesses = Prefix + nameof(Businesses);
 

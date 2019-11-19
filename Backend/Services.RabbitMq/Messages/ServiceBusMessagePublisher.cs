@@ -32,23 +32,34 @@ namespace Services.RabbitMq.Messages
         }
 
 
-        void Publish<T>(T message, IRequestInfo requestInfo) where T : IServiceBusMessage
-        { 
-            string routingKey = $"{_serviceSettings.Name}.{typeof(T).Name}";
+        void Publish<T>(T message, IRequestInfo requestInfo, string exchange, string routingKey) where T : IServiceBusMessage
+        {
             var messageJson = _jsonConvertWrapper.Serialize(message);
             var requestJson = _jsonConvertWrapper.Serialize(requestInfo);
             var json = requestJson + "\t" + messageJson;
             var body = _utf8Wrapper.GetBytes(json);
             var connection = _serviceBusConnectionFactory.ResolveServiceBusConnection();
-            connection.Channel.BasicPublish("micro-service-exchange", routingKey, true, new BasicProperties(), body);
+            connection.Channel.BasicPublish(exchange, routingKey, true, new BasicProperties(), body);
             _logger.LogInformation($"Published: {routingKey}");
         }
 
 
-        public void PublishCommand<T>(T message, IRequestInfo requestInfo) where T : ICommand =>
-            Publish(message, requestInfo);
+        public void PublishCommand<T>(T message, IRequestInfo requestInfo) where T : ICommand
+        {
+            string exchange = GetServiceName<T>();
+            if(exchange == null) throw new InvalidOperationException("Please specify using the [MicroService] attribute which service the command is intended for.");
+            string key = $"{exchange}.{typeof(T).Name}";
+            Publish(message, requestInfo, exchange, key);
+        }
 
-        public void PublishEvent<T>(T message, IRequestInfo requestInfo) where T : IEvent =>
-            Publish(message, requestInfo);
+
+        public void PublishEvent<T>(T message, IRequestInfo requestInfo) where T : IEvent
+        {
+            Publish(message, requestInfo, _serviceSettings.Name, $"{_serviceSettings.Name}.{typeof(T).Name}");
+        }
+
+        private string GetServiceName<T>() where T : IServiceBusMessage
+            => typeof(T).GetCustomAttribute<MicroService>()?.ServiceName;
+
     }
 }

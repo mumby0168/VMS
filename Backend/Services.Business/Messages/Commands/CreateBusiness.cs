@@ -5,7 +5,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Services.Business.Messages.Commands
 {
-    [MicroService(ServiceNames.Gateway)]
+  
     public class CreateBusiness : ICommand
     {
         public string Name { get; }
