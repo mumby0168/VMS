@@ -26,6 +26,13 @@ namespace Api.Gateway.Controllers
         public IActionResult Pass([FromBody]TestCommand test)
         {
             return PublishCommand(test);
-        } 
+        }
+
+        [Authorize(Roles = Roles.SystemAdmin)]
+        [HttpPost("issue")]
+        public IActionResult Issue([FromBody]IssueCommand test)
+        {
+            return PublishCommand(test);
+        }
     }
 }

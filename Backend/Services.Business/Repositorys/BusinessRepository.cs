@@ -17,5 +17,6 @@ namespace Services.Business.Repositorys
         public Task Add(Domain.Business business) => _repository.AddAsync(business);
         public Task<IEnumerable<Domain.Business>> GetBusinessesAsync() => _repository.GetAllAsync();
         public Task<Domain.Business> GetBusinessAsync(Guid id) => _repository.GetAsync(id);
+        public Task UpdateAsync(Domain.Business business) => _repository.UpdateAsync(business, business.Id);
     }
 }

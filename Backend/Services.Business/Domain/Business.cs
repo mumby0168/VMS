@@ -22,10 +22,28 @@ namespace Services.Business.Domain
 
         public Business()
         {
-            
+
         }
 
         public Business(string name, string tradingName, string webAddress, HeadOffice headOffice, HeadContact headContact)
+        {
+            Validate(name, tradingName, webAddress);
+
+            Id = new Guid();
+            Name = name;
+            TradingName = tradingName;
+            HeadOffice = headOffice;
+            HeadContact = headContact;
+        }
+
+        public void Update(string name, string tradingName, string webAddress)
+        {
+            Validate(name, tradingName, webAddress);
+            Name = name;
+            TradingName = tradingName;
+        }
+
+        private void Validate(string name, string tradingName, string webAddress)
         {
             if (name.IsEmpty()) throw new VmsException(Codes.EmptyProperty, "The name cannot be empty");
             if (tradingName.IsEmpty()) throw new VmsException(Codes.EmptyProperty, "The tradingName cannot be empty");
@@ -37,12 +55,6 @@ namespace Services.Business.Domain
             {
                 // ignored
             }
-
-            Id = new Guid();
-            Name = name;
-            TradingName = tradingName;
-            HeadOffice = headOffice;
-            HeadContact = headContact;
         }
     }
 }

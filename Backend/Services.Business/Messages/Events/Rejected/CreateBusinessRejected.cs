@@ -1,6 +1,6 @@
 ﻿using Services.RabbitMq.Interfaces.Messaging;
 
-namespace Services.Business.Messages.Events
+namespace Services.Business.Messages.Events.Rejected
 {
     public class CreateBusinessRejected : IRejectedEvent
     {

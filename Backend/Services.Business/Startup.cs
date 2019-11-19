@@ -36,7 +36,10 @@ namespace Services.Business
 
             app.UseMongo(ServiceNames.Businesses);
             app.UseServiceBus(ServiceNames.Businesses)
-                .SubscribeCommand<CreateBusiness>();
+                .SubscribeCommand<CreateBusiness>()
+                .SubscribeCommand<UpdateBusinessDetails>()
+                .SubscribeCommand<UpdateHeadContact>()
+                .SubscribeCommand<UpdateHeadOffice>();
 
             app.UseRouting();
 

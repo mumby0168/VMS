@@ -1,6 +1,6 @@
 @url = http://localhost:5020
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzM4NTQzNTQsImV4cCI6MTU3Mzg2NTE1NCwiaWF0IjoxNTczODU0MzU0fQ.h6MxhZNcJAMBT6L43qaroFD6Tw9Wi13mkQeGF1CzELE_a3JohKo1k3CLdQrOVVdNe4AMjnwamttGrfg1szTXgA
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzQwNjgwNzAsImV4cCI6MTU3NDA3ODg3MCwiaWF0IjoxNTc0MDY4MDcwfQ.HthgdegRhpg0trxRBtH-0bHHdPjboIU0Gg7uVuDmFp1YLdYtuHSoVIGuZ_FsBlsXicmPdkhw53AqPxQHfdLtCw
 
 ### Hit Api Test Controller Pass
 POST {{url}}/api/test/pass
@@ -18,4 +18,13 @@ Authorization: Bearer {{jwt}}
 
 {
     "isPass": "false",    
+}
+
+### Hit Api Test Controller Issue
+POST {{url}}/api/test/issue
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "message": "Hello their",    
 }

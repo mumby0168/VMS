@@ -9,5 +9,7 @@
         public const string InvalidContactNumber = "contact_number_invalid";
 
         public const string InvalidEmail = "email_invalid";
+
+        public const string InvalidId = "id_invalid";
     }
 }

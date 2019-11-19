@@ -16,10 +16,20 @@ namespace Services.Business.Domain
 
         public HeadContact(string firstName, string secondName, string contactNumber, string email)
         {
-            if(firstName.IsEmpty()) throw new VmsException(Codes.EmptyProperty, "The first name cannot be empty");
+            ValidateAndUpdate(firstName, secondName, contactNumber, email);
+        }
+
+        public void Update(string firstName, string secondName, string contactNumber, string email)
+        {
+            ValidateAndUpdate(firstName, secondName, contactNumber, email);
+        }
+
+        private void ValidateAndUpdate(string firstName, string secondName, string contactNumber, string email)
+        {
+            if (firstName.IsEmpty()) throw new VmsException(Codes.EmptyProperty, "The first name cannot be empty");
             if (secondName.IsEmpty()) throw new VmsException(Codes.EmptyProperty, "The second name cannot be empty");
             if (!Validator.IsUkPhoneNumberValid(contactNumber)) throw new VmsException(Codes.InvalidContactNumber, $"The contact number {contactNumber} is invalid");
-            if(!Validator.IsEmailValid(email)) throw new VmsException(Codes.InvalidEmail, $"The email {email} is invalid");
+            if (!Validator.IsEmailValid(email)) throw new VmsException(Codes.InvalidEmail, $"The email {email} is invalid");
 
             FirstName = firstName;
             SecondName = secondName;

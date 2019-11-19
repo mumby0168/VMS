@@ -21,6 +21,10 @@ namespace Services.Business
 
             //command handlers
             serviceCollection.AddTransient<ICommandHandler<CreateBusiness>, CreateBusinessHandler>();
+            serviceCollection.AddTransient<ICommandHandler<UpdateBusinessDetails>, UpdateBusinessDetailsHandler>();
+            serviceCollection.AddTransient<ICommandHandler<UpdateHeadContact>, UpdateHeadContactHandler>();
+            serviceCollection.AddTransient<ICommandHandler<UpdateHeadOffice>, UpdateHeadOfficeHandler>();
+
             //query handlers
             serviceCollection
                 .AddTransient<IQueryHandler<BusinessesSummary, IEnumerable<BusinessSummaryDto>>, BusinessesSummaryHandler>();

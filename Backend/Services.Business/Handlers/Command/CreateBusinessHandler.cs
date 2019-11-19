@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Services.Business.Factories;
 using Services.Business.Messages.Commands;
 using Services.Business.Messages.Events;
+using Services.Business.Messages.Events.Rejected;
 using Services.Business.Repositorys;
 using Services.Common.Exceptions;
 using Services.RabbitMq.Interfaces.Messaging;

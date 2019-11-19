@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.Common.Names;
 using Services.RabbitMq.Extensions;
+using Services.RabbitMq.Interfaces;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.Test.Handlers;
 using Services.Test.Messages.Commands;
@@ -25,6 +26,7 @@ namespace Services.Test
             services.AddServiceBus();
             services.AddControllers();
             services.AddTransient<ICommandHandler<TestCommand>, TestCommandHandler>();
+            services.AddTransient<ICommandHandler<IssueCommand>, IssueCommandHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,7 +38,8 @@ namespace Services.Test
             }
 
             app.UseServiceBus(ServiceNames.Test, true)
-                .SubscribeCommand<TestCommand>();
+                .SubscribeCommand<TestCommand>().SubscribeCommand<IssueCommand>();
+
 
             app.UseRouting();
             

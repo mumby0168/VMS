@@ -10,5 +10,6 @@ namespace Services.Business.Repositorys
 
         Task<IEnumerable<Domain.Business>> GetBusinessesAsync();
         Task<Domain.Business> GetBusinessAsync(Guid queryId);
+        Task UpdateAsync(Domain.Business business);
     }
 }
