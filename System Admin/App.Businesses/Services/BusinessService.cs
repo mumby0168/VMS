@@ -27,6 +27,27 @@ namespace App.Businesses.Services
             _logger = logger;
         }
 
+        public async Task<Guid> UpdateContactAsync(HeadContact contact, Guid businessId)
+        {
+            var message = new StringContent(JsonConvert.SerializeObject(new { BusinessId = businessId, FirstName = contact.FirstName, SecondName = contact.SecondName, Email = contact.Email, ContactNumber = contact.ContactNumber }), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response;
+            try
+            {
+                response = await Client.PostAsync("update-contact", message);
+                if(response.IsSuccessStatusCode)
+                {
+                    return response.GetOperationId();
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                _logger.LogError("The request failed to update the business contact business: " + e.Message);
+                throw new InternalHttpRequestException(e);
+            }
+            throw new NotImplementedException("Not sure what to do here yet");
+        }
+
         /// <summary>
         /// Creates a business by making a remote request.
         /// </summary>
@@ -51,7 +72,11 @@ namespace App.Businesses.Services
                 throw new InternalHttpRequestException(e);
             }
 
-            return response.GetOperationId();
+            if(response.IsSuccessStatusCode)
+            {
+                return response.GetOperationId();
+            }
+            throw new NotImplementedException("Not sure what to do here yet");
         }
 
         public async Task<IEnumerable<BusinessSummary>> GetBusinessSummariesAsync()

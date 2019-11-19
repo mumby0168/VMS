@@ -4,6 +4,7 @@ using App.Businesses;
 using App.Shared;
 using App.Shared.Operations;
 using Blazor.LoadingIndicator;
+using Blazored.Modal;
 using Blazored.Toast;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -33,6 +34,7 @@ namespace Manager
             services.AddScoped<AuthenticationStateProvider, SystemAdminAuthenticationStateProvider>();     
             services.AddPubSubService();      
             services.AddBlazoredToast();
+            services.AddBlazoredModal();
             services.AddBusinesses();
             services.AddAccount();
             services.AddUserContext();

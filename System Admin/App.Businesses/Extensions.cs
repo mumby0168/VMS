@@ -8,7 +8,8 @@ namespace App.Businesses
     {
         public static IServiceCollection AddBusinesses(this IServiceCollection services)
         {
-            services.AddScoped<CreateBusinessViewModel>();  
+            services.AddScoped<CreateBusinessViewModel>();
+            services.AddScoped<UpdateContactDetailsViewModel>();
             services.AddHttpClient<BusinessService>();          
             return services;
         }

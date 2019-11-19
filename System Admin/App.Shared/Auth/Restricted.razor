@@ -26,20 +26,20 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        PubSubService.Subscribe<UpdateRestrictedViewsEvent>(Notfiy);
-        await CheckState();
+        PubSubService.Subscribe<UpdateRestrictedViewsEvent>(Notify);        
     }
 
-    protected override async Task OnParametersSetAsync()
+        protected override async Task OnParametersSetAsync()
     {
         await CheckState();
         await base.OnParametersSetAsync();
     }
 
-    public async Task Notfiy()
+ public async Task Notify()
     {
         await InvokeAsync(() => StateHasChanged());
     }
+
 
     private async Task CheckState()
     {

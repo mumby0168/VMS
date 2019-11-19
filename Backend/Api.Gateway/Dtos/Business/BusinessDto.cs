@@ -1,3 +1,4 @@
+using System;
 using Api.Gateway.Dtos.Business.Sub;
 
 namespace Api.Gateway.Dtos.Business
@@ -9,6 +10,8 @@ namespace Api.Gateway.Dtos.Business
             Office = new HeadOfficeDto();
             Contact = new HeadContactDto();
         }
+
+        public Guid Id { get; set; }
     
         public string Name { get; set; }
        

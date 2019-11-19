@@ -1,3 +1,5 @@
+using System;
+
 namespace Services.Business.Dtos
 {
     public class BusinessDto
@@ -7,6 +9,8 @@ namespace Services.Business.Dtos
             Office = new HeadOfficeDto();
             Contact = new HeadContactDto();
         }
+
+        public Guid Id { get; set; }
     
         public string Name { get; set; }
        

@@ -10,7 +10,7 @@ namespace App.Shared.Operations
     {
         bool IsConnected { get; set; }
 
-        Task<IOperationMessage> GetOperationStatus(Guid id);
+        Task<IOperationMessage> GetOperationStatusAsync(Guid id);
 
         List<IOperationMessage> Messages { get; }
     }

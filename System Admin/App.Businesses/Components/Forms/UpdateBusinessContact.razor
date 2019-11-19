@@ -1,0 +1,69 @@
+﻿@inject UpdateContactDetailsViewModel Model
+@inject ILoadingService LoadingService
+
+
+
+<div class="container">
+    <div class="card update-contact-card">
+        <div class="card-header">
+            <h2>Contact Info</h2>
+        </div>
+        <div class="card-body">
+            <Indicator Context="update-contact">
+                <EditForm Model="@Model" OnValidSubmit="@Submit">
+
+                    <DataAnnotationsValidator></DataAnnotationsValidator>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="firstName">First Name: </label>
+                                <InputText @bind-Value="@Model.FirstName" id="firstName" required type="text" class="form-control" />
+                                <ValidationMessage For="@(() => Model.FirstName)" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="lastNmae">Last Name: </label>
+                                <InputText @bind-Value="@Model.SecondName" id="lastNmae" required type="text" class="form-control" />
+                                <ValidationMessage For="@(() => Model.SecondName)" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastNmae">Email: </label>
+                        <InputText @bind-Value="@Model.Email" id="lastNmae" required type="text" class="form-control" />
+                        <ValidationMessage For="@(() => Model.Email)" />
+                    </div>
+                    <div class="form-group">
+                        <label for="lastNmae">Contact Number: </label>
+                        <InputText @bind-Value="@Model.ContactNumber" required type="text" class="form-control" />
+                        <ValidationMessage For="@(() => Model.ContactNumber)" />
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Update" />
+                </EditForm>
+            </Indicator>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [CascadingParameter]
+    ModalParameters Parameters { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Model.BusinessId = Parameters.Get<Guid>("Id");
+        var contact = Parameters.Get<HeadContact>("Contact");
+        Model.FirstName = contact.FirstName;
+        Model.SecondName = contact.SecondName;
+        Model.Email = contact.Email;
+        Model.ContactNumber = contact.ContactNumber;        
+
+        base.OnInitialized();
+    }
+
+
+    async Task Submit() => await LoadingService.StartTaskAsync(async (task) => await Model.SubmitAsync(), "update-contact");
+}

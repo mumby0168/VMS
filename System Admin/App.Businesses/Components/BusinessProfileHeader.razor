@@ -1,5 +1,5 @@
 ﻿
-
+@inject IModalService ModalService
 
 <style>
     /* Header Styles */
@@ -80,7 +80,7 @@
                 <h2>@(Business.Contact.FirstName + " " + Business.Contact.SecondName)</h2>
                 <h4>@Business.Contact.ContactNumber</h4>
                 <h6>@Business.Contact.Email</h6>
-                <button class="btn edit-btn"><i class="fas fa-edit"></i></button>
+                <button @onclick="@ShowEditContact" class="btn edit-btn"><i class="fas fa-edit"></i></button>
             </div>
             <div class="business-address">
                 <h2>@Business.Office.AddressLine1</h2>
@@ -103,4 +103,19 @@ else
 
     [Parameter]
     public Business Business { get; set; }
+
+    void ShowEditContact()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Id", Business.Id);
+        parameters.Add("Contact", Business.Contact);
+        ModalService.Show<UpdateBusinessContact>("Update Business Contact", parameters);        
+    }
+
+    void ShowEditAddress()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Id", Business.Id);
+        parameters.Add("Office", Business.Office);
+    }
 }

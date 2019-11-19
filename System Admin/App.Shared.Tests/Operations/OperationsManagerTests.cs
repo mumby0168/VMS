@@ -72,7 +72,7 @@ namespace App.Shared.Tests.Operations
             _client.Setup(o => o.GetOperationMessageAsync(It.IsAny<Guid>())).Returns(Task.FromResult(_message.Object));
 
             //Act
-            var result = await sut.GetOperationStatus(_notContainedId);
+            var result = await sut.GetOperationStatusAsync(_notContainedId);
 
             //Assert
             _client.Verify(o => o.GetOperationMessageAsync(It.IsAny<Guid>()));
@@ -88,7 +88,7 @@ namespace App.Shared.Tests.Operations
             _service.Raise(s => s.MessageReceived += null, EventArgs.Empty, _message.Object);
 
             //Act
-            var result = await sut.GetOperationStatus(_containedId);
+            var result = await sut.GetOperationStatusAsync(_containedId);
 
             //Assert
             result.ShouldBe(_message.Object);
@@ -103,7 +103,7 @@ namespace App.Shared.Tests.Operations
 
             //Act
             //Assert
-            await Should.ThrowAsync<OperationNotFoundException>(sut.GetOperationStatus(_notContainedId));
+            await Should.ThrowAsync<OperationNotFoundException>(sut.GetOperationStatusAsync(_notContainedId));
         }
 
         private IOperationsManager CreateSut()

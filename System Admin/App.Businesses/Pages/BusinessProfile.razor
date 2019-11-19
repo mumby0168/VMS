@@ -1,6 +1,7 @@
 ﻿@inject DevelopmentSettings DevelopmentSettings
 @inject BusinessService BusinessService
 @inject ILoadingService LoadingService
+@inject IPubSubService  PubSubService
 @page "/business-profile/{id}"
 
 <style>
@@ -30,18 +31,34 @@
 
     protected async override Task OnInitializedAsync()
     {
-        await LoadingService.StartTaskAsync(async (task) => { 
+        PubSubService.Subscribe<UpdateBusinessProfile>(Notify);
+
+
+        await base.OnInitializedAsync();
+    }
+
+    Task LoadData() => LoadingService.StartTaskAsync(async (task) => {
             if (DevelopmentSettings.IsMockData) await LoadMockData();
             else await GetBusiness();
         }, "business-profile");
-        
-        await base.OnInitializedAsync();
+    
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await LoadData();
+        await base.OnParametersSetAsync();
     }
 
     private async Task GetBusiness()
     {
         Guid = Guid.Parse(Id);
         Business = await BusinessService.GetBusiness(Guid);
+    }
+
+    public async Task Notify()
+    {
+        Business = null;
+        await LoadData();
     }
 
     private async Task LoadMockData()

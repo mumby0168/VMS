@@ -26,7 +26,7 @@ namespace App.Shared.Operations
 
         public bool IsConnected { get; set; }
 
-        public async Task<IOperationMessage> GetOperationStatus(Guid id)
+        public async Task<IOperationMessage> GetOperationStatusAsync(Guid id)
         {
             if(!Messages.Any(m => m.Id == id))
             {

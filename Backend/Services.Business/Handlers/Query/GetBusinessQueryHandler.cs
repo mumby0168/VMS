@@ -33,6 +33,7 @@ namespace Services.Business.Handlers.Query
 
             return new BusinessDto()
             {
+                Id = domain.Id,
                 Name = domain.Name,
                 TradingName = domain.TradingName,
                 WebAddress = domain.WebAddress?.ToString(),

@@ -99,7 +99,7 @@ namespace App.Businesses.ViewModels
                 throw new NotImplementedException();
             }
 
-            var operation = await _operationManager.GetOperationStatus(id);
+            var operation = await _operationManager.GetOperationStatusAsync(id);
             if (operation is null)
             {
                 _toastService.ShowError("Failed to get reponse info");
