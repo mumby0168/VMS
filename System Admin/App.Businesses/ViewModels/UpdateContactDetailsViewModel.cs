@@ -46,7 +46,7 @@ namespace App.Businesses.ViewModels
             var status = await _operationsService.GetOperationStatusAsync(id);
             if(status.Status == Shared.Operations.Models.OperationStatus.Complete)
             {
-                _modalService.Close(ModalResult.Cancel());
+                _modalService.Close(ModalResult.Cancel());                
                 await _pubSubService.Publish<UpdateBusinessProfile>();
                 _toastService.ShowSuccess("Contact details updated succesfully");                
             }

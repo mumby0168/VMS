@@ -85,7 +85,7 @@ namespace App.Businesses.ViewModels
 
         public async Task Submit()
         {
-            var id = await _businessService.CreateBusiness(
+            var success = await _businessService.CreateBusiness(
             new Business
             {
                 Name = Name,
@@ -94,29 +94,14 @@ namespace App.Businesses.ViewModels
                 Contact = new HeadContact { FirstName = FirstName, SecondName = SecondName, Email = Email, ContactNumber = ContactNumber },
                 Office = new HeadOffice { PostCode = PostCode, AddressLine1 = AddressLine1, AddressLine2 = AddressLine2 }
             });
-            if (id == null)
-            {
-                throw new NotImplementedException();
-            }
 
-            var operation = await _operationManager.GetOperationStatusAsync(id);
-            if (operation is null)
-            {
-                _toastService.ShowError("Failed to get reponse info");
-                return;
-            }
-            if (operation.Status == OperationStatus.Complete)
+            if (success)
             {
                 _navigationManager.NavigateTo("/businesses");
-                _toastService.ShowSuccess($"The business {Name} was succsefully created.");
                 Clear();
-            }                
-            else if(operation.Status == OperationStatus.Failed)
-            {
-                var failed = operation as IOperationMessageFailed;
-                _toastService.ShowError(failed.Reason);
             }
         }
+        
         
     }
 }

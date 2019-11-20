@@ -20,6 +20,8 @@ namespace App.Shared
             services.AddHttpClient<IOperationsClient, OperationsClient>();
             return services;
         }
+
+        public static IServiceCollection AddHttpExecutor(this IServiceCollection services) => services.AddTransient<IHttpExecutor, HttpExecutor>();
         
         public static IServiceCollection AddDevelopmentSettings(this IServiceCollection services, IConfiguration configuration)
         {

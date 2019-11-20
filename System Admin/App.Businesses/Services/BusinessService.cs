@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using App.Shared.Exceptions;
 using App.Shared.Extensions;
 using System.Collections.Generic;
+using App.Shared.Services;
 
 namespace App.Businesses.Services
 {
@@ -17,14 +18,16 @@ namespace App.Businesses.Services
         private const string BaseBusinessesAddress = "http://localhost:5020/gateway/api/businesses/";
         
         private readonly ILogger<BusinessService> _logger;
+        private readonly IHttpExecutor _httpExecutor;
 
         public HttpClient Client { get; }
-        public BusinessService(HttpClient client, IUserContext context, ILogger<BusinessService> logger)
+        public BusinessService(HttpClient client, IUserContext context, ILogger<BusinessService> logger, IHttpExecutor httpExecutor)
         {
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {context.Token}");
             client.BaseAddress = new Uri(BaseBusinessesAddress);
             Client = client;
             _logger = logger;
+            _httpExecutor = httpExecutor;
         }
 
         public async Task<Guid> UpdateContactAsync(HeadContact contact, Guid businessId)
@@ -53,7 +56,7 @@ namespace App.Businesses.Services
         /// </summary>
         /// <param name="business"></param>
         /// <returns>Operation Id</returns>
-        public async Task<Guid> CreateBusiness(Business business)
+        public Task<bool> CreateBusiness(Business business)
         {
             var message = new StringContent(
                 JsonConvert.SerializeObject(new { Name = business.Name, TradingName = business.TradingName, WebAddress = business.WebAddress,
@@ -61,22 +64,7 @@ namespace App.Businesses.Services
                     HeadOfficePostCode = business.Office.PostCode, HeadOfficeAddressLine1 = business.Office.AddressLine1 , HeadOfficeAddressLine2 = business.Office.AddressLine2})
                 , Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response;
-            try
-            {
-                response = await Client.PostAsync("create", message);
-            }
-            catch(HttpRequestException e)
-            {
-                _logger.LogError("The request failed to create a business: " + e.Message);
-                throw new InternalHttpRequestException(e);
-            }
-
-            if(response.IsSuccessStatusCode)
-            {
-                return response.GetOperationId();
-            }
-            throw new NotImplementedException("Not sure what to do here yet");
+            return _httpExecutor.SendRequestAsync(() => Client.PostAsync("create", message), $"{business.Name} account created succesfully");
         }
 
         public async Task<IEnumerable<BusinessSummary>> GetBusinessSummariesAsync()
