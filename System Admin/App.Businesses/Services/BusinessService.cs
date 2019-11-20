@@ -51,6 +51,13 @@ namespace App.Businesses.Services
             throw new NotImplementedException("Not sure what to do here yet");
         }
 
+        public Task<bool> UpdateOfficeAsync(HeadOffice office, Guid businessId)
+        {
+            var message = new StringContent(JsonConvert.SerializeObject(new { BusinessId = businessId, office.PostCode, office.AddressLine1, office.AddressLine2 }), Encoding.UTF8, "application/json");
+
+            return _httpExecutor.SendRequestAsync(() => Client.PostAsync("update-office", message), "Business contact updated succesfully");
+        }
+
         /// <summary>
         /// Creates a business by making a remote request.
         /// </summary>

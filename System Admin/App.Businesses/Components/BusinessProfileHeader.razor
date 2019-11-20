@@ -86,7 +86,7 @@
                 <h2>@Business.Office.AddressLine1</h2>
                 <h4>@Business.Office.AddressLine2</h4>
                 <h6>@Business.Office.PostCode</h6>
-                <button class="btn edit-btn"><i class="fas fa-edit"></i></button>
+                <button @onclick="@ShowEditAddress" class="btn edit-btn"><i class="fas fa-edit"></i></button>
             </div>
         </div>
     </div>
@@ -117,5 +117,7 @@ else
         var parameters = new ModalParameters();
         parameters.Add("Id", Business.Id);
         parameters.Add("Office", Business.Office);
+        ModalService.Show<UpdateBusinessOffice>("Update Business Head Office", parameters);        
+
     }
 }

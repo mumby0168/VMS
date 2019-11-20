@@ -1,0 +1,63 @@
+﻿@inject UpdateBusinessOfficeViewModel Model
+@inject ILoadingService LoadingService
+
+
+
+<div class="container">
+    <div class="card update-office-card">
+        <div class="card-header">
+            <h2>Contact Info</h2>
+        </div>
+        <div class="card-body">
+            <Indicator Context="update-office">
+                <EditForm Model="@Model" OnValidSubmit="@Submit">
+
+                    <DataAnnotationsValidator></DataAnnotationsValidator>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="postCode">Postcode: </label>
+                                <InputText @bind-Value="@Model.PostCode" id="postCode" required type="text" class="form-control" />
+                                <ValidationMessage For="@(() => Model.PostCode)" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="add-line-1">Address Line 1:</label>
+                                <InputText class="form-control" type="text" id="add-line-1" @bind-Value="@Model.AddressLine1" />
+                                <ValidationMessage For="@(() => Model.AddressLine1)" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">                        
+                            <label for="add-line-2">Address Line 2:</label>
+                            <InputText class="form-control" type="text" id="add-line-2" @bind-Value="@Model.AddressLine2" />                        
+                    </div>
+                  
+                    <input type="submit" class="btn btn-primary" value="Update" />
+                </EditForm>
+            </Indicator>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [CascadingParameter]
+    ModalParameters Parameters { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Model.BusinessId = Parameters.Get<Guid>("Id");
+        var office = Parameters.Get<HeadOffice>("Office");
+        Model.PostCode = office.PostCode;
+        Model.AddressLine1 = office.AddressLine1;
+        Model.AddressLine2 = office.AddressLine2;
+
+        base.OnInitialized();
+    }
+
+
+    async Task Submit() => await LoadingService.StartTaskAsync(async (task) => await Model.SubmitAsync(), "update-office");
+}

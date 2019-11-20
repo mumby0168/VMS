@@ -36,7 +36,7 @@ namespace Services.Business.Handlers.Command
 
             try
             {
-                business.HeadOffice.Update(message.AddressLine1, message.AddressLine2, message.PostCode);
+                business.HeadOffice.Update(message.PostCode, message.AddressLine1, message.AddressLine2);
             }
             catch (VmsException e)
             {

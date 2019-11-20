@@ -10,6 +10,7 @@ namespace App.Businesses
         {
             services.AddScoped<CreateBusinessViewModel>();
             services.AddScoped<UpdateContactDetailsViewModel>();
+            services.AddScoped<UpdateBusinessOfficeViewModel>();
             services.AddHttpClient<BusinessService>();          
             return services;
         }
