@@ -1,0 +1,64 @@
+﻿@inject UpdateBusinessDetailsViewModel Model
+@inject ILoadingService LoadingService
+
+
+
+<div class="container">
+    <div class="card update-office-card">
+        <div class="card-header">
+            <h2>Contact Info</h2>
+        </div>
+        <div class="card-body">
+            <Indicator Context="update-detials">
+                <EditForm Model="@Model" OnValidSubmit="@Submit">
+
+                    <DataAnnotationsValidator></DataAnnotationsValidator>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="name">Business Name:</label>
+                                <InputText class="form-control" type="text" id="name" @bind-Value="@Model.Name" />
+                                <ValidationMessage For="@(() => Model.Name)" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="Tradingname">Trading Name:</label>
+                                <InputText class="form-control" type="text" id="Tradingname" @bind-Value="@Model.TradingName" />
+                                <ValidationMessage For="@(() => Model.TradingName)" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="webAddress">Website Name:</label>
+                        <InputText class="form-control" type="text" id="webAddress" @bind-Value="@Model.WebAddress" />
+                        <ValidationMessage For="@(() => Model.WebAddress)" />
+                    </div>
+                  
+                    <input type="submit" class="btn btn-primary" value="Update" />
+                </EditForm>
+            </Indicator>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [CascadingParameter]
+    ModalParameters Parameters { get; set; }
+
+    protected override void OnInitialized()
+    {        
+        var business = Parameters.Get<Business>("Business");
+        Model.Id = business.Id;
+        Model.Name = business.Name;
+        Model.TradingName = business.TradingName;
+        Model.WebAddress = business.WebAddress;
+
+        base.OnInitialized();
+    }
+
+
+    async Task Submit() => await LoadingService.StartTaskAsync(async (task) => await Model.SubmitAsync(), "update-details");
+}

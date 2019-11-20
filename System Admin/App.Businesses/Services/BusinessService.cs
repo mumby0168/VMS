@@ -10,6 +10,7 @@ using App.Shared.Exceptions;
 using App.Shared.Extensions;
 using System.Collections.Generic;
 using App.Shared.Services;
+using App.Shared.Http;
 
 namespace App.Businesses.Services
 {
@@ -51,12 +52,11 @@ namespace App.Businesses.Services
             throw new NotImplementedException("Not sure what to do here yet");
         }
 
-        public Task<bool> UpdateOfficeAsync(HeadOffice office, Guid businessId)
-        {
-            var message = new StringContent(JsonConvert.SerializeObject(new { BusinessId = businessId, office.PostCode, office.AddressLine1, office.AddressLine2 }), Encoding.UTF8, "application/json");
+        public Task<bool> UpdateOfficeAsync(HeadOffice office, Guid businessId) =>
+            _httpExecutor.SendRequestAsync(() => Client.PostAsync("update-office", JsonMessage.CreateJsonMessage(new { BusinessId = businessId, office.PostCode, office.AddressLine1, office.AddressLine2 })), "Business contact updated succesfully");
 
-            return _httpExecutor.SendRequestAsync(() => Client.PostAsync("update-office", message), "Business contact updated succesfully");
-        }
+        public Task<bool> UpdateDetails(Guid id, string name, string tradingName, string webAddress) 
+            => _httpExecutor.SendRequestAsync(() => Client.PostAsync("update-details", JsonMessage.CreateJsonMessage(new { id, name, tradingName, webAddress })), "Business details updated successfully");
 
         /// <summary>
         /// Creates a business by making a remote request.
