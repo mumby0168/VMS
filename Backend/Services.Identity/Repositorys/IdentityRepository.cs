@@ -16,13 +16,22 @@ namespace Services.Identity.Repositorys
             _repository = repository;
         }
 
-        public async Task<bool> IsEmailInUse(string email, string role) => 
+        public async Task<bool> IsEmailInUse(string email, string role) =>
             await _repository.GetAsync(i => i.Email == email && i.Role == role) != null;
 
         public Task<Domain.Identity> GetByEmailAndRole(string email, string role) =>
             _repository.GetAsync(i => i.Email == email && i.Role == role);
 
-        public Task AddAsync(Domain.Identity identity) => 
+        public Task AddAsync(Domain.Identity identity) =>
             _repository.AddAsync(identity);
+
+        public Task<IEnumerable<Domain.Identity>> GetForBusinessAsync(Guid businessId) =>
+            _repository.FindAsync(p => p.BusinessId == businessId);
+
+        public Task<Domain.Identity> GetAsync(Guid id, Guid businessId) =>
+            _repository.GetAsync(i => i.Id == id && i.BusinessId == businessId);
+
+        public Task RemoveAsync(Domain.Identity identity)
+            => _repository.RemoveAsync(identity.Id);
     }
 }

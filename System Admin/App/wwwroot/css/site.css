@@ -22,6 +22,10 @@ body {
     margin-right: 0.25rem;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 .validation-message {
     font-size: 0.75rem;
     color: red;

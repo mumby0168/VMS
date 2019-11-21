@@ -1,0 +1,97 @@
+﻿@inject DevelopmentSettings Setttings
+@inject IAdminAccountService AdminAccountService
+@inject ILoadingService LoadingService
+
+<style>
+    .table-wrapper {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+</style>
+
+
+
+<Indicator Context="accounts-table">
+    <div class="table-wrapper">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Created On</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody class="table-body">
+                @foreach (var account in Accounts)
+                {
+                    <tr>
+                        <td>
+                            @account.Email
+                            @if (account.IsPending)
+                            {
+                                <i class="fas fa-exclamation"></i>
+                            }
+                        </td>
+                        <td>@account.CreatedOn</td>
+                        <td>
+                            <button class="btn btn-danger remove-btn" @onclick="@(e => RemoveAccountAsync(account.Id))" >Remove</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</Indicator>
+
+
+
+@code {
+    [CascadingParameter] ModalParameters Parameters { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        Accounts = new List<AccountInfo>();
+        BusinessId = Parameters.Get<Guid>("Id");
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await LoadData();
+        await base.OnParametersSetAsync();
+    }
+
+    IEnumerable<AccountInfo> Accounts { get; set; }
+
+    Guid BusinessId { get; set; }
+
+    async Task LoadData()
+    {
+        if(Setttings.IsMockData)
+        {
+            var accounts = new List<AccountInfo>();
+            for (int i = 0; i < 25; i++) accounts.Add(new AccountInfo { Id = Guid.Empty, Email = "test@test.com", CreatedOn = DateTime.Now.AddDays(i) });
+            Accounts = accounts;
+            return;
+        }
+
+        await LoadingService.StartTaskAsync(async (task) =>
+        {
+            Accounts = await AdminAccountService.GetAccountsForBusiness(BusinessId);
+        }, "accounts-table");
+    }
+
+    async Task RemoveAccountAsync(Guid Id)
+    {
+        var success = await AdminAccountService.DeleteAccount(Id, BusinessId);
+        if(success)
+        {
+            Accounts = new List<AccountInfo>();
+            await InvokeAsync(() => StateHasChanged());
+        }
+    }
+
+
+
+}

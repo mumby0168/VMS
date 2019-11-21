@@ -18,6 +18,10 @@ namespace Services.Identity.Domain
 
         public string Role { get; private set; }
 
+        public Guid BusinessId { get; private set; }
+
+        public DateTime CreatedOn { get; private set; }
+
         public Identity(string email, byte[] hash, byte[] salt, string role)
         {
 
@@ -28,10 +32,30 @@ namespace Services.Identity.Domain
 
 
             Id = new Guid();
+            BusinessId = Guid.Empty;
             Email = email;
             Hash = hash;
             Salt = salt;
             Role = role;
+            CreatedOn = DateTime.UtcNow;
+        }
+
+        public Identity(string email, byte[] hash, byte[] salt, string role, Guid businessId)
+        {
+
+            if (role != Roles.SystemAdmin)
+            {
+
+            }
+
+            BusinessId = businessId;
+            Id = new Guid();
+            BusinessId = Guid.Empty;
+            Email = email;
+            Hash = hash;
+            Salt = salt;
+            Role = role;
+            CreatedOn = DateTime.UtcNow;
         }
 
         public Identity()

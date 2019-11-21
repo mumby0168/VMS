@@ -13,6 +13,7 @@ namespace App.Businesses
             services.AddScoped<UpdateBusinessOfficeViewModel>();
             services.AddScoped<UpdateBusinessDetailsViewModel>();
             services.AddScoped<CreateBusinessAdminViewModel>();
+            services.AddTransient<IAdminAccountService, AdminAccountService>();
             services.AddHttpClient<BusinessService>();          
             return services;
         }

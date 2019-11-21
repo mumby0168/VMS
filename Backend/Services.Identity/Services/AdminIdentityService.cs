@@ -25,7 +25,10 @@ namespace Services.Identity.Services
         private readonly IRefreshTokenService _tokenService;
         private readonly IBusinessRepository _businessRepository;
 
-        public AdminIdentityService(IServiceBusMessagePublisher serviceBus, IIdentityRepository identityRepository, IPendingIdentityRepository pendingIdentityRepository, IPasswordManager passwordManager, IJwtManager jwtManager, ILogger<AdminIdentityService> logger, IRefreshTokenService tokenService, IBusinessRepository businessRepository)
+        public AdminIdentityService(IServiceBusMessagePublisher serviceBus, IIdentityRepository identityRepository,
+            IPendingIdentityRepository pendingIdentityRepository, IPasswordManager passwordManager,
+            IJwtManager jwtManager, ILogger<AdminIdentityService> logger, IRefreshTokenService tokenService,
+            IBusinessRepository businessRepository)
         {
             _serviceBus = serviceBus;
             _identityRepository = identityRepository;
@@ -36,22 +39,23 @@ namespace Services.Identity.Services
             _tokenService = tokenService;
             _businessRepository = businessRepository;
         }
+
         public async Task<IAuthToken> SignIn(string email, string password, string role)
         {
             var identity = await _identityRepository.GetByEmailAndRole(email, role);
-            if (identity is null) 
+            if (identity is null)
             {
                 _logger.LogWarning($"No user found with email: {email} role: {role}");
-                throw new VmsException(Codes.InvalidCredentials, "The credentials provided where incorrect.");                
+                throw new VmsException(Codes.InvalidCredentials, "The credentials provided where incorrect.");
             }
-                
 
-            if(!_passwordManager.IsPasswordCorrect(password, identity.Hash, identity.Salt)) 
+
+            if (!_passwordManager.IsPasswordCorrect(password, identity.Hash, identity.Salt))
             {
                 _logger.LogWarning($"Incorrect password for: {email}");
                 throw new VmsException(Codes.InvalidCredentials, "The credentials provided where incorrect.");
             }
-                
+
 
             var jwt = _jwtManager.CreateToken(identity.Id, identity.Email, identity.Role);
             var refreshToken = await _tokenService.CreateRefreshToken(identity.Email);
@@ -61,7 +65,8 @@ namespace Services.Identity.Services
 
         public async Task CreateAdmin(string email)
         {
-            if(await _identityRepository.IsEmailInUse(email, Roles.SystemAdmin) || await _pendingIdentityRepository.IsEmailInUse(email, Roles.SystemAdmin))
+            if (await _identityRepository.IsEmailInUse(email, Roles.SystemAdmin) ||
+                await _pendingIdentityRepository.IsEmailInUse(email, Roles.SystemAdmin))
                 throw new VmsException(Codes.EmailInUse, "The email supplied is already in use.");
 
             var pending = new PendingIdentity(Guid.NewGuid(), email, Roles.SystemAdmin);
@@ -76,12 +81,15 @@ namespace Services.Identity.Services
         public async Task CompleteAdmin(Guid code, string password, string passwordMatch, string email)
         {
             var pendingIdentity = await _pendingIdentityRepository.GetAsync(code, email);
-            if(pendingIdentity is null) throw new VmsException(Codes.InvalidCredentials, "The credentials are invalid.");
+            if (pendingIdentity is null)
+                throw new VmsException(Codes.InvalidCredentials, "The credentials are invalid.");
 
             var existing = await _identityRepository.GetByEmailAndRole(email, Roles.SystemAdmin);
-            if(existing != null) throw  new VmsException(Codes.EmailInUse, "Their has already been an account created with this email.");
+            if (existing != null)
+                throw new VmsException(Codes.EmailInUse, "Their has already been an account created with this email.");
 
-            if(password != passwordMatch) throw new VmsException(Codes.InvalidCredentials, "The credentials are invalid.");
+            if (password != passwordMatch)
+                throw new VmsException(Codes.InvalidCredentials, "The credentials are invalid.");
 
             var pword = _passwordManager.EncryptPassword(password);
             var identity = new Domain.Identity(email, pword.Hash, pword.Salt, Roles.SystemAdmin);
@@ -89,18 +97,20 @@ namespace Services.Identity.Services
             await _identityRepository.AddAsync(identity);
         }
 
-        public async Task CreateBusinessAdmin(string email, Guid businessId)    
+        public async Task CreateBusinessAdmin(string email, Guid businessId)
         {
             //TODO: consider normal accounts as well when get round to it.
-            if (await _identityRepository.IsEmailInUse(email, Roles.BusinessAdmin) || await _pendingIdentityRepository.IsEmailInUse(email, Roles.BusinessAdmin))
+            if (await _identityRepository.IsEmailInUse(email, Roles.BusinessAdmin) ||
+                await _pendingIdentityRepository.IsEmailInUse(email, Roles.BusinessAdmin))
                 throw new VmsException(Codes.EmailInUse, "The email supplied is in use.");
 
             if (!await _businessRepository.ContainsBusinessAsync(businessId))
             {
                 //TODO: consider calling business service as back-up to avoid data inconsistency.
-                throw new VmsException(Codes.BusinessNotFound, "The business cannot be found to create the account for.");
+                throw new VmsException(Codes.BusinessNotFound,
+                    "The business cannot be found to create the account for.");
             }
-            
+
             var pending = new PendingIdentity(Guid.NewGuid(), email, Roles.BusinessAdmin, businessId);
 
             await _pendingIdentityRepository.AddAsync(pending);
@@ -108,6 +118,25 @@ namespace Services.Identity.Services
             _logger.LogInformation($"Pending identity for business admin created with email: {email}");
 
             _serviceBus.PublishEvent(new PendingBusinessAdminCreated(pending.Id, pending.Email), RequestInfo.Empty);
+        }
+
+        public async Task DeleteBusinessAdmin(Guid id, Guid businessId)
+        {
+            var identity = await _identityRepository.GetAsync(id, businessId);
+            if (identity != null)
+            {
+                await _identityRepository.RemoveAsync(identity);
+                return;
+            }
+
+            var pending = await _pendingIdentityRepository.GetAsync(id, businessId);
+            if (pending != null)
+            {
+                await _pendingIdentityRepository.RemoveAsync(pending);
+                return;
+            }
+
+            throw new VmsException(Codes.NoIdentityFound, "The admin could not be found to be deleted.");
         }
     }
 }

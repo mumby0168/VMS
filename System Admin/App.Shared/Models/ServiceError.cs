@@ -12,7 +12,7 @@ namespace App.Shared.Models
             this.Reason = reason;
 
         }        
-                public string Code { get; }
+        public string Code { get; }
 
         public string Reason { get; }
 

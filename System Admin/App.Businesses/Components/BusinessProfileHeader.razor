@@ -2,10 +2,7 @@
 @inject IModalService ModalService
 
 <style>
-    /* Header Styles */
-    .jumbotron {
-        background-color: white;
-    }
+    /* Header Styles */ 
 
     .business-header {
         height: 50%;
@@ -20,6 +17,7 @@
 
     .business-core-info {
         text-align: center;
+        margin-top: 1rem;
     }
 
     .contact-info {
@@ -64,46 +62,51 @@
 
     .business-action-bar {
         text-align: left;
+        margin-top: 1rem;
     }
 </style>
 
 
 @if (Business != null)
 {
-    <div class="business-info-wrapper">
-        <div class="row">
-            <div class="col-md-4 business-action-bar">                
-                <button @onclick="@ShowAddAdmin" class="btn">Create Business Admin</button>
-            </div>
-            <div class="col-md-4">
-                <div class="business-core-info">
-                    <h1>@Business.Name</h1>
-                    <h4>@Business.TradingName</h4>
-                    <a href="@Business.WebAddress">@Business.WebAddress</a>
-                    <br />
-                    <button @onclick="@ShowEditDetails" class="btn edit-btn"><i class="fas fa-edit"></i></button>
-                </div>
-            </div>
-            <div class="col-md-4">
+<div class="business-info-wrapper">
 
-            </div>           
+    <div class="business-action-bar">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a @onclick="@ShowAddAdmin" class="nav-link pointer edit-btn "><i class="fas fa-plus"></i> Create Business Admin</a>
+            </li>
+            <li class="nav-item">
+                <a @onclick="@ShowAccounts" class="nav-link pointer edit-btn"><i class="fas fa-list"></i> Shows Accounts</a>
+            </li>            
+        </ul>
+    </div>
+
+
+    <div class="business-core-info">
+        <h1>@Business.Name</h1>
+        <h4>@Business.TradingName</h4>
+        <a href="@Business.WebAddress">@Business.WebAddress</a>
+        <br />
+        <button @onclick="@ShowEditDetails" class="btn edit-btn"><i class="fas fa-edit"></i></button>
+    </div>
+
+    <hr />
+    <div class="header-grid">
+        <div class="contact-info">
+            <h2>@(Business.Contact.FirstName + " " + Business.Contact.SecondName)</h2>
+            <h4>@Business.Contact.ContactNumber</h4>
+            <h6>@Business.Contact.Email</h6>
+            <button @onclick="@ShowEditContact" class="btn edit-btn"><i class="fas fa-edit"></i></button>
         </div>
-        <hr />
-        <div class="header-grid">
-            <div class="contact-info">
-                <h2>@(Business.Contact.FirstName + " " + Business.Contact.SecondName)</h2>
-                <h4>@Business.Contact.ContactNumber</h4>
-                <h6>@Business.Contact.Email</h6>
-                <button @onclick="@ShowEditContact" class="btn edit-btn"><i class="fas fa-edit"></i></button>
-            </div>
-            <div class="business-address">
-                <h2>@Business.Office.AddressLine1</h2>
-                <h4>@Business.Office.AddressLine2</h4>
-                <h6>@Business.Office.PostCode</h6>
-                <button @onclick="@ShowEditAddress" class="btn edit-btn"><i class="fas fa-edit"></i></button>
-            </div>
+        <div class="business-address">
+            <h2>@Business.Office.AddressLine1</h2>
+            <h4>@Business.Office.AddressLine2</h4>
+            <h6>@Business.Office.PostCode</h6>
+            <button @onclick="@ShowEditAddress" class="btn edit-btn"><i class="fas fa-edit"></i></button>
         </div>
     </div>
+</div>
 }
 else
 {
@@ -121,7 +124,7 @@ else
     void ShowAddAdmin()
     {
         var parameters = new ModalParameters();
-        parameters.Add("Id", Business.Id);        
+        parameters.Add("Id", Business.Id);
         ModalService.Show<CreateBusinessAdmin>($"Create Business Admin ({Business.Name})", parameters);
     }
 
@@ -146,5 +149,12 @@ else
         var parameters = new ModalParameters();
         parameters.Add("Business", Business);
         ModalService.Show<UpdateBusinessDetails>("Update Business Details", parameters);
+    }
+
+    void ShowAccounts()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Id", Business.Id);
+        ModalService.Show<AdminAccounts>($"Admin Accounts ({Business.Name})", parameters);
     }
 }

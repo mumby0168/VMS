@@ -17,6 +17,7 @@ namespace Services.Identity.Services
         Task CompleteAdmin(Guid code, string password, string passwordMatch, string email);
 
         Task CreateBusinessAdmin(string email, Guid businessId);
+        Task DeleteBusinessAdmin(Guid id, Guid businessId);
     }
 }
-    
+        

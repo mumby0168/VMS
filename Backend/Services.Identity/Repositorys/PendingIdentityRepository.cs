@@ -25,5 +25,13 @@ namespace Services.Identity.Repositorys
 
         public Task<PendingIdentity> GetAsync(Guid code, string email) =>
             _repository.GetAsync(p => p.Email == email && p.Id == code);
+
+        public Task<IEnumerable<PendingIdentity>> GetForBusinessAsync(Guid queryBusinessId) =>
+            _repository.FindAsync(p => p.BusinessId == queryBusinessId);
+
+        public Task<PendingIdentity> GetAsync(Guid id, Guid businessId) =>
+            _repository.GetAsync(p => p.Id == id && p.BusinessId == businessId);
+
+        public Task RemoveAsync(PendingIdentity pending) => _repository.RemoveAsync(pending.Id);
     }
 }

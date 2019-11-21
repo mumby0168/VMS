@@ -13,6 +13,7 @@ using Services.Common.Jwt;
 using Services.Common.Middleware;
 using Services.Common.Mongo;
 using Services.Common.Names;
+using Services.Common.Queries;
 using Services.Identity.Domain;
 using Services.Identity.Managers;
 using Services.Identity.Messages.Events;
@@ -47,6 +48,7 @@ namespace Services.Identity
             services.AddCustomAuth(_configuration);
 
             services.AddTransient<VmsExceptionMiddleware>();
+            services.AddQuerySupport();
 
             services.AddMongo()
                 .AddMongoCollection<Domain.Identity>()

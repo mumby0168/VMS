@@ -1,6 +1,6 @@
 @url = http://localhost:5010
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzQyNTMwMDksImV4cCI6MTU3NDI2MzgwOSwiaWF0IjoxNTc0MjUzMDA5fQ.wMZV0z87XFIvsew7VeHG6DltciYCqG3yqV06yRAJlm0YOfgZWJhlLQ5-NSV98L5A-sVdiifqwTZkIK-IvSf_gA
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzQzNDUwNjksImV4cCI6MTU3NDM1NTg2OSwiaWF0IjoxNTc0MzQ1MDY5fQ.IpWDg4xx0pZv8NnmmWsN98D0lFje4xVinGNz-ETZ98Fgz8faCfSgRA9zYAZe717cO6KH70C0GmZfnJoSLgIbow
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
@@ -50,15 +50,30 @@ Content-Type: application/json
 
 ### Create Business Admin
 
-@BusinessId = 311786e2-d76a-4146-aaf4-cdcb253a2345
+@BusinessId = d573565c-4c45-4270-b567-da478c6e614c
 
 POST {{url}}/api/admin/create-business-admin
 Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
-    "email": "test57563@test.com",
+    "email": "sda@test.com",
     "businessId": "{{BusinessId}}"
 }
 
+### Get Business Accounts
+
+GET {{url}}/api/admin/get-for-business/d573565c-4c45-4270-b567-da478c6e614c
+Authorization: Bearer {{jwt}}
+
+### Remove Business Admin
+
+POST {{url}}/api/admin/remove
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "id": "24763759-0140-4013-97a0-30dc0ab3c1b6",
+    "businessId": "{{BusinessId}}"
+}
 

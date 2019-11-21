@@ -20,5 +20,6 @@ namespace Services.Identity
         public const string NoRefreshToken = "no_refresh_token_found";
 
         public const string BusinessNotFound = "busness_not_found";
+        public const string NoIdentityFound = "identity_not_found";
     }
 }
