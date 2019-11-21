@@ -35,6 +35,7 @@ namespace Services.Mail
             services.AddCustomAuth(config);
             services.AddTransient<VmsExceptionMiddleware>();
             services.AddTransient<IEventHandler<PendingAdminCreated>, PendingAdminCreatedHandler>();
+            services.AddTransient<IEventHandler<PendingBusinessAdminCreated>, PendingBusinessAdminCreatedHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +48,8 @@ namespace Services.Mail
 
             app.UseRouting();
             app.UseServiceBus(ServiceNames.Mail)
-                .SubscribeEvent<PendingAdminCreated>();
+                .SubscribeEvent<PendingAdminCreated>()
+                .SubscribeEvent<PendingBusinessAdminCreated>();
 
             app.UseEndpoints(endpoints =>
             {

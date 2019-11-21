@@ -42,6 +42,7 @@ namespace Manager
             services.AddLoadingIndicator();
             services.AddDevelopmentSettings(Configuration);
             services.AddHttpExecutor();
+            services.AddCustomClients();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

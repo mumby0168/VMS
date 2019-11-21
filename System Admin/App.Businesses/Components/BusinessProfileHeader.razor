@@ -30,9 +30,9 @@
         background-color: transparent;
     }
 
-        .edit-btn:hover {
-            background-color: lightgray;
-        }
+    .edit-btn:hover {
+        background-color: lightgray;
+    }
 
     .business-address {
         text-align: right;
@@ -59,7 +59,11 @@
         .contact-info {
             text-align: center;
             word-wrap: break-word;
-        }
+        }        
+    }
+
+    .business-action-bar {
+        text-align: left;
     }
 </style>
 
@@ -67,12 +71,22 @@
 @if (Business != null)
 {
     <div class="business-info-wrapper">
-        <div class="business-core-info">
-            <h1>@Business.Name</h1>
-            <h4>@Business.TradingName</h4>
-            <a href="@Business.WebAddress">@Business.WebAddress</a>
-            <br />
-            <button @onclick="@ShowEditDetails" class="btn edit-btn"><i class="fas fa-edit"></i></button>
+        <div class="row">
+            <div class="col-md-4 business-action-bar">                
+                <button @onclick="@ShowAddAdmin" class="btn">Create Business Admin</button>
+            </div>
+            <div class="col-md-4">
+                <div class="business-core-info">
+                    <h1>@Business.Name</h1>
+                    <h4>@Business.TradingName</h4>
+                    <a href="@Business.WebAddress">@Business.WebAddress</a>
+                    <br />
+                    <button @onclick="@ShowEditDetails" class="btn edit-btn"><i class="fas fa-edit"></i></button>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+            </div>           
         </div>
         <hr />
         <div class="header-grid">
@@ -104,6 +118,13 @@ else
     [Parameter]
     public Business Business { get; set; }
 
+    void ShowAddAdmin()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Id", Business.Id);        
+        ModalService.Show<CreateBusinessAdmin>($"Create Business Admin ({Business.Name})", parameters);
+    }
+
     void ShowEditContact()
     {
         var parameters = new ModalParameters();
@@ -122,7 +143,7 @@ else
 
     void ShowEditDetails()
     {
-        var parameters = new ModalParameters();        
+        var parameters = new ModalParameters();
         parameters.Add("Business", Business);
         ModalService.Show<UpdateBusinessDetails>("Update Business Details", parameters);
     }

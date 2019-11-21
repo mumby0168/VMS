@@ -14,17 +14,18 @@ using Services.RabbitMq.Messages;
 
 namespace Services.Identity.Services
 {
-    public class IdentityService : IIdentityService
+    public class AdminIdentityService : IAdminIdentityService
     {
         private readonly IServiceBusMessagePublisher _serviceBus;
         private readonly IIdentityRepository _identityRepository;
         private readonly IPendingIdentityRepository _pendingIdentityRepository;
         private readonly IPasswordManager _passwordManager;
         private readonly IJwtManager _jwtManager;
-        private readonly ILogger<IdentityService> _logger;
+        private readonly ILogger<AdminIdentityService> _logger;
         private readonly IRefreshTokenService _tokenService;
+        private readonly IBusinessRepository _businessRepository;
 
-        public IdentityService(IServiceBusMessagePublisher serviceBus, IIdentityRepository identityRepository, IPendingIdentityRepository pendingIdentityRepository, IPasswordManager passwordManager, IJwtManager jwtManager, ILogger<IdentityService> logger, IRefreshTokenService tokenService)
+        public AdminIdentityService(IServiceBusMessagePublisher serviceBus, IIdentityRepository identityRepository, IPendingIdentityRepository pendingIdentityRepository, IPasswordManager passwordManager, IJwtManager jwtManager, ILogger<AdminIdentityService> logger, IRefreshTokenService tokenService, IBusinessRepository businessRepository)
         {
             _serviceBus = serviceBus;
             _identityRepository = identityRepository;
@@ -33,6 +34,7 @@ namespace Services.Identity.Services
             _jwtManager = jwtManager;
             _logger = logger;
             _tokenService = tokenService;
+            _businessRepository = businessRepository;
         }
         public async Task<IAuthToken> SignIn(string email, string password, string role)
         {
@@ -59,10 +61,10 @@ namespace Services.Identity.Services
 
         public async Task CreateAdmin(string email)
         {
-            if(await _identityRepository.IsEmailInUse(email) || await _pendingIdentityRepository.IsEmailInUse(email))
+            if(await _identityRepository.IsEmailInUse(email, Roles.SystemAdmin) || await _pendingIdentityRepository.IsEmailInUse(email, Roles.SystemAdmin))
                 throw new VmsException(Codes.EmailInUse, "The email supplied is already in use.");
 
-            var pending = new PendingIdentity(Guid.NewGuid(), email);
+            var pending = new PendingIdentity(Guid.NewGuid(), email, Roles.SystemAdmin);
 
             await _pendingIdentityRepository.AddAsync(pending);
 
@@ -85,6 +87,27 @@ namespace Services.Identity.Services
             var identity = new Domain.Identity(email, pword.Hash, pword.Salt, Roles.SystemAdmin);
 
             await _identityRepository.AddAsync(identity);
+        }
+
+        public async Task CreateBusinessAdmin(string email, Guid businessId)    
+        {
+            //TODO: consider normal accounts as well when get round to it.
+            if (await _identityRepository.IsEmailInUse(email, Roles.BusinessAdmin) || await _pendingIdentityRepository.IsEmailInUse(email, Roles.BusinessAdmin))
+                throw new VmsException(Codes.EmailInUse, "The email supplied is in use.");
+
+            if (!await _businessRepository.ContainsBusinessAsync(businessId))
+            {
+                //TODO: consider calling business service as back-up to avoid data inconsistency.
+                throw new VmsException(Codes.BusinessNotFound, "The business cannot be found to create the account for.");
+            }
+            
+            var pending = new PendingIdentity(Guid.NewGuid(), email, Roles.BusinessAdmin, businessId);
+
+            await _pendingIdentityRepository.AddAsync(pending);
+
+            _logger.LogInformation($"Pending identity for business admin created with email: {email}");
+
+            _serviceBus.PublishEvent(new PendingBusinessAdminCreated(pending.Id, pending.Email), RequestInfo.Empty);
         }
     }
 }

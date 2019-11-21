@@ -1,5 +1,6 @@
 ﻿using App.Shared.Exceptions;
 using App.Shared.Extensions;
+using App.Shared.Models;
 using App.Shared.Operations;
 using App.Shared.Operations.Models;
 using Blazored.Toast.Services;
@@ -35,6 +36,7 @@ namespace App.Shared.Services
             catch (HttpRequestException e)
             {
                 _logger.LogError("A request failed with the reason: " + e.Message);
+                _toastService.ShowError(ServiceError.Standard.Reason);
                 return false;
             }
 

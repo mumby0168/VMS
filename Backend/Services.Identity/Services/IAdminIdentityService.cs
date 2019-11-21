@@ -8,13 +8,15 @@ using Services.Identity.Models;
 
 namespace Services.Identity.Services
 {
-    public interface IIdentityService
+    public interface IAdminIdentityService
     {
         Task<IAuthToken> SignIn(string email, string password, string role);
 
         Task CreateAdmin(string email);
 
         Task CompleteAdmin(Guid code, string password, string passwordMatch, string email);
+
+        Task CreateBusinessAdmin(string email, Guid businessId);
     }
 }
     

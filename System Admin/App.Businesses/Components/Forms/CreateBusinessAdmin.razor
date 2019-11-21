@@ -1,0 +1,46 @@
+﻿@inject CreateBusinessAdminViewModel Model
+@inject ILoadingService LoadingService
+
+
+<div class="containter">
+    <div class="card">
+        <div class="card-header">
+            <h3>Admin Details</h3>
+        </div>
+        <div class="card-body">
+            <Indicator Context="create-business-admin">
+                <EditForm Model="@Model" OnValidSubmit="@Submit">
+
+                    <DataAnnotationsValidator />
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <InputText class="form-control" id="email" @bind-Value="@Model.Email" />
+                        <ValidationMessage For="@(() => Model.Email)" />
+                    </div>
+                    
+
+                    <input type="submit" class="btn btn-primary" value="Create Admin" />
+
+                </EditForm>
+
+            </Indicator>
+</div>
+    </div>
+</div>
+
+
+@code { 
+
+    [CascadingParameter]
+    public ModalParameters Parameters { get; set; }
+
+    protected override void OnInitialized()
+    {        
+        Model.Id = Parameters.Get<Guid>("Id");
+        base.OnInitialized();
+    }
+
+    public Task Submit() => LoadingService.StartTaskAsync((task) => Model.SubmitAsync(), "create-business-admin");
+
+    }

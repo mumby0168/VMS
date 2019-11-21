@@ -8,7 +8,7 @@ namespace Services.Identity.Repositorys
 {
     public interface IPendingIdentityRepository
     {
-        Task<bool> IsEmailInUse(string email);
+        Task<bool> IsEmailInUse(string email, string role);
         Task AddAsync(PendingIdentity pending);
         Task<PendingIdentity> GetAsync(Guid code, string email);
     }

@@ -13,23 +13,23 @@ namespace Services.Identity.Controllers
     [Route("api/admin/")]
     public class AdminController : ControllerBase
     {
-        private readonly IIdentityService _identityService;
+        private readonly IAdminIdentityService _adminIdentityService;
 
-        public AdminController(IIdentityService identityService)
+        public AdminController(IAdminIdentityService adminIdentityService)
         {
-            _identityService = identityService;
+            _adminIdentityService = adminIdentityService;
         }
 
         [AllowAnonymous]
         [HttpPost("sign-in-system")]
         public async Task<IActionResult> SignIn([FromBody] SignIn command) => 
-            Ok(await _identityService.SignIn(command.Email, command.Password, Roles.SystemAdmin));
+            Ok(await _adminIdentityService.SignIn(command.Email, command.Password, Roles.SystemAdmin));
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateAdmin command)
         {
-            await _identityService.CreateAdmin(command.Email);
+            await _adminIdentityService.CreateAdmin(command.Email);
             return Ok();
         }
 
@@ -37,7 +37,15 @@ namespace Services.Identity.Controllers
         [HttpPost("complete")]
         public async Task<IActionResult> Complete([FromBody] CompleteAdmin command)
         {
-            await _identityService.CompleteAdmin(command.Code, command.Password, command.PasswordMatch, command.Email);
+            await _adminIdentityService.CompleteAdmin(command.Code, command.Password, command.PasswordMatch, command.Email);
+            return Ok();
+        }
+
+        [Authorize(Roles = Roles.SystemAdmin)]
+        [HttpPost("create-business-admin")]
+        public async Task<IActionResult> Create([FromBody] CreateBusinessAdmin command)
+        {
+            await _adminIdentityService.CreateBusinessAdmin(command.Email, command.BusinessId);
             return Ok();
         }
     }

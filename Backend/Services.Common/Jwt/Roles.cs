@@ -7,5 +7,7 @@ namespace Services.Common.Jwt
     public static class Roles
     {
         public const string SystemAdmin = "SystemAdmin";
+
+        public const string BusinessAdmin = "BusinessAdmin";
     }
 }

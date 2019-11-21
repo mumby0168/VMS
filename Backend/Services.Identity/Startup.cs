@@ -16,6 +16,7 @@ using Services.Common.Names;
 using Services.Identity.Domain;
 using Services.Identity.Managers;
 using Services.Identity.Messages.Events;
+using Services.Identity.Messages.Events.Subscribed;
 using Services.Identity.Repositorys;
 using Services.Identity.Services;
 using Services.RabbitMq.Extensions;
@@ -50,7 +51,8 @@ namespace Services.Identity
             services.AddMongo()
                 .AddMongoCollection<Domain.Identity>()
                 .AddMongoCollection<PendingIdentity>()
-                .AddMongoCollection<RefreshToken>();
+                .AddMongoCollection<RefreshToken>()
+                .AddMongoCollection<Business>();
 
 
             ServicesRegistry.RegisterServices(services);
@@ -64,8 +66,13 @@ namespace Services.Identity
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseServiceBus(ServiceNames.Identity);
+
             app.UseMongo(ServiceNames.Identity);
+
+
+            app.UseServiceBus(ServiceNames.Identity)
+                .SubscribeEvent<BusinessCreated>();
+            
 
             CheckSeed(app.ApplicationServices.GetService<IIdentityRepository>(), app.ApplicationServices.GetService<IPasswordManager>());
 

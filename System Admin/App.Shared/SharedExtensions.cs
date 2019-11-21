@@ -14,12 +14,20 @@ namespace App.Shared
         public static IServiceCollection AddUserContext(this IServiceCollection services) => services.AddSingleton<IUserContext, UserContext>();
 
         public static IServiceCollection AddOperationsServices(this IServiceCollection services)
-        {            
+        {
             services.AddSingleton<IOperationsService, OperationsService>();
             services.AddSingleton<IOperationsManager, OperationsManager>();
             services.AddHttpClient<IOperationsClient, OperationsClient>();
             return services;
         }
+
+        public static IServiceCollection AddCustomClients(this IServiceCollection services) 
+        {            
+            services.AddSingleton<IHttpClient, CustomHttpClient>();
+            return services;
+        }
+
+
 
         public static IServiceCollection AddHttpExecutor(this IServiceCollection services) => services.AddTransient<IHttpExecutor, HttpExecutor>();
         

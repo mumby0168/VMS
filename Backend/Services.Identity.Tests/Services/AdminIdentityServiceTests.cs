@@ -20,15 +20,16 @@ using Shouldly;
 
 namespace Services.Identity.Tests.Managers
 {
-    public class IdentityServiceTests
+    public class AdminIdentityServiceTests
     {
         private Mock<IIdentityRepository> _identityRepo;
         private Mock<IJwtManager> _jwtManager;
         private Mock<IPendingIdentityRepository> _pendingRepo;
         private Mock<IServiceBusMessagePublisher> _serviceBusMessagePublisher;
         private Mock<IPasswordManager> _passwordManager;
-        private Mock<ILogger<IdentityService>> _logger;
+        private Mock<ILogger<AdminIdentityService>> _logger;
         private Mock<IRefreshTokenService> _refreshTokenService;
+        private Mock<IBusinessRepository> _businessRepository;
 
         private Mock<Domain.Identity> _identity;
         private Mock<PendingIdentity> _pendingIdentity;
@@ -52,17 +53,19 @@ namespace Services.Identity.Tests.Managers
             _pendingRepo = new Mock<IPendingIdentityRepository>();
             _serviceBusMessagePublisher = new Mock<IServiceBusMessagePublisher>();
             _refreshTokenService = new Mock<IRefreshTokenService>();
-            _logger = new Mock<ILogger<IdentityService>>();
+            _logger = new Mock<ILogger<AdminIdentityService>>();
+            _businessRepository = new Mock<IBusinessRepository>();
 
             _identity = new Mock<Domain.Identity>();
             _pendingIdentity = new Mock<PendingIdentity>();
             _password = new Mock<IPassword>();
             _password.SetupAllProperties();
 
-            _identityRepo.Setup(o => o.IsEmailInUse(TestInUseEmail)).Returns(Task.FromResult(true));
-            _identityRepo.Setup(o => o.IsEmailInUse(TestEmail)).Returns(Task.FromResult(false));
-            _pendingRepo.Setup(o => o.IsEmailInUse(TestInUseEmail)).Returns(Task.FromResult(true));
-            _pendingRepo.Setup(o => o.IsEmailInUse(TestEmail)).Returns(Task.FromResult(false));
+            _businessRepository.Setup(o => o.ContainsBusinessAsync(It.IsAny<Guid>())).Returns(Task.FromResult(true));
+            _identityRepo.Setup(o => o.IsEmailInUse(TestInUseEmail, It.IsAny<string>())).Returns(Task.FromResult(true));
+            _identityRepo.Setup(o => o.IsEmailInUse(TestEmail, It.IsAny<string>())).Returns(Task.FromResult(false));
+            _pendingRepo.Setup(o => o.IsEmailInUse(TestInUseEmail, It.IsAny<string>())).Returns(Task.FromResult(true));
+            _pendingRepo.Setup(o => o.IsEmailInUse(TestEmail, It.IsAny<string>())).Returns(Task.FromResult(false));
             _pendingRepo.Setup(o => o.GetAsync(_validCode, TestEmail)).Returns(Task.FromResult(_pendingIdentity.Object));
             _passwordManager.Setup(o => o.EncryptPassword(TestPassword)).Returns(_password.Object);
         }
@@ -232,7 +235,60 @@ namespace Services.Identity.Tests.Managers
             _identityRepo.Verify(o => o.AddAsync(It.IsAny<Domain.Identity>()));
         }
 
-        public IIdentityService CreateSut() => 
-            new IdentityService(_serviceBusMessagePublisher.Object, _identityRepo.Object, _pendingRepo.Object, _passwordManager.Object ,_jwtManager.Object, _logger.Object, _refreshTokenService.Object);
+        [Test]
+        public void CreateBusinessAdmin_Always_ThrowsIfEmailInUse()
+        {
+            //Arrange
+            var sut = CreateSut();
+
+            //Act   
+            var exception = Assert.ThrowsAsync<VmsException>(() => sut.CreateBusinessAdmin(TestInUseEmail, Guid.NewGuid()));
+
+            //Assert
+            exception.Code.ShouldBe(Codes.EmailInUse);
+        }
+
+        [Test]
+        public void CreateBusinessAdmin_Always_ThrowsIfBusinessNotFound()
+        {
+            //Arrange
+            var sut = CreateSut();
+            _businessRepository.Setup(o => o.ContainsBusinessAsync(It.IsAny<Guid>())).Returns(Task.FromResult(false));
+
+            //Act   
+            var exception = Assert.ThrowsAsync<VmsException>(() => sut.CreateBusinessAdmin(TestEmail, Guid.NewGuid()));
+
+            //Assert
+            exception.Code.ShouldBe(Codes.BusinessNotFound);
+        }
+
+        [Test]
+        public async Task CreateBusinessAdmin_Always_StoresPendingIdentityWhenValid()
+        {
+            //Arrange
+            var sut = CreateSut();
+
+            //Act   
+            await sut.CreateBusinessAdmin(TestEmail, Guid.NewGuid());
+
+            //Assert
+            _pendingRepo.Verify(o => o.AddAsync(It.Is<PendingIdentity>(pi => pi.Email == TestEmail && pi.Role == Roles.BusinessAdmin)));
+        }
+
+        [Test]
+        public async Task CreateBusinessAdmin_Always_SendsCreatedMessageWhenValid()
+        {
+            //Arrange
+            var sut = CreateSut();
+
+            //Act   
+            await sut.CreateBusinessAdmin(TestEmail, Guid.NewGuid());
+
+            //Assert
+            _serviceBusMessagePublisher.Verify(o => o.PublishEvent(It.Is<PendingBusinessAdminCreated>(p => p.Email == TestEmail), It.IsAny<RequestInfo>()));
+        }
+
+        public IAdminIdentityService CreateSut() => 
+            new AdminIdentityService(_serviceBusMessagePublisher.Object, _identityRepo.Object, _pendingRepo.Object, _passwordManager.Object ,_jwtManager.Object, _logger.Object, _refreshTokenService.Object, _businessRepository.Object);
     }
 }

@@ -17,8 +17,8 @@ namespace Services.Identity.Repositorys
             _repository = repository;
         }
 
-        public async Task<bool> IsEmailInUse(string email) => 
-            await _repository.GetAsync(i => i.Email == email) != null;
+        public async Task<bool> IsEmailInUse(string email, string role) => 
+            await _repository.GetAsync(i => i.Email == email && i.Role == role) != null;
 
         public Task AddAsync(PendingIdentity pending) => 
             _repository.AddAsync(pending);
