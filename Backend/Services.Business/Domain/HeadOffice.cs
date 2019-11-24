@@ -31,5 +31,10 @@ namespace Services.Business.Domain
             AddressLine1 = addressLine1;
             AddressLine2 = addressLine2;
         }
+
+        public HeadOffice()
+        {
+            
+        }
     }
 }

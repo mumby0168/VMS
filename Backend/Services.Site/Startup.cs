@@ -3,9 +3,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MongoDB.Driver;
 using Services.Common.Mongo;
 using Services.Common.Names;
 using Services.RabbitMq.Extensions;
+using Services.Sites.Domain;
+using Services.Sites.Messages.Commands;
+using Services.Sites.Messages.Events;
 
 namespace Services.Sites
 {
@@ -16,7 +20,9 @@ namespace Services.Sites
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddServiceBus();
-            services.AddMongo();
+            services.AddMongo()
+                .AddMongoCollection<Site>()
+                .AddMongoCollection<Business>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,7 +34,10 @@ namespace Services.Sites
             }
 
             app.UseMongo(ServiceNames.Sites);
-            app.UseServiceBus(ServiceNames.Sites);
+            app.UseServiceBus(ServiceNames.Sites)
+                .SubscribeCommand<CreateSite>()
+                .SubscribeEvent<BusinessCreated>();
+
 
             app.UseRouting();
 

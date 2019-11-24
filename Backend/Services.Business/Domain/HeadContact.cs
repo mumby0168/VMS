@@ -36,5 +36,10 @@ namespace Services.Business.Domain
             ContactNumber = contactNumber;
             Email = email;
         }
+
+        public HeadContact()
+        {
+            
+        }
     }
 }
