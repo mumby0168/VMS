@@ -4,7 +4,7 @@ using Services.Common.Validation;
 
 namespace Services.Business.Domain
 {
-    public class HeadOffice
+    public class HeadOffice : IHeadOffice
     {
         public string PostCode { get; private set; }
 
@@ -12,9 +12,10 @@ namespace Services.Business.Domain
 
         public string AddressLine2 { get; private set; }
 
-        public HeadOffice(string postCode, string addressLine1, string addressLine2)
+        public IHeadOffice Setup(string postCode, string addressLine1, string addressLine2)
         {
             ValidateAndUpdate(postCode, addressLine1, addressLine2);
+            return this;
         }
 
         public void Update(string postCode, string addressLine1, string addressLine2)
@@ -30,11 +31,6 @@ namespace Services.Business.Domain
             PostCode = postCode;
             AddressLine1 = addressLine1;
             AddressLine2 = addressLine2;
-        }
-
-        public HeadOffice()
-        {
-            
         }
     }
 }

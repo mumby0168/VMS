@@ -39,13 +39,13 @@ namespace Services.Business.Handlers.Query
                 WebAddress = domain.WebAddress?.ToString(),
                 Contact = new HeadContactDto()
                 {
-                    ContactNumber = domain.HeadContact?.ContactNumber, Email = domain.HeadContact?.Email,
-                    FirstName = domain.HeadContact?.FirstName, SecondName = domain.HeadContact?.SecondName
+                    ContactNumber = domain.GetContact()?.ContactNumber, Email = domain.GetContact()?.Email,
+                    FirstName = domain.GetContact()?.FirstName, SecondName = domain.GetContact()?.SecondName
                 },
                 Office = new HeadOfficeDto()
                 {
-                    AddressLine1 = domain.HeadOffice?.AddressLine1, AddressLine2 = domain.HeadOffice?.AddressLine2,
-                    PostCode = domain.HeadOffice?.PostCode
+                    AddressLine1 = domain.GetOffice()?.AddressLine1, AddressLine2 = domain.GetOffice()?.AddressLine2,
+                    PostCode = domain.GetOffice()?.PostCode
                 }
             };
         }

@@ -36,7 +36,7 @@ namespace Services.Business.Handlers.Command
 
             try
             {
-                business.HeadContact.Update(message.FirstName, message.SecondName, message.ContactNumber, message.Email);
+                business.GetContact().Update(message.FirstName, message.SecondName, message.ContactNumber, message.Email);
             }
             catch (VmsException e)
             {

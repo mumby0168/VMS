@@ -6,7 +6,7 @@ using Uri = System.Uri;
 
 namespace Services.Business.Domain
 {
-    public class Business : IDomain
+    public class Business : IBusiness
     {
         public Guid Id { get; private set; }
 
@@ -15,26 +15,22 @@ namespace Services.Business.Domain
         public string TradingName { get; private set; }
 
         public Uri WebAddress { get; private set; }
+        public HeadOffice Office { get; private set; }
+        public HeadContact Contact { get; private set; }
 
-        public HeadOffice HeadOffice { get; private set; }
-
-        public HeadContact HeadContact { get; private set; }
-
-        public Business()
-        {
-
-        }
-
-        public Business(string name, string tradingName, string webAddress, HeadOffice headOffice, HeadContact headContact)
+        public IBusiness Setup(string name, string tradingName, string webAddress, IHeadOffice headOffice, IHeadContact headContact)
         {
             Validate(name, tradingName, webAddress);
 
             Id = new Guid();
             Name = name;
             TradingName = tradingName;
-            HeadOffice = headOffice;
-            HeadContact = headContact;
+            Office = headOffice as HeadOffice;
+            Contact = headContact as HeadContact;
+
+            return this;
         }
+
 
         public void Update(string name, string tradingName, string webAddress)
         {
@@ -42,6 +38,10 @@ namespace Services.Business.Domain
             Name = name;
             TradingName = tradingName;
         }
+
+        public IHeadOffice GetOffice() => Office;
+
+        public IHeadContact GetContact() => Contact;
 
         private void Validate(string name, string tradingName, string webAddress)
         {

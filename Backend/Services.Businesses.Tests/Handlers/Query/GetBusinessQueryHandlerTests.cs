@@ -19,9 +19,9 @@ namespace Services.Businesses.Tests.Handlers.Query
         private Guid _valid;
         private Guid _invalid;
 
-        private Mock<Business.Domain.Business> _business;
-        private Mock<HeadContact> _headContact;
-        private Mock<HeadOffice> _headOffice;
+        private Mock<IBusiness> _business;
+        private Mock<IHeadContact> _headContact;
+        private Mock<IHeadOffice> _headOffice;
 
 
 
@@ -29,13 +29,14 @@ namespace Services.Businesses.Tests.Handlers.Query
         public void Setup()
         {
             _repository = new Mock<IBusinessRepository>();
-            _business = new Mock<Business.Domain.Business>();
+            _business = new Mock<IBusiness>();
             _valid = Guid.NewGuid();
             _invalid = Guid.NewGuid();
-            _headContact = new Mock<HeadContact>();
-            _headOffice = new Mock<HeadOffice>();
-            _business.SetupGet(o => o.HeadOffice).Returns(_headOffice.Object);
-            _business.SetupGet(o => o.HeadContact).Returns(_headContact.Object);
+            _headContact = new Mock<IHeadContact>();
+            _headOffice = new Mock<IHeadOffice>();
+            _business.Setup(o => o.GetContact()).Returns(_headContact.Object);
+            _business.Setup(o => o.GetOffice()).Returns(_headOffice.Object);
+
             _repository.Setup(o => o.GetBusinessAsync(_valid)).Returns(Task.FromResult(_business.Object));
         }
 
@@ -59,7 +60,7 @@ namespace Services.Businesses.Tests.Handlers.Query
             var sut = CreateSut();
 
             //Act
-            var dto = await sut.HandleAsync(new GetBusiness { Id = _invalid });
+            var dto = await sut.HandleAsync(new GetBusiness { Id = _valid });
 
             //Assert
             dto.ShouldNotBeNull();

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Services.Business.Domain;
 using Services.Business.Factories;
 using Services.Business.Messages.Commands;
 using Services.Business.Messages.Events;
@@ -32,7 +33,7 @@ namespace Services.Business.Handlers.Command
                 _logger.LogError("The message read was null request: " + requestInfo.OperationId);
                 return;
             }
-            Domain.Business business;
+            IBusiness business;
             try
             {
                 business = _businessesFactory.CreateBusiness(message.Name, message.TradingName, message.WebAddress,

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Services.Business.Domain;
 using Services.Common.Mongo;
 
 namespace Services.Business.Repositorys
@@ -14,9 +15,9 @@ namespace Services.Business.Repositorys
             _repository = repository;
         }
 
-        public Task Add(Domain.Business business) => _repository.AddAsync(business);
-        public Task<IEnumerable<Domain.Business>> GetBusinessesAsync() => _repository.GetAllAsync();
-        public Task<Domain.Business> GetBusinessAsync(Guid id) => _repository.GetAsync(id);
-        public Task UpdateAsync(Domain.Business business) => _repository.UpdateAsync(business, business.Id);
+        public Task Add(IBusiness business) => _repository.AddAsync(business as Domain.Business);
+        public async Task<IEnumerable<IBusiness>> GetBusinessesAsync() => await _repository.GetAllAsync();
+        public async Task<IBusiness> GetBusinessAsync(Guid id) => await _repository.GetAsync(id);
+        public Task UpdateAsync(IBusiness business) => _repository.UpdateAsync(business as Domain.Business, business.Id);
     }
 }

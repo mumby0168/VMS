@@ -4,7 +4,7 @@ using Validator = Services.Common.Validation.Validator;
 
 namespace Services.Business.Domain
 {
-    public class HeadContact
+    public class HeadContact : IHeadContact
     {
         public string FirstName { get; private set; }
 
@@ -14,9 +14,10 @@ namespace Services.Business.Domain
 
         public string Email { get; private set; }
 
-        public HeadContact(string firstName, string secondName, string contactNumber, string email)
+        public IHeadContact Setup(string firstName, string secondName, string contactNumber, string email)
         {
             ValidateAndUpdate(firstName, secondName, contactNumber, email);
+            return this;
         }
 
         public void Update(string firstName, string secondName, string contactNumber, string email)
