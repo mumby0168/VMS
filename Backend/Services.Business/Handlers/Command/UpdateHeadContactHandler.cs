@@ -15,11 +15,11 @@ namespace Services.Business.Handlers.Command
 {
     public class UpdateHeadContactHandler : ICommandHandler<UpdateHeadContact>
     {
-        private readonly ILogger<UpdateBusinessDetails> _logger;
+        private readonly ILogger<UpdateHeadContactHandler> _logger;
         private readonly IBusinessRepository _repository;
         private readonly IServiceBusMessagePublisher _publisher;
 
-        public UpdateHeadContactHandler(ILogger<UpdateBusinessDetails> logger, IBusinessRepository repository, IServiceBusMessagePublisher publisher)
+        public UpdateHeadContactHandler(ILogger<UpdateHeadContactHandler> logger, IBusinessRepository repository, IServiceBusMessagePublisher publisher)
         {
             _logger = logger;
             _repository = repository;
@@ -45,7 +45,7 @@ namespace Services.Business.Handlers.Command
             }
 
             await _repository.UpdateAsync(business);
-            _publisher.PublishEvent(new BusinessDetailsUpdated(), requestInfo);
+            _publisher.PublishEvent(new BusinessContactUpdated(), requestInfo);
             _logger.LogInformation("The business contact was updated successfully.");
         }
     }

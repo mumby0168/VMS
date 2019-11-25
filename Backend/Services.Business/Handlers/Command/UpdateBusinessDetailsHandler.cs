@@ -15,11 +15,11 @@ namespace Services.Business.Handlers.Command
 {
     public class UpdateBusinessDetailsHandler : ICommandHandler<UpdateBusinessDetails>
     {
-        private readonly ILogger<UpdateBusinessDetails> _logger;
+        private readonly ILogger<UpdateBusinessDetailsHandler> _logger;
         private readonly IBusinessRepository _repository;
         private readonly IServiceBusMessagePublisher _publisher;
 
-        public UpdateBusinessDetailsHandler(ILogger<UpdateBusinessDetails> logger, IBusinessRepository repository, IServiceBusMessagePublisher publisher)
+        public UpdateBusinessDetailsHandler(ILogger<UpdateBusinessDetailsHandler> logger, IBusinessRepository repository, IServiceBusMessagePublisher publisher)
         {
             _logger = logger;
             _repository = repository;

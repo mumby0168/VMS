@@ -24,5 +24,10 @@ namespace Services.Business.Messages.Commands
             AddressLine2 = addressLine2;
             PostCode = postCode;
         }
+
+        public UpdateHeadOffice()
+        {
+            
+        }
     }
 }

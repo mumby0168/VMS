@@ -27,5 +27,10 @@ namespace Services.Business.Messages.Commands
             TradingName = tradingName;
             WebAddress = webAddress;
         }
+
+        public UpdateBusinessDetails()
+        {
+            
+        }
     }
 }

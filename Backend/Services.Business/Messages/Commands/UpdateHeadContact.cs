@@ -28,5 +28,10 @@ namespace Services.Business.Messages.Commands
             Email = email;
             ContactNumber = contactNumber;
         }
+
+        public UpdateHeadContact()
+        {
+            
+        }
     }
 }
