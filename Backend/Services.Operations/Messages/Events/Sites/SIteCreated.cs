@@ -7,12 +7,12 @@ using Services.RabbitMq.Interfaces.Messaging;
 namespace Services.Operations.Messages.Events.Sites
 {
     [MicroService(ServiceNames.Sites)]
-    public class SIteCreated : IEvent
+    public class SiteCreated : IEvent
     {
         public Guid Id { get; }
 
         [JsonConstructor]
-        public SIteCreated(Guid id)
+        public SiteCreated(Guid id)
         {
             Id = id;
         }

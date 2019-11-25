@@ -1,9 +1,12 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Services.Common.Names;
+using Services.RabbitMq.Attributes;
 using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Api.Gateway.Messages.Sites
 {
+    [MicroService(ServiceNames.Sites)]
     public class CreateSite : ICommand
     {
         public Guid BusinessId { get; }
@@ -36,11 +39,6 @@ namespace Api.Gateway.Messages.Sites
             ContactNumber = contactNumber;
             Email = email;
             BusinessId = businessId;
-        }
-
-        public CreateSite()
-        {
-            
         }
     }
 }

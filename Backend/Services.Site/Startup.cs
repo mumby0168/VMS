@@ -23,6 +23,8 @@ namespace Services.Sites
             services.AddMongo()
                 .AddMongoCollection<Site>()
                 .AddMongoCollection<Business>();
+
+            ServiceRegistry.RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
