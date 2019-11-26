@@ -1,5 +1,6 @@
 ﻿
 @inject IModalService ModalService
+@inject NavigationManager NavigationManager
 
 <style>
     /* Header Styles */ 
@@ -78,7 +79,11 @@
             </li>
             <li class="nav-item">
                 <a @onclick="@ShowAccounts" class="nav-link pointer edit-btn"><i class="fas fa-list"></i> Shows Accounts</a>
-            </li>            
+            </li>
+            <li class="nav-item">
+                <a @onclick="@NavigateCreateSite" class="nav-link pointer edit-btn"><i class="fas fa-building"></i> Create Site</a>
+            </li>
+
         </ul>
     </div>
 
@@ -126,6 +131,11 @@ else
         var parameters = new ModalParameters();
         parameters.Add("Id", Business.Id);
         ModalService.Show<CreateBusinessAdmin>($"Create Business Admin ({Business.Name})", parameters);
+    }
+
+    void NavigateCreateSite()
+    {
+        NavigationManager.NavigateTo("/create-site/" + Business.Id);
     }
 
     void ShowEditContact()

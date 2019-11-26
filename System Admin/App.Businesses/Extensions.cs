@@ -1,5 +1,6 @@
 using App.Businesses.Services;
 using App.Businesses.ViewModels;
+using App.Sites;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace App.Businesses
@@ -14,7 +15,8 @@ namespace App.Businesses
             services.AddScoped<UpdateBusinessDetailsViewModel>();
             services.AddScoped<CreateBusinessAdminViewModel>();
             services.AddTransient<IAdminAccountService, AdminAccountService>();
-            services.AddHttpClient<BusinessService>();          
+            services.AddHttpClient<BusinessService>();
+            services.AddSites();
             return services;
         }
     }

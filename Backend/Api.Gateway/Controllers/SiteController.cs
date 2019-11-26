@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Api.Gateway.Messages.Sites;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Services.Common.Jwt;
 using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Api.Gateway.Controllers
@@ -16,6 +18,7 @@ namespace Api.Gateway.Controllers
 
         }
 
+        [Authorize(Roles = Roles.SystemAdmin)]
         [HttpPost("create")]
         public IActionResult Create([FromBody]CreateSite command) => PublishCommand(command);
     }

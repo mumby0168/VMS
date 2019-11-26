@@ -14,16 +14,9 @@ namespace Api.Gateway.Messages.Sites
         public string PostCode { get; }
         public string AddressLine1 { get; }
         public string AddressLine2 { get; }
-
         public string FirstName { get; }
-
-
         public string SecondName { get; }
-
-
         public string ContactNumber { get; }
-
-
         public string Email { get; }
 
 

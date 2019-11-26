@@ -10,12 +10,11 @@
     <PackageReference Include="Blazored.Toast" Version="2.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="3.0.0" />
   </ItemGroup>
 
-  <ItemGroup>  
-    <ProjectReference Include="..\App.Shared\App.Shared.csproj" />  
-    <ProjectReference Include="..\App.Sites\App.Sites.csproj" /> 
+
+  <ItemGroup>
+    <ProjectReference Include="..\App.Shared\App.Shared.csproj" />
   </ItemGroup>
 
 </Project>

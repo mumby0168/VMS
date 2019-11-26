@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Account", "App.Account\Acco
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Account.Interfaces", "App.Account.Interfaces\Account.Interfaces.csproj", "{BE4567E0-1FA7-4B4D-B0C8-FC3A21DA89D3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Businesses.Interfaces", "App.Businesses.Interfaces\App.Businesses.Interfaces.csproj", "{6F42A13D-704E-47B1-A285-E58DF5AF088A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Businesses", "App.Businesses\App.Businesses.csproj", "{5411C3D8-0585-4D4E-B835-17EA62B760A9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Shared", "App.Shared\App.Shared.csproj", "{E789F67F-A19D-4C91-BD49-526B14B1D460}"
@@ -22,6 +20,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{46AA66EE-20DB-458C-8554-0B9C4A1A9BD3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.LoadingIndicator", "..\External\BlazorLoadingFork\src\Blazor.LoadingIndicator\Blazor.LoadingIndicator.csproj", "{F4C4A9E7-1740-4362-8F9B-C5AF6FBF112B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Sites", "App.Sites\App.Sites.csproj", "{AB1896EE-6B89-4DCB-B3D0-AE89B89A8D4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,18 +69,6 @@ Global
 		{BE4567E0-1FA7-4B4D-B0C8-FC3A21DA89D3}.Release|x64.Build.0 = Release|Any CPU
 		{BE4567E0-1FA7-4B4D-B0C8-FC3A21DA89D3}.Release|x86.ActiveCfg = Release|Any CPU
 		{BE4567E0-1FA7-4B4D-B0C8-FC3A21DA89D3}.Release|x86.Build.0 = Release|Any CPU
-		{6F42A13D-704E-47B1-A285-E58DF5AF088A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F42A13D-704E-47B1-A285-E58DF5AF088A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F42A13D-704E-47B1-A285-E58DF5AF088A}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{6F42A13D-704E-47B1-A285-E58DF5AF088A}.Debug|x64.Build.0 = Debug|Any CPU
-		{6F42A13D-704E-47B1-A285-E58DF5AF088A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6F42A13D-704E-47B1-A285-E58DF5AF088A}.Debug|x86.Build.0 = Debug|Any CPU
-		{6F42A13D-704E-47B1-A285-E58DF5AF088A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F42A13D-704E-47B1-A285-E58DF5AF088A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6F42A13D-704E-47B1-A285-E58DF5AF088A}.Release|x64.ActiveCfg = Release|Any CPU
-		{6F42A13D-704E-47B1-A285-E58DF5AF088A}.Release|x64.Build.0 = Release|Any CPU
-		{6F42A13D-704E-47B1-A285-E58DF5AF088A}.Release|x86.ActiveCfg = Release|Any CPU
-		{6F42A13D-704E-47B1-A285-E58DF5AF088A}.Release|x86.Build.0 = Release|Any CPU
 		{5411C3D8-0585-4D4E-B835-17EA62B760A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5411C3D8-0585-4D4E-B835-17EA62B760A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5411C3D8-0585-4D4E-B835-17EA62B760A9}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -129,6 +117,18 @@ Global
 		{F4C4A9E7-1740-4362-8F9B-C5AF6FBF112B}.Release|x64.Build.0 = Release|Any CPU
 		{F4C4A9E7-1740-4362-8F9B-C5AF6FBF112B}.Release|x86.ActiveCfg = Release|Any CPU
 		{F4C4A9E7-1740-4362-8F9B-C5AF6FBF112B}.Release|x86.Build.0 = Release|Any CPU
+		{AB1896EE-6B89-4DCB-B3D0-AE89B89A8D4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB1896EE-6B89-4DCB-B3D0-AE89B89A8D4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB1896EE-6B89-4DCB-B3D0-AE89B89A8D4C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AB1896EE-6B89-4DCB-B3D0-AE89B89A8D4C}.Debug|x64.Build.0 = Debug|Any CPU
+		{AB1896EE-6B89-4DCB-B3D0-AE89B89A8D4C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AB1896EE-6B89-4DCB-B3D0-AE89B89A8D4C}.Debug|x86.Build.0 = Debug|Any CPU
+		{AB1896EE-6B89-4DCB-B3D0-AE89B89A8D4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB1896EE-6B89-4DCB-B3D0-AE89B89A8D4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB1896EE-6B89-4DCB-B3D0-AE89B89A8D4C}.Release|x64.ActiveCfg = Release|Any CPU
+		{AB1896EE-6B89-4DCB-B3D0-AE89B89A8D4C}.Release|x64.Build.0 = Release|Any CPU
+		{AB1896EE-6B89-4DCB-B3D0-AE89B89A8D4C}.Release|x86.ActiveCfg = Release|Any CPU
+		{AB1896EE-6B89-4DCB-B3D0-AE89B89A8D4C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,6 +3,7 @@ using Account.Interfaces.Jwt;
 using App.Businesses;
 using App.Shared;
 using App.Shared.Operations;
+using App.Sites;
 using Blazor.LoadingIndicator;
 using Blazored.Modal;
 using Blazored.Toast;
@@ -42,7 +43,7 @@ namespace Manager
             services.AddLoadingIndicator();
             services.AddDevelopmentSettings(Configuration);
             services.AddHttpExecutor();
-            services.AddCustomClients();
+            services.AddCustomClients();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

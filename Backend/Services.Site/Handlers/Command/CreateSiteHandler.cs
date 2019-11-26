@@ -37,7 +37,7 @@ namespace Services.Sites.Handlers.Command
         {
             if (!await _businessRepository.IsBusinessValidAsync(message.BusinessId))
             {
-                _publisher.PublishEvent(new CreateSiteRejected("", ""), requestInfo);
+                _publisher.PublishEvent(new CreateSiteRejected(Codes.InvalidBusinessId, "The business could not be found to create a site for."), requestInfo);
                 return;
             }
 

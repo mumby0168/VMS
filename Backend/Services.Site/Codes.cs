@@ -11,5 +11,7 @@
         public const string InvalidEmail = "email_invalid";
 
         public const string InvalidId = "id_invalid";
+
+        public const string InvalidBusinessId = "business_id_invlalid";
     }
 }

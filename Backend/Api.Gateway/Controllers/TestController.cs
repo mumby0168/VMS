@@ -10,7 +10,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Api.Gateway.Controllers
 {
-    [Route("api/test/")]
+    [Route("gateway/api/test/")]
     public class TestController : GatewayControllerBase
     {
         public TestController(IDispatcher dispatcher) : base(dispatcher)
