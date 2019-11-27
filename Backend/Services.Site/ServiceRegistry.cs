@@ -22,6 +22,7 @@ namespace Services.Sites
             serviceCollection.AddTransient<ISiteServiceFactory, SiteServiceFactory>();
             serviceCollection.AddTransient<IBusinessRepository, BusinessRepository>();
             serviceCollection.AddTransient<ISiteRepository, SiteRepository>();
+            serviceCollection.AddTransient<ISiteResourceRepository, SiteResourceRepository>();
 
             //command handlers
             serviceCollection.AddTransient<ICommandHandler<CreateSite>, CreateSiteHandler>();

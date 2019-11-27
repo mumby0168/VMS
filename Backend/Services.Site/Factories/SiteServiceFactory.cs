@@ -17,5 +17,10 @@ namespace Services.Sites.Factories
         {
             return new Contact().Setup(firstName, secondName, email, number) ;
         }
+
+        public ISiteResource CreateSiteResource(Guid siteId, string name, string identifier)
+        {
+            return new SiteResource().Setup(siteId, name, identifier);
+        }
     }
 }

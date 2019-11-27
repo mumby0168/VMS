@@ -11,5 +11,7 @@ namespace Services.Sites.Factories
         ISite CreateSite(Guid businessId, string name, string postCode, string addressLine1, string addressLine2, IContact contact);
 
         IContact CreateContact(string firstName, string secondName, string email, string number);
+
+        ISiteResource CreateSiteResource(Guid siteId, string name, string identifier);
     }
 }

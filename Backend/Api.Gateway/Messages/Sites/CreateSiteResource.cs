@@ -12,15 +12,16 @@ namespace Api.Gateway.Messages.Sites
     [MicroService(ServiceNames.Sites)]
     public class CreateSiteResource : ICommand
     {
+        private Guid SiteId { get; }
         public string Identifier { get; }
 
         public string Name { get; }
 
         [JsonConstructor]
-        public CreateSiteResource(string identifier, string name)
+        public CreateSiteResource(Guid siteId, string identifier, string name)
         {
+            SiteId = siteId;
             Identifier = identifier;
             Name = name;
         }
     }
-}

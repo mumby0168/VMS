@@ -23,7 +23,8 @@ namespace Services.Sites
             services.AddServiceBus();
             services.AddMongo()
                 .AddMongoCollection<Site>()
-                .AddMongoCollection<Business>();
+                .AddMongoCollection<Business>()
+                .AddMongoCollection<SiteResource>();
 
             services.AddQuerySupport();
 
@@ -41,6 +42,7 @@ namespace Services.Sites
             }
 
             app.UseMongo(ServiceNames.Sites);
+
             app.UseServiceBus(ServiceNames.Sites)
                 .SubscribeCommand<CreateSite>()
                 .SubscribeCommand<UpdateSiteDetails>()
