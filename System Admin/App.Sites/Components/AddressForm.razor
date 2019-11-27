@@ -10,15 +10,18 @@
             <div class="form-group">
                 <label for="addressLine1">Address Line 1</label>
                 <InputText disabled="@(!Model.IsEdit)" @bind-Value="@Model.AddressLine1" class="form-control" id="addressLine1" />
+                <ValidationMessage For="@(() => Model.AddressLine1)" />
             </div>
             <div class="form-group">
                 <label for="addressLine2">Address Line 2</label>
 
                 <InputText disabled="@(!Model.IsEdit)" @bind-Value="@Model.AddressLine2" class="form-control" id="addressLine2" />
+                <ValidationMessage For="@(() => Model.AddressLine2)" />
             </div>
             <div class="form-group">
                 <label for="postCode">Postcode</label>
                 <InputText disabled="@(!Model.IsEdit)" @bind-Value="@Model.PostCode" class="form-control" id="postCode" />
+                <ValidationMessage For="@(() => Model.PostCode)" />
             </div>
             @if (Model.IsEdit)
             {

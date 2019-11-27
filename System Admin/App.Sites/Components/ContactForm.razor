@@ -7,20 +7,23 @@
             <div class="form-group col">
                 <label for="first">First Name</label>
                 <InputText disabled="@(!Model.IsEdit)" @bind-Value="@Model.FirstName" class="form-control" id="first" />
+                <ValidationMessage For="@(() => Model.FirstName)" />
             </div>
             <div class="form-group col">
                 <label for="second">Second Name</label>
                 <InputText disabled="@(!Model.IsEdit)" @bind-Value="@Model.SecondName" class="form-control" id="second" />
+                <ValidationMessage For="@(() => Model.SecondName)" />
             </div>
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-
             <InputText disabled="@(!Model.IsEdit)" @bind-Value="@Model.Email" class="form-control" id="email" />
+            <ValidationMessage For="@(() => Model.Email)" />
         </div>
         <div class="form-group">
             <label for="contact">Contact Number</label>
             <InputText disabled="@(!Model.IsEdit)" @bind-Value="@Model.ContactNumber" class="form-control" id="contact" />
+            <ValidationMessage For="@(() => Model.ContactNumber)" />
         </div>
         
         @if (Model.IsEdit)
