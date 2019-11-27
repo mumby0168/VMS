@@ -6,13 +6,13 @@ using Services.RabbitMq.Interfaces.Messaging;
 namespace Services.Operations.Messages.Events.Sites.Rejected
 {
     [MicroService(ServiceNames.Sites)]
-    public class SiteUpdateRejected : IRejectedEvent
+    public class RemoveSiteResourceRejected : IRejectedEvent
     {
         public string Code { get; }
         public string Reason { get; }
 
         [JsonConstructor]
-        public SiteUpdateRejected(string code, string reason)
+        public RemoveSiteResourceRejected(string code, string reason)
         {
             Code = code;
             Reason = reason;

@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 using Services.Common.Names;
 using Services.RabbitMq.Attributes;
 using Services.RabbitMq.Interfaces.Messaging;
 
-namespace Services.Sites.Messages.Events.Send.Rejected
+namespace Services.Operations.Messages.Events.Sites.Rejected
 {
-    public class CreateSiteRejected : IRejectedEvent
+    [MicroService(ServiceNames.Sites)]
+    public class SiteResourceRejected : IRejectedEvent
     {
         public string Code { get; }
         public string Reason { get; }
 
-        public CreateSiteRejected(string code, string reason)
+        [JsonConstructor]
+        public SiteResourceRejected(string code, string reason)
         {
             Code = code;
             Reason = reason;

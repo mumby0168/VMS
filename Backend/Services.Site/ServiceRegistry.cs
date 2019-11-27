@@ -27,6 +27,8 @@ namespace Services.Sites
             serviceCollection.AddTransient<ICommandHandler<CreateSite>, CreateSiteHandler>();
             serviceCollection.AddTransient<ICommandHandler<UpdateSiteDetails>, UpdateSiteDetailsHandler>();
             serviceCollection.AddTransient<ICommandHandler<UpdateSiteContact>, UpdateSiteContactHandler>();
+            serviceCollection.AddTransient<ICommandHandler<CreateSiteResource>, CreateSiteResourceHandler>();
+            serviceCollection.AddTransient<ICommandHandler<RemoveSiteResource>, RemoveSiteResourceHandler>();
 
             //event handlers
             serviceCollection.AddTransient<IEventHandler<BusinessCreated>, BusinessCreatedHandler>();
@@ -34,6 +36,7 @@ namespace Services.Sites
             //query handlers
             serviceCollection.AddTransient<IQueryHandler<GetSite, SiteDto>, GetSiteHandler>();
             serviceCollection.AddTransient<IQueryHandler<GetSiteSummaries, IEnumerable<SiteSummaryDto>>, GetSiteSummariesHandler>();
+            serviceCollection.AddTransient<IQueryHandler<GetSiteResources, IEnumerable<SiteResourceDto>>, GetSiteResourcesHandler>();
 
             return serviceCollection;
         }

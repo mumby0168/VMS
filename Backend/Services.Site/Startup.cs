@@ -8,6 +8,7 @@ using Services.Common.Names;
 using Services.Common.Queries;
 using Services.RabbitMq.Extensions;
 using Services.Sites.Domain;
+using Services.Sites.Handlers.Command;
 using Services.Sites.Messages.Commands;
 using Services.Sites.Messages.Events;
 
@@ -43,6 +44,8 @@ namespace Services.Sites
             app.UseServiceBus(ServiceNames.Sites)
                 .SubscribeCommand<CreateSite>()
                 .SubscribeCommand<UpdateSiteDetails>()
+                .SubscribeCommand<RemoveSiteResource>()
+                .SubscribeCommand<CreateSiteResource>()
                 .SubscribeCommand<UpdateSiteContact>()
                 .SubscribeEvent<BusinessCreated>();
 

@@ -21,13 +21,12 @@ namespace Services.Sites.Controllers
         }
 
         [HttpGet("summaries/{businessId}")]
-        public async Task<ActionResult<IEnumerable<SiteSummaryDto>>> Summaries([FromRoute] Guid businessId)
-        {
-            return Collection(await _dispatcher.Dispatch<GetSiteSummaries, IEnumerable<SiteSummaryDto>>(new GetSiteSummaries(businessId)));
-        }
+        public async Task<ActionResult<IEnumerable<SiteSummaryDto>>> Summaries([FromRoute] Guid businessId) => Collection(await _dispatcher.Dispatch<GetSiteSummaries, IEnumerable<SiteSummaryDto>>(new GetSiteSummaries(businessId)));
 
         [HttpGet("{siteId}")]
-        public async Task<IActionResult> Get([FromRoute] Guid siteId) =>
-            Single(await _dispatcher.Dispatch<GetSite, SiteDto>(new GetSite(siteId)));
+        public async Task<IActionResult> Get([FromRoute] Guid siteId) => Single(await _dispatcher.Dispatch<GetSite, SiteDto>(new GetSite(siteId)));
+
+        [HttpGet("resources/{siteId}")]
+        public async Task<IActionResult> GetResources([FromRoute] Guid siteId) => Single(await _dispatcher.Dispatch<GetSiteResources, IEnumerable<SiteResourceDto>>(new GetSiteResources(siteId)));
     }
 }

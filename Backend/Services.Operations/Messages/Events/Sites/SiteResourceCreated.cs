@@ -5,7 +5,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 namespace Services.Operations.Messages.Events.Sites
 {
     [MicroService(ServiceNames.Sites)]
-    public class SiteUpdated : IEvent
+    public class SiteResourceCreated : IEvent
     {
     }
 }
