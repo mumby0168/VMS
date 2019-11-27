@@ -10,5 +10,8 @@ namespace Services.Sites.Repositorys
     public interface ISiteRepository
     {
         Task AddAsync(ISite site);
+        Task<ISite> GetAsync(Guid id);
+        Task<IEnumerable<ISite>> GetSitesForBusinessAsync(Guid businessId);
     }
 }
+    

@@ -12,6 +12,9 @@
     .bg-white {
         background-color: white;
     }
+    .sites-list {
+        padding: 1rem;
+    }
 </style>
 
 <Indicator Context="business-profile">
@@ -20,6 +23,8 @@
     </section>
 
     <section class="bg-light sites-list">
+        @if (Business != null)
+        {<SiteProfile BusinessId="@Business.Id"></SiteProfile>}
     </section>
 </Indicator>
 
@@ -36,7 +41,7 @@
     protected async override Task OnInitializedAsync()
     {
         PubSubService.Subscribe<UpdateBusinessProfile>(Notify);
-
+        await LoadData();
 
         await base.OnInitializedAsync();
     }

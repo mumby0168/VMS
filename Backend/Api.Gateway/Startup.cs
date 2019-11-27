@@ -34,6 +34,7 @@ namespace Api.Gateway
 
             services.AddTransient<IOperationsClient, OperationsClient>();
             services.AddTransient<IBusinessClient, BusinessClient>();
+            services.AddTransient<ISiteClient, SiteClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,47 @@
+﻿
+
+
+
+    <div class="details">
+        <EditForm Model="@Model" OnValidSubmit="@Model.SubmitAsync">
+
+            <DataAnnotationsValidator />
+
+            <div class="form-group">
+                <label for="addressLine1">Address Line 1</label>
+                <InputText disabled="@(!IsEdit)" @bind-Value="@Model.AddressLine1" class="form-control" id="addressLine1" />
+            </div>
+            <div class="form-group">
+                <label for="addressLine2">Address Line 1</label>
+
+                <InputText disabled="@(!IsEdit)" @bind-Value="@Model.AddressLine1" class="form-control" id="addressLine2" />
+            </div>
+            <div class="form-group">
+                <label for="postCode">Postcode</label>
+                <InputText disabled="@(!IsEdit)" @bind-Value="@Model.AddressLine1" class="form-control" id="postCode" />
+            </div>
+            @if (IsEdit)
+            {
+                <input type="submit" class="btn btn-primary" value="Update" />
+                <button class="btn btn-danger" @onclick="((e) => IsEdit = false)">Cancel</button>
+            }
+        </EditForm>
+        @if (!IsEdit)
+        {            
+            <button  @onclick="((e) => IsEdit = true)" class="btn edit-btn"><i class="fas fa-edit"></i></button>
+        }
+
+    </div>
+
+
+
+
+
+@code {
+
+
+    bool IsEdit { get; set; } = false;
+
+    [Parameter]
+    public AddressFormViewModel Model { get; set; }
+}

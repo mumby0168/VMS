@@ -6,7 +6,7 @@
     /* Header Styles */ 
 
     .business-header {
-        height: 50%;
+        
     }
 
     .header-grid {
@@ -23,15 +23,7 @@
 
     .contact-info {
         text-align: left;
-    }
-
-    .edit-btn {
-        background-color: transparent;
-    }
-
-    .edit-btn:hover {
-        background-color: lightgray;
-    }
+    }    
 
     .business-address {
         text-align: right;
@@ -72,16 +64,16 @@
 {
 <div class="business-info-wrapper">
 
-    <div class="business-action-bar">
+    <div class="business-action-bar card">
         <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a @onclick="@NavigateCreateSite" class="nav-link pointer edit-btn"><i class="fas fa-building"></i> Create Site</a>
+            </li>
             <li class="nav-item">
                 <a @onclick="@ShowAddAdmin" class="nav-link pointer edit-btn "><i class="fas fa-plus"></i> Create Business Admin</a>
             </li>
             <li class="nav-item">
                 <a @onclick="@ShowAccounts" class="nav-link pointer edit-btn"><i class="fas fa-list"></i> Shows Accounts</a>
-            </li>
-            <li class="nav-item">
-                <a @onclick="@NavigateCreateSite" class="nav-link pointer edit-btn"><i class="fas fa-building"></i> Create Site</a>
             </li>
 
         </ul>

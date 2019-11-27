@@ -1,0 +1,114 @@
+﻿@inject SiteService SiteService
+@inject ILoadingService LoadingService
+@inject AddressFormViewModel AddressModel
+@inject ContactFormViewModel ContactModel
+
+<style>
+    .title {
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+    .full-length {
+      height: 100%;
+    }
+    .row {
+      height: 100%;
+    }
+    .details {
+        padding: 0rem 1rem 1rem 1rem;
+    }
+    .title-card {
+        margin-bottom: 0.5rem;
+    }
+</style>
+
+
+<Indicator Context="site-profile">
+    <div class="row">
+        <div class="col-3">
+
+
+            @if (SiteSummaries != null && SiteSummaries.Any())
+            {
+
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    @foreach (var summary in SiteSummaries)
+                    {
+                        <a class="nav-link primary-hover pointer @(SelectedSiteId == summary.Id ? "active": "")" @onclick="@(() => UpdateSite(summary.Id))">@summary.Name</a>
+                    }
+                </div>
+            }
+            else
+            {
+                <h2>No sites for this business yet.</h2>
+            }
+        </div>
+
+        <div class="col-9">
+            @if (SelectedSite != null)
+            {
+
+                
+                <div class="card title-card title">
+                    <h1 class="title">@SelectedSite.Name</h1>
+                </div>                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="title">
+                                <h2>Address</h2>
+                                <hr />
+                            </div>
+                            <AddressForm Model="@AddressModel"></AddressForm>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="title">
+                                <h2>Contact</h2>
+                                <hr />
+                            </div>
+                            <ContactForm Model="@ContactModel"></ContactForm>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+</Indicator>
+
+
+@code {
+
+    [Parameter]
+    public Guid BusinessId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadingService.StartTaskAsync(async (task) => SiteSummaries = await SiteService.GetSiteSummariesForBusiness(BusinessId), "site-profile");
+        if (SiteSummaries.Count() > 0)
+        {
+            SelectedSiteId = SiteSummaries.FirstOrDefault().Id;
+        }
+        await UpdateSite(SelectedSiteId);
+        await base.OnInitializedAsync();
+    }
+
+    Guid SelectedSiteId { get; set; }
+
+    IEnumerable<SiteSummary> SiteSummaries { get; set; }
+
+    Site SelectedSite { get; set; }
+
+    public async Task UpdateSite(Guid siteId)
+    {
+        SelectedSiteId = siteId;
+        await LoadingService.StartTaskAsync(async (task) => SelectedSite = await SiteService.GetSite(SelectedSiteId), "site-profile");
+        if (SelectedSite != null)
+        {
+            AddressModel.Setup(SelectedSite.Id, SelectedSite.AddressLine1, SelectedSite.AddressLine2, SelectedSite.PostCode);
+            ContactModel.Setup(SelectedSite.Id, SelectedSite.FirstName, SelectedSite.SecondName, SelectedSite.Email, SelectedSite.ContactNumber);
+        }
+    }
+}

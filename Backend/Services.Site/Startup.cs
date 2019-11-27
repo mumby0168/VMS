@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using MongoDB.Driver;
 using Services.Common.Mongo;
 using Services.Common.Names;
+using Services.Common.Queries;
 using Services.RabbitMq.Extensions;
 using Services.Sites.Domain;
 using Services.Sites.Messages.Commands;
@@ -23,6 +24,10 @@ namespace Services.Sites
             services.AddMongo()
                 .AddMongoCollection<Site>()
                 .AddMongoCollection<Business>();
+
+            services.AddQuerySupport();
+
+            services.AddControllers();
 
             ServiceRegistry.RegisterServices(services);
         }
@@ -45,6 +50,7 @@ namespace Services.Sites
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapDefaultControllerRoute();
                 endpoints.MapGet("/", async context =>
                 {
                     await context.Response.WriteAsync(ServiceNames.Sites);

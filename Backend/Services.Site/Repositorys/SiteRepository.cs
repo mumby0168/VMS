@@ -15,9 +15,15 @@ namespace Services.Sites.Repositorys
         {
             _repository = repository;
         }
-        public Task AddAsync(ISite site)
-        {
-            return _repository.AddAsync(site as Site);
-        }
+
+
+        public Task AddAsync(ISite site) => 
+            _repository.AddAsync(site as Site);
+
+        public async Task<ISite> GetAsync(Guid id) => 
+            await _repository.GetAsync(id);
+
+        public async Task<IEnumerable<ISite>> GetSitesForBusinessAsync(Guid businessId) =>
+            await _repository.FindAsync(s => s.BusinessId == businessId);
     }
 }

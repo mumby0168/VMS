@@ -12,6 +12,8 @@ namespace App.Sites
         public static IServiceCollection AddSites(this IServiceCollection services)
         {
             services.AddScoped<CreateSiteViewModel>();
+            services.AddScoped<AddressFormViewModel>();
+            services.AddScoped<ContactFormViewModel>();
             services.AddHttpClient<SiteService>();
             return services;
         }

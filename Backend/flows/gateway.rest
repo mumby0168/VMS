@@ -1,6 +1,6 @@
 @url = http://localhost:5020/gateway/api/
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzQ2OTkwMjAsImV4cCI6MTU3NDcwOTgyMCwiaWF0IjoxNTc0Njk5MDIwfQ.4zYA-LQjFXiY8RjUOn3OW00VP7ugUDQI1HPcGOCTUaYFolCBkf2xUtpVZyTI5deglC_ApNuWUSXhny17C0xYWQ
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzQ3OTUzNjQsImV4cCI6MTU3NDgwNjE2NCwiaWF0IjoxNTc0Nzk1MzY0fQ.eLZ_GcJvSjYICdbXwwmeuLTEUCqlMWjW7kB7PtZ5AgwhoSLe-nB9PVEzzBmZldLkG44FJdaW8iLR0gliHPAQEQ
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
@@ -93,7 +93,7 @@ Authorization: Bearer {{jwt}}
 
 {
     "businessId": "{{businessiD}}",
-    "Name": "Test Site",        
+    "Name": "Main Office",        
     "firstName": "Joe",
     "secondName": "Bloggs",
     "contactNumber": "07568512675",
@@ -102,3 +102,13 @@ Authorization: Bearer {{jwt}}
     "addressLine2": "Hull",
     "postCode": "Hu10 7rt"
 }
+
+
+### Get Site
+GET {{url}}sites/get/adfadfasdf
+Authorization: Bearer {{jwt}}
+
+
+### Get Site Summaries
+GET {{url}}sites/summaries/{{businessiD}}
+Authorization: Bearer {{jwt}}

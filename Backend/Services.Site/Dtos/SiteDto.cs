@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace App.Sites.Models
+namespace Services.Sites.Dtos
 {
-    public class Site
+    public class SiteDto
     {
         public Guid Id { get; set; }
 
@@ -13,7 +11,7 @@ namespace App.Sites.Models
         public string Name { get; set; }
 
         public string PostCode { get; set; }
-        
+
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
 
@@ -25,4 +23,5 @@ namespace App.Sites.Models
 
         public string Email { get; set; }
     }
+
 }
