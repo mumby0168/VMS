@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MongoDB.Driver;
 using Services.Common.Mongo;
 using Services.Common.Names;
 using Services.Common.Queries;
@@ -43,6 +42,8 @@ namespace Services.Sites
             app.UseMongo(ServiceNames.Sites);
             app.UseServiceBus(ServiceNames.Sites)
                 .SubscribeCommand<CreateSite>()
+                .SubscribeCommand<UpdateSiteDetails>()
+                .SubscribeCommand<UpdateSiteContact>()
                 .SubscribeEvent<BusinessCreated>();
 
 

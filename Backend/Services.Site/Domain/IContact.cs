@@ -10,6 +10,8 @@ namespace Services.Sites.Domain
     {
         IContact Setup(string firstName, string secondName, string email, string number);
 
+        void Update(string firstName, string secondName, string email, string number);
+
         string FirstName { get; }
 
 

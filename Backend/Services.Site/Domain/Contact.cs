@@ -28,6 +28,18 @@ namespace Services.Sites.Domain
             return this;
         }
 
+        public void Update(string firstName, string secondName, string email, string number)
+        {
+            if (firstName.IsEmpty()) throw new VmsException(Codes.EmptyProperty, "The first name cannot be empty");
+            if (secondName.IsEmpty()) throw new VmsException(Codes.EmptyProperty, "The second name cannot be empty"); if (!Validator.IsUkPhoneNumberValid(number)) throw new VmsException(Codes.InvalidContactNumber, $"The contact number {number} is invalid");
+            if (!Validator.IsEmailValid(email)) throw new VmsException(Codes.InvalidEmail, $"The email {email} is invalid");
+
+            FirstName = firstName;
+            SecondName = secondName;
+            Email = email;
+            ContactNumber = number;
+        }
+
         public string FirstName { get; private set; }
         public string SecondName { get; private set; }
         public string ContactNumber { get; private set; }

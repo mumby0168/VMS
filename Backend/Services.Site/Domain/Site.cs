@@ -38,6 +38,18 @@ namespace Services.Sites.Domain
             return this;
         }
 
+        public void Update(string name, string postCode, string addressLine1, string addressLine2)
+        {
+            if (string.IsNullOrWhiteSpace(name)) throw new VmsException("empty_property", "The field name must contain a value.");
+            if (!Validator.IsPostCodeValid(postCode)) throw new VmsException(Codes.InvalidPostCode, $"The postcode: {postCode} is not valid in the UK ");
+            if (addressLine1.IsEmpty()) throw new VmsException(Codes.EmptyProperty, "The property address line 1 must be given a value.");
+
+            Name = name;
+            PostCode = postCode;
+            AddressLine1 = addressLine1;
+            AddressLine2 = addressLine2;
+        }
+
         public Guid BusinessId { get; private set; }
     }
 }

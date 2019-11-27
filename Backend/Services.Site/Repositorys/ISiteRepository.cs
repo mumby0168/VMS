@@ -12,6 +12,7 @@ namespace Services.Sites.Repositorys
         Task AddAsync(ISite site);
         Task<ISite> GetAsync(Guid id);
         Task<IEnumerable<ISite>> GetSitesForBusinessAsync(Guid businessId);
+        Task Update(ISite site);
     }
 }
     

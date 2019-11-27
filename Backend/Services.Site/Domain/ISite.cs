@@ -10,6 +10,8 @@ namespace Services.Sites.Domain
     {
         ISite Setup(Guid businessId, string name, string postCode, string addressLine1, string addressLine2, IContact contact);
 
+        void Update(string name, string postCode, string addressLine1, string addressLine2);
+
         Guid BusinessId { get; }
 
         string PostCode { get; }

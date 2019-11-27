@@ -27,6 +27,14 @@ namespace Api.Gateway.Controllers
         public IActionResult Create([FromBody]CreateSite command) => PublishCommand(command);
 
         [Authorize(Roles = Roles.SystemAdmin)]
+        [HttpPost("update")]
+        public IActionResult Update([FromBody]UpdateSiteDetails command) => PublishCommand(command);
+
+        [Authorize(Roles = Roles.SystemAdmin)]
+        [HttpPost("update-contact")]
+        public IActionResult UpdateContact([FromBody]UpdateSiteContact command) => PublishCommand(command);
+
+        [Authorize(Roles = Roles.SystemAdmin)]
         [HttpGet("summaries/{businessId}")]
         public async Task<ActionResult<IEnumerable<SiteSummaryDto>>> Summaries([FromRoute] Guid businessId)
         {

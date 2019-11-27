@@ -25,6 +25,8 @@ namespace Services.Sites
 
             //command handlers
             serviceCollection.AddTransient<ICommandHandler<CreateSite>, CreateSiteHandler>();
+            serviceCollection.AddTransient<ICommandHandler<UpdateSiteDetails>, UpdateSiteDetailsHandler>();
+            serviceCollection.AddTransient<ICommandHandler<UpdateSiteContact>, UpdateSiteContactHandler>();
 
             //event handlers
             serviceCollection.AddTransient<IEventHandler<BusinessCreated>, BusinessCreatedHandler>();

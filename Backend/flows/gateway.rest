@@ -1,6 +1,6 @@
 @url = http://localhost:5020/gateway/api/
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzQ3OTUzNjQsImV4cCI6MTU3NDgwNjE2NCwiaWF0IjoxNTc0Nzk1MzY0fQ.eLZ_GcJvSjYICdbXwwmeuLTEUCqlMWjW7kB7PtZ5AgwhoSLe-nB9PVEzzBmZldLkG44FJdaW8iLR0gliHPAQEQ
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzQ4NTgyODUsImV4cCI6MTU3NDg2OTA4NSwiaWF0IjoxNTc0ODU4Mjg1fQ.VRxnXDvCJbdgNBsKwabtr1Jx6zshAPEhi1FvNvRW94N65JsCSmRcTAmVVQN1_fjK1a0BqrFoM0zsoj7tEwPeEg
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
@@ -104,11 +104,39 @@ Authorization: Bearer {{jwt}}
 }
 
 
+@siteId = ac3fed5d-3277-409e-972c-e800e072ae35
+
 ### Get Site
-GET {{url}}sites/get/adfadfasdf
+GET {{url}}sites/get/{{siteId}}
 Authorization: Bearer {{jwt}}
 
 
 ### Get Site Summaries
 GET {{url}}sites/summaries/{{businessiD}}
 Authorization: Bearer {{jwt}}
+
+### Update Site Details
+POST {{url}}sites/update
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{    
+    "siteId": "{{siteId}}",
+    "name": "Update Office",            
+    "addressLine1": " (Update) 56 Bond Street",
+    "addressLine2": "Hull (Update)",
+    "postCode": "LS10 7rt"
+}
+
+### Update Site Contact
+POST {{url}}sites/update-contact
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{    
+    "siteId": "{{siteId}}",
+    "firstName": "Fred",
+    "secondName": "Brand",
+    "contactNumber": "07568512675",
+    "email": "joe.bloggs@outlook.com"
+}

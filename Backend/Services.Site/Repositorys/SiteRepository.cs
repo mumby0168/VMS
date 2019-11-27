@@ -25,5 +25,7 @@ namespace Services.Sites.Repositorys
 
         public async Task<IEnumerable<ISite>> GetSitesForBusinessAsync(Guid businessId) =>
             await _repository.FindAsync(s => s.BusinessId == businessId);
+
+        public Task Update(ISite site) => _repository.UpdateAsync(site as Site, site.Id);
     }
 }
