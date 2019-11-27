@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 using Services.Sites.Messages.Commands;
+using Services.Sites.Repositorys;
 
 namespace Services.Sites.Handlers.Command
 {
@@ -13,16 +14,18 @@ namespace Services.Sites.Handlers.Command
     {
         private readonly ILogger<RemoveSiteResourceHandler> _logger;
         private readonly IServiceBusMessagePublisher _publisher;
+        private readonly ISiteResourceRepository _repository;
 
-        public RemoveSiteResourceHandler(ILogger<RemoveSiteResourceHandler> logger, IServiceBusMessagePublisher publisher)
+        public RemoveSiteResourceHandler(ILogger<RemoveSiteResourceHandler> logger, IServiceBusMessagePublisher publisher, ISiteResourceRepository repository)
         {
             _logger = logger;
             _publisher = publisher;
+            _repository = repository;
         }
 
-        public Task HandleAsync(RemoveSiteResource message, IRequestInfo requestInfo)
+        public async Task HandleAsync(RemoveSiteResource message, IRequestInfo requestInfo)
         {
-            throw new NotImplementedException();
+            await _repository.RemoveAsync(message.ResourceId);
         }
     }
 }

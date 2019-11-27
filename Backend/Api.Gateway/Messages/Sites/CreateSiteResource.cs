@@ -12,7 +12,7 @@ namespace Api.Gateway.Messages.Sites
     [MicroService(ServiceNames.Sites)]
     public class CreateSiteResource : ICommand
     {
-        private Guid SiteId { get; }
+        public Guid SiteId { get; }
         public string Identifier { get; }
 
         public string Name { get; }
@@ -25,3 +25,4 @@ namespace Api.Gateway.Messages.Sites
             Name = name;
         }
     }
+}

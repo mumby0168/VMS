@@ -12,7 +12,7 @@ namespace Api.Gateway.Messages.Sites
     [MicroService(ServiceNames.Sites)]
     public class RemoveSiteResource : ICommand
     {
-        private Guid ResourceId { get; }
+        public Guid ResourceId { get; }
 
         [JsonConstructor]
         public RemoveSiteResource(Guid resourceId)

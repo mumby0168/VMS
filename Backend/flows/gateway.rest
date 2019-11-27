@@ -1,6 +1,6 @@
 @url = http://localhost:5020/gateway/api/
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzQ4NTgyODUsImV4cCI6MTU3NDg2OTA4NSwiaWF0IjoxNTc0ODU4Mjg1fQ.VRxnXDvCJbdgNBsKwabtr1Jx6zshAPEhi1FvNvRW94N65JsCSmRcTAmVVQN1_fjK1a0BqrFoM0zsoj7tEwPeEg
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzQ4ODQyNzksImV4cCI6MTU3NDg5NTA3OSwiaWF0IjoxNTc0ODg0Mjc5fQ.DyQ5S9V5zcmwygyJMoIkUUbeO44jK6-GFNvk1jN2LhAwYIA0yU16JuEMLKl6T-7AHJ53CtwAaEYylDRYo6_l1g
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
@@ -139,4 +139,33 @@ Authorization: Bearer {{jwt}}
     "secondName": "Brand",
     "contactNumber": "07568512675",
     "email": "joe.bloggs@outlook.com"
+}
+
+
+### Add Site Resource
+
+POST {{url}}sites/create-site-resource
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "siteId": "{{siteId}}",
+    "name": "iPhone 10",
+    "identifier": "45678457896243798589725346rgtwhghjfksdhkjfg"
+}
+
+@resourceId = ee06616f-64a3-486a-808c-e5a2b81b8346
+
+### Get Site Resources
+GET {{url}}sites/resources/{{siteId}}
+Authorization: Bearer {{jwt}}
+
+### Remove Site Resource
+
+POST {{url}}sites/remove-site-resource
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "resourceId": "{{resourceId}}"
 }

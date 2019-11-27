@@ -13,5 +13,7 @@
         public const string InvalidId = "id_invalid";
 
         public const string InvalidBusinessId = "business_id_invlalid";
+
+        public const string InvalidSiteId = "invalid_site_id";
     }
 }

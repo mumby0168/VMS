@@ -6,7 +6,7 @@ namespace Services.Sites.Messages.Commands
 {
     public class CreateSiteResource : ICommand
     {
-        private Guid SiteId { get; }
+        public Guid SiteId { get; }
         public string Identifier { get; }
 
         public string Name { get; }
@@ -17,6 +17,11 @@ namespace Services.Sites.Messages.Commands
             SiteId = siteId;
             Identifier = identifier;
             Name = name;
+        }
+
+        public CreateSiteResource()
+        {
+            
         }
     }
 }

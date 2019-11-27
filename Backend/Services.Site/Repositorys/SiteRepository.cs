@@ -27,5 +27,10 @@ namespace Services.Sites.Repositorys
             await _repository.FindAsync(s => s.BusinessId == businessId);
 
         public Task Update(ISite site) => _repository.UpdateAsync(site as Site, site.Id);
+        public async Task<bool> IsSiteIdValid(Guid siteId)
+        {
+            var site = await _repository.GetAsync(siteId);
+            return site != null;
+        }
     }
 }

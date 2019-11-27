@@ -12,6 +12,6 @@ namespace Services.Sites.Repositorys
 
         Task RemoveAsync(Guid resourceId);
 
-        Task<IEnumerable<ISiteResource>> GetSiteResources(Guid siteId)
+        Task<IEnumerable<ISiteResource>> GetSiteResources(Guid siteId);
     }
 }
