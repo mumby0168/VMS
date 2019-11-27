@@ -6,32 +6,32 @@
         <div class="row">
             <div class="form-group col">
                 <label for="first">First Name</label>
-                <InputText disabled="@(!IsEdit)" @bind-Value="@Model.FirstName" class="form-control" id="first" />
+                <InputText disabled="@(!Model.IsEdit)" @bind-Value="@Model.FirstName" class="form-control" id="first" />
             </div>
             <div class="form-group col">
                 <label for="second">Second Name</label>
-                <InputText disabled="@(!IsEdit)" @bind-Value="@Model.SecondName" class="form-control" id="second" />
+                <InputText disabled="@(!Model.IsEdit)" @bind-Value="@Model.SecondName" class="form-control" id="second" />
             </div>
         </div>
         <div class="form-group">
-            <label for="addressLine2">Address Line 1</label>
+            <label for="email">Email</label>
 
-            <InputText disabled="@(!IsEdit)" @bind-Value="@Model.Email" class="form-control" id="addressLine2" />
+            <InputText disabled="@(!Model.IsEdit)" @bind-Value="@Model.Email" class="form-control" id="email" />
         </div>
         <div class="form-group">
             <label for="contact">Contact Number</label>
-            <InputText disabled="@(!IsEdit)" @bind-Value="@Model.ContactNumber" class="form-control" id="contact" />
+            <InputText disabled="@(!Model.IsEdit)" @bind-Value="@Model.ContactNumber" class="form-control" id="contact" />
         </div>
         
-        @if (IsEdit)
+        @if (Model.IsEdit)
         {
             <input type="submit" class="btn btn-primary" value="Update" />
-            <button class="btn btn-danger" @onclick="((e) => IsEdit = false)">Cancel</button>
+            @*<button class="btn btn-danger" @onclick="((e) => Model.IsEdit = false)">Cancel</button>*@
         }
     </EditForm>
-    @if (!IsEdit)
+    @if (!Model.IsEdit)
     {
-<button @onclick="((e) => IsEdit = true)" class="btn edit-btn"><i class="fas fa-edit"></i></button>
+<button @onclick="((e) => Model.IsEdit = true)" class="btn edit-btn"><i class="fas fa-edit"></i></button>
     }
 
 </div>
@@ -40,9 +40,7 @@
 
 
 
-@code {
-    bool IsEdit { get; set; } = false;
-
+@code {    
     [Parameter]
     public ContactFormViewModel Model { get; set; }
 }

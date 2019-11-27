@@ -38,6 +38,11 @@ namespace App.Sites.Services
                 )),
             $"{site.Name} site created succesfully.");
 
+        public Task<bool> UpdateSiteDetailsAsync(Guid siteId, string name, string addressLine1, string addressLine2, string postCode) => _executor.SendRequestAsync(() => Client.PostAsync("update", JsonMessage.CreateJsonMessage(new { siteId, name, addressLine1, addressLine2, postCode })), "Site details updated succesfully.");
+
+
+        public Task<bool> UpdateSiteContactAsync(Guid siteId, string firstName, string secondName, string email, string contactNumber) => _executor.SendRequestAsync(() => Client.PostAsync("update-contact", JsonMessage.CreateJsonMessage(new { siteId, firstName, secondName, email, contactNumber })), "Site contact details updated succesfully.");
+
 
         public async Task<IEnumerable<SiteSummary>> GetSiteSummariesForBusiness(Guid businessId)
         {
