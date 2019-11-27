@@ -11,5 +11,7 @@ namespace Api.Gateway.Clients.Interfaces
         Task<IEnumerable<SiteSummaryDto>> GetSites(Guid businessId);
 
         Task<SiteDto> GetSite(Guid siteId);
+
+        Task<IEnumerable<SiteResourceDto>> GetResourcesForSite(Guid siteId);
     }
 }

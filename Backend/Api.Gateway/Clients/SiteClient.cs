@@ -24,5 +24,9 @@ namespace Api.Gateway.Clients
 
         public Task<SiteDto> GetSite(Guid siteId) =>
             _client.GetAsync<SiteDto>($"{_baseAddress}/{siteId.ToString()}");
+
+        public Task<IEnumerable<SiteResourceDto>> GetResourcesForSite(Guid siteId) =>
+            _client.GetAsync<IEnumerable<SiteResourceDto>>($"{_baseAddress}/resources/{siteId.ToString()}");
+
     }
 }

@@ -27,6 +27,14 @@ namespace Api.Gateway.Controllers
         public IActionResult Create([FromBody]CreateSite command) => PublishCommand(command);
 
         [Authorize(Roles = Roles.SystemAdmin)]
+        [HttpGet("summaries/{businessId}")]
+        public async Task<ActionResult<IEnumerable<SiteSummaryDto>>> GetSummaries([FromRoute] Guid businessId) => Collection(await _siteClient.GetSites(businessId));
+
+        [Authorize(Roles = Roles.SystemAdmin)]
+        [HttpGet("get/{siteId}")]
+        public async Task<IActionResult> Get([FromRoute] Guid siteId) => Single(await _siteClient.GetSite(siteId));
+
+        [Authorize(Roles = Roles.SystemAdmin)]
         [HttpPost("update")]
         public IActionResult Update([FromBody]UpdateSiteDetails command) => PublishCommand(command);
 
@@ -34,17 +42,18 @@ namespace Api.Gateway.Controllers
         [HttpPost("update-contact")]
         public IActionResult UpdateContact([FromBody]UpdateSiteContact command) => PublishCommand(command);
 
-        [Authorize(Roles = Roles.SystemAdmin)]
-        [HttpGet("summaries/{businessId}")]
-        public async Task<ActionResult<IEnumerable<SiteSummaryDto>>> Summaries([FromRoute] Guid businessId)
-        {
-            return Collection(await _siteClient.GetSites(businessId));
-        }
 
         [Authorize(Roles = Roles.SystemAdmin)]
-        [HttpGet("get/{siteId}")]
-        public async Task<IActionResult> Get([FromRoute] Guid siteId) =>
-            Single(await _siteClient.GetSite(siteId));
+        [HttpPost("create-site-resource")]
+        public IActionResult CreateSiteResource([FromBody]CreateSiteResource command) => PublishCommand(command);
+
+        [Authorize(Roles = Roles.SystemAdmin)]
+        [HttpPost("remove-site-resource")]
+        public IActionResult RemoveSiteResource([FromBody]RemoveSiteResource command) => PublishCommand(command);
+
+        [Authorize(Roles = Roles.SystemAdmin)]
+        [HttpGet("resources/{siteId}")]
+        public async Task<ActionResult<IEnumerable<SiteResourceDto>>> GetSiteResources([FromRoute] Guid siteId) => Collection(await _siteClient.GetResourcesForSite(siteId));
 
 
     }
