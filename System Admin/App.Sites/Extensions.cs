@@ -13,6 +13,7 @@ namespace App.Sites
         {
             services.AddScoped<CreateSiteViewModel>();
             services.AddScoped<AddressFormViewModel>();
+            services.AddScoped<CreateSiteResourceViewModel>();
             services.AddScoped<ContactFormViewModel>();
             services.AddHttpClient<SiteService>();
             return services;

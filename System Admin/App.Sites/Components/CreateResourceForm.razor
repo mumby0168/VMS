@@ -1,0 +1,49 @@
+﻿@inject CreateSiteResourceViewModel Model
+@inject ILoadingService LoadingService
+
+
+
+<div class="container">
+    <div class="card update-office-card">
+        <div class="card-header">
+            <h2>Contact Info</h2>
+        </div>
+        <div class="card-body">
+            <Indicator Context="update-detials">
+                <EditForm Model="@Model" OnValidSubmit="@Submit">
+
+                    <DataAnnotationsValidator></DataAnnotationsValidator>                    
+
+                    <div class="form-group">
+                        <label for="name">Resource Name:</label>
+                        <InputText class="form-control" type="text" id="name" @bind-Value="@Model.Name" />
+                        <ValidationMessage For="@(() => Model.Name)" />
+                    </div>                                       
+                    <div class="form-group">
+                        <label for="Tradingname">Resource Identifier:</label>
+                        <InputText class="form-control" type="text" id="Tradingname" @bind-Value="@Model.Identifier" />
+                        <ValidationMessage For="@(() => Model.Identifier)" />
+                    </div>                                                                
+
+                    <input type="submit" class="btn btn-primary" value="Update" />
+                </EditForm>
+            </Indicator>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [CascadingParameter]
+    ModalParameters Parameters { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Model.SiteId = Parameters.Get<Guid>("Id");       
+        base.OnInitialized();
+    }
+
+
+    async Task Submit() => await LoadingService.StartTaskAsync(async (task) => await Model.SubmitAsync(), "create-resource");
+}
+

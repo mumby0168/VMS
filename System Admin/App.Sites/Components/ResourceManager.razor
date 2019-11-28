@@ -1,5 +1,6 @@
 ﻿@inject SiteService SiteService
 @inject ILoadingService LoadingService
+@inject IModalService ModalService
 
 
 
@@ -21,19 +22,26 @@
     .resource-ident {
         word-wrap: break-word;
     }
+    .create-button {
+        margin-bottom: 0.5rem;
+        margin-left: 0.5rem;
+    }
 </style>
 
 
 <div class="card">
 
-    <div class="title">
+    
+
+    <div class="title">        
         <h4>Site Resources</h4>
-        <hr/>
+        <hr />
     </div>
 
 
     <Indicator Context="resource-list">
         <div class="overflow-container">
+            <button @onclick="@ShowCreateResource" class="btn btn-default create-button"><i class="fas fa-plus"></i> Create Resource</button>
             <ul class="list-group list-group-flush">
 
                 <li class="list-group-item" style="padding-bottom: 1rem;">
@@ -55,7 +63,7 @@
                     <li class="list-group-item">
                         <div class="row">
                             <div class="col-md-6">
-                                <p class="resource-ident">@resource.Identifier</p>                                
+                                <p class="resource-ident">@resource.Identifier</p>
                             </div>
                             <div class="col-md-3">
                                 @resource.Name
@@ -104,5 +112,13 @@
         {
             await LoadData();
         }
+    }
+
+    void ShowCreateResource()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Id", SiteId);      
+        ModalService.Show<CreateResourceForm>("Create Site Resource", parameters);
+        ModalService.OnClose += async (res) => await LoadData();
     }
 }

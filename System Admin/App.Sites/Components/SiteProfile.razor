@@ -3,6 +3,7 @@
 @inject AddressFormViewModel AddressModel
 @inject ContactFormViewModel ContactModel
 @inject IPubSubService PubSubService
+@inject IModalService  ModalService
 
 <style>
     .title {
@@ -121,5 +122,5 @@
             AddressModel.Setup(SelectedSite.Id,SelectedSite.Name, SelectedSite.AddressLine1, SelectedSite.AddressLine2, SelectedSite.PostCode);
             ContactModel.Setup(SelectedSite.Id, SelectedSite.FirstName, SelectedSite.SecondName, SelectedSite.Email, SelectedSite.ContactNumber);
         }
-    }
+    }    
 }
