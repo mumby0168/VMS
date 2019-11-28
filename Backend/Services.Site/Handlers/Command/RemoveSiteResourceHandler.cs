@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 using Services.Sites.Messages.Commands;
+using Services.Sites.Messages.Events.Send;
 using Services.Sites.Repositorys;
 
 namespace Services.Sites.Handlers.Command
@@ -26,6 +27,7 @@ namespace Services.Sites.Handlers.Command
         public async Task HandleAsync(RemoveSiteResource message, IRequestInfo requestInfo)
         {
             await _repository.RemoveAsync(message.ResourceId);
+            _publisher.PublishEvent(new SiteResourceRemoved(), requestInfo);
         }
     }
 }
