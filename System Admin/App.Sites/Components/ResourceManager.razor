@@ -1,0 +1,108 @@
+﻿@inject SiteService SiteService
+@inject ILoadingService LoadingService
+
+
+
+<style>
+    .title {
+        text-align: center;
+    }
+    .card {
+        width: 100%;
+    }
+    .overflow-container {
+        height: 100%;
+        overflow-y: auto;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        margin-top: 1rem;
+    }
+    .resource-ident {
+        word-wrap: break-word;
+    }
+</style>
+
+
+<div class="card">
+
+    <div class="title">
+        <h4>Site Resources</h4>
+        <hr/>
+    </div>
+
+
+    <Indicator Context="resource-list">
+        <div class="overflow-container">
+            <ul class="list-group list-group-flush">
+
+                <li class="list-group-item" style="padding-bottom: 1rem;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="font-weight-bold">Identifier</p>
+                        </div>
+                        <div class="col-md-3">
+                            <p class="font-weight-bold">Name</p>
+                        </div>
+                        <div class="col-md-3">
+                            <p class="font-weight-bold">Actions</p>
+                        </div>
+                    </div>
+                </li>
+
+                @foreach (var resource in Resources)
+                {
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="resource-ident">@resource.Identifier</p>                                
+                            </div>
+                            <div class="col-md-3">
+                                @resource.Name
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-danger" @onclick="((e) => RemoveAsync(resource.Id))">Remove</button>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </Indicator>
+</div>
+
+
+
+
+@code {
+    [Parameter]
+    public Guid SiteId { get; set; }
+
+    IEnumerable<SiteResource> Resources { get; set; } = new List<SiteResource>();
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await LoadData();
+        await base.OnParametersSetAsync();
+    }
+
+    Task LoadData()
+    {
+        return LoadingService.StartTaskAsync(async (task) => Resources = await SiteService.GetResourcesForSite(SiteId), "resource-list");
+    }
+
+    async Task RemoveAsync(Guid resourceId)
+    {
+        var res = await SiteService.RemoveSiteResourceAsync(resourceId);
+        if(res)
+        {
+            await LoadData();
+        }
+    }
+}

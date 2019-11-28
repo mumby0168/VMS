@@ -9,17 +9,25 @@
         text-align: center;
         margin-top: 0.5rem;
     }
-    .full-length {
+    /*.full-length {
       height: 100%;
     }
     .row {
       height: 100%;
-    }
+    }*/
     .details {
         padding: 0rem 1rem 1rem 1rem;
     }
     .title-card {
         margin-bottom: 0.5rem;
+    }
+    .card {
+        margin-top: 1rem;
+    }
+    .resource-manager-wrapper {
+        width: 100%;        
+        margin-right: 0px;
+        margin-left: 0px;
     }
 </style>
 
@@ -73,10 +81,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="row resource-manager-wrapper">
+                    <ResourceManager SiteId="@SelectedSiteId"></ResourceManager>
+                </div>
             }
         </div>
     </div>
-
 </Indicator>
 
 

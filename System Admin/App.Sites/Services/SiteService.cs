@@ -44,6 +44,31 @@ namespace App.Sites.Services
         public Task<bool> UpdateSiteContactAsync(Guid siteId, string firstName, string secondName, string email, string contactNumber) => _executor.SendRequestAsync(() => Client.PostAsync("update-contact", JsonMessage.CreateJsonMessage(new { siteId, firstName, secondName, email, contactNumber })), "Site contact details updated succesfully.");
 
 
+        public Task<bool> CreateSiteResource(Guid siteId, string name, string identifier) => _executor.SendRequestAsync(() => Client.PostAsync("create-site-resource",JsonMessage.CreateJsonMessage(new { siteId, name, identifier })), "The resource was added succesfully.");
+
+        public Task<bool> RemoveSiteResourceAsync(Guid resourceId) => _executor.SendRequestAsync(() => Client.PostAsync("remove-site-resource", JsonMessage.CreateJsonMessage(new { resourceId})), "Resource removed succesfully.");
+
+        public async Task<IEnumerable<SiteResource>> GetResourcesForSite(Guid siteId)
+        {
+            try
+            {
+                var response = await Client.GetAsync($"resources/{siteId}");
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return JsonConvert.DeserializeObject<IEnumerable<SiteResource>>(await response.Content.ReadAsStringAsync());
+                }
+                else if (response.StatusCode == System.Net.HttpStatusCode.NoContent) return new List<SiteResource>();
+            }
+            catch (HttpRequestException e)
+            {
+                _logger.LogError("The request failed to get site resources: " + e.Message);
+                throw new InternalHttpRequestException(e);
+            }
+
+            throw new NotImplementedException("This should do something to offer a reload of the data.");
+        }
+
+
         public async Task<IEnumerable<SiteSummary>> GetSiteSummariesForBusiness(Guid businessId)
         {
             try
