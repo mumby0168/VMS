@@ -24,25 +24,33 @@ namespace App.Sites.ViewModels
         public Guid BusinessId { get; set; }
 
         [Required]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
-        [Required]        
+        [Required]
+        [Display(Name = "Postcode")]
         public string PostCode { get; set; }
 
         [Required]
+        [Display(Name = "Address Line 1")]
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
 
         [Required]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
+        [Display(Name = "Second Name")]
         public string SecondName { get; set; }
 
+        [Required]
         [Phone]
+        [Display(Name = "Contact Number")]
         public string ContactNumber { get; set; }
 
-        [EmailAddress]      
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         public async Task SubmitAsync()

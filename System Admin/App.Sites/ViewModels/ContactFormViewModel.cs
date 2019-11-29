@@ -3,6 +3,7 @@ using App.Shared.Services;
 using App.Sites.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,12 +32,21 @@ namespace App.Sites.ViewModels
 
         public Guid Id { get; set; }
 
+        [Required]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
+        [Required]
+        [Display(Name = "Second Name")]
         public string SecondName { get; set; }
 
+        [Required]
+        [Phone]
+        [Display(Name = "Contact Number")]
         public string ContactNumber { get; set; }
 
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         public async Task SubmitAsync()
