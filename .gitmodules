@@ -1,3 +1,6 @@
 [submodule "External/BlazorLoadingFork"]
 	path = External/BlazorLoadingFork
 	url = https://github.com/mumby0168/Blazor.LoadingIndicator.git
+[submodule "Tools/Governer"]
+	path = Tools/Governer
+	url = https://github.com/mumby0168/Governor.git
