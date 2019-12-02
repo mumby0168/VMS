@@ -18,12 +18,14 @@ namespace App.Shared.Services
         private readonly ILogger<HttpExecutor> _logger;
         private readonly IToastService _toastService;
         private readonly IOperationsManager _operationsManager;
+        private readonly IOperationsService _operationsService;
 
-        public HttpExecutor(ILogger<HttpExecutor> logger, IToastService toastService, IOperationsManager operationsManager)
+        public HttpExecutor(ILogger<HttpExecutor> logger, IToastService toastService, IOperationsManager operationsManager, IOperationsService operationsService)
         {
             _logger = logger;
             _toastService = toastService;
             _operationsManager = operationsManager;
+            this._operationsService = operationsService;
         }
 
         public async Task<bool> SendRequestAsync(Func<Task<HttpResponseMessage>> call,string successMessage, Func<Task> onFailure = null, Func<Task> onSuccess = null)
@@ -48,9 +50,11 @@ namespace App.Shared.Services
                     if (onSuccess is null)
                     {
                         _toastService.ShowSuccess(successMessage);
+                        await CheckConnection();
                         return true;
                     }
-                    
+
+                    await CheckConnection();
                     await onSuccess.Invoke();
 
                     return true;
@@ -59,23 +63,37 @@ namespace App.Shared.Services
                 {
                     if (onFailure is null)
                     {
+                        await CheckConnection();
                         _toastService.ShowError(failed.Reason);
                         return false;                
                     }
 
+                    await CheckConnection();
                     await onFailure?.Invoke();
                     return false;
                 }
             }
             else if(response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
+                await CheckConnection();
                 // TODO Re apply for token using refresh token and then recurse on this function.             
                 _toastService.ShowError("Request failed as you are not authenticated");
                 return false;
             }
 
+            await CheckConnection();
             _toastService.ShowError("Something went wrong :(");
             return false;
         }        
+
+
+        private Task CheckConnection()
+        {
+            if (!_operationsManager.IsConnected)
+            {
+                return _operationsService.CreateConnection();
+            }
+            else return Task.CompletedTask;
+        }
     }
 }

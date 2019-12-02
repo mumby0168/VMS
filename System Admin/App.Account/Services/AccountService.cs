@@ -6,11 +6,11 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Account.Interfaces.Jwt;
-using App.Account.Interfaces.Names;
 using Newtonsoft.Json;
 using Account.Interfaces.Models;
 using App.Shared.Models;
 using Microsoft.Extensions.Logging;
+using App.Shared.Http;
 
 namespace App.Account.Services
 {
@@ -21,11 +21,11 @@ namespace App.Account.Services
         private readonly ILogger<AccountService> _logger;
         private bool _isAuthHeaderSet = false;
 
-        public AccountService(HttpClient client, ITokenStorageService tokenStorage, ILogger<AccountService> logger)
+        public AccountService(HttpClient client, ITokenStorageService tokenStorage, ILogger<AccountService> logger, Endpoints endpoints)
         {
             _tokenStorage = tokenStorage;
             _logger = logger;
-            client.BaseAddress = new System.Uri(IdentityContext.IdentityBaseUrl);
+            client.BaseAddress = new System.Uri(endpoints.Identity);
             if(_tokenStorage.Token != null)
             {
                 _isAuthHeaderSet = true;

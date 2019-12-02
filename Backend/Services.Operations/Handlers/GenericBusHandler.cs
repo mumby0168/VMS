@@ -34,7 +34,7 @@ namespace Services.Operations.Handlers
                     break;
                 case ICommand _:
                     _logger.LogInformation($"Operation [{requestInfo.OperationId}]: PENDING");
-                    await _operationsCache.SaveAsync(requestInfo.OperationId, requestInfo.State.ToString().ToLower());
+                    await _operationsCache.SaveAsync(requestInfo.OperationId, RequestState.Pending.ToString());
                     break;
                 case IEvent _:
                     requestInfo.Complete();

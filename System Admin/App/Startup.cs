@@ -2,6 +2,7 @@ using Account;
 using Account.Interfaces.Jwt;
 using App.Businesses;
 using App.Shared;
+using App.Shared.Http;
 using App.Shared.Operations;
 using App.Sites;
 using Blazor.LoadingIndicator;
@@ -29,6 +30,11 @@ namespace Manager
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+            var endpoints = new Endpoints();
+            Configuration.GetSection("Endpoints").Bind(endpoints);
+            services.AddSingleton(typeof(Endpoints), endpoints);
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddHttpClient();            

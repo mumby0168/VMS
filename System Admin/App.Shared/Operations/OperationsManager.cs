@@ -30,12 +30,12 @@ namespace App.Shared.Operations
         {
             if(!Messages.Any(m => m.Id == id))
             {
-                IOperationMessage message = null; ;
+                IOperationMessage message = null;
                 await Task.Run( async () =>
                 {
                     int counter = 0;
                     //TODO: Possibly use a timer here may underload fail and always fallback.
-                    while (!Messages.Any(m => m.Id == id))
+                    while (!Messages.Any(m => m.Id == id) && IsConnected == true)
                     {
                         if(counter == 5)
                         {
@@ -54,9 +54,7 @@ namespace App.Shared.Operations
                         message = await _operationsClient.GetOperationMessageAsync(id);
                     }
                 });
-
-               
-
+              
                 return message;
             }
 

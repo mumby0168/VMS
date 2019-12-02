@@ -1,4 +1,5 @@
 ﻿using App.Shared.Exceptions;
+using App.Shared.Http;
 using App.Shared.Operations.Models;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -11,14 +12,13 @@ using System.Threading.Tasks;
 namespace App.Shared.Operations
 {
     public class OperationsClient : IOperationsClient
-    {
-        private const string BaseAddress = "http://localhost:5020/gateway/api/operations/";
+    {        
         private readonly ILogger<OperationsClient> _logger;        
 
         public HttpClient Client { get; } 
-        public OperationsClient(HttpClient client, ILogger<OperationsClient> logger)
+        public OperationsClient(HttpClient client, ILogger<OperationsClient> logger, Endpoints endpoints)
         {
-            client.BaseAddress = new Uri(BaseAddress);
+            client.BaseAddress = new Uri(endpoints.Gateway + "operations/");
             Client = client;
             _logger = logger;
         }        
@@ -41,8 +41,8 @@ namespace App.Shared.Operations
                 _logger.LogInformation("Got operation through http request");
                 //TODO: inject this so can test.
                 var result = JsonConvert.DeserializeObject<OperationResponse>(await response.Content.ReadAsStringAsync());
-                if (result.Status == OperationStatus.Complete.ToString()) return new OperationMessage(result.Id, OperationStatus.Complete);
-                else if (result.Status == OperationStatus.Failed.ToString()) return new OperationMessageFailed(result.Id, OperationStatus.Failed, result.Code, result.Reason);
+                if (result.State == OperationStatus.Complete.ToString().ToLower()) return new OperationMessage(result.Id, OperationStatus.Complete);
+                else if (result.State == OperationStatus.Failed.ToString().ToLower()) return new OperationMessageFailed(result.Id, OperationStatus.Failed, result.Code, result.Reason);
             }
             return null;
         }
@@ -51,7 +51,7 @@ namespace App.Shared.Operations
         {
             public Guid Id { get; set; }
                 
-            public string Status { get; set; }
+            public string State { get; set; }
 
             public string Code { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using App.Shared.Context;
+using App.Shared.Http;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -7,17 +8,13 @@ using System.Text;
 namespace App.Shared.Services
 {
     public class CustomHttpClient : IHttpClient
-    {
-
-        private const string BaseUrl = @"http://localhost:5020/gateway/api/";
-        private const string BaseIdentityUrl = @"http://localhost:5010/api/";
-
-        public CustomHttpClient(IHttpClientFactory factory, IUserContext context)
+    {       
+        public CustomHttpClient(IHttpClientFactory factory, IUserContext context, Endpoints endpoints)
         {
             var baseClient = factory.CreateClient();
             var identityClient = factory.CreateClient();
-            baseClient.BaseAddress = new Uri(BaseUrl);
-            identityClient.BaseAddress = new Uri(BaseIdentityUrl);
+            baseClient.BaseAddress = new Uri(endpoints.Gateway);
+            identityClient.BaseAddress = new Uri(endpoints.Identity);
 
             string auth = $"Bearer {context.Token}";
 

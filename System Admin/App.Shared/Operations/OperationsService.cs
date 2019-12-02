@@ -1,5 +1,6 @@
 ﻿using App.Shared.Context;
 using App.Shared.Events;
+using App.Shared.Http;
 using App.Shared.Operations.Models;
 using App.Shared.Services;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -16,15 +17,18 @@ namespace App.Shared.Operations
         public event EventHandler<ConnectionStatusUpdatedEventArgs> ConnectionStatusUpdated;
         public event EventHandler<IOperationMessage> MessageReceived;
 
-        private const string HubUrl = "http://localhost:5015/operations";
+        private readonly string _hubUrl;
         private readonly ILogger<OperationsService> _logger;
         private readonly IUserContext _userContext;
         private HubConnection _connection;
+        private int retries = 0;
+        private const int MaxRetries = 2;
 
-        public OperationsService(ILogger<OperationsService> logger, IUserContext userContext, IPubSubService pubSubService)
+        public OperationsService(ILogger<OperationsService> logger, IUserContext userContext, IPubSubService pubSubService, Endpoints endpoints)
         {
             _logger = logger;
             _userContext = userContext;
+            _hubUrl = endpoints.Push;
             pubSubService.Subscribe<LoginSuccesfulEvent>(LoginSuccesful);
         }
 
@@ -35,10 +39,12 @@ namespace App.Shared.Operations
 
         public async Task CreateConnection()
         {
-            _connection = new HubConnectionBuilder().WithUrl(HubUrl).Build();
+            _connection = new HubConnectionBuilder().WithUrl(_hubUrl).Build();
 
             _connection.Closed += async (exception) =>
            {
+               retries++;
+               if (retries == MaxRetries) return;
                _logger.LogWarning("Disconnected attempting to reconnect");
                await Connect();
            };
@@ -74,16 +80,16 @@ namespace App.Shared.Operations
         {
             try
             {
-                _logger.LogInformation("Starting initial connection");
+                _logger.LogInformation($"Starting connection attempt: {retries} ");
                 await _connection.StartAsync();
             }
             catch (Exception)
             {
-                _logger.LogWarning("Inital connection failed retrying");
-                await _connection.StartAsync();
-                throw;
+                _logger.LogWarning("Inital connection failed.");
+                return;
             }
 
+            retries = 0;
             await _connection.SendAsync("connect", _userContext.Token);
         }
 

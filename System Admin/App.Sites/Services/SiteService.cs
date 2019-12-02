@@ -17,13 +17,14 @@ namespace App.Sites.Services
     {
         private readonly IHttpExecutor _executor;
         private readonly ILogger<SiteService> _logger;
-        private const string BaseAddress = @"http://localhost:5020/gateway/api/sites/";
+        private readonly string _baseAddress;
 
         public HttpClient Client { get; }
 
-        public SiteService(HttpClient client, IHttpExecutor executor, IUserContext context, ILogger<SiteService> logger)
+        public SiteService(HttpClient client, IHttpExecutor executor, IUserContext context, ILogger<SiteService> logger, Endpoints endpoints)
         {
-            client.BaseAddress = new Uri(BaseAddress);
+            _baseAddress = endpoints.Gateway + "sites/";
+            client.BaseAddress = new Uri(_baseAddress);
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {context.Token}");
             _executor = executor;
             _logger = logger;

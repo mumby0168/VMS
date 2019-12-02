@@ -16,16 +16,17 @@ namespace App.Businesses.Services
 {
     public class BusinessService
     {
-        private const string BaseBusinessesAddress = "http://localhost:5020/gateway/api/businesses/";
+        private readonly string _baseBusinessesAddress;
         
         private readonly ILogger<BusinessService> _logger;
         private readonly IHttpExecutor _httpExecutor;
 
         public HttpClient Client { get; }
-        public BusinessService(HttpClient client, IUserContext context, ILogger<BusinessService> logger, IHttpExecutor httpExecutor)
+        public BusinessService(HttpClient client, IUserContext context, ILogger<BusinessService> logger, IHttpExecutor httpExecutor, Endpoints endpoints)
         {
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {context.Token}");
-            client.BaseAddress = new Uri(BaseBusinessesAddress);
+            _baseBusinessesAddress = endpoints.Gateway + "businesses/";
+            client.BaseAddress = new Uri(_baseBusinessesAddress);
             Client = client;
             _logger = logger;
             _httpExecutor = httpExecutor;
