@@ -22,21 +22,24 @@
                 </tr>
             </thead>
             <tbody class="table-body">
-                @foreach (var account in Accounts)
+                @if (Accounts != null)
                 {
-                    <tr>
-                        <td>
-                            @account.Email
-                            @if (account.IsPending)
-                            {
-                                <i class="fas fa-exclamation"></i>
-                            }
-                        </td>
-                        <td>@account.CreatedOn</td>
-                        <td>
-                            <button class="btn btn-danger remove-btn" @onclick="@(e => RemoveAccountAsync(account.Id))" >Remove</button>
-                        </td>
-                    </tr>
+                    @foreach (var account in Accounts)
+                    {
+                        <tr>
+                            <td>
+                                @account.Email
+                                @if (account.IsPending)
+                                {
+                                    <i class="fas fa-exclamation"></i>
+                                }
+                            </td>
+                            <td>@account.CreatedOn</td>
+                            <td>
+                                <button class="btn btn-danger remove-btn" @onclick="@(e => RemoveAccountAsync(account.Id))">Remove</button>
+                            </td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>
@@ -87,8 +90,8 @@
         var success = await AdminAccountService.DeleteAccount(Id, BusinessId);
         if(success)
         {
-            Accounts = new List<AccountInfo>();
-            await InvokeAsync(() => StateHasChanged());
+            Accounts = null;
+            await LoadData();
         }
     }
 
