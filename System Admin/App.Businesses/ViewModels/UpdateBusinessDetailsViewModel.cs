@@ -46,7 +46,6 @@ namespace App.Businesses.ViewModels
                 _modalService.Close(ModalResult.Cancel());
             }
 
-        }
-
+        }        
     }
 }

@@ -33,7 +33,9 @@ namespace App.Sites.ViewModels
             if(res)
             {
                 _modalService.Close(ModalResult.Cancel());
-                // something to reload list.
+                Name = string.Empty;
+                Identifier = string.Empty;
+                SiteId = Guid.Empty;
             }
         }
     }

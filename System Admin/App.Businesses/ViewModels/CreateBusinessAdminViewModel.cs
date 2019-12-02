@@ -48,6 +48,8 @@ namespace App.Businesses.ViewModels
             {
                 _modalService.Close(ModalResult.Cancel());
                 _toastService.ShowSuccess($"Email sent to user {Email} to confirm their account");
+                Email = string.Empty;
+                Id = Guid.Empty;
                 return;
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)

@@ -14,9 +14,9 @@ namespace App.Account.ViewModels
         private readonly NavigationManager _navigationManager;
         public CreateAdminViewModel(AccountService accountService, IToastService toastService, NavigationManager navigationManager)
         {
-            this._navigationManager = navigationManager;
-            this._toastService = toastService;
-            this._accountService = accountService;
+            _navigationManager = navigationManager;
+            _toastService = toastService;
+            _accountService = accountService;
             Error = string.Empty;
         }
 
@@ -33,6 +33,8 @@ namespace App.Account.ViewModels
             {
                 _navigationManager.NavigateTo("counter");
                 _toastService.ShowSuccess($"Email sent to {Email} to setup their account.");
+                Email = string.Empty;
+                Error = string.Empty;
                 return;
             }
             Error = result.Reason;
