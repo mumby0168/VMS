@@ -52,19 +52,13 @@ namespace App.Businesses.ViewModels
 
         public async Task SubmitAsync()
         {
-            var id = await _businessService.UpdateContactAsync(new HeadContact { FirstName = FirstName, SecondName = SecondName, Email = Email, ContactNumber = ContactNumber }, BusinessId);
-            var status = await _operationsService.GetOperationStatusAsync(id);
-            if(status.Status == Shared.Operations.Models.OperationStatus.Complete)
+            var res = await _businessService.UpdateContactAsync(new HeadContact { FirstName = FirstName, SecondName = SecondName, Email = Email, ContactNumber = ContactNumber }, BusinessId);
+           
+            if(res)
             {
                 _modalService.Close(ModalResult.Cancel());                
-                await _pubSubService.Publish<UpdateBusinessProfile>();
-                _toastService.ShowSuccess("Contact details updated succesfully");                
-            }
-            else if(status is OperationMessageFailed failed)
-            {
-                _toastService.ShowError(failed.Reason);
-            }
-
+                await _pubSubService.Publish<UpdateBusinessProfile>();                
+            }           
         }
     }
 }

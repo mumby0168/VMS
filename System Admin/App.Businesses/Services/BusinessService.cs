@@ -16,42 +16,24 @@ namespace App.Businesses.Services
 {
     public class BusinessService
     {
-        private readonly string _baseBusinessesAddress;
-        
-        private readonly ILogger<BusinessService> _logger;
+        private readonly string _baseBusinessesAddress;                
         private readonly IHttpExecutor _httpExecutor;
 
         public HttpClient Client { get; }
-        public BusinessService(HttpClient client, IUserContext context, ILogger<BusinessService> logger, IHttpExecutor httpExecutor, Endpoints endpoints)
-        {
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {context.Token}");
+        public BusinessService(IUserContext context, IHttpExecutor httpExecutor, Endpoints endpoints, HttpClient client)
+        {            
             _baseBusinessesAddress = endpoints.Gateway + "businesses/";
             client.BaseAddress = new Uri(_baseBusinessesAddress);
-            Client = client;
-            _logger = logger;
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {context.Token}");
+            Client = client;            
             _httpExecutor = httpExecutor;
         }
 
-        public async Task<Guid> UpdateContactAsync(HeadContact contact, Guid businessId)
-        {
-            var message = new StringContent(JsonConvert.SerializeObject(new { BusinessId = businessId, FirstName = contact.FirstName, SecondName = contact.SecondName, Email = contact.Email, ContactNumber = contact.ContactNumber }), Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response;
-            try
-            {
-                response = await Client.PostAsync("update-contact", message);
-                if(response.IsSuccessStatusCode)
-                {
-                    return response.GetOperationId();
-                }
-            }
-            catch (HttpRequestException e)
-            {
-                _logger.LogError("The request failed to update the business contact business: " + e.Message);
-                throw new InternalHttpRequestException(e);
-            }
-            throw new NotImplementedException("Not sure what to do here yet");
-        }
+        public Task<bool> UpdateContactAsync(HeadContact contact, Guid businessId) => 
+            _httpExecutor.SendRequestAsync(() => Client.PostAsync("update-contact", 
+                JsonMessage.CreateJsonMessage(
+                    new { BusinessId = businessId, FirstName = contact.FirstName, SecondName = contact.SecondName, Email = contact.Email, ContactNumber = contact.ContactNumber })),
+                "Business contact updated succesfully.");        
 
         public Task<bool> UpdateOfficeAsync(HeadOffice office, Guid businessId) =>
             _httpExecutor.SendRequestAsync(() => Client.PostAsync("update-office", JsonMessage.CreateJsonMessage(new { BusinessId = businessId, office.PostCode, office.AddressLine1, office.AddressLine2 })), "Business contact updated succesfully");
@@ -59,59 +41,20 @@ namespace App.Businesses.Services
         public Task<bool> UpdateDetails(Guid id, string name, string tradingName, string webAddress) 
             => _httpExecutor.SendRequestAsync(() => Client.PostAsync("update-details", JsonMessage.CreateJsonMessage(new { id, name, tradingName, webAddress })), "Business details updated successfully");
 
-        /// <summary>
-        /// Creates a business by making a remote request.
-        /// </summary>
-        /// <param name="business"></param>
-        /// <returns>Operation Id</returns>
         public Task<bool> CreateBusiness(Business business)
         {
-            var message = new StringContent(
-                JsonConvert.SerializeObject(new { Name = business.Name, TradingName = business.TradingName, WebAddress = business.WebAddress,
+            var message = JsonMessage.CreateJsonMessage(
+                new { Name = business.Name, TradingName = business.TradingName, WebAddress = business.WebAddress,
                     HeadContactFirstName = business.Contact.FirstName, HeadContactSecondName = business.Contact.SecondName, HeadContactContactNumber = business.Contact.ContactNumber, HeadContactEmail = business.Contact.Email,
-                    HeadOfficePostCode = business.Office.PostCode, HeadOfficeAddressLine1 = business.Office.AddressLine1 , HeadOfficeAddressLine2 = business.Office.AddressLine2})
-                , Encoding.UTF8, "application/json");
+                    HeadOfficePostCode = business.Office.PostCode, HeadOfficeAddressLine1 = business.Office.AddressLine1 , HeadOfficeAddressLine2 = business.Office.AddressLine2});
 
             return _httpExecutor.SendRequestAsync(() => Client.PostAsync("create", message), $"{business.Name} account created succesfully");
         }
 
-        public async Task<IEnumerable<BusinessSummary>> GetBusinessSummariesAsync()
-        {            
-            try
-            {
-                var response = await Client.GetAsync("");
-                if(response.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    return JsonConvert.DeserializeObject<IEnumerable<BusinessSummary>>(await response.Content.ReadAsStringAsync());
-                }                
-            }
-            catch (HttpRequestException e)
-            {
-                _logger.LogError("The request failed to get business summaries: " + e.Message);
-                throw new InternalHttpRequestException(e);                
-            }
+        public Task<IEnumerable<BusinessSummary>> GetBusinessSummariesAsync() 
+            => _httpExecutor.GetAsync<IEnumerable<BusinessSummary>>(_baseBusinessesAddress);
 
-            throw new NotImplementedException("This should do something to offer a reload of the data.");
-        }
-
-        public async Task<Business> GetBusiness(Guid id)
-        {
-            try
-            {
-                var response = await Client.GetAsync(id.ToString());
-                if(response.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    var json = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<Business>(json);
-                }
-            }
-            catch (HttpRequestException e)
-            {
-                _logger.LogError($"The request failed to get business with id: {id} error: " + e.Message);
-                throw new InternalHttpRequestException(e);
-                throw;
-            }
-            throw new NotImplementedException("This should do something to offer a reload of the data.");
-        }
+        public Task<Business> GetBusiness(Guid id) => _httpExecutor.GetAsync<Business>(_baseBusinessesAddress + id.ToString());
+       
     }
 }

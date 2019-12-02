@@ -19,12 +19,16 @@ namespace App.Businesses.Services
         private readonly ILogger<AdminAccountService> _logger;
         private readonly IHttpClient _client;
         private readonly IToastService _toastService;
+        private readonly IHttpExecutor _executor;
+        private readonly Endpoints _endpoints;
 
-        public AdminAccountService(ILogger<AdminAccountService> logger, IHttpClient client, IToastService toastService)
+        public AdminAccountService(ILogger<AdminAccountService> logger, IHttpClient client, IToastService toastService, IHttpExecutor executor, Endpoints endpoints)
         {
             _logger = logger;
             _client = client;
             _toastService = toastService;
+            _executor = executor;
+            this._endpoints = endpoints;
         }
 
         public async Task<bool> DeleteAccount(Guid accountId, Guid businessId)
@@ -55,23 +59,6 @@ namespace App.Businesses.Services
             return false;
         }
 
-        public async Task<IEnumerable<AccountInfo>> GetAccountsForBusiness(Guid businessId)
-        {
-            try
-            {
-                var response = await _client.IdentityClient.GetAsync($"admin/get-for-business/{businessId}");
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    return JsonConvert.DeserializeObject<IEnumerable<AccountInfo>>(await response.Content.ReadAsStringAsync());
-                }
-            }
-            catch (HttpRequestException e)
-            {
-                _logger.LogError("The request failed to get accounts: " + e.Message);
-                throw new InternalHttpRequestException(e);
-            }
-
-            throw new NotImplementedException("This should do something to offer a reload of the data.");
-        }
+        public Task<IEnumerable<AccountInfo>> GetAccountsForBusiness(Guid businessId) => _executor.GetAsync<IEnumerable<AccountInfo>>(_endpoints.Identity + $"admin/get-for-business/{businessId}");      
     }
 }

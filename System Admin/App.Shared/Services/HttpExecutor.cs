@@ -1,10 +1,12 @@
-﻿using App.Shared.Exceptions;
+﻿using App.Shared.Context;
+using App.Shared.Exceptions;
 using App.Shared.Extensions;
 using App.Shared.Models;
 using App.Shared.Operations;
 using App.Shared.Operations.Models;
 using Blazored.Toast.Services;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -19,13 +21,40 @@ namespace App.Shared.Services
         private readonly IToastService _toastService;
         private readonly IOperationsManager _operationsManager;
         private readonly IOperationsService _operationsService;
+        private readonly HttpClient _client;
 
-        public HttpExecutor(ILogger<HttpExecutor> logger, IToastService toastService, IOperationsManager operationsManager, IOperationsService operationsService)
+        public HttpExecutor(ILogger<HttpExecutor> logger, IToastService toastService, IOperationsManager operationsManager, IOperationsService operationsService, IHttpClientFactory httpFactory, IUserContext context)
         {
             _logger = logger;
             _toastService = toastService;
             _operationsManager = operationsManager;
-            this._operationsService = operationsService;
+            _operationsService = operationsService;
+            _client = httpFactory.CreateClient();
+            _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {context.Token}");
+        }
+
+        public async Task<T> GetAsync<T>(string url)
+        {
+            try
+            {
+                var response = await _client.GetAsync(url);
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+                }
+                if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    return default(T);
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                _logger.LogError($"The request failed to : {url} for reason: {e.Message}");
+            }
+
+            _toastService.ShowError("The data could not fetched, please try again soon.");
+
+            return default(T);
         }
 
         public async Task<bool> SendRequestAsync(Func<Task<HttpResponseMessage>> call,string successMessage, Func<Task> onFailure = null, Func<Task> onSuccess = null)

@@ -59,28 +59,37 @@
             </div>
         </li>
 
-        @foreach (var summary in Summaries)
+        @if (Summaries != null)
         {
-            <li class="list-group-item">
-                <div class="grid-wrapper">
-                    <div class="grid-item">
-                        @summary.Name
+            @foreach (var summary in Summaries)
+            {
+                <li class="list-group-item">
+                    <div class="grid-wrapper">
+                        <div class="grid-item">
+                            @summary.Name
+                        </div>
+                        <div class="grid-item">
+                            @summary.TradingName
+                        </div>
+                        <div class="grid-item">
+                            @summary.SiteCount
+                        </div>
+                        <div class="grid-item">
+                            @{ string id = summary.Id.ToString(); string route = "business-profile/" + id;}
+                            <NavLink class="btn btn-primary" href="@route">
+                                View
+                            </NavLink>
+                        </div>
                     </div>
-                    <div class="grid-item">
-                        @summary.TradingName
-                    </div>
-                    <div class="grid-item">
-                        @summary.SiteCount
-                    </div>
-                    <div class="grid-item">
-                        @{ string id = summary.Id.ToString(); string route = "business-profile/" + id;}
-                        <NavLink class="btn btn-primary" href="@route">
-                            View
-                        </NavLink>
-                    </div>
-                </div>
-            </li>
+                </li>
+            }
         }
+        else
+        {
+            <li> class="list-group-item"> No businesses available at this time. </li>
+        }
+
+
     </ul>
 
 </div>

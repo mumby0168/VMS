@@ -20,7 +20,10 @@
 
 <Indicator Context="business-profile">
     <section class="bg-white business-header">
-        <App.Businesses.Components.BusinessProfileHeader Business="@Business"></App.Businesses.Components.BusinessProfileHeader>
+        @if (Business != null)
+        {
+            <App.Businesses.Components.BusinessProfileHeader Business="@Business"></App.Businesses.Components.BusinessProfileHeader>
+        }
     </section>
 
     <section class="bg-light sites-list">

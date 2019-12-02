@@ -59,21 +59,24 @@
                     </div>
                 </li>
 
-                @foreach (var resource in Resources)
+                @if (Resources != null)
                 {
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="resource-ident">@resource.Identifier</p>
+                    @foreach (var resource in Resources)
+                    {
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="resource-ident">@resource.Identifier</p>
+                                </div>
+                                <div class="col-md-3">
+                                    @resource.Name
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-danger" @onclick="((e) => RemoveAsync(resource.Id))">Remove</button>
+                                </div>
                             </div>
-                            <div class="col-md-3">
-                                @resource.Name
-                            </div>
-                            <div class="col-md-3">
-                                <button class="btn btn-danger" @onclick="((e) => RemoveAsync(resource.Id))">Remove</button>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                    }
                 }
             </ul>
         </div>
