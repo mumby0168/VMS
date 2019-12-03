@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Services.Common.Logging;
 using Services.Common.Names;
 using Services.RabbitMq.Extensions;
 using Services.RabbitMq.Interfaces;
@@ -27,6 +29,7 @@ namespace Services.Test
             services.AddControllers();
             services.AddTransient<ICommandHandler<TestCommand>, TestCommandHandler>();
             services.AddTransient<ICommandHandler<IssueCommand>, IssueCommandHandler>();
+            services.AddUdpLogging();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +39,8 @@ namespace Services.Test
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseUdpLogging(ServiceNames.Logs);
 
             app.UseServiceBus(ServiceNames.Test, true)
                 .SubscribeCommand<TestCommand>().SubscribeCommand<IssueCommand>();
@@ -51,6 +56,14 @@ namespace Services.Test
                     await context.Response.WriteAsync(ServiceNames.Test);
                 });
             });
+
+            var loggingService = app.ApplicationServices.GetService<IUdpLoggingClient>();
+
+            while (true)
+            {
+                loggingService.LogAsync("TEST", LogType.Info, "Hello their I am a log message", Guid.Empty, Guid.Empty);
+                Thread.Sleep(500);
+            }
         }
     }
 }
