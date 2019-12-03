@@ -59,11 +59,7 @@ namespace Services.Test
 
             var loggingService = app.ApplicationServices.GetService<IUdpLoggingClient>();
 
-            while (true)
-            {
-                loggingService.LogAsync("TEST", LogType.Info, "Hello their I am a log message", Guid.Empty, Guid.Empty);
-                Thread.Sleep(500);
-            }
+            loggingService.LogAsync("TEST", LogType.Info, "Hello their I am a log message", Guid.Empty, Guid.Empty);
         }
     }
 }

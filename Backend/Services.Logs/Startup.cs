@@ -12,6 +12,7 @@ using Services.Common.Names;
 using Services.Logs.Decode;
 using Services.Logs.Domain;
 using Services.Logs.Factories;
+using Services.Logs.Repositorys;
 using Services.Logs.Server;
 
 namespace Services.Logs
@@ -22,11 +23,12 @@ namespace Services.Logs
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
             services.AddScoped<ILogFactory, LogFactory>();
             services.AddMongo().AddMongoCollection<Log>();
             services.AddSingleton<IUdpServer, UdpServer>();
+            services.AddTransient<ILogsRepository, LogRepository>();
             services.AddTransient<ILogDecoder, LogDecoder>();
-            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

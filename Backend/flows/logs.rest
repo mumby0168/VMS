@@ -1,0 +1,7 @@
+@url = http://localhost:5016
+
+
+
+### Get Logs
+
+GET {{url}}/api/logs/
