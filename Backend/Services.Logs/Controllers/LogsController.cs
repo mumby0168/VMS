@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Services.Common.Base;
 using Services.Logs.Domain;
@@ -9,6 +10,7 @@ using Services.Logs.Repositorys;
 
 namespace Services.Logs.Controllers
 {
+    [EnableCors]
     [Route("api/logs/")]
     public class LogsController : VmsControllerBase
     {

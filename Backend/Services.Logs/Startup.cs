@@ -26,6 +26,7 @@ namespace Services.Logs
             services.AddControllers();
             services.AddScoped<ILogFactory, LogFactory>();
             services.AddMongo().AddMongoCollection<Log>();
+            services.AddCors();
             services.AddSingleton<IUdpServer, UdpServer>();
             services.AddTransient<ILogsRepository, LogRepository>();
             services.AddTransient<ILogDecoder, LogDecoder>();
@@ -38,6 +39,12 @@ namespace Services.Logs
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(opts =>
+            {
+                opts.AllowAnyHeader();
+                opts.AllowAnyMethod();
+                opts.AllowAnyOrigin();
+            });
 
             app.UseMongo(ServiceNames.Logs);
 
