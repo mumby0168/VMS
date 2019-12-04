@@ -7,16 +7,17 @@ using Services.Business.Dtos;
 using Services.Business.Messages.Queries;
 using Services.Business.Repositorys;
 using Services.Common.Exceptions;
+using Services.Common.Logging;
 using Services.Common.Queries;
 
 namespace Services.Business.Handlers.Query
 {
     public class GetBusinessQueryHandler : IQueryHandler<GetBusiness, BusinessDto>
     {
-        private readonly ILogger<GetBusinessQueryHandler> _logger;
+        private readonly IVmsLogger<GetBusinessQueryHandler> _logger;
         private readonly IBusinessRepository _repository;
 
-        public GetBusinessQueryHandler(ILogger<GetBusinessQueryHandler> logger,IBusinessRepository repository)
+        public GetBusinessQueryHandler(IVmsLogger<GetBusinessQueryHandler> logger,IBusinessRepository repository)
         {
             _logger = logger;
             _repository = repository;

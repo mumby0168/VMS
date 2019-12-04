@@ -13,6 +13,7 @@ namespace Services.Common.Logging
             services.AddSingleton<ServiceLoggingOptions>();
             services.AddTransient<ILogEncoder, LogEncoder>();
             services.AddSingleton<IUdpLoggingClient, UdpLoggingClient>();
+            services.AddSingleton(typeof(IVmsLogger<>), typeof(VmsLogger<>));
             return services;
         }
 

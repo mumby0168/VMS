@@ -114,6 +114,6 @@ namespace Services.Businesses.Tests.Handlers
             _publisher.Verify(o => o.PublishEvent(It.IsAny<UpdateBusinessRejected>(), _requestInfo.Object));
         }
 
-        public UpdateHeadOfficeHandler CreateSut() => new UpdateHeadOfficeHandler(LoggerMock.Create<UpdateHeadOfficeHandler>(), _repository.Object, _publisher.Object);
+        public UpdateHeadOfficeHandler CreateSut() => new UpdateHeadOfficeHandler(LoggerMock.CreateVms<UpdateHeadOfficeHandler>(), _repository.Object, _publisher.Object);
     }
 }

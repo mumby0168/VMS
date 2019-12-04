@@ -8,6 +8,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Interfaces.Settings;
 using Services.RabbitMq.Interfaces.Wrappers;
 using Services.RabbitMq.Messages;
+using Services.Tests.Mocks;
 using Services.Tests.Mocks.Messaging;
 
 
@@ -105,6 +106,6 @@ namespace Services.RabbitMq.Tests.Messages
                 It.IsAny<IBasicProperties>(), bytes));
         }
 
-        public ServiceBusMessagePublisher CreateSut() => new ServiceBusMessagePublisher(_connectionFactory.Object, _serviceSettings.Object, _jsonWrapper.Object, _utf8Wrapper.Object, _logger.Object);
+        public ServiceBusMessagePublisher CreateSut() => new ServiceBusMessagePublisher(_connectionFactory.Object, _serviceSettings.Object, _jsonWrapper.Object, _utf8Wrapper.Object, LoggerMock.CreateVms<ServiceBusMessagePublisher>());
     }
 }

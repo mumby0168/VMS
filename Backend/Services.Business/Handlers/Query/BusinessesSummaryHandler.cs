@@ -5,16 +5,17 @@ using Microsoft.Extensions.Logging;
 using Services.Business.Dtos;
 using Services.Business.Messages.Queries;
 using Services.Business.Repositorys;
+using Services.Common.Logging;
 using Services.Common.Queries;
 
 namespace Services.Business.Handlers.Query
 {
     public class BusinessesSummaryHandler : IQueryHandler<BusinessesSummary, IEnumerable<BusinessSummaryDto>>
     {
-        private readonly ILogger<BusinessesSummaryHandler> _logger;
+        private readonly IVmsLogger<BusinessesSummaryHandler> _logger;
         private readonly IBusinessRepository _repository;
 
-        public BusinessesSummaryHandler(ILogger<BusinessesSummaryHandler> logger, IBusinessRepository repository)
+        public BusinessesSummaryHandler(IVmsLogger<BusinessesSummaryHandler> logger, IBusinessRepository repository)
         {
             _logger = logger;
             _repository = repository;

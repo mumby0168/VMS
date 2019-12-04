@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client.Framing;
+using Services.Common.Logging;
 using Services.RabbitMq.Attributes;
 using Services.RabbitMq.Interfaces;
 using Services.RabbitMq.Interfaces.Factories;
@@ -20,9 +21,9 @@ namespace Services.RabbitMq.Messages
         private readonly IServiceSettings _serviceSettings;
         private readonly IJsonConvertWrapper _jsonConvertWrapper;
         private readonly IUtf8Wrapper _utf8Wrapper;
-        private readonly ILogger<ServiceBusMessagePublisher> _logger;
+        private readonly IVmsLogger<ServiceBusMessagePublisher> _logger;
 
-        public ServiceBusMessagePublisher(IServiceBusConnectionFactory serviceBusConnectionFactory, IServiceSettings serviceSettings, IJsonConvertWrapper jsonConvertWrapper, IUtf8Wrapper utf8Wrapper, ILogger<ServiceBusMessagePublisher> logger)
+        public ServiceBusMessagePublisher(IServiceBusConnectionFactory serviceBusConnectionFactory, IServiceSettings serviceSettings, IJsonConvertWrapper jsonConvertWrapper, IUtf8Wrapper utf8Wrapper, IVmsLogger<ServiceBusMessagePublisher> logger)
         {
             _serviceBusConnectionFactory = serviceBusConnectionFactory;
             _serviceSettings = serviceSettings;
@@ -40,7 +41,7 @@ namespace Services.RabbitMq.Messages
             var body = _utf8Wrapper.GetBytes(json);
             var connection = _serviceBusConnectionFactory.ResolveServiceBusConnection();
             connection.Channel.BasicPublish(exchange, routingKey, true, new BasicProperties(), body);
-            _logger.LogInformation($"Published: {routingKey}");
+            _logger.LogInformation($"Published message with key: {routingKey}", "RabbitMq");
         }
 
 

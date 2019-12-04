@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Services.Common.Logging;
 using Services.Common.Names;
 using Services.Operations.Handlers;
 using Services.Operations.Messages.Events.Push;
@@ -24,6 +25,9 @@ namespace Services.Operations
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+
+            services.AddUdpLogging();
             services.AddServiceBus()
                 .RegisterGenericMessageHandler<GenericBusHandler>();
 
@@ -44,6 +48,8 @@ namespace Services.Operations
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseUdpLogging(ServiceNames.Operations);
 
             app.UseServiceBus(ServiceNames.Operations)
                 .SubscribeAllMessages<GenericBusHandler>(Assembly.GetExecutingAssembly()

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.Business.Messages.Commands;
+using Services.Common.Logging;
 using Services.Common.Mongo;
 using Services.Common.Names;
 using Services.Common.Queries;
@@ -17,6 +18,7 @@ namespace Services.Business
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddUdpLogging();
             services.AddServiceBus();
             services.AddControllers();
             services.AddMongo().AddMongoCollection<Domain.Business>();
@@ -33,9 +35,9 @@ namespace Services.Business
                 app.UseDeveloperExceptionPage();
             }
 
-          
 
 
+            app.UseUdpLogging(ServiceNames.Businesses);
             app.UseMongo(ServiceNames.Businesses);
             app.UseServiceBus(ServiceNames.Businesses)
                 .SubscribeCommand<CreateBusiness>()

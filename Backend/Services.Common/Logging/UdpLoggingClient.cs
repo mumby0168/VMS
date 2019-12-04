@@ -24,8 +24,9 @@ namespace Services.Common.Logging
 
         public void CreateConnection()
         {
-            _client = new UdpClient(_options.Port);
+            _client = new UdpClient();
             _client.Connect(IPAddress.Parse(_options.Address), _options.Port);
+            LogAsync("Connection", LogType.Info, "Connected to logging", Guid.Empty, Guid.Empty);
             _logger.LogInformation($"Connected to udp logging service at host: {_options.Address} port: {_options.Port}");
             IsConnected = true;
         }

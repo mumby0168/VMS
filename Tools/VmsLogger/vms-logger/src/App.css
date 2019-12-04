@@ -1,22 +1,25 @@
-.App {
-  text-align: center;
+body {
+  /* background-color: #282c34; */
 }
 
-.App-logo {
-  height: 40vmin;
+.log-list-wrapper {
+  font-size: 0.75rem;
+  max-height: 45rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 1rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.log-header-item {
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
-.App-link {
-  color: #09d3ac;
+.list-group-item {
+  padding: 2px;
+}
+
+.app-container {
+  margin-left: 2rem;
+  margin-right: 2rem;
 }

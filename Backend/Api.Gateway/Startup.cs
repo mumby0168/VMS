@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.Common.Jwt;
+using Services.Common.Logging;
 using Services.Common.Names;
 using Services.RabbitMq.Extensions;
 
@@ -26,6 +27,7 @@ namespace Api.Gateway
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddUdpLogging();
             services.AddMvcCore().AddNewtonsoftJson();
             services.AddControllers();
             services.AddCustomAuth(_configuration);
@@ -45,6 +47,8 @@ namespace Api.Gateway
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseUdpLogging(ServiceNames.Gateway);
+;
             app.UseServiceBus(ServiceNames.Gateway, false);
 
             app.UseRouting();

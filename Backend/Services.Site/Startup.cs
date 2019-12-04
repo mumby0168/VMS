@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Services.Common.Logging;
 using Services.Common.Mongo;
 using Services.Common.Names;
 using Services.Common.Queries;
@@ -28,6 +29,8 @@ namespace Services.Sites
 
             services.AddQuerySupport();
 
+            services.AddUdpLogging();
+
             services.AddControllers();
 
             ServiceRegistry.RegisterServices(services);
@@ -51,6 +54,8 @@ namespace Services.Sites
                 .SubscribeCommand<UpdateSiteContact>()
                 .SubscribeEvent<BusinessCreated>();
 
+
+            app.UseUdpLogging(ServiceNames.Sites);
 
             app.UseRouting();
 

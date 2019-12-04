@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.Common.Jwt;
+using Services.Common.Logging;
 using Services.Common.Names;
 using Services.Push.Clients;
 using Services.Push.Handlers;
@@ -39,6 +40,7 @@ namespace Services.Push
             services.AddConvey().AddHttpClient();
             services.RegisterGenericMessageHandler<PushServiceHandler>();
             services.AddSingleton<ITokensClient, TokensClient>();
+            services.AddUdpLogging();
             services.AddSingleton<IPushService, PushService>();
         }
 
@@ -49,6 +51,8 @@ namespace Services.Push
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseUdpLogging(ServiceNames.Push);
 
             app.UseRouting();
 

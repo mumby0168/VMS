@@ -12,6 +12,7 @@ using Services.Business.Messages.Events;
 using Services.Business.Messages.Events.Rejected;
 using Services.Business.Repositorys;
 using Services.Common.Exceptions;
+using Services.Common.Logging;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 using Shouldly.Configuration;
@@ -21,7 +22,7 @@ namespace Services.Businesses.Tests.Handlers
     public class CreateBusinessHandlerTests
     {
 
-        private Mock<ILogger<CreateBusinessHandler>> _logger;
+        private Mock<IVmsLogger<CreateBusinessHandler>> _logger;
         private Mock<IServiceBusMessagePublisher> _publisher;
         private Mock<IBusinessRepository> _repo;
         private Mock<IRequestInfo> _request;
@@ -37,7 +38,7 @@ namespace Services.Businesses.Tests.Handlers
         public void Setup()
         {
             _publisher = new Mock<IServiceBusMessagePublisher>();
-            _logger = new Mock<ILogger<CreateBusinessHandler>>();
+            _logger = new Mock<IVmsLogger<CreateBusinessHandler>>();
             _repo = new Mock<IBusinessRepository>();
             _message = new Mock<CreateBusiness>();
             _request = new Mock<IRequestInfo>();

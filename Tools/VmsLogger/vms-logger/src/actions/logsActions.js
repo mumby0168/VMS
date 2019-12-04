@@ -12,3 +12,17 @@ export function fetchLogs() {
         });
     }
 }
+
+
+export function purge() {
+    return function(dispatch) {
+        axios.post('http://localhost:5016/api/logs/purge')
+        .then((res) => {
+            dispatch({type: "PURGE_LOGS"});
+            dispatch(fetchLogs());
+        })
+        .catch((err) => {
+            dispatch({type: "PURGE_LOGS_REJECTED"});
+        })
+    }
+}

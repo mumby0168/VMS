@@ -8,6 +8,7 @@ using Services.Business.Messages.Events;
 using Services.Business.Messages.Events.Rejected;
 using Services.Business.Repositorys;
 using Services.Common.Exceptions;
+using Services.Common.Logging;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 
@@ -15,11 +16,11 @@ namespace Services.Business.Handlers.Command
 {
     public class UpdateHeadContactHandler : ICommandHandler<UpdateHeadContact>
     {
-        private readonly ILogger<UpdateHeadContactHandler> _logger;
+        private readonly IVmsLogger<UpdateHeadContactHandler> _logger;
         private readonly IBusinessRepository _repository;
         private readonly IServiceBusMessagePublisher _publisher;
 
-        public UpdateHeadContactHandler(ILogger<UpdateHeadContactHandler> logger, IBusinessRepository repository, IServiceBusMessagePublisher publisher)
+        public UpdateHeadContactHandler(IVmsLogger<UpdateHeadContactHandler> logger, IBusinessRepository repository, IServiceBusMessagePublisher publisher)
         {
             _logger = logger;
             _repository = repository;

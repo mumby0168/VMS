@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.Common.Jwt;
+using Services.Common.Logging;
 using Services.Common.Middleware;
 using Services.Common.Mongo;
 using Services.Common.Names;
@@ -37,6 +38,8 @@ namespace Services.Identity
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddUdpLogging();
             services.AddMvcCore().AddNewtonsoftJson();
 
             services.AddControllers();
@@ -64,6 +67,8 @@ namespace Services.Identity
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseVmsExceptionHandler();
+
+            app.UseUdpLogging(ServiceNames.Identity);
 
             app.UseRouting();
             app.UseAuthentication();

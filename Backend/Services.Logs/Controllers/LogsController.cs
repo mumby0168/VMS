@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Services.Common.Base;
+using Services.Logs.Decode;
 using Services.Logs.Domain;
+using Services.Logs.Dtos;
 using Services.Logs.Repositorys;
 
 namespace Services.Logs.Controllers
@@ -22,9 +24,25 @@ namespace Services.Logs.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ILog>>> GetAll()
+        public async Task<ActionResult<IEnumerable<LogDto>>> GetAll()
         {
-            return Collection(await _logsRepository.GetAllAsync());
+            var logs = await _logsRepository.GetAllAsync();
+            var dtos = new List<LogDto>();
+            foreach (var log in logs.OrderByDescending(o => o.Created))
+            {
+                dtos.Add(new LogDto
+                {
+                    Id = log.Id,
+                    Time = log.Created.ToShortTimeString(),
+                    Date = log.Created.ToShortDateString(),
+                    Type = log.Type.ToString(),
+                    Service = log.ServiceName,
+                    Category = log.Category,
+                    Message = log.Message
+                });
+            }
+            
+            return Collection(dtos);
         }
 
         [HttpPost("purge")]

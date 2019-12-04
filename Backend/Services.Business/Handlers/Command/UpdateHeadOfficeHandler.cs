@@ -8,6 +8,7 @@ using Services.Business.Messages.Events;
 using Services.Business.Messages.Events.Rejected;
 using Services.Business.Repositorys;
 using Services.Common.Exceptions;
+using Services.Common.Logging;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 
@@ -15,11 +16,11 @@ namespace Services.Business.Handlers.Command
 {
     public class UpdateHeadOfficeHandler : ICommandHandler<UpdateHeadOffice>
     {
-        private readonly ILogger<UpdateHeadOfficeHandler> _logger;
+        private readonly IVmsLogger<UpdateHeadOfficeHandler> _logger;
         private readonly IBusinessRepository _repository;
         private readonly IServiceBusMessagePublisher _publisher;
 
-        public UpdateHeadOfficeHandler(ILogger<UpdateHeadOfficeHandler> logger, IBusinessRepository repository, IServiceBusMessagePublisher publisher)
+        public UpdateHeadOfficeHandler(IVmsLogger<UpdateHeadOfficeHandler> logger, IBusinessRepository repository, IServiceBusMessagePublisher publisher)
         {
             _logger = logger;
             _repository = repository;

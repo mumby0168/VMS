@@ -110,6 +110,6 @@ namespace Services.Businesses.Tests.Handlers
             _publisher.Verify(o => o.PublishEvent(It.IsAny<UpdateBusinessRejected>(), _requestInfo.Object));
         }
 
-        public UpdateBusinessDetailsHandler CreateSut() => new UpdateBusinessDetailsHandler(LoggerMock.Create<UpdateBusinessDetailsHandler>(), _repository.Object, _publisher.Object);
+        public UpdateBusinessDetailsHandler CreateSut() => new UpdateBusinessDetailsHandler(LoggerMock.CreateVms<UpdateBusinessDetailsHandler>(), _repository.Object, _publisher.Object);
     }
 }

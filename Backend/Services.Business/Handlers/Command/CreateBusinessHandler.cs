@@ -7,6 +7,7 @@ using Services.Business.Messages.Events;
 using Services.Business.Messages.Events.Rejected;
 using Services.Business.Repositorys;
 using Services.Common.Exceptions;
+using Services.Common.Logging;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 
@@ -15,11 +16,11 @@ namespace Services.Business.Handlers.Command
     public class CreateBusinessHandler : ICommandHandler<CreateBusiness>
     {
         private readonly IBusinessRepository _repository;
-        private readonly ILogger<CreateBusinessHandler> _logger;
+        private readonly IVmsLogger<CreateBusinessHandler> _logger;
         private readonly IServiceBusMessagePublisher _publisher;
         private readonly IBusinessesFactory _businessesFactory;
 
-        public CreateBusinessHandler(IBusinessRepository repository, ILogger<CreateBusinessHandler> logger, IServiceBusMessagePublisher publisher, IBusinessesFactory businessesFactory)
+        public CreateBusinessHandler(IBusinessRepository repository, IVmsLogger<CreateBusinessHandler> logger, IServiceBusMessagePublisher publisher, IBusinessesFactory businessesFactory)
         {
             _repository = repository;
             _logger = logger;

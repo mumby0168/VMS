@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RabbitMQ.Client.Events;
+using Services.Common.Logging;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Interfaces.Wrappers;
 
@@ -14,10 +15,10 @@ namespace Services.RabbitMq.Messages
     {
         private readonly IJsonConvertWrapper _jsonConvertWrapper;
         private readonly IUtf8Wrapper _utf8Wrapper;
-        private readonly ILogger<ServiceBusMessageHandler> _logger;
+        private readonly IVmsLogger<ServiceBusMessageHandler> _logger;
         private readonly IServiceProvider _serviceProvider;
 
-        public ServiceBusMessageHandler(IJsonConvertWrapper jsonConvertWrapper, IUtf8Wrapper utf8Wrapper, ILogger<ServiceBusMessageHandler> logger, IServiceProvider serviceProvider)
+        public ServiceBusMessageHandler(IJsonConvertWrapper jsonConvertWrapper, IUtf8Wrapper utf8Wrapper, IVmsLogger<ServiceBusMessageHandler> logger, IServiceProvider serviceProvider)
         {
             _jsonConvertWrapper = jsonConvertWrapper;
             _utf8Wrapper = utf8Wrapper;
@@ -27,7 +28,7 @@ namespace Services.RabbitMq.Messages
 
         public async Task Handle<T>(object sender, BasicDeliverEventArgs args, Func<T, IRequestInfo, Task> callback) where T : IServiceBusMessage
         {
-            _logger.LogInformation($"Message received key: {args.RoutingKey}");
+            _logger.LogInformation($"Message received with key: {args.RoutingKey}", "RabbitMq");
             string json = _utf8Wrapper.GetString(args.Body);
             var split = json.Split('\t');
             var requestInfo = _jsonConvertWrapper.Deserialize<RequestInfo>(split[0]);
@@ -39,7 +40,7 @@ namespace Services.RabbitMq.Messages
 
         public async Task HandleUsingRoutingKey<T>(object sender, BasicDeliverEventArgs args, Func<T, IRequestInfo, Task> callback)
         {
-            _logger.LogInformation($"Message received key: {args.RoutingKey}");
+            _logger.LogInformation($"Message received with key: {args.RoutingKey}", "RabbitMq");
             string json = _utf8Wrapper.GetString(args.Body);
             var split = json.Split('\t');
             var requestInfo = _jsonConvertWrapper.Deserialize<RequestInfo>(split[0]);

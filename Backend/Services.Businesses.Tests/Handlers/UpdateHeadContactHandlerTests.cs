@@ -114,6 +114,6 @@ namespace Services.Businesses.Tests.Handlers
             _publisher.Verify(o => o.PublishEvent(It.IsAny<UpdateBusinessRejected>(), _requestInfo.Object));
         }
 
-        public UpdateHeadContactHandler CreateSut() => new UpdateHeadContactHandler(LoggerMock.Create<UpdateHeadContactHandler>(), _repository.Object, _publisher.Object);
+        public UpdateHeadContactHandler CreateSut() => new UpdateHeadContactHandler(LoggerMock.CreateVms<UpdateHeadContactHandler>(), _repository.Object, _publisher.Object);
     }
 }

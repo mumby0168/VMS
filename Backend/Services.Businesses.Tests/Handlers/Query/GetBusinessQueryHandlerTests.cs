@@ -67,6 +67,6 @@ namespace Services.Businesses.Tests.Handlers.Query
         }
 
 
-        public GetBusinessQueryHandler CreateSut() => new GetBusinessQueryHandler(LoggerMock.Create<GetBusinessQueryHandler>(), _repository.Object);    
+        public GetBusinessQueryHandler CreateSut() => new GetBusinessQueryHandler(LoggerMock.CreateVms<GetBusinessQueryHandler>(), _repository.Object);    
     }
 }
