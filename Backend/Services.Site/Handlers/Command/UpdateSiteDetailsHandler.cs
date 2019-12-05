@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Services.Common.Exceptions;
+using Services.Common.Logging;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 using Services.Sites.Messages.Commands;
@@ -15,11 +16,11 @@ namespace Services.Sites.Handlers.Command
 {
     public class UpdateSiteDetailsHandler : ICommandHandler<UpdateSiteDetails>
     {
-        private readonly ILogger<UpdateSiteDetailsHandler> _logger;
+        private readonly IVmsLogger<UpdateSiteDetailsHandler> _logger;
         private readonly IServiceBusMessagePublisher _publisher;
         private readonly ISiteRepository _siteRepository;
 
-        public UpdateSiteDetailsHandler(ILogger<UpdateSiteDetailsHandler> logger, IServiceBusMessagePublisher publisher,
+        public UpdateSiteDetailsHandler(IVmsLogger<UpdateSiteDetailsHandler> logger, IServiceBusMessagePublisher publisher,
             ISiteRepository siteRepository)
         {
             _logger = logger;

@@ -67,6 +67,6 @@ namespace Services.Sites.Tests.Handlers.Query
 
 
 
-        public GetSiteResourcesHandler CreateSut() => new GetSiteResourcesHandler(LoggerMock.Create<GetSiteResourcesHandler>(), _repository.Object);
+        public GetSiteResourcesHandler CreateSut() => new GetSiteResourcesHandler(LoggerMock.CreateVms<GetSiteResourcesHandler>(), _repository.Object);
     }
 }

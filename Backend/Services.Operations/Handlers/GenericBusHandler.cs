@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Services.Common.Logging;
 using Services.Operations.Messages.Events.Push;
 using Services.Operations.Services;
 using Services.RabbitMq.Interfaces.Messaging;
@@ -12,11 +13,11 @@ namespace Services.Operations.Handlers
 {
     public class GenericBusHandler : IGenericBusHandler
     {
-        private readonly ILogger<GenericBusHandler> _logger;
+        private readonly IVmsLogger<GenericBusHandler> _logger;
         private readonly IOperationsCache _operationsCache;
         private readonly IServiceBusMessagePublisher _publisher;
 
-        public GenericBusHandler(ILogger<GenericBusHandler> logger, IOperationsCache operationsCache, IServiceBusMessagePublisher publisher)
+        public GenericBusHandler(IVmsLogger<GenericBusHandler> logger, IOperationsCache operationsCache, IServiceBusMessagePublisher publisher)
         {
             _logger = logger;
             _operationsCache = operationsCache;

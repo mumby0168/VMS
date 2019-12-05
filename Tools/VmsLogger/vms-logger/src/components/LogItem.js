@@ -7,7 +7,7 @@ export default class LogItem extends Component {
             case "info":
                 return "badge-success";
             case "warning":
-                return "badge-warnining";
+                return "badge-warning";
             case "error":
                 return "badge-danger";
             case "trace":

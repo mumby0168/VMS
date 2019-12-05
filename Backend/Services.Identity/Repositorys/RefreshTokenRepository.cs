@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Services.Common.Exceptions;
+using Services.Common.Logging;
 using Services.Common.Mongo;
 using Services.Identity.Domain;
 
@@ -12,9 +13,9 @@ namespace Services.Identity.Repositorys
     public class RefreshTokenRepository : IRefreshTokenRepository
     {
         private readonly IMongoRepository<RefreshToken> _repository;
-        private readonly ILogger<RefreshTokenRepository> _logger;
+        private readonly IVmsLogger<RefreshTokenRepository> _logger;
 
-        public RefreshTokenRepository(IMongoRepository<RefreshToken> repository, ILogger<RefreshTokenRepository> logger)
+        public RefreshTokenRepository(IMongoRepository<RefreshToken> repository, IVmsLogger<RefreshTokenRepository> logger)
         {
             _repository = repository;
             _logger = logger;

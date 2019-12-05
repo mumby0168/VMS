@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Api.Gateway.Clients.Interfaces;
 using Api.Gateway.Dtos.Business;
 using Api.Gateway.Messages.Business;
+using Convey.HTTP;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Common.Jwt;
+using Services.Common.Names;
 using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Api.Gateway.Controllers
@@ -25,7 +28,7 @@ namespace Api.Gateway.Controllers
         [HttpPost("create")]
         [Authorize(Roles = Roles.SystemAdmin)]
         public Task<IActionResult> Create([FromBody] CreateBusiness command) 
-            => Task.FromResult(PublishCommand(command));
+            => PublishCommand(command, ServiceNames.Businesses);
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpGet]
@@ -37,18 +40,17 @@ namespace Api.Gateway.Controllers
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpPost("update-details")]
-        public Task<IActionResult> UpdateDetails([FromBody] UpdateBusinessDetails command) =>
-            Task.FromResult(PublishCommand(command));
+        public Task<IActionResult> UpdateDetails([FromBody] UpdateBusinessDetails command) => PublishCommand(command, ServiceNames.Businesses);
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpPost("update-contact")]
         public Task<IActionResult> UpdateContact([FromBody] UpdateHeadContact command) =>
-            Task.FromResult(PublishCommand(command));
+        PublishCommand(command, ServiceNames.Businesses);
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpPost("update-office")]
         public Task<IActionResult> UpdateOffice([FromBody] UpdateHeadOffice command) =>
-            Task.FromResult(PublishCommand(command));
+            PublishCommand(command, ServiceNames.Businesses);
 
     }
 }

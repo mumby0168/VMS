@@ -132,7 +132,7 @@ namespace Services.Sites.Tests.Handlers.Command
 
 
 
-        public CreateSiteHandler CreateSut() => new CreateSiteHandler(LoggerMock.Create<CreateSiteHandler>(), _factory.Object, _repository.Object,_publisher.Object, _businessRepository.Object);
+        public CreateSiteHandler CreateSut() => new CreateSiteHandler(LoggerMock.CreateVms<CreateSiteHandler>(), _factory.Object, _repository.Object,_publisher.Object, _businessRepository.Object);
 
     }
 }

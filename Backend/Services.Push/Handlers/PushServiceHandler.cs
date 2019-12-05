@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Services.Common.Logging;
 using Services.Push.Messages.Events;
 using Services.Push.Services;
 using Services.RabbitMq.Interfaces.Messaging;
@@ -11,10 +12,10 @@ namespace Services.Push.Handlers
 {
     public class PushServiceHandler : IGenericBusHandler
     {
-        private readonly ILogger<PushServiceHandler> _logger;
+        private readonly IVmsLogger<PushServiceHandler> _logger;
         private readonly IPushService _pushService;
 
-        public PushServiceHandler(ILogger<PushServiceHandler> logger, IPushService pushService)
+        public PushServiceHandler(IVmsLogger<PushServiceHandler> logger, IPushService pushService)
         {
             _logger = logger;
             _pushService = pushService;

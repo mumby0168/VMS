@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Services.Common.Logging;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.Sites.Domain;
 using Services.Sites.Messages.Events;
@@ -12,10 +13,10 @@ namespace Services.Sites.Handlers.Events
 {
     public class BusinessCreatedHandler : IEventHandler<BusinessCreated>
     {
-        private readonly ILogger<BusinessCreatedHandler> _logger;
+        private readonly IVmsLogger<BusinessCreatedHandler> _logger;
         private readonly IBusinessRepository _repository;
 
-        public BusinessCreatedHandler(ILogger<BusinessCreatedHandler> logger, IBusinessRepository repository)
+        public BusinessCreatedHandler(IVmsLogger<BusinessCreatedHandler> logger, IBusinessRepository repository)
         {
             _logger = logger;
             _repository = repository;

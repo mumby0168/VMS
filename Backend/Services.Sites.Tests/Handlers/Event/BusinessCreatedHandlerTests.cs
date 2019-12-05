@@ -45,6 +45,6 @@ namespace Services.Sites.Tests.Handlers.Event
             _repository.Verify(o => o.AddAsync(It.IsAny<IBusiness>()));
         }
 
-        public BusinessCreatedHandler CreateSut() => new BusinessCreatedHandler(LoggerMock.Create<BusinessCreatedHandler>(), _repository.Object);   
+        public BusinessCreatedHandler CreateSut() => new BusinessCreatedHandler(LoggerMock.CreateVms<BusinessCreatedHandler>(), _repository.Object);   
     }
 }

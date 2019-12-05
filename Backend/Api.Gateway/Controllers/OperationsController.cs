@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Api.Gateway.Clients.Interfaces;
+using Convey.HTTP;
 using Microsoft.AspNetCore.Mvc;
 using Services.RabbitMq.Interfaces.Messaging;
 

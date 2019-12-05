@@ -16,6 +16,7 @@ using Services.Identity.Repositorys;
 using Services.Identity.Services;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
+using Services.Tests.Mocks;
 using Shouldly;
 
 namespace Services.Identity.Tests.Managers
@@ -289,6 +290,6 @@ namespace Services.Identity.Tests.Managers
         }
 
         public IAdminIdentityService CreateSut() => 
-            new AdminIdentityService(_serviceBusMessagePublisher.Object, _identityRepo.Object, _pendingRepo.Object, _passwordManager.Object ,_jwtManager.Object, _logger.Object, _refreshTokenService.Object, _businessRepository.Object);
+            new AdminIdentityService(_serviceBusMessagePublisher.Object, _identityRepo.Object, _pendingRepo.Object, _passwordManager.Object ,_jwtManager.Object, LoggerMock.CreateVms<AdminIdentityService>(), _refreshTokenService.Object, _businessRepository.Object);
     }
 }

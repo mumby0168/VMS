@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Services.Common.Logging;
 using Services.Common.Mongo;
 using Services.Identity.Domain;
 using Services.Identity.Messages.Events.Subscribed;
@@ -12,10 +13,10 @@ namespace Services.Identity.Handlers
 {
     public class BusinessCreatedHandler : IEventHandler<BusinessCreated>
     {
-        private readonly ILogger<BusinessCreatedHandler> _logger;
+        private readonly IVmsLogger<BusinessCreatedHandler> _logger;
         private readonly IMongoRepository<Business> _repository;
 
-        public BusinessCreatedHandler(ILogger<BusinessCreatedHandler> logger, IMongoRepository<Business> repository)
+        public BusinessCreatedHandler(IVmsLogger<BusinessCreatedHandler> logger, IMongoRepository<Business> repository)
         {
             _logger = logger;
             _repository = repository;

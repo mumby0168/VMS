@@ -107,6 +107,6 @@ namespace Services.Sites.Tests.Handlers.Command
             _publisher.Verify(o => o.PublishEvent(It.IsAny<SiteResourceCreated>(), _requestInfo.Object));
         }
 
-        public CreateSiteResourceHandler CreateSut() => new CreateSiteResourceHandler(LoggerMock.Create<CreateSiteResourceHandler>(), _publisher.Object, _factory.Object, _repository.Object, _siteRepository.Object);
+        public CreateSiteResourceHandler CreateSut() => new CreateSiteResourceHandler(LoggerMock.CreateVms<CreateSiteResourceHandler>(), _publisher.Object, _factory.Object, _repository.Object, _siteRepository.Object);
     }
 }

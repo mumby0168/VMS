@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Services.Common.Exceptions;
 using Services.Common.Jwt;
+using Services.Common.Logging;
 using Services.Identity.Domain;
 using Services.Identity.Managers;
 using Services.Identity.Messages.Events;
@@ -21,13 +22,13 @@ namespace Services.Identity.Services
         private readonly IPendingIdentityRepository _pendingIdentityRepository;
         private readonly IPasswordManager _passwordManager;
         private readonly IJwtManager _jwtManager;
-        private readonly ILogger<AdminIdentityService> _logger;
+        private readonly IVmsLogger<AdminIdentityService> _logger;
         private readonly IRefreshTokenService _tokenService;
         private readonly IBusinessRepository _businessRepository;
 
         public AdminIdentityService(IServiceBusMessagePublisher serviceBus, IIdentityRepository identityRepository,
             IPendingIdentityRepository pendingIdentityRepository, IPasswordManager passwordManager,
-            IJwtManager jwtManager, ILogger<AdminIdentityService> logger, IRefreshTokenService tokenService,
+            IJwtManager jwtManager, IVmsLogger<AdminIdentityService> logger, IRefreshTokenService tokenService,
             IBusinessRepository businessRepository)
         {
             _serviceBus = serviceBus;
@@ -59,6 +60,8 @@ namespace Services.Identity.Services
 
             var jwt = _jwtManager.CreateToken(identity.Id, identity.Email, identity.Role);
             var refreshToken = await _tokenService.CreateRefreshToken(identity.Email);
+
+            _logger.LogInformation($"User issued token email: {email}");
 
             return AuthToken.Create(jwt, refreshToken);
         }
@@ -136,6 +139,7 @@ namespace Services.Identity.Services
                 return;
             }
 
+            _logger.LogWarning($"Admin with id: {id} could not be found to be deleted.");
             throw new VmsException(Codes.NoIdentityFound, "The admin could not be found to be deleted.");
         }
     }

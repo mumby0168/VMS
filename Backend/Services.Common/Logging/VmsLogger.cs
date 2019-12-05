@@ -47,7 +47,7 @@ namespace Services.Common.Logging
             Task.Run(() =>
             {
                 string cat = category ?? "None";
-                _logger.LogAsync(cat, type, message, Guid.Empty, Guid.Empty);
+                _logger.LogAsync(cat, type, $"{typeof(T).Name}: {message}", Guid.Empty, Guid.Empty);
             });
         }
     }

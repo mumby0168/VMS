@@ -101,6 +101,6 @@ namespace Services.Sites.Tests.Handlers.Command
             _publisher.Verify(o => o.PublishEvent(It.Is<SiteUpdateRejected>(r => r.Code == code && r.Reason == reason), _requestInfo.Object));
         }
 
-        public UpdateSiteDetailsHandler CreateSut() => new UpdateSiteDetailsHandler(LoggerMock.Create<UpdateSiteDetailsHandler>(), _publisher.Object, _siteRepository.Object);
+        public UpdateSiteDetailsHandler CreateSut() => new UpdateSiteDetailsHandler(LoggerMock.CreateVms<UpdateSiteDetailsHandler>(), _publisher.Object, _siteRepository.Object);
     }
 }

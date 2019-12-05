@@ -1,5 +1,6 @@
 using Api.Gateway.Clients;
 using Api.Gateway.Clients.Interfaces;
+using Api.Gateway.Controllers;
 using Convey;
 using Convey.HTTP;
 using Microsoft.AspNetCore.Builder;

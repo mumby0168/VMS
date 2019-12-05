@@ -61,6 +61,6 @@ namespace Services.Sites.Tests.Handlers.Query
             res.ShouldBeEmpty();
         }
 
-        public GetSiteSummariesHandler CreateSut() => new GetSiteSummariesHandler(LoggerMock.Create<GetSiteSummariesHandler>(), _repository.Object);
+        public GetSiteSummariesHandler CreateSut() => new GetSiteSummariesHandler(LoggerMock.CreateVms<GetSiteSummariesHandler>(), _repository.Object);
     }
 }

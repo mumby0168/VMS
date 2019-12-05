@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Services.Common.Exceptions;
+using Services.Common.Logging;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 using Services.Sites.Domain;
@@ -17,13 +18,13 @@ namespace Services.Sites.Handlers.Command
 {
     public class CreateSiteResourceHandler : ICommandHandler<CreateSiteResource>
     {
-        private readonly ILogger<CreateSiteResourceHandler> _logger;
+        private readonly IVmsLogger<CreateSiteResourceHandler> _logger;
         private readonly IServiceBusMessagePublisher _publisher;
         private readonly ISiteServiceFactory _factory;
         private readonly ISiteResourceRepository _siteResourceRepository;
         private readonly ISiteRepository _siteRepository;
 
-        public CreateSiteResourceHandler(ILogger<CreateSiteResourceHandler> logger, IServiceBusMessagePublisher publisher, ISiteServiceFactory factory, ISiteResourceRepository siteResourceRepository, ISiteRepository siteRepository)
+        public CreateSiteResourceHandler(IVmsLogger<CreateSiteResourceHandler> logger, IServiceBusMessagePublisher publisher, ISiteServiceFactory factory, ISiteResourceRepository siteResourceRepository, ISiteRepository siteRepository)
         {
             _logger = logger;
             _publisher = publisher;

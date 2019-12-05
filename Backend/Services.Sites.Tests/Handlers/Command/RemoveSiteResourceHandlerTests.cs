@@ -45,6 +45,6 @@ namespace Services.Sites.Tests.Handlers.Command
             _repository.Verify(o => o.RemoveAsync(It.IsAny<Guid>()));
         }
 
-        public RemoveSiteResourceHandler CreateSut() => new RemoveSiteResourceHandler(LoggerMock.Create<RemoveSiteResourceHandler>(), _publisher.Object, _repository.Object);
+        public RemoveSiteResourceHandler CreateSut() => new RemoveSiteResourceHandler(LoggerMock.CreateVms<RemoveSiteResourceHandler>(), _publisher.Object, _repository.Object);
     }
 }

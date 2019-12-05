@@ -10,6 +10,7 @@ using Services.Operations.Handlers;
 using Services.Operations.Services;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
+using Services.Tests.Mocks;
 using Services.Tests.Mocks.Messaging;
 
 namespace Services.Operations.Tests.Handlers
@@ -68,7 +69,7 @@ namespace Services.Operations.Tests.Handlers
 
 
 
-        public GenericBusHandler CreateSut() => new GenericBusHandler(_logger.Object, _cache.Object, _publisher.Object);
+        public GenericBusHandler CreateSut() => new GenericBusHandler(LoggerMock.CreateVms<GenericBusHandler>(), _cache.Object, _publisher.Object);
 
     }
 }

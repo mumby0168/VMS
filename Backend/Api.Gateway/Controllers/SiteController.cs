@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Api.Gateway.Clients.Interfaces;
 using Api.Gateway.Dtos.Sites;
 using Api.Gateway.Messages.Sites;
+using Convey.HTTP;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Common.Jwt;
+using Services.Common.Names;
 using Services.RabbitMq.Interfaces.Messaging;
     
 namespace Api.Gateway.Controllers
@@ -24,7 +27,7 @@ namespace Api.Gateway.Controllers
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpPost("create")]
-        public IActionResult Create([FromBody]CreateSite command) => PublishCommand(command);
+        public Task<IActionResult> Create([FromBody]CreateSite command) => PublishCommand(command, ServiceNames.Sites);
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpGet("summaries/{businessId}")]
@@ -36,20 +39,20 @@ namespace Api.Gateway.Controllers
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpPost("update")]
-        public IActionResult Update([FromBody]UpdateSiteDetails command) => PublishCommand(command);
+        public Task<IActionResult> Update([FromBody]UpdateSiteDetails command) => PublishCommand(command, ServiceNames.Sites);
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpPost("update-contact")]
-        public IActionResult UpdateContact([FromBody]UpdateSiteContact command) => PublishCommand(command);
+        public Task<IActionResult> UpdateContact([FromBody]UpdateSiteContact command) => PublishCommand(command, ServiceNames.Sites);
 
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpPost("create-site-resource")]
-        public IActionResult CreateSiteResource([FromBody]CreateSiteResource command) => PublishCommand(command);
+        public Task<IActionResult> CreateSiteResource([FromBody]CreateSiteResource command) => PublishCommand(command, ServiceNames.Sites);
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpPost("remove-site-resource")]
-        public IActionResult RemoveSiteResource([FromBody]RemoveSiteResource command) => PublishCommand(command);
+        public Task<IActionResult> RemoveSiteResource([FromBody]RemoveSiteResource command) => PublishCommand(command, ServiceNames.Sites);
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpGet("resources/{siteId}")]

@@ -63,6 +63,12 @@ namespace App.Shared.Services
             try
             {
                 response = await call();
+                if(response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
+                {
+                    _toastService.ShowError("Something went wrong please try again shortly.");
+                    _logger.LogInformation("Request failed due to service being down.");
+                    return false;
+                }
             }
             catch (HttpRequestException e)
             {

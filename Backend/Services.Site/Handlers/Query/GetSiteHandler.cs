@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Services.Common.Logging;
 using Services.Common.Queries;
 using Services.Sites.Dtos;
 using Services.Sites.Messages.Queries;
@@ -12,10 +13,10 @@ namespace Services.Sites.Handlers.Query
 {
     public class GetSiteHandler : IQueryHandler<GetSite, SiteDto>
     {
-        private readonly ILogger<GetSiteHandler> _logger;
+        private readonly IVmsLogger<GetSiteHandler> _logger;
         private readonly ISiteRepository _repository;
 
-        public GetSiteHandler(ILogger<GetSiteHandler> logger, ISiteRepository repository)
+        public GetSiteHandler(IVmsLogger<GetSiteHandler> logger, ISiteRepository repository)
         {
             _logger = logger;
             _repository = repository;

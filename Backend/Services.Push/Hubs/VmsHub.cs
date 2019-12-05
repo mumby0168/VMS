@@ -7,16 +7,17 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using Services.Common.Exceptions;
 using Services.Common.Jwt;
+using Services.Common.Logging;
 using Services.Push.Clients;
 
 namespace Services.Push.Hubs
 {
     public class VmsHub : Hub
     {
-        private readonly ILogger<VmsHub> _logger;
+        private readonly IVmsLogger<VmsHub> _logger;
         private readonly ITokensClient _client;
 
-        public VmsHub(ILogger<VmsHub> logger, ITokensClient client)
+        public VmsHub(IVmsLogger<VmsHub> logger, ITokensClient client)
         {
             _logger = logger;
             _client = client;

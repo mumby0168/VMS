@@ -99,7 +99,7 @@
     protected override async Task OnInitializedAsync()
     {        
         await LoadingService.StartTaskAsync(async (task) => SiteSummaries = await SiteService.GetSiteSummariesForBusiness(BusinessId), "site-profile");
-        if (SiteSummaries.Count() > 0)
+        if (SiteSummaries != null && SiteSummaries.Count() > 0)
         {
             SelectedSiteId = SiteSummaries.FirstOrDefault().Id;
         }
