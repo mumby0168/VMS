@@ -80,6 +80,11 @@ namespace App.Shared.Services
             if(response.IsSuccessStatusCode)
             {
                 var status = await _operationsManager.GetOperationStatusAsync(response.GetOperationId());
+                if(status is null)
+                {
+                    _toastService.ShowError("Something went wrong your operation may have completed please verify before trying again");
+                    return false;
+                }
                 if(status.Status == OperationStatus.Complete)
                 {
                     if (onSuccess is null)
