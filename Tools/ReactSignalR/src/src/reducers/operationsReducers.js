@@ -1,16 +1,19 @@
 
 const intialState = {    
-    operations: []
+    operations: [        
+    ]
 }
 
 
 export default function(state = intialState , action) {
-    switch(action.type) {
 
-        case "OPERATION_PUSHED":
-            state.operations.push(action.payload);
-            return state;
-        default:
+    console.log(action);
+    switch(action.type) {        
+
+        case "OPERATION_PUSHED": {            
+            return {...state, operations: state.operations.push(action.payload)};
+        }
+        default: 
             return state;
 
     }

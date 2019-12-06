@@ -9,7 +9,7 @@ export const configureStore = () => {
     var middleware = applyMiddleware(thunk, logger);
 
     return createStore(
-        rootReducer(),
+        rootReducer,
         middleware
       );
 }
