@@ -6,7 +6,7 @@
 
 ### Get Operations
 
-GET {{url}}operations/c11b99c8-fc02-426b-8b91-e29bf8d5d96d
+GET {{url}}operations/cbca9775-a738-46bd-bdf7-861152cec2d6
 
 
 ### Create Business
@@ -24,7 +24,7 @@ Authorization: Bearer {{jwt}}
     "HeadContactEmail": "joe.bloggs@outlook.com",
     "HeadOfficeAddressLine1": " 56 Bond Street",
     "HeadOfficeAddressLine2": "Hull",
-    "HeadOfficePostCode": "Hu10 7rt"
+    "HeadOfficePostCode": "HU1 7RT"
 }
 
 ### Get Business Summaries
