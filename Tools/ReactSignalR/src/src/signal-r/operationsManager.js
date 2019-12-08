@@ -22,10 +22,8 @@ export default class OperationsManager {
             console.log("operation complete received.");
             console.log(op);            
             dispatchHandle(addOperation({
-                status: "failed",
-                id: op.id,
-                code: "",
-                reason: ""
+                status: "complete",
+                id: op.operationId,
             }));   
         });
 
@@ -34,7 +32,7 @@ export default class OperationsManager {
             console.log(op);
             dispatchHandle(addOperation({
                 status: "failed",
-                id: op.id,
+                id: op.operationId,
                 code: op.code,
                 reason: op.reason
             }));           

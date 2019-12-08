@@ -10,15 +10,16 @@ class Messages extends Component {
 
     render() {
             
+        console.log(this.props);
 
         if(this.props.operations.length === 0)
         {
             return (<h1>No Operations</h1>)
         }        
 
-        const operations = this.props.operations.map((operation) => {
-           return  <h4>1</h4>
-        });
+        const operations = this.props.operations.map((operation) =>
+           <h4>1</h4>
+        );
 
         return (
             <div>
@@ -32,7 +33,7 @@ class Messages extends Component {
 const mapStateToProprs = (state) => {
     console.log(state);
     return {
-        operations: state.operations.operations
+        operations: state.operations.operationsList
     }
 }
 
