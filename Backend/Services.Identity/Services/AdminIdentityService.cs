@@ -118,7 +118,7 @@ namespace Services.Identity.Services
 
             await _pendingIdentityRepository.AddAsync(pending);
 
-            _logger.LogInformation($"Pending identity for business admin created with email: {email}");
+            _logger.LogInformation($"Pending identity for business admin created with email: {email} and code: {pending.Id}.");
 
             _serviceBus.PublishEvent(new PendingBusinessAdminCreated(pending.Id, pending.Email), RequestInfo.Empty);
         }

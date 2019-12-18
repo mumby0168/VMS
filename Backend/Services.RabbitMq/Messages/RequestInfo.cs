@@ -44,6 +44,12 @@ namespace Services.RabbitMq.Messages
             
         }
 
+        public RequestInfo(Guid operationId, Guid userId)
+        {
+            UserId = userId;
+            OperationId = operationId;
+        }
+
         public RequestInfo(Guid userId)
         {
             UserId = userId;

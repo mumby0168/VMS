@@ -1,6 +1,5 @@
 const intialState = {
     operationsList: [
-        {}
     ]
 }
 

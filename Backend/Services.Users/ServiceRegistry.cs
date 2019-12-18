@@ -1,0 +1,30 @@
+﻿using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
+using Services.Common.Queries;
+using Services.RabbitMq.Interfaces.Messaging;
+using Services.Users.Commands;
+using Services.Users.Domain;
+using Services.Users.Events;
+using Services.Users.Factories;
+using Services.Users.Handlers.Command;
+using Services.Users.Handlers.Events;
+using Services.Users.Repositories;
+
+namespace Services.Users
+{
+    internal static class ServiceRegistry
+    {
+        public static IServiceCollection RegisterServices(IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddTransient<IUsersFactory, UsersFactory>();
+            serviceCollection.AddTransient<IAccountRepository, AccountRepository>();
+            serviceCollection.AddTransient<IUserRepository, UserRepository>();
+
+            serviceCollection.AddTransient<IEventHandler<UserAccountCreated>, UserAccountCreatedHandler>();
+
+            serviceCollection.AddTransient<ICommandHandler<CreateUser>, CreateUserHandler>();
+
+            return serviceCollection;
+        }
+    }
+}

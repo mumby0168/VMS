@@ -2,29 +2,60 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Chronicle;
 using Microsoft.Extensions.Logging;
 using Services.Common.Logging;
 using Services.Operations.Messages.Events.Push;
+using Services.Operations.Sagas;
 using Services.Operations.Services;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 
 namespace Services.Operations.Handlers
 {
+    public class SagaData : ISagaContextMetadata
+    {
+        public static string OperationIdKey => "OperationId";
+        public static string UserIdKey => "UserId";
+        public string Key { get; }
+        public object Value { get; }
+
+        public SagaData(string key, object value)
+        {
+            Key = key;
+            Value = value;
+        }
+    }
+
     public class GenericBusHandler : IGenericBusHandler
     {
         private readonly IVmsLogger<GenericBusHandler> _logger;
         private readonly IOperationsCache _operationsCache;
         private readonly IServiceBusMessagePublisher _publisher;
+        private readonly ISagaCoordinator _sagaCoordinator;
 
-        public GenericBusHandler(IVmsLogger<GenericBusHandler> logger, IOperationsCache operationsCache, IServiceBusMessagePublisher publisher)
+        public GenericBusHandler(IVmsLogger<GenericBusHandler> logger, IOperationsCache operationsCache, IServiceBusMessagePublisher publisher, ISagaCoordinator sagaCoordinator)
         {
             _logger = logger;
             _operationsCache = operationsCache;
             _publisher = publisher;
+            _sagaCoordinator = sagaCoordinator;
         }
         public async Task HandleAsync(object message, IRequestInfo requestInfo)
         {
+            var serviceBusMessage = message as IServiceBusMessage;
+            if (serviceBusMessage.BelongsToSaga())
+            {
+                var context = SagaContext.Create(new SagaId(), "", new List<ISagaContextMetadata>
+                {
+                    new SagaData(SagaData.OperationIdKey, requestInfo.OperationId.ToString()),
+                    new SagaData(SagaData.UserIdKey, requestInfo.UserId)
+                });
+                await _sagaCoordinator.ProcessAsync(serviceBusMessage, context);
+                return;
+            }
+
+
             switch (message)
             {
                 case IRejectedEvent rejected:

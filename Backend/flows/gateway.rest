@@ -18,7 +18,7 @@ Authorization: Bearer {{jwt}}
     "Name": "Test Business 233",
     "TradingName": "Test Trading Name",
     "WebAddress" : "http://wwww.google.co.ul",
-    "HeadContactFirstName": "Joe",
+    "HeadContactFirstName": "John",
     "HeadContactSecondName": "Bloggs",
     "HeadContactContactNumber": "07568512675",
     "HeadContactEmail": "joe.bloggs@outlook.com",

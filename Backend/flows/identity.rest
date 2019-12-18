@@ -1,6 +1,6 @@
 @url = http://localhost:5010
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzQ4NTgyODUsImV4cCI6MTU3NDg2OTA4NSwiaWF0IjoxNTc0ODU4Mjg1fQ.VRxnXDvCJbdgNBsKwabtr1Jx6zshAPEhi1FvNvRW94N65JsCSmRcTAmVVQN1_fjK1a0BqrFoM0zsoj7tEwPeEg
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzY2ODEyNzMsImV4cCI6MTU3NjY5MjA3MywiaWF0IjoxNTc2NjgxMjczfQ.gWMSlsxJ3LmqLtVXAXVcFw9yL6dTGAK_6NiZqpIeh-l-17NhUSWwV9VcRnDLIUoie9GBqSxwJoz0dWtue2-uAA
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
@@ -57,7 +57,7 @@ Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
-    "email": "sda@test.com",
+    "email": "b-admin1@test.com",
     "businessId": "{{BusinessId}}"
 }
 
@@ -77,3 +77,15 @@ Authorization: Bearer {{jwt}}
     "businessId": "{{BusinessId}}"
 }
 
+
+### Complete User
+
+POST {{url}}/api/users/complete
+Content-Type: application/json
+
+{
+    "email": "b-admin1@test.com",
+    "code": "d7f1f499-6c21-46d0-8fe5-446209a3cbeb",
+    "password": "Test123",
+    "passwordConfirmation": "Test123"
+}

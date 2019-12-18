@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+import OperationItem from './OperationItem'
 
 class Messages extends Component {    
 
@@ -8,23 +9,20 @@ class Messages extends Component {
         console.log(this.props);
     }
 
-    render() {
-            
-        console.log(this.props);
-
+    render() {                  
         if(this.props.operations.length === 0)
         {
             return (<h1>No Operations</h1>)
         }        
 
         const operations = this.props.operations.map((operation) =>
-           <h4>1</h4>
+           <OperationItem operation={operation}></OperationItem>
         );
 
         return (
-            <div>
+            <ul className="list-group">
                 {operations}
-            </div>
+            </ul>
         )
     }   
 }

@@ -12,7 +12,6 @@ using Services.Logs.Repositorys;
 
 namespace Services.Logs.Controllers
 {
-    [EnableCors]
     [Route("api/logs/")]
     public class LogsController : VmsControllerBase
     {

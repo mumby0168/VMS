@@ -34,6 +34,8 @@ namespace Services.Identity
             serviceCollection.AddTransient<IEventHandler<BusinessCreated>, BusinessCreatedHandler>();
             serviceCollection.AddTransient<IQueryHandler<GetAllBusinessAdmins, IEnumerable<AccountInfoDto>>, GetAllBusinessAdminsHandler>();
 
+            serviceCollection.AddTransient<IUserService, UserService>();
+
             return serviceCollection;
         }
 
