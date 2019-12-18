@@ -1,13 +1,14 @@
 ﻿using Services.RabbitMq.Interfaces.Messaging;
 
-namespace Services.Operations.Messages.Events.Identity
+namespace Services.Users.Events
 {
-    public class UserAccountRejected : IRejectedEvent
+    public class CreateUserRejected : IRejectedEvent
     {
         public string Code { get; }
         public string Reason { get; }
 
-        public UserAccountRejected(string code, string reason)
+
+        public CreateUserRejected(string code, string reason)
         {
             Code = code;
             Reason = reason;

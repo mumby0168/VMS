@@ -4,6 +4,15 @@
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
+### sign in portal
+
+POST {{url}}/api/users/sign-in
+Content-Type: application/json
+
+{
+    "email": "b-admin2@test.com",
+    "password": "Test123"
+}
 
 ### sign in admin
 
@@ -57,7 +66,7 @@ Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
-    "email": "b-admin1@test.com",
+    "email": "b-admin2@test.com",
     "businessId": "{{BusinessId}}"
 }
 
@@ -84,8 +93,9 @@ POST {{url}}/api/users/complete
 Content-Type: application/json
 
 {
-    "email": "b-admin1@test.com",
-    "code": "d7f1f499-6c21-46d0-8fe5-446209a3cbeb",
+    "email": "b-admin2@test.com",
+    "code": "97234f8f-abce-4af9-8fc8-c736b78d4208",
     "password": "Test123",
     "passwordConfirmation": "Test123"
 }
+

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Common.Base;
+using Services.Common.Jwt;
 using Services.Identity.Messages.Commands;
 using Services.Identity.Services;
 
@@ -19,6 +20,11 @@ namespace Services.Identity.Controllers
         {
             _userService = userService;
         }
+
+        [AllowAnonymous]
+        [HttpPost("sign-in")]
+        public async Task<IActionResult> SignIn([FromBody] SignIn command) =>
+            Ok(await _userService.SignIn(command.Email, command.Password));
 
         [AllowAnonymous]
         [HttpPost("complete")]

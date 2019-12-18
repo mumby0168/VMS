@@ -9,5 +9,6 @@ namespace Services.Users.Repositories
     public interface IAccountRepository
     {
         Task AddAsync(IAccount account);
+        Task<IAccount> GetAsync(Guid accountId);
     }
 }

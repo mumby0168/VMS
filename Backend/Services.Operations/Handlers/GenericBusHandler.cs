@@ -34,26 +34,25 @@ namespace Services.Operations.Handlers
         private readonly IServiceBusMessagePublisher _publisher;
         private readonly ISagaCoordinator _sagaCoordinator;
 
-        public GenericBusHandler(IVmsLogger<GenericBusHandler> logger, IOperationsCache operationsCache, IServiceBusMessagePublisher publisher, ISagaCoordinator sagaCoordinator)
+        public GenericBusHandler(IVmsLogger<GenericBusHandler> logger, IOperationsCache operationsCache, IServiceBusMessagePublisher publisher)
         {
             _logger = logger;
             _operationsCache = operationsCache;
             _publisher = publisher;
-            _sagaCoordinator = sagaCoordinator;
         }
         public async Task HandleAsync(object message, IRequestInfo requestInfo)
         {
-            var serviceBusMessage = message as IServiceBusMessage;
-            if (serviceBusMessage.BelongsToSaga())
-            {
-                var context = SagaContext.Create(new SagaId(), "", new List<ISagaContextMetadata>
-                {
-                    new SagaData(SagaData.OperationIdKey, requestInfo.OperationId.ToString()),
-                    new SagaData(SagaData.UserIdKey, requestInfo.UserId)
-                });
-                await _sagaCoordinator.ProcessAsync(serviceBusMessage, context);
-                return;
-            }
+            //var serviceBusMessage = message as IServiceBusMessage;
+            //if (serviceBusMessage.BelongsToSaga())
+            //{
+            //    var context = SagaContext.Create(new SagaId(), "", new List<ISagaContextMetadata>
+            //    {
+            //        new SagaData(SagaData.OperationIdKey, requestInfo.OperationId.ToString()),
+            //        new SagaData(SagaData.UserIdKey, requestInfo.UserId)
+            //    });
+            //    await _sagaCoordinator.ProcessAsync(serviceBusMessage, context);
+            //    return;
+            //}
 
 
             switch (message)

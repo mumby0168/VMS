@@ -14,5 +14,6 @@ namespace Services.Identity.Repositorys
         Task<IEnumerable<Domain.Identity>> GetForBusinessAsync(Guid businessId);
         Task<Domain.Identity> GetAsync(Guid id, Guid businessId);
         Task RemoveAsync(Domain.Identity identity);
+        Task<Domain.Identity> GetByEmail(string email);
     }
 }

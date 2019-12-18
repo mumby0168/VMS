@@ -20,5 +20,11 @@ namespace Services.Users.Repositories
         {
             return _collection.AddAsync(account as Account);
         }
+
+        public async Task<IAccount> GetAsync(Guid accountId)
+        {
+            var account = await _collection.GetAsync(accountId);
+            return account;
+        }
     }
 }

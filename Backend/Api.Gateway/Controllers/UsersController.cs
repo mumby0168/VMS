@@ -18,6 +18,7 @@ namespace Api.Gateway.Controllers
         }
 
         [Authorize(Roles = Roles.PortalUser)]
+        [HttpPost("create")]
         public IActionResult Create([FromBody] CreateUser command) => PublishCommand(command);
     }
 }

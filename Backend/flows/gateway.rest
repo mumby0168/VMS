@@ -1,12 +1,12 @@
 @url = http://localhost:5020/gateway/api/
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzU4MDA1MTQsImV4cCI6MTU3NTgxMTMxNCwiaWF0IjoxNTc1ODAwNTE0fQ.2wGXIaRNMLzX55Y3qlI621JQfpouQfuG6ViwXjWK_zpjpBZAPLcGR0LulAWTGxji5f5Bq0PAgG2EdLIg6DK10A
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW4xQHRlc3QuY29tIiwibmFtZWlkIjoiMmNlYzQ5MmYtODgzYi00MjFmLTlmMTItYjhmNDUzOWE0MGZlIiwicm9sZSI6IkJ1c2luZXNzQWRtaW4iLCJuYmYiOjE1NzY2ODQ5MjMsImV4cCI6MTU3NjY5NTcyMywiaWF0IjoxNTc2Njg0OTIzfQ.EA7KELltOYzWCGJtishodj3o5XvwNzBFZgWl2b74MwjutpLdoWYNqPgizuKHHlsQVJLseXGriohWMomFB4PEhQ
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
 ### Get Operations
 
-GET {{url}}operations/cbca9775-a738-46bd-bdf7-861152cec2d6
+GET {{url}}operations/dc678925-7189-4b62-9b6d-ad4bf6e3676a
 
 
 ### Create Business
@@ -168,4 +168,21 @@ Authorization: Bearer {{jwt}}
 
 {
     "resourceId": "{{resourceId}}"
+}
+
+################################################## USERS ###################################################################
+
+### Create User
+POST {{url}}users/create
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "accountId": "5f4fdabd-e94e-4f07-9243-c2b9950ce113",
+    "basedSiteId": "{{businessiD}}",
+    "businessId": "{{businessiD}}",
+    "firstName": "Joe",
+    "secondName": "Bloggs",
+    "phoneNumber": "07568 567343",
+    "businessPhoneNumber": "01482 564323"
 }

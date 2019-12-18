@@ -22,7 +22,9 @@ namespace Services.Users.Domain
 
         Guid BusinessId { get; }
 
+        Guid AccountId { get; }
+
         IUser Setup(string firstName, string secondName, string email, string phoneNumber, string businessPhoneNumber,
-            Guid basedSiteId, Guid businessId);
+            Guid basedSiteId, Guid businessId, Guid accountId);
     }
 }

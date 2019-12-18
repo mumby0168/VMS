@@ -19,15 +19,17 @@ namespace Services.Users.Domain
         public Guid BasedSiteId { get; private set; }
         public Guid BusinessId { get; private set; }
 
+        public Guid AccountId { get; private set; }
+
         public IUser Setup(string firstName, string secondName, string email, string phoneNumber, string businessPhoneNumber,
-            Guid basedSiteId, Guid businessId) =>
-            new User(firstName, secondName, email, phoneNumber, businessPhoneNumber, basedSiteId, businessId);
+            Guid basedSiteId, Guid businessId, Guid accountId) =>
+            new User(firstName, secondName, email, phoneNumber, businessPhoneNumber, basedSiteId, businessId, accountId);
 
         public User()
         {
             
         }
-        private User(string firstName, string secondName, string email, string phoneNumber, string businessPhoneNumber, Guid basedSiteId, Guid businessId)
+        private User(string firstName, string secondName, string email, string phoneNumber, string businessPhoneNumber, Guid basedSiteId, Guid businessId, Guid accountId)
         {
 
             if (firstName.IsEmpty()) throw new VmsException(Codes.EmptyProperty, "The field first name cannot be empty");
@@ -46,6 +48,7 @@ namespace Services.Users.Domain
             BusinessPhoneNumber = businessPhoneNumber;
             BasedSiteId = basedSiteId;
             BusinessId = businessId;
+            AccountId = accountId;
         }
     }
 }

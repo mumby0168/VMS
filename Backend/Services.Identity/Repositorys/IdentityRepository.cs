@@ -33,5 +33,8 @@ namespace Services.Identity.Repositorys
 
         public Task RemoveAsync(Domain.Identity identity)
             => _repository.RemoveAsync(identity.Id);
+
+        public Task<Domain.Identity> GetByEmail(string email)
+            => _repository.GetAsync(i => i.Email == email);
     }
 }
