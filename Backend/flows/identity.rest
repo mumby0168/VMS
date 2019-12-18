@@ -66,7 +66,7 @@ Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
-    "email": "b-admin2@test.com",
+    "email": "b-admin3@test.com",
     "businessId": "{{BusinessId}}"
 }
 
@@ -93,8 +93,8 @@ POST {{url}}/api/users/complete
 Content-Type: application/json
 
 {
-    "email": "b-admin2@test.com",
-    "code": "97234f8f-abce-4af9-8fc8-c736b78d4208",
+    "email": "b-admin3@test.com",
+    "code": "a50af5c4-c03a-4b74-a780-758c56b39e6a",
     "password": "Test123",
     "passwordConfirmation": "Test123"
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Chronicle;
+using Convey;
+using Convey.HTTP;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -28,6 +30,8 @@ namespace Services.Users
             services.AddMongo()
                 .AddMongoCollection<User>()
                 .AddMongoCollection<Account>();
+
+            services.AddConvey().AddHttpClient();
 
             services.AddUdpLogging();
 

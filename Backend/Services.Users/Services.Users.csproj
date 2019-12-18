@@ -6,11 +6,16 @@
 
   <ItemGroup>
     <PackageReference Include="Chronicle_" Version="2.1.0" />
+    <PackageReference Include="Convey.HTTP" Version="0.3.172" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Services.Common\Services.Common.csproj" />
     <ProjectReference Include="..\Services.RabbitMq\Services.RabbitMq.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Dtos\" />
   </ItemGroup>
 
 </Project>

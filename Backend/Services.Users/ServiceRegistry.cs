@@ -9,6 +9,7 @@ using Services.Users.Factories;
 using Services.Users.Handlers.Command;
 using Services.Users.Handlers.Events;
 using Services.Users.Repositories;
+using Services.Users.Services;
 
 namespace Services.Users
 {
@@ -19,6 +20,7 @@ namespace Services.Users
             serviceCollection.AddTransient<IUsersFactory, UsersFactory>();
             serviceCollection.AddTransient<IAccountRepository, AccountRepository>();
             serviceCollection.AddTransient<IUserRepository, UserRepository>();
+            serviceCollection.AddTransient<IServicesRepository, ServicesRepository>();
 
             serviceCollection.AddTransient<IEventHandler<UserAccountCreated>, UserAccountCreatedHandler>();
 

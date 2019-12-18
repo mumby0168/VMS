@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Convey.HTTP;
 using Services.Common.Exceptions;
 using Services.Common.Logging;
 using Services.RabbitMq.Interfaces.Messaging;
@@ -11,6 +12,7 @@ using Services.Users.Domain;
 using Services.Users.Factories;
 using Services.Users.Handlers.Events;
 using Services.Users.Repositories;
+using Services.Users.Services;
 
 namespace Services.Users.Handlers.Command
 {
@@ -21,14 +23,16 @@ namespace Services.Users.Handlers.Command
         private readonly IAccountRepository _accountRepository;
         private readonly IUserRepository _userRepository;
         private readonly IServiceBusMessagePublisher _publisher;
+        private readonly IServicesRepository _servicesRepository;
 
-        public CreateUserHandler(IVmsLogger<CreateUserHandler> logger, IUsersFactory factory, IAccountRepository accountRepository, IUserRepository userRepository, IServiceBusMessagePublisher publisher)
+        public CreateUserHandler(IVmsLogger<CreateUserHandler> logger, IUsersFactory factory, IAccountRepository accountRepository, IUserRepository userRepository, IServiceBusMessagePublisher publisher, IServicesRepository servicesRepository)
         {
             _logger = logger;
             _factory = factory;
             _accountRepository = accountRepository;
             _userRepository = userRepository;
             _publisher = publisher;
+            _servicesRepository = servicesRepository;
         }
         public async Task HandleAsync(CreateUser message, IRequestInfo requestInfo)
         {
@@ -39,7 +43,20 @@ namespace Services.Users.Handlers.Command
                 _publisher.PublishEvent(new CreateUserRejected(Codes.InvalidId, $"The account with the id: {message.AccountId} cannot be found"), requestInfo);
             }
 
-            //TODO: Call HTTP to check the site & the business ID. Need to use retry and integrate polly. IHttpClient from convey has built in retries.
+            if (!await _servicesRepository.IsBusinessIdValid(message.BusinessId))
+            {
+                _logger.LogWarning($"The business id: {message.BusinessId} could not be fetched from the business service.");
+                _publisher.PublishEvent(new CreateUserRejected(Codes.InvalidId, $"The business id: {message.BusinessId} could not be fetched from the business service."), requestInfo);
+                return;
+            }
+
+            if(!await _servicesRepository.IsSiteIdValid(message.BasedSiteId))
+            {
+                _logger.LogWarning($"The site id: {message.BasedSiteId} could not be fetched from the site service.");
+                _publisher.PublishEvent(new CreateUserRejected(Codes.InvalidId, $"The site id: {message.BasedSiteId} could not be fetched from the site service."), requestInfo);
+                return;
+            }
+
 
             IUser user = null;
             try
