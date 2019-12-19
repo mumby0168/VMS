@@ -22,6 +22,10 @@ namespace Services.Users
             serviceCollection.AddTransient<IUserRepository, UserRepository>();
             serviceCollection.AddTransient<IServicesRepository, ServicesRepository>();
 
+
+            serviceCollection.AddSingleton<IAccessRecordFactory, AccessRecordFactory>();
+            serviceCollection.AddTransient<IAccessRecordRepository, AccessRecordRepository>();
+
             serviceCollection.AddTransient<IEventHandler<UserAccountCreated>, UserAccountCreatedHandler>();
 
             serviceCollection.AddTransient<ICommandHandler<CreateUser>, CreateUserHandler>();
