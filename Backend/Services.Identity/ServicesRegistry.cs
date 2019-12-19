@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Services.Common.Queries;
 using Services.Identity.Dtos;
+using Services.Identity.Factories;
 using Services.Identity.Handlers;
 using Services.Identity.Handlers.Query;
 using Services.Identity.Managers;
@@ -25,6 +26,9 @@ namespace Services.Identity
             serviceCollection.AddTransient<IPendingIdentityRepository, PendingIdentityRepository>();
             serviceCollection.AddTransient<IRefreshTokenRepository, RefreshTokenRepository>();
             serviceCollection.AddTransient<IBusinessRepository, BusinessRepository>();
+            serviceCollection.AddTransient<IResetRequestRepository, ResetRequestRepository>();
+            //factories
+            serviceCollection.AddTransient<IResetRequestFactory, ResetRequestFactory>();
             //services
             serviceCollection.AddTransient<IAdminIdentityService, AdminIdentityService>();
             serviceCollection.AddTransient<IRefreshTokenService, RefreshTokenService>();

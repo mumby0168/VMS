@@ -58,6 +58,12 @@ namespace Services.Identity.Domain
             CreatedOn = DateTime.UtcNow;
         }
 
+        public void UpdatePassword(byte[] hash, byte[] salt)
+        {
+            Hash = hash;
+            Salt = salt;
+        }
+
         public Identity()
         {
             

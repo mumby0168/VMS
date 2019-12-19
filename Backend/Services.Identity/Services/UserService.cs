@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Services.Common.Exceptions;
 using Services.Common.Jwt;
 using Services.Common.Logging;
+using Services.Identity.Factories;
 using Services.Identity.Managers;
 using Services.Identity.Messages.Commands;
 using Services.Identity.Messages.Events;
@@ -23,8 +24,11 @@ namespace Services.Identity.Services
         private readonly IServiceBusMessagePublisher _publisher;
         private readonly IJwtManager _jwtManager;
         private readonly IRefreshTokenService _tokenService;
+        private readonly IResetRequestFactory _resetRequestFactory;
+        private readonly IResetRequestRepository _resetRequestRepository;
+        private readonly TimeSpan _passwordExpiryTime = TimeSpan.FromMinutes(30);   
 
-        public UserService(IPendingIdentityRepository pendingIdentityRepository, IIdentityRepository identityRepository, IVmsLogger<UserService> logger, IPasswordManager passwordManager, IServiceBusMessagePublisher publisher, IJwtManager jwtManager, IRefreshTokenService tokenService)
+        public UserService(IPendingIdentityRepository pendingIdentityRepository, IIdentityRepository identityRepository, IVmsLogger<UserService> logger, IPasswordManager passwordManager, IServiceBusMessagePublisher publisher, IJwtManager jwtManager, IRefreshTokenService tokenService, IResetRequestFactory resetRequestFactory, IResetRequestRepository resetRequestRepository)
         {
             _pendingIdentityRepository = pendingIdentityRepository;
             _identityRepository = identityRepository;
@@ -33,6 +37,8 @@ namespace Services.Identity.Services
             _publisher = publisher;
             _jwtManager = jwtManager;
             _tokenService = tokenService;
+            _resetRequestFactory = resetRequestFactory;
+            _resetRequestRepository = resetRequestRepository;
         }
 
 
@@ -85,6 +91,49 @@ namespace Services.Identity.Services
             _logger.LogInformation($"User issued token email: {email}");
 
             return AuthToken.Create(jwt, refreshToken);
+        }
+
+        public async Task InitiatePasswordReset(string email)
+        {
+            var identity = await _identityRepository.GetByEmail(email);
+            if (identity is null)
+            {
+                _logger.LogInformation($"Password reset requested with no account email: {email}.");
+                throw new VmsException(Codes.InvalidEmail, "This email could not be found in our records.");
+            }
+
+            var request = _resetRequestFactory.Create(email);
+            await _resetRequestRepository.AddAsync(request);
+            _logger.LogInformation($"Password reset requested added for email: {email} with code: {request.Id}.");
+            //TODO: Publish event to email service to send the reset email.
+        }
+
+        public async Task ResetPassword(Guid code, string email, string password, string passwordConfirm)
+        {
+            var request = await _resetRequestRepository.GetAsync(code);
+            if(request is null || request.Email != email || request.RequestedAt > (DateTime.UtcNow + _passwordExpiryTime))
+            {
+                _logger.LogWarning($"The password reset failed for user with email: {email} and code: {code}.");
+                throw new VmsException(Codes.InvalidCode, "The reset request cannot be found or may have expired.");
+            }
+
+            if(password != passwordConfirm)
+            {
+                _logger.LogWarning("Reset rejected as passwords do not match");
+                throw new VmsException(Codes.InvalidCredentials, "The passwords provided do not match.");
+            }
+
+            var identity = await _identityRepository.GetByEmail(email);
+            if (identity is null || identity.Role == Roles.SystemAdmin)
+            {
+                _logger.LogError("The identity could not be resolved to reset the password");
+                throw new VmsException(Codes.InvalidEmail, "The email provided could not resolve an account.");
+            }
+
+            var encryptedPassword = _passwordManager.EncryptPassword(password);
+            identity.UpdatePassword(encryptedPassword.Hash, encryptedPassword.Salt);
+            await _identityRepository.UpdateAsync(identity);
+            _logger.LogInformation($"Password successfully reset for user with email: {email}.");
         }
     }
 }

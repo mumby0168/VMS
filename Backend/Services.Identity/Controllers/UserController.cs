@@ -35,5 +35,21 @@ namespace Services.Identity.Controllers
 
             return Ok();
         }
+
+        [AllowAnonymous]
+        [HttpPost("request-reset")]
+        public async Task<IActionResult> RequestReset([FromBody] RequestPasswordReset command)
+        {
+            await _userService.InitiatePasswordReset(command.Email);
+            return Ok();
+        }
+
+        [AllowAnonymous]
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPassword command)
+        {
+            await _userService.ResetPassword(command.Code, command.Email, command.Password, command.PasswordConfirm);
+            return Ok();
+        }
     }
 }

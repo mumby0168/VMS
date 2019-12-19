@@ -34,6 +34,7 @@ namespace Services.Users.Handlers.Command
             _publisher = publisher;
             _servicesRepository = servicesRepository;
         }
+
         public async Task HandleAsync(CreateUser message, IRequestInfo requestInfo)
         {
             var account = await _accountRepository.GetAsync(message.AccountId);

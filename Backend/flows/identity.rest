@@ -10,8 +10,8 @@ POST {{url}}/api/users/sign-in
 Content-Type: application/json
 
 {
-    "email": "b-admin2@test.com",
-    "password": "Test123"
+    "email": "b-admin3@test.com",
+    "password": "Test123s"
 }
 
 ### sign in admin
@@ -97,5 +97,28 @@ Content-Type: application/json
     "code": "a50af5c4-c03a-4b74-a780-758c56b39e6a",
     "password": "Test123",
     "passwordConfirmation": "Test123"
+}
+
+### Request Reset User Password
+
+
+POST {{url}}/api/users/request-reset
+Content-Type: application/json
+
+{
+    "email": "b-adminsafsf@test.com",
+}
+
+### Reset User Password
+
+
+POST {{url}}/api/users/reset-password
+Content-Type: application/json
+
+{
+    "code": "518dd46d-a3d9-49ab-8083-1efd23dfc8c2",
+    "email": "b-admin3@test.com",
+    "password": "Test145",
+    "passwordConfirm": "Test12345"
 }
 

@@ -57,7 +57,9 @@ namespace Services.Identity
                 .AddMongoCollection<Domain.Identity>()
                 .AddMongoCollection<PendingIdentity>()
                 .AddMongoCollection<RefreshToken>()
-                .AddMongoCollection<Business>();
+                .AddMongoCollection<Business>()
+                .AddMongoCollection<ResetRequest>();
+
 
 
             ServicesRegistry.RegisterServices(services);

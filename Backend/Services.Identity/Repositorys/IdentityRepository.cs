@@ -36,5 +36,7 @@ namespace Services.Identity.Repositorys
 
         public Task<Domain.Identity> GetByEmail(string email)
             => _repository.GetAsync(i => i.Email == email);
+
+        public Task UpdateAsync(Domain.Identity identity) => _repository.UpdateAsync(identity, identity.Id);
     }
 }

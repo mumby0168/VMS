@@ -12,5 +12,8 @@ namespace Services.Identity.Services
         Task CompleteUser(Guid code, string email, string password, string passwordConfirm);
 
         Task<IAuthToken> SignIn(string email, string password);
+
+        Task InitiatePasswordReset(string email);
+        Task ResetPassword(Guid code, string email, string password, string passwordConfirm);
     }
 }
