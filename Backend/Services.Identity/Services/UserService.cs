@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Services.Common.Exceptions;
 using Services.Common.Jwt;
 using Services.Common.Logging;
+using Services.Identity.Domain;
 using Services.Identity.Factories;
 using Services.Identity.Managers;
 using Services.Identity.Messages.Commands;
@@ -26,9 +27,10 @@ namespace Services.Identity.Services
         private readonly IRefreshTokenService _tokenService;
         private readonly IResetRequestFactory _resetRequestFactory;
         private readonly IResetRequestRepository _resetRequestRepository;
+        private readonly IBusinessRepository _businessRepository;
         private readonly TimeSpan _passwordExpiryTime = TimeSpan.FromMinutes(30);   
 
-        public UserService(IPendingIdentityRepository pendingIdentityRepository, IIdentityRepository identityRepository, IVmsLogger<UserService> logger, IPasswordManager passwordManager, IServiceBusMessagePublisher publisher, IJwtManager jwtManager, IRefreshTokenService tokenService, IResetRequestFactory resetRequestFactory, IResetRequestRepository resetRequestRepository)
+        public UserService(IPendingIdentityRepository pendingIdentityRepository, IIdentityRepository identityRepository, IVmsLogger<UserService> logger, IPasswordManager passwordManager, IServiceBusMessagePublisher publisher, IJwtManager jwtManager, IRefreshTokenService tokenService, IResetRequestFactory resetRequestFactory, IResetRequestRepository resetRequestRepository, IBusinessRepository businessRepository)
         {
             _pendingIdentityRepository = pendingIdentityRepository;
             _identityRepository = identityRepository;
@@ -39,6 +41,7 @@ namespace Services.Identity.Services
             _tokenService = tokenService;
             _resetRequestFactory = resetRequestFactory;
             _resetRequestRepository = resetRequestRepository;
+            _businessRepository = businessRepository;
         }
 
 
@@ -85,7 +88,12 @@ namespace Services.Identity.Services
                 throw new VmsException(Codes.InvalidCredentials, "The credentials provided where incorrect.");
             }
 
-            var jwt = _jwtManager.CreateToken(identity.Id, identity.Email, identity.Role);
+            if(identity.BusinessId == Guid.Empty)
+            {
+                throw new VmsException("No business ID found on sign in.", "");
+            }
+
+            var jwt = _jwtManager.CreateToken(identity.Id, identity.Email, identity.Role, identity.BusinessId);
             var refreshToken = await _tokenService.CreateRefreshToken(identity.Email);
 
             _logger.LogInformation($"User issued token email: {email}");
@@ -134,6 +142,29 @@ namespace Services.Identity.Services
             identity.UpdatePassword(encryptedPassword.Hash, encryptedPassword.Salt);
             await _identityRepository.UpdateAsync(identity);
             _logger.LogInformation($"Password successfully reset for user with email: {email}.");
+        }
+
+        public async Task CreateUser(string email, Guid businessId)
+        {
+            if(await _identityRepository.IsEmailInUse(email, Roles.BusinessAdmin) || 
+               await _identityRepository.IsEmailInUse(email, Roles.StandardPortalUser) || 
+               await _pendingIdentityRepository.IsEmailInUse(email, Roles.BusinessAdmin) || 
+               await _pendingIdentityRepository.IsEmailInUse(email, Roles.StandardPortalUser))
+            {
+                _logger.LogWarning($"Create user failed as a user with {email} already exists.");
+                throw new VmsException(Codes.EmailInUse, $"The email: {email} already has an account registered with it.");
+            }
+
+            if(!await _businessRepository.ContainsBusinessAsync(businessId))
+            {
+                _logger.LogWarning("The business id used cannot be found.");
+                throw new VmsException(Codes.BusinessNotFound, "The business with the id cannot be found");
+            }
+
+            var pending = new PendingIdentity(Guid.NewGuid(), email, Roles.StandardPortalUser, businessId);
+            await _pendingIdentityRepository.AddAsync(pending);
+            _logger.LogInformation($"User account registration created with code: {pending.Id}. for user with email: {pending.Email}");
+            //TODO: Send email to user through email Service.
         }
     }
 }

@@ -7,5 +7,6 @@ namespace Services.Common.Jwt
         string CreateToken(Guid id, string email, string role);
 
         bool IsTokenValid(string encodedToken);
+        string CreateToken(Guid identityId, string identityEmail, string identityRole, Guid identityBusinessId);
     }
 }

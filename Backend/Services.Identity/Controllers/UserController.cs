@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Common.Base;
+using Services.Common.Exceptions;
 using Services.Common.Jwt;
 using Services.Identity.Messages.Commands;
 using Services.Identity.Services;
@@ -33,6 +34,16 @@ namespace Services.Identity.Controllers
             await _userService.CompleteUser(command.Code, command.Email, command.Password,
                 command.PasswordConfirmation);
 
+            return Ok();
+        }
+
+        [Authorize(Roles = Roles.BusinessAdmin)]
+        [HttpPost("create")]
+        public async Task<IActionResult> Create([FromBody] CreateUserAccount command)
+        {
+            var id = User.Claims.FirstOrDefault(c => c.Type == CustomClaims.BusinessIdClaim);
+            if (id == null) return Unauthorized();
+            await _userService.CreateUser(command.Email, Guid.Parse(id.Value));
             return Ok();
         }
 

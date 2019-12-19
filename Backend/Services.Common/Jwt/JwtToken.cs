@@ -35,6 +35,10 @@ namespace Services.Common.Jwt
             {
                 Id = Guid.Parse(id.ToString());
             }
+            if(dictionary.TryGetValue(CustomClaims.BusinessIdClaim, out object businessId))
+            {
+                BusinessId = Guid.Parse((string) businessId);
+            }
 
         }
 
@@ -67,5 +71,6 @@ namespace Services.Common.Jwt
         public IEnumerable<Claim> Claims { get; private set; }
 
         public DateTime Expiry { get; private set; }
+        public Guid BusinessId { get; private set; }
     }
 }

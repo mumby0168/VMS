@@ -37,6 +37,24 @@ namespace Services.Common.Jwt
             return _jwtSecurityTokenHandler.WriteToken(token);
         }
 
+        public string CreateToken(Guid id, string email, string role, Guid businessId)
+        {
+            var descriptor = _jwtFactory.CreateTokenDescriptor();
+            var claims = new List<Claim>
+            {
+                _jwtFactory.CreateClaim(ClaimTypes.Email, email),
+                _jwtFactory.CreateClaim(ClaimTypes.NameIdentifier, id.ToString()),
+                _jwtFactory.CreateClaim(ClaimTypes.Role, role),
+                _jwtFactory.CreateClaim(CustomClaims.BusinessIdClaim, businessId.ToString())
+            };
+            var identity = _jwtFactory.CreateClaimsIdentity(claims);
+            descriptor.Subject = identity;
+            descriptor.Expires = DateTime.Now.AddHours(3);
+            descriptor.SigningCredentials = _jwtFactory.CreateSigningCredentials(_configuration.GetSection("jwt:secret").Value, SecurityAlgorithms.HmacSha512Signature);
+            var token = _jwtSecurityTokenHandler.CreateToken(descriptor);
+            return _jwtSecurityTokenHandler.WriteToken(token);
+        }
+
         public bool IsTokenValid(string encodedToken)
         {
             var key = _configuration.GetSection("jwt:secret").Value;

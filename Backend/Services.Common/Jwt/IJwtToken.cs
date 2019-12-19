@@ -16,5 +16,7 @@ namespace Services.Common.Jwt
         IEnumerable<Claim> Claims { get; }
 
         DateTime Expiry { get; }
+
+        Guid BusinessId { get; }
     }
 }

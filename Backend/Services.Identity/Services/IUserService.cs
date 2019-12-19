@@ -15,5 +15,7 @@ namespace Services.Identity.Services
 
         Task InitiatePasswordReset(string email);
         Task ResetPassword(Guid code, string email, string password, string passwordConfirm);
+
+        Task CreateUser(string email, Guid businessId);
     }
 }

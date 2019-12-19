@@ -1,6 +1,6 @@
 @url = http://localhost:5020/gateway/api/
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW4xQHRlc3QuY29tIiwibmFtZWlkIjoiMmNlYzQ5MmYtODgzYi00MjFmLTlmMTItYjhmNDUzOWE0MGZlIiwicm9sZSI6IkJ1c2luZXNzQWRtaW4iLCJuYmYiOjE1NzY2ODQ5MjMsImV4cCI6MTU3NjY5NTcyMywiaWF0IjoxNTc2Njg0OTIzfQ.EA7KELltOYzWCGJtishodj3o5XvwNzBFZgWl2b74MwjutpLdoWYNqPgizuKHHlsQVJLseXGriohWMomFB4PEhQ
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItc3RhbmRhcmRAdGVzdC5jb20iLCJuYW1laWQiOiI3NTc5ODViNC1lZDk3LTQ0MzQtOTkzNC0xMzg0Njg3ZTIwMmQiLCJyb2xlIjoiU3RhbmRhcmQiLCJidXNpbmVzc0lkIjoiNGU2MDE0M2QtMmE0OS00ZjZjLWEwNjktMmI4NGRlYjY3NjQxIiwibmJmIjoxNTc2NzUyNDk4LCJleHAiOjE1NzY3NjMyOTgsImlhdCI6MTU3Njc1MjQ5OH0.1d4Hn34HtblfIbbfs7ae7Gtd54LK6uhvQ9VE3xuoNqrqaJi8nIFpw3VZvkg3nsv-riyjO95gFAfKe7hbSnnYYQ
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
@@ -42,7 +42,7 @@ Authorization: Bearer {{jwt}}
 
 ### Update Business Details
 
-@businessiD = 3e779db5-3382-4993-83b4-eff7b6767719
+@businessiD = 4e60143d-2a49-4f6c-a069-2b84deb67641
 
 POST {{url}}businesses/update-details
 Content-Type: application/json
@@ -178,9 +178,9 @@ Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
-    "accountId": "be0b8195-d2ca-4ffa-8551-77b65eec939e",
-    "basedSiteId": "{{businessiD}}",
-    "businessId": "{{businessiD}}",
+    "accountId": "757985b4-ed97-4434-9934-1384687e202d",
+    "basedSiteId": "aef48a96-1db9-488f-9cbf-034aab882f4b",
+    "businessId": "4e60143d-2a49-4f6c-a069-2b84deb67641",
     "firstName": "Joe",
     "secondName": "Bloggs",
     "phoneNumber": "07568 567343",

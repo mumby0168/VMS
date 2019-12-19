@@ -42,15 +42,8 @@ namespace Services.Identity.Domain
 
         public Identity(string email, byte[] hash, byte[] salt, string role, Guid businessId)
         {
-
-            if (role != Roles.SystemAdmin)
-            {
-
-            }
-
             BusinessId = businessId;
             Id = new Guid();
-            BusinessId = Guid.Empty;
             Email = email;
             Hash = hash;
             Salt = salt;

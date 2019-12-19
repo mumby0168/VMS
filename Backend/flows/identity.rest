@@ -1,17 +1,17 @@
 @url = http://localhost:5010
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzY2ODEyNzMsImV4cCI6MTU3NjY5MjA3MywiaWF0IjoxNTc2NjgxMjczfQ.gWMSlsxJ3LmqLtVXAXVcFw9yL6dTGAK_6NiZqpIeh-l-17NhUSWwV9VcRnDLIUoie9GBqSxwJoz0dWtue2-uAA
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItc3RhbmRhcmRAdGVzdC5jb20iLCJuYW1laWQiOiI3NTc5ODViNC1lZDk3LTQ0MzQtOTkzNC0xMzg0Njg3ZTIwMmQiLCJyb2xlIjoiU3RhbmRhcmQiLCJidXNpbmVzc0lkIjoiNGU2MDE0M2QtMmE0OS00ZjZjLWEwNjktMmI4NGRlYjY3NjQxIiwibmJmIjoxNTc2NzUyNDk4LCJleHAiOjE1NzY3NjMyOTgsImlhdCI6MTU3Njc1MjQ5OH0.1d4Hn34HtblfIbbfs7ae7Gtd54LK6uhvQ9VE3xuoNqrqaJi8nIFpw3VZvkg3nsv-riyjO95gFAfKe7hbSnnYYQ
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
-### sign in portal
+### sign in portal (standard || admin)
 
 POST {{url}}/api/users/sign-in
 Content-Type: application/json
 
 {
-    "email": "b-admin3@test.com",
-    "password": "Test123s"
+    "email": "b-standard@test.com",
+    "password": "Test123"
 }
 
 ### sign in admin
@@ -86,6 +86,16 @@ Authorization: Bearer {{jwt}}
     "businessId": "{{BusinessId}}"
 }
 
+### Create Standard User
+POST {{url}}/api/users/create
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "email": "b-standard@test.com",
+    "businessId": "{{BusinessId}}"
+}
+
 
 ### Complete User
 
@@ -93,8 +103,8 @@ POST {{url}}/api/users/complete
 Content-Type: application/json
 
 {
-    "email": "b-admin3@test.com",
-    "code": "a50af5c4-c03a-4b74-a780-758c56b39e6a",
+    "email": "b-standard@test.com",
+    "code": "e7e5e7dc-9fb5-47b0-89b6-ac18a5abf000",
     "password": "Test123",
     "passwordConfirmation": "Test123"
 }
