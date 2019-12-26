@@ -62,5 +62,7 @@ namespace Services.Identity.Controllers
             await _userService.ResetPassword(command.Code, command.Email, command.Password, command.PasswordConfirm);
             return Ok();
         }
+
+        
     }
 }

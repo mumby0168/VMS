@@ -29,6 +29,7 @@ namespace Services.Users
             serviceCollection.AddTransient<IEventHandler<UserAccountCreated>, UserAccountCreatedHandler>();
 
             serviceCollection.AddTransient<ICommandHandler<CreateUser>, CreateUserHandler>();
+            serviceCollection.AddTransient<ICommandHandler<CreateAccessRecord>, CreateAccessRecordHandler>();
 
             return serviceCollection;
         }

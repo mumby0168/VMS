@@ -1,6 +1,6 @@
 @url = http://localhost:5020/gateway/api/
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItc3RhbmRhcmRAdGVzdC5jb20iLCJuYW1laWQiOiI3NTc5ODViNC1lZDk3LTQ0MzQtOTkzNC0xMzg0Njg3ZTIwMmQiLCJyb2xlIjoiU3RhbmRhcmQiLCJidXNpbmVzc0lkIjoiNGU2MDE0M2QtMmE0OS00ZjZjLWEwNjktMmI4NGRlYjY3NjQxIiwibmJmIjoxNTc2NzUyNDk4LCJleHAiOjE1NzY3NjMyOTgsImlhdCI6MTU3Njc1MjQ5OH0.1d4Hn34HtblfIbbfs7ae7Gtd54LK6uhvQ9VE3xuoNqrqaJi8nIFpw3VZvkg3nsv-riyjO95gFAfKe7hbSnnYYQ
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItc3RhbmRhcmRAdGVzdC5jb20iLCJuYW1laWQiOiI3NTc5ODViNC1lZDk3LTQ0MzQtOTkzNC0xMzg0Njg3ZTIwMmQiLCJyb2xlIjoiU3RhbmRhcmQiLCJidXNpbmVzc0lkIjoiNGU2MDE0M2QtMmE0OS00ZjZjLWEwNjktMmI4NGRlYjY3NjQxIiwibmJmIjoxNTc2OTMzMDU3LCJleHAiOjE1NzY5NDM4NTcsImlhdCI6MTU3NjkzMzA1N30.UtG_a9021fKhYdSMGzAvhrMqAmTY0uMj1dGfNpnsQHobpnsmdgBL2QdYARXjJIGB4gVGI5Qg0HGq2ut6VHX3_w
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
@@ -186,3 +186,25 @@ Authorization: Bearer {{jwt}}
     "phoneNumber": "07568 567343",
     "businessPhoneNumber": "01482 564323"
 }
+
+@userId = 732e94ce-dc19-4cbd-b976-e210b2e6d56a
+
+### In User
+POST {{url}}users/in
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "userId": "{{userId}}"
+}
+
+
+### Out User
+POST {{url}}users/out
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "userId": "{{userId}}"
+}
+

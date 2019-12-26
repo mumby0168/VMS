@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Api.Gateway.Clients.Interfaces;
+using Api.Gateway.Dtos.Users;
 using Api.Gateway.Messages.Users.Commands;
 using Api.Gateway.Messages.Users.Enums;
 using Microsoft.AspNetCore.Authorization;
@@ -14,8 +17,11 @@ namespace Api.Gateway.Controllers
     [Route("gateway/api/users/")]
     public class UsersController : GatewayControllerBase
     {
-        public UsersController(IDispatcher dispatcher) : base(dispatcher)
+        private readonly IUsersClient _client;
+
+        public UsersController(IDispatcher dispatcher, IUsersClient client) : base(dispatcher)
         {
+            _client = client;
         }
 
         [Authorize(Roles = Roles.PortalUser)]
@@ -23,13 +29,24 @@ namespace Api.Gateway.Controllers
         public IActionResult Create([FromBody] CreateUser command) => PublishCommand(command);
 
         //TODO: decide on security restriction for this.
+        [AllowAnonymous]
         [HttpPost("in")]
-        public IActionResult SignOn(UserSignOn command) =>
+        public IActionResult SignOn([FromBody]UserSignOn command) =>
             PublishCommand(new CreateAccessRecord(command.UserId, AccessAction.In));
 
         //TODO: decide on security restriction for this.
+        [AllowAnonymous]
         [HttpPost("out")]
-        public IActionResult SignOn(UserSignOff command) =>
+        public IActionResult SignOn([FromBody]UserSignOff command) =>
             PublishCommand(new CreateAccessRecord(command.UserId, AccessAction.Out));
+
+        [Authorize(Roles = Roles.PortalUser)]
+        [HttpGet("records")]
+        public async Task<ActionResult<IEnumerable<AccessRecordDto>>> GetRecords()
+        {
+            var accountId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            if (accountId is null) return Unauthorized();
+            return Ok(await _client.GetAccessRecordForUserAsync(Guid.Parse(accountId.Value)));
+        }
     }
 }

@@ -29,7 +29,8 @@ namespace Services.Users
             services.AddServiceBus();
             services.AddMongo()
                 .AddMongoCollection<User>()
-                .AddMongoCollection<Account>();
+                .AddMongoCollection<Account>()
+                .AddMongoCollection<AccessRecord>();
 
             services.AddConvey().AddHttpClient();
 
@@ -52,7 +53,8 @@ namespace Services.Users
             app.UseMongo(ServiceNames.Users);
             app.UseServiceBus(ServiceNames.Users)
                 .SubscribeEvent<UserAccountCreated>()
-                .SubscribeCommand<CreateUser>();
+                .SubscribeCommand<CreateUser>()
+                .SubscribeCommand<CreateAccessRecord>();
 
             app.UseUdpLogging(ServiceNames.Users);
 
