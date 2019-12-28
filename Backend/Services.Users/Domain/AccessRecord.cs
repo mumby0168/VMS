@@ -7,12 +7,12 @@ namespace Services.Users.Domain
 {
     public class AccessRecord : IAccessRecord
     {
-        public Guid Id { get; }
-        public Guid UserId { get; }
-        public Guid SiteId { get; }
-        public Guid BusinessId { get; }
-        public DateTime TimeStamp { get; }
-        public AccessAction Action { get; }
+        public Guid Id { get; private set; }
+        public Guid UserId { get; private set; }
+        public Guid SiteId { get; private set; }
+        public Guid BusinessId { get; private set; }
+        public DateTime TimeStamp { get; private set; }
+        public AccessAction Action { get; private set; }
         public IAccessRecord Create(Guid userId, Guid siteId, AccessAction action, Guid businessId)
         {
             return new AccessRecord(userId, siteId, action, businessId);

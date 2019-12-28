@@ -1,6 +1,6 @@
 @url = http://localhost:5020/gateway/api/
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItc3RhbmRhcmRAdGVzdC5jb20iLCJuYW1laWQiOiI3NTc5ODViNC1lZDk3LTQ0MzQtOTkzNC0xMzg0Njg3ZTIwMmQiLCJyb2xlIjoiU3RhbmRhcmQiLCJidXNpbmVzc0lkIjoiNGU2MDE0M2QtMmE0OS00ZjZjLWEwNjktMmI4NGRlYjY3NjQxIiwibmJmIjoxNTc2OTMzMDU3LCJleHAiOjE1NzY5NDM4NTcsImlhdCI6MTU3NjkzMzA1N30.UtG_a9021fKhYdSMGzAvhrMqAmTY0uMj1dGfNpnsQHobpnsmdgBL2QdYARXjJIGB4gVGI5Qg0HGq2ut6VHX3_w
+@jwt =eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItc3RhbmRhcmRAdGVzdC5jb20iLCJuYW1laWQiOiI3NTc5ODViNC1lZDk3LTQ0MzQtOTkzNC0xMzg0Njg3ZTIwMmQiLCJyb2xlIjoiU3RhbmRhcmQiLCJidXNpbmVzc0lkIjoiNGU2MDE0M2QtMmE0OS00ZjZjLWEwNjktMmI4NGRlYjY3NjQxIiwibmJmIjoxNTc3NTUwMjY2LCJleHAiOjE1Nzc1NjEwNjYsImlhdCI6MTU3NzU1MDI2Nn0.FA0q3bLhR54kP0vqxoW059LVSYRThaJreXsVS0uHhPz6A1tJfpHSkERCk-60fB2CunhTtukhUiMDAstv1qQ6JA
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
@@ -207,4 +207,10 @@ Authorization: Bearer {{jwt}}
 {
     "userId": "{{userId}}"
 }
+
+
+### Get User Access Records
+
+GET {{url}}users/records
+Authorization: Bearer {{jwt}}
 

@@ -4,10 +4,13 @@ using Services.Common.Queries;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.Users.Commands;
 using Services.Users.Domain;
+using Services.Users.Dtos;
 using Services.Users.Events;
 using Services.Users.Factories;
 using Services.Users.Handlers.Command;
 using Services.Users.Handlers.Events;
+using Services.Users.Handlers.Queries;
+using Services.Users.Queries;
 using Services.Users.Repositories;
 using Services.Users.Services;
 
@@ -27,6 +30,10 @@ namespace Services.Users
             serviceCollection.AddTransient<IAccessRecordRepository, AccessRecordRepository>();
 
             serviceCollection.AddTransient<IEventHandler<UserAccountCreated>, UserAccountCreatedHandler>();
+
+            serviceCollection
+                .AddTransient<IQueryHandler<GetPersonalAccessRecords, IEnumerable<AccessRecordDto>>,
+                    GetPersonalAccessRecordsHandler>();
 
             serviceCollection.AddTransient<ICommandHandler<CreateUser>, CreateUserHandler>();
             serviceCollection.AddTransient<ICommandHandler<CreateAccessRecord>, CreateAccessRecordHandler>();

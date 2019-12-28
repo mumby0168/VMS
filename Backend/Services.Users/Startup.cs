@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Services.Common.Logging;
 using Services.Common.Mongo;
 using Services.Common.Names;
+using Services.Common.Queries;
 using Services.RabbitMq.Extensions;
 using Services.Users.Commands;
 using Services.Users.Domain;
@@ -27,10 +28,13 @@ namespace Services.Users
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddServiceBus();
-            services.AddMongo()
+            services.AddControllers();
+                services.AddMongo()
                 .AddMongoCollection<User>()
                 .AddMongoCollection<Account>()
                 .AddMongoCollection<AccessRecord>();
+
+            services.AddQuerySupport();
 
             services.AddConvey().AddHttpClient();
 
@@ -62,6 +66,7 @@ namespace Services.Users
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapDefaultControllerRoute();
                 endpoints.MapGet("/", async context =>
                 {
                     await context.Response.WriteAsync(ServiceNames.Users);

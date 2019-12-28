@@ -18,9 +18,9 @@ namespace Services.Users.Repositories
         public Task AddAsync(IAccessRecord record) => 
             _repository.AddAsync(record as AccessRecord);
 
-        public Task<IEnumerable<IAccessRecord>> GetForUser(Guid userId)
+        public async Task<IEnumerable<IAccessRecord>> GetForUser(Guid userId)
         {
-            throw new NotImplementedException();
+            return await _repository.FindAsync(r => r.UserId == userId);
         }
 
         public Task<IEnumerable<IAccessRecord>> GetForSite(Guid siteId)
