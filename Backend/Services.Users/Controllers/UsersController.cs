@@ -22,5 +22,7 @@ namespace Services.Users.Controllers
         {
             return Ok(await _repository.GetAllAsync());
         }
+
+
     }
 }

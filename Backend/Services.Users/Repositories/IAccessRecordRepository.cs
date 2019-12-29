@@ -11,5 +11,6 @@ namespace Services.Users.Repositories
         Task AddAsync(IAccessRecord record);
         Task<IEnumerable<IAccessRecord>> GetForUser(Guid userId);
         Task<IEnumerable<IAccessRecord>> GetForSite(Guid siteId);
+        Task<IEnumerable<AccessRecord>> GetForBusiness(Guid businessId);
     }
 }

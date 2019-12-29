@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Api.Gateway.Clients.Interfaces;
@@ -47,6 +48,15 @@ namespace Api.Gateway.Controllers
             var accountId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
             if (accountId is null) return Unauthorized();
             return Ok(await _client.GetAccessRecordForUserAsync(Guid.Parse(accountId.Value)));
+        }
+
+        [Authorize(Roles = Roles.BusinessAdmin)]
+        [HttpGet("business-records")]
+        public async Task<ActionResult<IEnumerable<SiteAccessDetailsDto>>> GetBusinessRecords()
+        {
+            var businessId = HttpContext.User.Claims.FirstOrDefault(u => u.Type == CustomClaims.BusinessIdClaim);
+            if (businessId is null) return Unauthorized();
+            return Ok(await _client.GetBusinessAccessRecordsAsync(Guid.Parse(businessId.Value)));
         }
     }
 }

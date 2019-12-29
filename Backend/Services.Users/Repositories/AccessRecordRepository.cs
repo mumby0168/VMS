@@ -27,5 +27,10 @@ namespace Services.Users.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public async Task<IEnumerable<AccessRecord>> GetForBusiness(Guid businessId)
+        {
+            return await _repository.FindAsync(a => a.BusinessId == businessId);
+        }
     }
 }

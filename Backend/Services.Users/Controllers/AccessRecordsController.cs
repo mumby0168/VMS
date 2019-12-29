@@ -27,5 +27,13 @@ namespace Services.Users.Controllers
             return Collection(await _dispatcher.Dispatch<GetPersonalAccessRecords, IEnumerable<AccessRecordDto>>(
                 new GetPersonalAccessRecords(userId)));
         }
+
+        [HttpGet("business-records/{businessId}")]
+        public async Task<ActionResult<IEnumerable<SiteAccessDetailsDto>>> GetBusinessRecords([FromRoute] Guid businessId)
+        {
+            return Collection(
+                await _dispatcher.Dispatch<GetBusinessAccessRecords, IEnumerable<SiteAccessDetailsDto>>(
+                    new GetBusinessAccessRecords(businessId)));
+        }
     }
 }
