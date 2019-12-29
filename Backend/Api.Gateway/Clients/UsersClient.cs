@@ -18,7 +18,7 @@ namespace Api.Gateway.Clients
             _baseAddress = options.Services["users"];
             _client = client;
         }
-        public Task<IEnumerable<AccessRecordDto>> GetAccessRecordForUserAsync(Guid userId) =>
-            _client.GetAsync<IEnumerable<AccessRecordDto>>($"{_baseAddress}/records/{userId}");
+        public Task<IEnumerable<AccessRecordDto>> GetAccessRecordForUserAsync(Guid accountId) =>
+            _client.GetAsync<IEnumerable<AccessRecordDto>>($"{_baseAddress}/records/{accountId}");
     }
 }

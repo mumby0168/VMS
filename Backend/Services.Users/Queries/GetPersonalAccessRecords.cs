@@ -8,11 +8,11 @@ namespace Services.Users.Queries
 {
     public class GetPersonalAccessRecords : IQuery
     {
-        public Guid UserId { get; set; }
+        public Guid AccountId { get; set; }
 
-        public GetPersonalAccessRecords(Guid userId)
+        public GetPersonalAccessRecords(Guid accountId)
         {
-            UserId = userId;
+            AccountId = accountId;
         }
     }
 }

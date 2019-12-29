@@ -11,5 +11,6 @@ namespace Services.Users.Repositories
         Task AddAsync(IUser user);
 
         Task<IUser> GetAsync(Guid id);
+        Task<IUser> GetFromAccountId(Guid accountId);
     }
 }

@@ -8,6 +8,6 @@ namespace Api.Gateway.Clients.Interfaces
 {
     public interface IUsersClient
     {
-        Task<IEnumerable<AccessRecordDto>> GetAccessRecordForUserAsync(Guid userId);
+        Task<IEnumerable<AccessRecordDto>> GetAccessRecordForUserAsync(Guid accountId);
     }
 }

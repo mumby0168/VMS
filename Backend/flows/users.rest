@@ -1,0 +1,6 @@
+@url = http://localhost:5017/users/api
+
+
+### Get all users
+
+GET {{url}}/users

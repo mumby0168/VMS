@@ -26,5 +26,10 @@ namespace Services.Users.Repositories
             var user = await _repository.GetAsync(id);
             return user;
         }
+
+        public async Task<IUser> GetFromAccountId(Guid accountId)
+        {
+            return await _repository.GetAsync(u => u.AccountId == accountId);
+        }
     }
 }

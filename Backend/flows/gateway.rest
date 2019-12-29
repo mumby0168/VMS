@@ -1,12 +1,12 @@
 @url = http://localhost:5020/gateway/api/
 
-@jwt =eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItc3RhbmRhcmRAdGVzdC5jb20iLCJuYW1laWQiOiI3NTc5ODViNC1lZDk3LTQ0MzQtOTkzNC0xMzg0Njg3ZTIwMmQiLCJyb2xlIjoiU3RhbmRhcmQiLCJidXNpbmVzc0lkIjoiNGU2MDE0M2QtMmE0OS00ZjZjLWEwNjktMmI4NGRlYjY3NjQxIiwibmJmIjoxNTc3NTUwMjY2LCJleHAiOjE1Nzc1NjEwNjYsImlhdCI6MTU3NzU1MDI2Nn0.FA0q3bLhR54kP0vqxoW059LVSYRThaJreXsVS0uHhPz6A1tJfpHSkERCk-60fB2CunhTtukhUiMDAstv1qQ6JA
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItc3RhbmRhcmRAdGVzdC5jb20iLCJuYW1laWQiOiI3NTc5ODViNC1lZDk3LTQ0MzQtOTkzNC0xMzg0Njg3ZTIwMmQiLCJyb2xlIjoiU3RhbmRhcmQiLCJidXNpbmVzc0lkIjoiNGU2MDE0M2QtMmE0OS00ZjZjLWEwNjktMmI4NGRlYjY3NjQxIiwibmJmIjoxNTc3NjIzNTUwLCJleHAiOjE1Nzc2MzQzNTAsImlhdCI6MTU3NzYyMzU1MH0.c2l_eIel17zsbaitok_8AIe_H3lCLmXIPDCCjkwke_8HMiS5KWRDWAuKumdnxtO2tXaW7HmWzy1WfMAuGMkcSQ
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
 ### Get Operations
 
-GET {{url}}operations/dc678925-7189-4b62-9b6d-ad4bf6e3676a
+GET {{url}}operations/2b122f24-e2c2-48a2-9a30-a6e5aeef5d3d
 
 
 ### Create Business
@@ -211,6 +211,6 @@ Authorization: Bearer {{jwt}}
 
 ### Get User Access Records
 
-GET {{url}}users/records
+GET {{url}}users/records/
 Authorization: Bearer {{jwt}}
 
