@@ -50,7 +50,7 @@ namespace Services.Sites.Handlers.Command
                     message.AddressLine2, contact);
 
                 await _siteRepository.AddAsync(site);
-                _publisher.PublishEvent(new SiteCreated(site.Id), requestInfo);
+                _publisher.PublishEvent(new SiteCreated(site.Id, site.Name), requestInfo);
             }
             catch (VmsException e)
             {

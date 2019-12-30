@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Services.RabbitMq.Interfaces.Messaging;
 
-namespace Services.Sites.Messages.Events.Send
+namespace Services.Users.Events
 {
     public class SiteCreated : IEvent
     {

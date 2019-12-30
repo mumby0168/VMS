@@ -29,10 +29,11 @@ namespace Services.Users
         {
             services.AddServiceBus();
             services.AddControllers();
-                services.AddMongo()
+            services.AddMongo()
                 .AddMongoCollection<User>()
                 .AddMongoCollection<Account>()
-                .AddMongoCollection<AccessRecord>();
+                .AddMongoCollection<AccessRecord>()
+                .AddMongoCollection<Site>();
 
             services.AddQuerySupport();
 
@@ -58,7 +59,8 @@ namespace Services.Users
             app.UseServiceBus(ServiceNames.Users)
                 .SubscribeEvent<UserAccountCreated>()
                 .SubscribeCommand<CreateUser>()
-                .SubscribeCommand<CreateAccessRecord>();
+                .SubscribeCommand<CreateAccessRecord>()
+                .SubscribeEvent<SiteCreated>();
 
             app.UseUdpLogging(ServiceNames.Users);
 

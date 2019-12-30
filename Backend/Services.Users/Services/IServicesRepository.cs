@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Services.Users.Services.Dtos;
 
 namespace Services.Users.Services
 {
@@ -10,5 +11,7 @@ namespace Services.Users.Services
         Task<bool> IsSiteIdValid(Guid siteId);
 
         Task<bool> IsBusinessIdValid(Guid businessId);
+
+        Task<string> GetSiteNameAsync(Guid siteId);
     }
 }

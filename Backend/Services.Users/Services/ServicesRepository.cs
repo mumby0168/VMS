@@ -33,5 +33,11 @@ namespace Services.Users.Services
             var business = await _client.GetAsync<BusinessDto>($"{_businessAddress}/{businessId}");
             return business != null;
         }
+
+        public async Task<string> GetSiteNameAsync(Guid siteId)
+        {
+            var site = await _client.GetAsync<SiteDto>($"{_siteAddress}/{siteId}");
+            return site?.Name;
+        }
     }
 }
