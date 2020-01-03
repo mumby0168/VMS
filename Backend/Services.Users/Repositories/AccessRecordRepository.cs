@@ -23,9 +23,9 @@ namespace Services.Users.Repositories
             return await _repository.FindAsync(r => r.UserId == userId);
         }
 
-        public Task<IEnumerable<IAccessRecord>> GetForSite(Guid siteId)
+        public async Task<IEnumerable<IAccessRecord>> GetForSite(Guid siteId)
         {
-            throw new NotImplementedException();
+            return await _repository.FindAsync(a => a.SiteId == siteId);
         }
 
         public async Task<IEnumerable<AccessRecord>> GetForBusiness(Guid businessId)

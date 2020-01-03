@@ -41,6 +41,7 @@ namespace Services.Users.Handlers.Command
                 return;
             }
 
+            //TODO: take site id as a param.
             var record = _factory.Create(message.UserId, user.BasedSiteId, message.Action, user.BusinessId);
             await _accessRecordRepository.AddAsync(record);
             _publisher.PublishEvent(new AccessRecordCreated(), requestInfo);

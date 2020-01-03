@@ -28,5 +28,8 @@ namespace Services.Sites.Controllers
 
         [HttpGet("resources/{siteId}")]
         public async Task<IActionResult> GetResources([FromRoute] Guid siteId) => Single(await _dispatcher.Dispatch<GetSiteResources, IEnumerable<SiteResourceDto>>(new GetSiteResources(siteId)));
+
+        [HttpGet("availability/{siteId}")]
+        public async Task<IActionResult> GetAvailability([FromRoute] Guid siteId) => Single(await _dispatcher.Dispatch<GetSiteAvailability, SiteAvailabilityDto>(new GetSiteAvailability(siteId)));
     }
 }

@@ -12,6 +12,7 @@ using Services.Sites.Messages.Commands;
 using Services.Sites.Messages.Events;
 using Services.Sites.Messages.Queries;
 using Services.Sites.Repositorys;
+using Services.Sites.Services;
 
 namespace Services.Sites
 {
@@ -23,6 +24,7 @@ namespace Services.Sites
             serviceCollection.AddTransient<IBusinessRepository, BusinessRepository>();
             serviceCollection.AddTransient<ISiteRepository, SiteRepository>();
             serviceCollection.AddTransient<ISiteResourceRepository, SiteResourceRepository>();
+            serviceCollection.AddTransient<ISystemServices, SystemServices>();
 
             //command handlers
             serviceCollection.AddTransient<ICommandHandler<CreateSite>, CreateSiteHandler>();
@@ -38,6 +40,7 @@ namespace Services.Sites
             serviceCollection.AddTransient<IQueryHandler<GetSite, SiteDto>, GetSiteHandler>();
             serviceCollection.AddTransient<IQueryHandler<GetSiteSummaries, IEnumerable<SiteSummaryDto>>, GetSiteSummariesHandler>();
             serviceCollection.AddTransient<IQueryHandler<GetSiteResources, IEnumerable<SiteResourceDto>>, GetSiteResourcesHandler>();
+            serviceCollection.AddTransient<IQueryHandler<GetSiteAvailability, SiteAvailabilityDto>, GetSiteAvailabilityHandler>();
 
             return serviceCollection;
         }

@@ -4,3 +4,10 @@
 ### Get all users
 
 GET {{url}}/users
+
+
+### Get Site Availability 
+
+@siteId = aef48a96-1db9-488f-9cbf-034aab882f4b
+
+GET {{url}}/site-availability/{{siteId}}

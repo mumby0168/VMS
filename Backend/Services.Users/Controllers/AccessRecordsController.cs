@@ -35,5 +35,12 @@ namespace Services.Users.Controllers
                 await _dispatcher.Dispatch<GetBusinessAccessRecords, IEnumerable<SiteAccessDetailsDto>>(
                     new GetBusinessAccessRecords(businessId)));
         }
+
+        [HttpGet("site-availability/{siteId}")]
+        public async Task<ActionResult<IEnumerable<LatestAccessRecordDto>>> GetLatestSiteRecords([FromRoute] Guid siteId)
+        {
+            return Collection(
+                await _dispatcher.Dispatch<GetLatestSiteAccessRecords, IEnumerable<LatestAccessRecordDto>>(new GetLatestSiteAccessRecords(siteId)));
+        }
     }
 }

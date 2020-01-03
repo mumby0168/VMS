@@ -13,5 +13,8 @@ namespace Api.Gateway.Clients.Interfaces
         Task<SiteDto> GetSite(Guid siteId);
 
         Task<IEnumerable<SiteResourceDto>> GetResourcesForSite(Guid siteId);
+
+        Task<SiteAvailabilityDto> GetSiteAvailabilityAsync(Guid siteId);
     }
 }
+        

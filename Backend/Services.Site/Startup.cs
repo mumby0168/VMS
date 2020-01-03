@@ -1,3 +1,5 @@
+using Convey;
+using Convey.HTTP;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -26,6 +28,8 @@ namespace Services.Sites
                 .AddMongoCollection<Site>()
                 .AddMongoCollection<Business>()
                 .AddMongoCollection<SiteResource>();
+
+            services.AddConvey().AddHttpClient();
 
             services.AddQuerySupport();
 
