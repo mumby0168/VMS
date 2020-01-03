@@ -9,7 +9,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Api.Gateway.Messages.Sites
 {
-    [MicroService(ServiceNames.Sites)]
+    [MicroService(Services.Common.Names.Services.Sites)]
     public class CreateSiteResource : ICommand
     {
         public Guid SiteId { get; }

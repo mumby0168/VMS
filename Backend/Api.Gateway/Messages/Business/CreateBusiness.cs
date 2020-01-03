@@ -9,7 +9,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Api.Gateway.Messages.Business
 {
-    [MicroService(ServiceNames.Businesses)]
+    [MicroService(Services.Common.Names.Services.Businesses)]
     public class CreateBusiness : ICommand
     {
         public string Name { get; }

@@ -40,9 +40,9 @@ namespace Services.Test
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseUdpLogging(ServiceNames.Logs);
+            app.UseUdpLogging(Common.Names.Services.Logs);
 
-            app.UseServiceBus(ServiceNames.Test, true)
+            app.UseServiceBus(Common.Names.Services.Test, true)
                 .SubscribeCommand<TestCommand>().SubscribeCommand<IssueCommand>();
 
 
@@ -53,7 +53,7 @@ namespace Services.Test
                 endpoints.MapGet("/", async context =>
                 {
                     endpoints.MapControllers();
-                    await context.Response.WriteAsync(ServiceNames.Test);
+                    await context.Response.WriteAsync(Common.Names.Services.Test);
                 });
             });
 

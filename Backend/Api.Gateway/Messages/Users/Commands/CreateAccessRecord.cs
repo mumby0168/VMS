@@ -7,7 +7,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Api.Gateway.Messages.Users.Commands
 {
-    [MicroService(ServiceNames.Users)]
+    [MicroService(Services.Common.Names.Services.Users)]
     public class CreateAccessRecord : ICommand
     {
         public Guid UserId { get; }

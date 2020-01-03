@@ -55,14 +55,14 @@ namespace Services.Users
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMongo(ServiceNames.Users);
-            app.UseServiceBus(ServiceNames.Users)
+            app.UseMongo(Common.Names.Services.Users);
+            app.UseServiceBus(Common.Names.Services.Users)
                 .SubscribeEvent<UserAccountCreated>()
                 .SubscribeCommand<CreateUser>()
                 .SubscribeCommand<CreateAccessRecord>()
                 .SubscribeEvent<SiteCreated>();
 
-            app.UseUdpLogging(ServiceNames.Users);
+            app.UseUdpLogging(Common.Names.Services.Users);
 
             app.UseRouting();
 
@@ -71,7 +71,7 @@ namespace Services.Users
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync(ServiceNames.Users);
+                    await context.Response.WriteAsync(Common.Names.Services.Users);
                 });
             });
         }

@@ -5,7 +5,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Services.Operations.Messages.Events.Sites.Rejected
 {
-    [MicroService(ServiceNames.Sites)]
+    [MicroService(Common.Names.Services.Sites)]
     public class CreateSiteRejected : IRejectedEvent
     {
         public string Code { get; }

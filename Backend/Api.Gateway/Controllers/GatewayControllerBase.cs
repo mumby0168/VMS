@@ -61,11 +61,11 @@ namespace Api.Gateway.Controllers
         {
             switch (service)
             {
-                case ServiceNames.Businesses:
+                case Services.Common.Names.Services.Businesses:
                     return CheckHealth("http://localhost:5013/business/status/api/pulse", command);
-                case ServiceNames.Sites:
+                case Services.Common.Names.Services.Sites:
                     return CheckHealth("http://localhost:5014/sites/status/api/pulse", command);
-                case ServiceNames.Operations:
+                case Services.Common.Names.Services.Operations:
                     return CheckHealth("http://localhost:5012/operations/status/api/pulse", command);
                 default:
                     throw new NotImplementedException();

@@ -9,7 +9,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Services.Operations.Messages.Commands.Test
 {
-    [MicroService(ServiceNames.Gateway)]
+    [MicroService(Common.Names.Services.Gateway)]
     public class TestCommand : ICommand
     {
         public bool IsPass { get; }

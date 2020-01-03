@@ -61,18 +61,18 @@ namespace Services.Push
                 opts.WithOrigins("http://localhost:3000");
             });
 
-            app.UseUdpLogging(ServiceNames.Push);
+            app.UseUdpLogging(Common.Names.Services.Push);
 
             app.UseRouting();
 
-            app.UseServiceBus(ServiceNames.Push).SubscribeAllMessages<PushServiceHandler>(Assembly.GetExecutingAssembly());
+            app.UseServiceBus(Common.Names.Services.Push).SubscribeAllMessages<PushServiceHandler>(Assembly.GetExecutingAssembly());
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<VmsHub>("/operations");
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync(ServiceNames.Push);
+                    await context.Response.WriteAsync(Common.Names.Services.Push);
                 });
             });
         }

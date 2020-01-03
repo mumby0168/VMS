@@ -5,7 +5,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Services.Users.Events
 {
-    [MicroService(ServiceNames.Identity)]
+    [MicroService(Common.Names.Services.Identity)]
     public class UserAccountCreated : IEvent
     {
         public Guid Id { get; }

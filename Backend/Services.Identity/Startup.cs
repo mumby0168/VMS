@@ -70,16 +70,16 @@ namespace Services.Identity
         {
             app.UseVmsExceptionHandler();
 
-            app.UseUdpLogging(ServiceNames.Identity);
+            app.UseUdpLogging(Common.Names.Services.Identity);
 
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseMongo(ServiceNames.Identity);
+            app.UseMongo(Common.Names.Services.Identity);
 
 
-            app.UseServiceBus(ServiceNames.Identity)
+            app.UseServiceBus(Common.Names.Services.Identity)
                 .SubscribeEvent<BusinessCreated>();
             
 
@@ -90,7 +90,7 @@ namespace Services.Identity
                 endpoints.MapControllers();
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync(ServiceNames.Identity);
+                    await context.Response.WriteAsync(Common.Names.Services.Identity);
                 });
             });
             

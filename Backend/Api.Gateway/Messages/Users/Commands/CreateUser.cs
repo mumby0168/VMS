@@ -6,7 +6,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Api.Gateway.Messages.Users.Commands
 {
-    [MicroService(ServiceNames.Users)]
+    [MicroService(Services.Common.Names.Services.Users)]
     public class CreateUser : ICommand
     {
         public Guid AccountId { get; }

@@ -9,7 +9,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Services.Identity.Messages.Events.Subscribed
 {
-    [MicroService(ServiceNames.Businesses)]
+    [MicroService(Common.Names.Services.Businesses)]
     public class BusinessCreated : IEvent
     {
         public Guid Id { get; }

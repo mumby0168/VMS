@@ -5,7 +5,7 @@ using SharpCompress.Archives.SevenZip;
 
 namespace Services.Common.Names
 {
-    public static class ServiceNames
+    public static class Services
     {
         private const string Prefix = "Services.";
         public const string Identity = Prefix + nameof(Identity);
@@ -23,5 +23,7 @@ namespace Services.Common.Names
         public static string Logs => Prefix + nameof(Logs);
 
         public const string Users = Prefix + nameof(Users);
+
+        public const string Visitors = Prefix + nameof(Visitors);
     }
 }

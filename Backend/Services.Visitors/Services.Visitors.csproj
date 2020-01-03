@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Services.Common\Services.Common.csproj" />
+    <ProjectReference Include="..\Services.RabbitMq\Services.RabbitMq.csproj" />
   </ItemGroup>
 
 </Project>

@@ -48,9 +48,9 @@ namespace Services.Sites
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMongo(ServiceNames.Sites);
+            app.UseMongo(Common.Names.Services.Sites);
 
-            app.UseServiceBus(ServiceNames.Sites)
+            app.UseServiceBus(Common.Names.Services.Sites)
                 .SubscribeCommand<CreateSite>()
                 .SubscribeCommand<UpdateSiteDetails>()
                 .SubscribeCommand<RemoveSiteResource>()
@@ -59,7 +59,7 @@ namespace Services.Sites
                 .SubscribeEvent<BusinessCreated>();
 
 
-            app.UseUdpLogging(ServiceNames.Sites);
+            app.UseUdpLogging(Common.Names.Services.Sites);
 
             app.UseRouting();
 
@@ -68,7 +68,7 @@ namespace Services.Sites
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync(ServiceNames.Sites);
+                    await context.Response.WriteAsync(Common.Names.Services.Sites);
                 });
             });
         }

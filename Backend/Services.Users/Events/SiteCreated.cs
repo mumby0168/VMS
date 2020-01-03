@@ -5,7 +5,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Services.Users.Events
 {
-    [MicroService(ServiceNames.Sites)]
+    [MicroService(Common.Names.Services.Sites)]
     public class SiteCreated : IEvent
     {
         public Guid Id { get; }

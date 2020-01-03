@@ -4,7 +4,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Services.Operations.Messages.Events.Users
 {
-    [MicroService(ServiceNames.Users)]
+    [MicroService(Common.Names.Services.Users)]
     public class AccessRecordCreated : IEvent
     {
     }

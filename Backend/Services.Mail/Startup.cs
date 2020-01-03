@@ -47,7 +47,7 @@ namespace Services.Mail
             }
 
             app.UseRouting();
-            app.UseServiceBus(ServiceNames.Mail)
+            app.UseServiceBus(Common.Names.Services.Mail)
                 .SubscribeEvent<PendingAdminCreated>()
                 .SubscribeEvent<PendingBusinessAdminCreated>();
 

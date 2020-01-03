@@ -39,6 +39,7 @@ namespace Api.Gateway
             services.AddTransient<IBusinessClient, BusinessClient>();
             services.AddTransient<ISiteClient, SiteClient>();
             services.AddTransient<IUsersClient, UsersClient>();
+            services.AddTransient<IVisitorsClient, VisitorClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,9 +50,9 @@ namespace Api.Gateway
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseUdpLogging(ServiceNames.Gateway);
+            app.UseUdpLogging(Services.Common.Names.Services.Gateway);
 ;
-            app.UseServiceBus(ServiceNames.Gateway, false);
+            app.UseServiceBus(Services.Common.Names.Services.Gateway, false);
 
             app.UseRouting();
             app.UseAuthentication();
@@ -62,7 +63,7 @@ namespace Api.Gateway
                 endpoints.MapControllers();
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync(ServiceNames.Gateway);
+                    await context.Response.WriteAsync(Services.Common.Names.Services.Gateway);
                 });
             });
         }

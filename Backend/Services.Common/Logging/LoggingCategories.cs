@@ -7,5 +7,7 @@ namespace Services.Common.Logging
     public class LoggingCategories
     {
         public const string Access = "Access";
+
+        public const string DomainValidation = "Domain Validation";
     }
 }

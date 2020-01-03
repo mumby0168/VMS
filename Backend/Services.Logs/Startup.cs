@@ -46,7 +46,7 @@ namespace Services.Logs
                 opts.AllowAnyOrigin();
             });
 
-            app.UseMongo(ServiceNames.Logs);
+            app.UseMongo(Common.Names.Services.Logs);
 
             var udpServer = app.ApplicationServices.GetService<IUdpServer>();
 
@@ -57,7 +57,7 @@ namespace Services.Logs
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync(ServiceNames.Logs);
+                    await context.Response.WriteAsync(Common.Names.Services.Logs);
                 });
             });
 

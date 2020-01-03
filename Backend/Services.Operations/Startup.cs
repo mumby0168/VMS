@@ -49,9 +49,9 @@ namespace Services.Operations
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseUdpLogging(ServiceNames.Operations);
+            app.UseUdpLogging(Common.Names.Services.Operations);
 
-            app.UseServiceBus(ServiceNames.Operations)
+            app.UseServiceBus(Common.Names.Services.Operations)
                 .SubscribeAllMessages<GenericBusHandler>(Assembly.GetExecutingAssembly()
                     ,new [] { typeof(OperationComplete), typeof(OperationFailed), typeof(OperationPending) });
 
@@ -62,7 +62,7 @@ namespace Services.Operations
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync(ServiceNames.Operations);
+                    await context.Response.WriteAsync(Common.Names.Services.Operations);
                 });
             });
         }

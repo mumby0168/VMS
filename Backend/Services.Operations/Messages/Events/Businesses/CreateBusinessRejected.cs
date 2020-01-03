@@ -9,7 +9,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Services.Operations.Messages.Events.Businesses
 {
-    [MicroService(ServiceNames.Businesses)]
+    [MicroService(Common.Names.Services.Businesses)]
     public class CreateBusinessRejected : IRejectedEvent
     {
         public string Code { get; }

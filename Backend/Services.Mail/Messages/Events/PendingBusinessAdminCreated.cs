@@ -5,7 +5,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Services.Mail.Messages.Events
 {
-    [MicroService(ServiceNames.Identity)]
+    [MicroService(Common.Names.Services.Identity)]
     public class PendingBusinessAdminCreated : IEvent
     {
         public Guid Code { get; }

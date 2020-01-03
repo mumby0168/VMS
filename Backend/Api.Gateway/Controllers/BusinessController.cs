@@ -28,7 +28,7 @@ namespace Api.Gateway.Controllers
         [HttpPost("create")]
         [Authorize(Roles = Roles.SystemAdmin)]
         public Task<IActionResult> Create([FromBody] CreateBusiness command) 
-            => PublishCommand(command, ServiceNames.Businesses);
+            => PublishCommand(command, Services.Common.Names.Services.Businesses);
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpGet]
@@ -40,17 +40,17 @@ namespace Api.Gateway.Controllers
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpPost("update-details")]
-        public Task<IActionResult> UpdateDetails([FromBody] UpdateBusinessDetails command) => PublishCommand(command, ServiceNames.Businesses);
+        public Task<IActionResult> UpdateDetails([FromBody] UpdateBusinessDetails command) => PublishCommand(command, Services.Common.Names.Services.Businesses);
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpPost("update-contact")]
         public Task<IActionResult> UpdateContact([FromBody] UpdateHeadContact command) =>
-        PublishCommand(command, ServiceNames.Businesses);
+        PublishCommand(command, Services.Common.Names.Services.Businesses);
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpPost("update-office")]
         public Task<IActionResult> UpdateOffice([FromBody] UpdateHeadOffice command) =>
-            PublishCommand(command, ServiceNames.Businesses);
+            PublishCommand(command, Services.Common.Names.Services.Businesses);
 
     }
 }

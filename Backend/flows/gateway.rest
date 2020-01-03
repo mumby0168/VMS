@@ -1,6 +1,6 @@
 @url = http://localhost:5020/gateway/api/
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItc3RhbmRhcmRAdGVzdC5jb20iLCJuYW1laWQiOiI3NTc5ODViNC1lZDk3LTQ0MzQtOTkzNC0xMzg0Njg3ZTIwMmQiLCJyb2xlIjoiU3RhbmRhcmQiLCJidXNpbmVzc0lkIjoiNGU2MDE0M2QtMmE0OS00ZjZjLWEwNjktMmI4NGRlYjY3NjQxIiwibmJmIjoxNTc4MDM2OTMyLCJleHAiOjE1NzgwNDc3MzIsImlhdCI6MTU3ODAzNjkzMn0.zWzNQ1DVH1I4Ay62pQxfUqemQ7tGh1_6xfSDjWaXhihw6r9n8ExItciI0H2cjg7iEfAV8TGSNm0OPQ-1zM2N2g
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5hZG1pbkB0ZXN0LmNvbSIsIm5hbWVpZCI6IjlmZTc3MDgwLTBlNzgtNGJhZC05N2FlLTI0MDMyNDc2ZDRlNCIsInJvbGUiOiJCdXNpbmVzc0FkbWluIiwiYnVzaW5lc3NJZCI6IjRlNjAxNDNkLTJhNDktNGY2Yy1hMDY5LTJiODRkZWI2NzY0MSIsIm5iZiI6MTU3ODA1ODQwOSwiZXhwIjoxNTc4MDY5MjA5LCJpYXQiOjE1NzgwNTg0MDl9.Q-bMq7A6-XHmMPX0l4-g_Nxi9wdDrR5dY5pmXAnYpwGtQUg3IQEOegRzHTu5XfYyikYfUqXgLQKsLAOxotrJiA
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
@@ -225,3 +225,61 @@ Authorization: Bearer {{jwt}}
 GET {{url}}sites/availability/{{siteId}}
 Authorization: Bearer {{jwt}}
 
+
+### VISITORS +===================================================================
+
+
+### Create Data Entry
+POST {{url}}visitors/spec/create
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "label": "4",
+    "validationMessage": "Second name is required",
+    "validationCode": "Required"
+}
+
+### Get Data Entries
+
+GET {{url}}visitors/spec/entries/4e60143d-2a49-4f6c-a069-2b84deb67641
+Authorization: Bearer {{jwt}}
+
+### Update Order
+POST {{url}}visitors/spec/reorder
+Authorization: Bearer {{jwt}}
+Content-Type:  application/json
+
+{
+    "businessId": "4e60143d-2a49-4f6c-a069-2b84deb67641",
+    "entries": [
+{
+    "id": "27343344-ee56-4f9c-a94b-3f54c7f7d042",
+    "label": "4",
+    "validationCode": "Required",
+    "validationMessage": "Second name is required",
+    "order": 3
+  },
+  {
+    "id": "017848ee-0b7c-4dba-bdb4-e52e57c7223d",
+    "label": "3",
+    "validationCode": "Required",
+    "validationMessage": "Second name is required",
+    "order": 4
+  },
+  {
+    "id": "96b2e999-695a-4225-b175-bc90038118a4",
+    "label": "1",
+    "validationCode": "Required",
+    "validationMessage": "Second name is required",
+    "order": 2
+  },
+  {
+    "id": "3e057c93-5ee9-4577-bf7d-3b2ed042d5c0",
+    "label": "2",
+    "validationCode": "Required",
+    "validationMessage": "Second name is required",
+    "order": 1
+  }
+    ]
+}

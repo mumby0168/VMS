@@ -37,9 +37,9 @@ namespace Services.Business
 
 
 
-            app.UseUdpLogging(ServiceNames.Businesses);
-            app.UseMongo(ServiceNames.Businesses);
-            app.UseServiceBus(ServiceNames.Businesses)
+            app.UseUdpLogging(Common.Names.Services.Businesses);
+            app.UseMongo(Common.Names.Services.Businesses);
+            app.UseServiceBus(Common.Names.Services.Businesses)
                 .SubscribeCommand<CreateBusiness>()
                 .SubscribeCommand<UpdateBusinessDetails>()
                 .SubscribeCommand<UpdateHeadContact>()
@@ -52,7 +52,7 @@ namespace Services.Business
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync(ServiceNames.Businesses);
+                    await context.Response.WriteAsync(Common.Names.Services.Businesses);
                 });
             });
         }
