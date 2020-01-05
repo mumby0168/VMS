@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Driver;
+using Services.Common.Jwt;
 using Services.Common.Mongo;
 
 namespace Services.Identity.Repositorys
@@ -38,5 +39,10 @@ namespace Services.Identity.Repositorys
             => _repository.GetAsync(i => i.Email == email);
 
         public Task UpdateAsync(Domain.Identity identity) => _repository.UpdateAsync(identity, identity.Id);
+
+        public Task<IEnumerable<Domain.Identity>> GetStandardAccountsForBusinessAsync(Guid businessId) => _repository.FindAsync(i => i.Role == Roles.StandardPortalUser && i.BusinessId == businessId);
+
+        public Task<Domain.Identity> GetStandardAccountsForBusinessAsync(Guid businessId, Guid accountId)
+        => _repository.GetAsync(i => i.Role == Roles.StandardPortalUser && i.BusinessId == businessId && i.Id == accountId);
     }
 }

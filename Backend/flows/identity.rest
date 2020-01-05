@@ -1,6 +1,5 @@
 @url = http://localhost:5010
-
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItc3RhbmRhcmRAdGVzdC5jb20iLCJuYW1laWQiOiI3NTc5ODViNC1lZDk3LTQ0MzQtOTkzNC0xMzg0Njg3ZTIwMmQiLCJyb2xlIjoiU3RhbmRhcmQiLCJidXNpbmVzc0lkIjoiNGU2MDE0M2QtMmE0OS00ZjZjLWEwNjktMmI4NGRlYjY3NjQxIiwibmJmIjoxNTc2NzUyNDk4LCJleHAiOjE1NzY3NjMyOTgsImlhdCI6MTU3Njc1MjQ5OH0.1d4Hn34HtblfIbbfs7ae7Gtd54LK6uhvQ9VE3xuoNqrqaJi8nIFpw3VZvkg3nsv-riyjO95gFAfKe7hbSnnYYQ
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5hZG1pbkB0ZXN0LmNvbSIsIm5hbWVpZCI6IjlmZTc3MDgwLTBlNzgtNGJhZC05N2FlLTI0MDMyNDc2ZDRlNCIsInJvbGUiOiJCdXNpbmVzc0FkbWluIiwiYnVzaW5lc3NJZCI6IjRlNjAxNDNkLTJhNDktNGY2Yy1hMDY5LTJiODRkZWI2NzY0MSIsIm5iZiI6MTU3ODIyNDY2OCwiZXhwIjoxNTc4MjM1NDY4LCJpYXQiOjE1NzgyMjQ2Njh9.--aIarnXWfI9EkXTtttDAhSOcmYKn0QkjJnyUO3Gq-t7H3DTFUJFUPrIc3JD4hHD-f_hLqPMMHHy9gd1GhaDdQ
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
@@ -14,7 +13,7 @@ Content-Type: application/json
     "password": "Test123"
 }
 
-### admin
+### portal admin
 
 POST {{url}}/api/users/sign-in
 Content-Type: application/json
@@ -142,3 +141,11 @@ Content-Type: application/json
     "passwordConfirm": "Test12345"
 }
 
+
+### Remove Account
+POST {{url}}/api/users/remove/55a1d569-e0e6-49c4-a300-460d9473aaa2
+Authorization: Bearer {{jwt}}
+
+### Get All User Accounts
+GET {{url}}/api/users/accounts
+Authorization: Bearer {{jwt}}

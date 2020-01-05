@@ -45,7 +45,8 @@ namespace Services.Visitors
 
             app.UseServiceBus(Common.Names.Services.Visitors)
                 .SubscribeCommand<CreateDataEntry>()
-                .SubscribeCommand<UpdateEntryOrder>();
+                .SubscribeCommand<UpdateEntryOrder>()
+                .SubscribeCommand<DeprecateDataEntry>();
 
             app.UseRouting();
 

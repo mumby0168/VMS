@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Services.Common.Base;
 using Services.Common.Exceptions;
 using Services.Common.Jwt;
+using Services.Identity.Dtos;
 using Services.Identity.Messages.Commands;
 using Services.Identity.Services;
 
@@ -44,6 +45,26 @@ namespace Services.Identity.Controllers
             var id = User.Claims.FirstOrDefault(c => c.Type == CustomClaims.BusinessIdClaim);
             if (id == null) return Unauthorized();
             await _userService.CreateUser(command.Email, Guid.Parse(id.Value));
+            return Ok();
+        }
+
+        [Authorize(Roles = Roles.BusinessAdmin)]
+        [HttpGet("accounts")]
+        public async Task<ActionResult<IEnumerable<StandardUserAccountDto>>> GetAccounts()
+        {
+            var businessId = HttpContext.User.Claims.FirstOrDefault(u => u.Type == CustomClaims.BusinessIdClaim);
+            if (businessId is null) return Unauthorized();
+            var collection = await Task.Run(() => _userService.GetStandardAccountsForBusiness(Guid.Parse(businessId.Value)));
+            return Collection(collection.ToEnumerable());
+        }
+
+        [Authorize(Roles = Roles.BusinessAdmin)]
+        [HttpPost("remove/{accountId}")]
+        public async Task<IActionResult> DeleteAccount([FromRoute]Guid accountId)
+        {
+            var businessId = HttpContext.User.Claims.FirstOrDefault(u => u.Type == CustomClaims.BusinessIdClaim);
+            if (businessId is null) return Unauthorized();
+            await _userService.RemoveAsync(accountId, Guid.Parse(businessId.Value));
             return Ok();
         }
 

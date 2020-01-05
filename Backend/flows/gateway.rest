@@ -283,3 +283,14 @@ Content-Type:  application/json
   }
     ]
 }
+
+
+### Depreacte Data Entry
+
+POST {{url}}visitors/spec/deprecate
+Authorization: Bearer {{jwt}}
+Content-Type:  application/json
+
+{
+    "id": "017848ee-0b7c-4dba-bdb4-e52e57c7223d",    
+}

@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Services.Common.Exceptions;
 using Services.Common.Jwt;
 using Services.Common.Logging;
 using Services.Identity.Domain;
+using Services.Identity.Dtos;
 using Services.Identity.Factories;
 using Services.Identity.Managers;
-using Services.Identity.Messages.Commands;
 using Services.Identity.Messages.Events;
 using Services.Identity.Models;
 using Services.Identity.Repositorys;
@@ -166,5 +165,27 @@ namespace Services.Identity.Services
             _logger.LogInformation($"User account registration created with code: {pending.Id}. for user with email: {pending.Email}");
             //TODO: Send email to user through email Service.
         }
+
+        public async IAsyncEnumerable<StandardUserAccountDto> GetStandardAccountsForBusiness(Guid businessId)
+        {
+            var accounts = await _identityRepository.GetStandardAccountsForBusinessAsync(businessId);
+            foreach(var account in accounts)
+            {
+                yield return new StandardUserAccountDto
+                {
+                    Id = account.Id,
+                    CreatedOn = account.CreatedOn,
+                    Email = account.Email,             
+                };
+            }
+        }
+
+        public async Task RemoveAsync(Guid accountId, Guid businessId)
+        {
+            var account = await _identityRepository.GetStandardAccountsForBusinessAsync(businessId, accountId);
+            if (account is null) throw new VmsException(Codes.NoIdentityFound, $"The account with the id {accountId} could not be found");
+            await _identityRepository.RemoveAsync(account);
+            _logger.LogInformation($"Account with id {accountId} deleted");
+        }        
     }
 }

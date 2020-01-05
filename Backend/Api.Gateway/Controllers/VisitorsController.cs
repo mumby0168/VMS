@@ -43,5 +43,15 @@ namespace Api.Gateway.Controllers
         [Authorize(Roles = Roles.BusinessAdmin)]
         [HttpGet("spec/entries/{businessId}")]
         public async Task<ActionResult<IEnumerable<DataSpecificationDto>>> GetSpecifications(Guid businessId) => Collection(await _client.GetDataSpecificationsForBusinessAsync(businessId));
+
+        [Authorize(Roles = Roles.BusinessAdmin)]
+        [HttpPost("spec/deprecate")]
+        public IActionResult DeprecateEntry([FromBody] DeprecateDataEntry command)
+        {
+            var businessId = HttpContext.User.Claims.FirstOrDefault(u => u.Type == CustomClaims.BusinessIdClaim);
+            if (businessId is null) return Unauthorized();
+            return PublishCommand(new DeprecateDataEntry(command.Id, Guid.Parse(businessId.Value)));
+        }
+
     }
 }

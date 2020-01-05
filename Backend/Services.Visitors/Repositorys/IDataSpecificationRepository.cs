@@ -13,5 +13,6 @@ namespace Services.Visitors.Repositorys
         Task<int> GetNextOrderNumberAsync(Guid businessId);
         Task<IEnumerable<IDataSpecification>> GetEntriesAsync(Guid businessId);
         Task UpdateAsync(IDataSpecification entry);
+        Task RemoveAsync(IDataSpecification spec);
     }
 }

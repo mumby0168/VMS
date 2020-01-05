@@ -35,5 +35,10 @@ namespace Services.Visitors.Repositorys
         {
             return _repository.UpdateAsync(entry as DataSpecification, entry.Id);
         }
+
+        public Task RemoveAsync(IDataSpecification spec)
+        {
+            return _repository.RemoveAsync(spec.Id);
+        }
     }
 }

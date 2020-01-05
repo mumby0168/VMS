@@ -26,5 +26,15 @@ namespace Services.Common.Base
 
             return Ok(items);
         }
+
+        protected ActionResult<IAsyncEnumerable<T>> CollectionAsync<T>(IEnumerable<T> items)
+        {
+            if (items == null)
+            {
+                return NoContent();
+            }
+
+            return Ok(items);
+        }
     }
 }
