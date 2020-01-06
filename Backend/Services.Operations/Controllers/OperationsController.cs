@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver.Core.Operations;
 using Services.Common.Base;
+using Services.Operations.Dtos;
 using Services.Operations.Services;
 
 namespace Services.Operations.Controllers
@@ -20,7 +21,7 @@ namespace Services.Operations.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute]Guid id)
+        public async Task<ActionResult<OperationDto>> Get([FromRoute]Guid id)
         {
             return Single(await _operationsCache.GetAsync(id));
         }

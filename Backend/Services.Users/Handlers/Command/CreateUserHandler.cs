@@ -42,6 +42,7 @@ namespace Services.Users.Handlers.Command
             {
                 _logger.LogWarning($"Account not found when completing user profile account id: {message.AccountId}.");
                 _publisher.PublishEvent(new CreateUserRejected(Codes.InvalidId, $"The account with the id: {message.AccountId} cannot be found"), requestInfo);
+                return;
             }
 
             if (!await _servicesRepository.IsBusinessIdValid(message.BusinessId))

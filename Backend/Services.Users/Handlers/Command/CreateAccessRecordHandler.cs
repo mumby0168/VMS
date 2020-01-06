@@ -15,13 +15,13 @@ namespace Services.Users.Handlers.Command
 {
     public class CreateAccessRecordHandler : ICommandHandler<CreateAccessRecord>
     {
-        private readonly IVmsLogger<CreateAccessRecord> _logger;
+        private readonly IVmsLogger<CreateAccessRecordHandler> _logger;
         private readonly IUserRepository _userRepository;
         private readonly IAccessRecordRepository _accessRecordRepository;
         private readonly IAccessRecordFactory _factory;
         private readonly IServiceBusMessagePublisher _publisher;
 
-        public CreateAccessRecordHandler(IVmsLogger<CreateAccessRecord> logger, IUserRepository userRepository, IAccessRecordRepository accessRecordRepository, IAccessRecordFactory factory, IServiceBusMessagePublisher publisher)
+        public CreateAccessRecordHandler(IVmsLogger<CreateAccessRecordHandler> logger, IUserRepository userRepository, IAccessRecordRepository accessRecordRepository, IAccessRecordFactory factory, IServiceBusMessagePublisher publisher)
         {
             _logger = logger;
             _userRepository = userRepository;
@@ -41,7 +41,6 @@ namespace Services.Users.Handlers.Command
                 return;
             }
 
-            //TODO: take site id as a param.
             var record = _factory.Create(message.UserId, user.BasedSiteId, message.Action, user.BusinessId);
             await _accessRecordRepository.AddAsync(record);
             _publisher.PublishEvent(new AccessRecordCreated(), requestInfo);
