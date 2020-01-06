@@ -9,5 +9,6 @@ namespace Services.Sites.Services
     public interface ISystemServices
     {
         Task<IEnumerable<LatestAccessRecordDto>> GetLatestAccessRecordsForSite(Guid siteId);
+        Task<IEnumerable<OnSiteAccessRecordDto>> GetUsersOnSiteAsync(Guid querySiteId);
     }
 }

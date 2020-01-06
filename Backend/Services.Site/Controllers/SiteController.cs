@@ -24,12 +24,16 @@ namespace Services.Sites.Controllers
         public async Task<ActionResult<IEnumerable<SiteSummaryDto>>> Summaries([FromRoute] Guid businessId) => Collection(await _dispatcher.Dispatch<GetSiteSummaries, IEnumerable<SiteSummaryDto>>(new GetSiteSummaries(businessId)));
 
         [HttpGet("{siteId}")]
-        public async Task<IActionResult> Get([FromRoute] Guid siteId) => Single(await _dispatcher.Dispatch<GetSite, SiteDto>(new GetSite(siteId)));
+        public async Task<ActionResult<SiteDto>> Get([FromRoute] Guid siteId) => Single(await _dispatcher.Dispatch<GetSite, SiteDto>(new GetSite(siteId)));
 
         [HttpGet("resources/{siteId}")]
-        public async Task<IActionResult> GetResources([FromRoute] Guid siteId) => Single(await _dispatcher.Dispatch<GetSiteResources, IEnumerable<SiteResourceDto>>(new GetSiteResources(siteId)));
+        public async Task<ActionResult<IEnumerable<SiteResourceDto>>> GetResources([FromRoute] Guid siteId) => Single(await _dispatcher.Dispatch<GetSiteResources, IEnumerable<SiteResourceDto>>(new GetSiteResources(siteId)));
 
         [HttpGet("availability/{siteId}")]
-        public async Task<IActionResult> GetAvailability([FromRoute] Guid siteId) => Single(await _dispatcher.Dispatch<GetSiteAvailability, SiteAvailabilityDto>(new GetSiteAvailability(siteId)));
+        public async Task<ActionResult<SiteAvailabilityDto>> GetAvailability([FromRoute] Guid siteId) => Single(await _dispatcher.Dispatch<GetSiteAvailability, SiteAvailabilityDto>(new GetSiteAvailability(siteId)));
+
+        [HttpGet("fire/{siteId}")]
+        public async Task<ActionResult<SiteFireListDto>> GetFireList([FromRoute] Guid siteId) =>
+            Single(await _dispatcher.Dispatch<GetSiteFireList, SiteFireListDto>(new GetSiteFireList(siteId)));
     }
 }

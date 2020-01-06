@@ -36,7 +36,7 @@ namespace Api.Gateway.Controllers
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute]Guid id) => Single(await _client.GetBusiness(id));
+        public async Task<ActionResult<BusinessDto>> Get([FromRoute]Guid id) => Single(await _client.GetBusiness(id));
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpPost("update-details")]

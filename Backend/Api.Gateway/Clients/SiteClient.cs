@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,5 +31,8 @@ namespace Api.Gateway.Clients
 
         public Task<SiteAvailabilityDto> GetSiteAvailabilityAsync(Guid siteId)
             => _client.GetAsync<SiteAvailabilityDto>($"{_baseAddress}/availability/{siteId}");
+
+        public Task<SiteFireListDto> GetFireListForSiteAsync(Guid siteId)
+            => _client.GetAsync<SiteFireListDto>($"{_baseAddress}/fire/{siteId}");
     }
 }

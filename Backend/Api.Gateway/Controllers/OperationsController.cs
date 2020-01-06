@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Api.Gateway.Clients.Interfaces;
+using Api.Gateway.Dtos.Operations;
 using Convey.HTTP;
 using Microsoft.AspNetCore.Mvc;
 using Services.RabbitMq.Interfaces.Messaging;
@@ -21,6 +22,6 @@ namespace Api.Gateway.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute]Guid id) => Single(await _operationsClient.GetAsync(id));
+        public async Task<ActionResult<OperationDto>> Get([FromRoute]Guid id) => Single(await _operationsClient.GetAsync(id));
     }
 }

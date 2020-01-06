@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace Services.Common.Base
 {
     public class VmsControllerBase : ControllerBase
-    {
-        protected IActionResult Single<T>(T dto)
+    { 
+
+        protected ActionResult<T> Single<T>(T dto)
         {
             if (dto == null)
             {
@@ -16,6 +17,8 @@ namespace Services.Common.Base
 
             return Ok(dto);
         }
+
+
 
         protected ActionResult<IEnumerable<T>> Collection<T>(IEnumerable<T> items)
         {

@@ -41,6 +41,7 @@ namespace Services.Sites
             serviceCollection.AddTransient<IQueryHandler<GetSiteSummaries, IEnumerable<SiteSummaryDto>>, GetSiteSummariesHandler>();
             serviceCollection.AddTransient<IQueryHandler<GetSiteResources, IEnumerable<SiteResourceDto>>, GetSiteResourcesHandler>();
             serviceCollection.AddTransient<IQueryHandler<GetSiteAvailability, SiteAvailabilityDto>, GetSiteAvailabilityHandler>();
+            serviceCollection.AddTransient<IQueryHandler<GetSiteFireList, SiteFireListDto>, GetSiteFireListHandler>();
 
             return serviceCollection;
         }

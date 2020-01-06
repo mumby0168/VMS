@@ -44,6 +44,9 @@ namespace Services.Users
                 .AddTransient<IQueryHandler<GetBusinessAccessRecords, IEnumerable<SiteAccessDetailsDto>>,
                     GetBusinessAccessRecordsHandler>();
 
+            serviceCollection
+                .AddTransient<IQueryHandler<GetUsersOnSite, IEnumerable<OnSiteAccessRecordDto>>, GetUsersOnSiteHandler>();
+
             serviceCollection.AddTransient<ICommandHandler<CreateUser>, CreateUserHandler>();
             serviceCollection.AddTransient<ICommandHandler<CreateAccessRecord>, CreateAccessRecordHandler>();
 

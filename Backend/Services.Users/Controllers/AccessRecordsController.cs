@@ -42,5 +42,11 @@ namespace Services.Users.Controllers
             return Collection(
                 await _dispatcher.Dispatch<GetLatestSiteAccessRecords, IEnumerable<LatestAccessRecordDto>>(new GetLatestSiteAccessRecords(siteId)));
         }
+
+        [HttpGet("on-site/{siteId}")]
+        public async Task<ActionResult<IEnumerable<OnSiteAccessRecordDto>>> GetOnSite([FromRoute] Guid siteId) =>
+            Collection(
+                await _dispatcher.Dispatch<GetUsersOnSite, IEnumerable<OnSiteAccessRecordDto>>(
+                    new GetUsersOnSite(siteId)));
     }
 }

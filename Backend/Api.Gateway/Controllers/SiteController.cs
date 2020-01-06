@@ -35,7 +35,7 @@ namespace Api.Gateway.Controllers
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpGet("get/{siteId}")]
-        public async Task<IActionResult> Get([FromRoute] Guid siteId) => Single(await _siteClient.GetSite(siteId));
+        public async Task<ActionResult<SiteDto>> Get([FromRoute] Guid siteId) => Single(await _siteClient.GetSite(siteId));
 
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpPost("update")]
@@ -60,7 +60,11 @@ namespace Api.Gateway.Controllers
         
         [Authorize(Roles = Roles.StandardPortalUser)]
         [HttpGet("availability/{siteId}")]
-        public async Task<IActionResult> GetAvailability([FromRoute] Guid siteId) => Single(await _siteClient.GetSiteAvailabilityAsync(siteId));
+        public async Task<ActionResult<SiteAvailabilityDto>> GetAvailability([FromRoute] Guid siteId) => Single(await _siteClient.GetSiteAvailabilityAsync(siteId));
+
+        [Authorize(Roles = Roles.PortalUser)]
+        [HttpGet("fire/{siteId}")]
+        public async Task<ActionResult<SiteFireListDto>> FireList([FromRoute] Guid siteId) => Single(await _siteClient.GetFireListForSiteAsync(siteId));
 
     }
 }

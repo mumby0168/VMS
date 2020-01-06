@@ -1,6 +1,5 @@
 @url = http://localhost:5020/gateway/api/
-
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5hZG1pbkB0ZXN0LmNvbSIsIm5hbWVpZCI6IjlmZTc3MDgwLTBlNzgtNGJhZC05N2FlLTI0MDMyNDc2ZDRlNCIsInJvbGUiOiJCdXNpbmVzc0FkbWluIiwiYnVzaW5lc3NJZCI6IjRlNjAxNDNkLTJhNDktNGY2Yy1hMDY5LTJiODRkZWI2NzY0MSIsIm5iZiI6MTU3ODA1ODQwOSwiZXhwIjoxNTc4MDY5MjA5LCJpYXQiOjE1NzgwNTg0MDl9.Q-bMq7A6-XHmMPX0l4-g_Nxi9wdDrR5dY5pmXAnYpwGtQUg3IQEOegRzHTu5XfYyikYfUqXgLQKsLAOxotrJiA
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5hZG1pbkB0ZXN0LmNvbSIsIm5hbWVpZCI6IjlmZTc3MDgwLTBlNzgtNGJhZC05N2FlLTI0MDMyNDc2ZDRlNCIsInJvbGUiOiJCdXNpbmVzc0FkbWluIiwiYnVzaW5lc3NJZCI6IjRlNjAxNDNkLTJhNDktNGY2Yy1hMDY5LTJiODRkZWI2NzY0MSIsIm5iZiI6MTU3ODI5ODY4NiwiZXhwIjoxNTc4MzA5NDg2LCJpYXQiOjE1NzgyOTg2ODZ9.tcDbnpbn1thNyTZ1dOYahJGgl0u14vG2ptwI9b7N_WEfHF7MY4-iWpKDvKQsE7bp4EOiknxIDfvRGF__B17I3g
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
@@ -294,3 +293,9 @@ Content-Type:  application/json
 {
     "id": "017848ee-0b7c-4dba-bdb4-e52e57c7223d",    
 }
+
+
+### Get Site Fire List
+
+GET {{url}}sites/fire/{{siteId}}
+Authorization: Bearer {{jwt}}
