@@ -29,11 +29,6 @@ namespace Services.Business.Handlers.Command
         }
         public async Task HandleAsync(CreateBusiness message, IRequestInfo requestInfo)
         {
-            if (message == null)
-            {
-                _logger.LogError("The message read was null request: " + requestInfo.OperationId);
-                return;
-            }
             IBusiness business;
             try
             {

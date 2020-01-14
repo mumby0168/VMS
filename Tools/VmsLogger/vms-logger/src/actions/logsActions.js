@@ -18,10 +18,12 @@ export function purge() {
     return function(dispatch) {
         axios.post('http://localhost:5016/api/logs/purge')
         .then((res) => {
+            console.log(res);
             dispatch({type: "PURGE_LOGS"});
             dispatch(fetchLogs());
         })
         .catch((err) => {
+            console.log(err);
             dispatch({type: "PURGE_LOGS_REJECTED"});
         })
     }

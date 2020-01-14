@@ -60,6 +60,8 @@ namespace Services.Identity
                 .AddMongoCollection<Business>()
                 .AddMongoCollection<ResetRequest>();
 
+            services.AddCors();
+
 
 
             ServicesRegistry.RegisterServices(services);
@@ -71,6 +73,12 @@ namespace Services.Identity
             app.UseVmsExceptionHandler();
 
             app.UseUdpLogging(Common.Names.Services.Identity);
+            app.UseCors(opts =>
+            {
+                opts.AllowAnyHeader();
+                opts.AllowAnyMethod();
+                opts.AllowAnyOrigin();
+            });
 
             app.UseRouting();
             app.UseAuthentication();
