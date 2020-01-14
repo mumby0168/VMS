@@ -22,7 +22,7 @@ class Operations extends Component {
         this.checkConnection();       
         return (
             <div>
-
+                
             </div>
         )
     }
@@ -32,7 +32,7 @@ const mapStateToProps = (state) => {
     return {
         isPushConnected: state.operations.isSignalRConnected,
         connect: state.account.isLoggedIn,
-        jwt: state.account.jwt,
+        jwt: state.account.jwtToken,
         pendingOperations: state.operations.pendingOperations,
         handler: state.operations.operationHandlers
     }

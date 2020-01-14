@@ -10,11 +10,11 @@ export default class OperationsManager {
     }
 
 
-    connect(dispatchHandle, jwt) {                        
+    connect(dispatchHandle, jwt) {                                
         this.connection.start().then(() => {            
             this.connection.invoke("connect", jwt)
             .then(() => {                                
-                dispatchHandle(signalRConnectionUpdate(true)); 
+                console.log("connection request send to push service.")                
             })
             .catch(err => {                                
                 dispatchHandle(signalRConnectionUpdate(false));            
@@ -23,6 +23,15 @@ export default class OperationsManager {
         }).catch(err =>  { 
             dispatchHandle(signalRConnectionUpdate(false));                   
         });    
+
+        this.connection.on("connectionSucceeded", () => {
+            dispatchHandle(signalRConnectionUpdate(true));     
+        });
+
+        this.connection.on("connectionFailed", (reason) => {
+            console.log("Connection Failed to push for reason: " + reason);
+            dispatchHandle(signalRConnectionUpdate(false));     
+        })
         
 
         this.connection.on("operationComplete", (op) => {

@@ -58,7 +58,7 @@ namespace Services.Push
                 opts.AllowAnyHeader();
                 opts.AllowAnyMethod();
                 opts.AllowCredentials();
-                opts.WithOrigins("http://localhost:3000");
+                opts.WithOrigins("http://localhost:3000", "http://localhost:3001");
             });
 
             app.UseUdpLogging(Common.Names.Services.Push);

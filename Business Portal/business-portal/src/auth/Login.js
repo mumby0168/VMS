@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import {Button, CardContent, Card, CardHeader, TextField, Grid} from '@material-ui/core'
-import {login, loginFormUpdated} from '../actions/accountActions';
+import {CardContent, Card, CardHeader} from '@material-ui/core'
+import {login} from '../actions/accountActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Alert from '@material-ui/lab/Alert';
+import Progress from '../common/Progress';
+import LoginForm from '../components/LoginForm';
 
-const gridWrapperClass = {
-    paddingBottom: '5%'
-}
+
 
 const wrapperClass = {
     padding: '1%',
@@ -40,30 +39,15 @@ class Login extends Component {
 
     render() {        
 
+        //TODO: Causing an error.
         if(this.props.isLoggedIn) {
             this.props.history.push("/landing");
         }
 
-        const error = (this.props.error === null) ? "" : 
-        <Grid style={gridWrapperClass}>
-            <Alert severity="error">{this.props.error}</Alert>
-        </Grid>    
+    
 
-        const body = this.props.isLoading ? <h1>Loading</h1> :         
-                    <form onSubmit={this.handleSubmit}>
-                        <Grid direction="column" container>
-                            <Grid style={gridWrapperClass}>
-                            <TextField value={this.props.user.username} required id="email" label="Email" onChange={(e) => this.props.dispatch(loginFormUpdated(e.target.value, this.props.user.password))}></TextField>
-                            </Grid>                            
-                            <Grid style={gridWrapperClass}>
-                            <TextField value={this.props.user.password} required id="password" label="Password" type="password"  onChange={(e) => this.props.dispatch(loginFormUpdated(this.props.user.username, e.target.value))}></TextField>
-                            </Grid>              
-                            {error}                  
-                            <Grid style={gridWrapperClass}>
-                            <Button variant="contained" type="submit">Submit</Button>
-                            </Grid>                                                                                   
-                        </Grid>
-                    </form>
+        const body = this.props.isLoading ? <Progress message="Logging you in"/> :         
+                    <LoginForm dispatch={this.props.dispatch} handleSubmit={this.handleSubmit} user={this.props.user} error={this.props.error} />
                     
                     
         return (

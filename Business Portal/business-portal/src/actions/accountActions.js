@@ -14,13 +14,17 @@ export function login(username, password) {
                 dispatch({type: "LOGIN_SUCCESFUL", payload: res.data});
             }            
         })
-        .catch((err) => {            
+        .catch((err) => {
+            if(err.status === undefined || null) {
+                dispatch({type: "LOGIN_REJECTED", payload: {Code: "not_accesible", Reason: "Our services are currently down."}});
+                return;
+            }
+            
             if(err.response.status === 400) {                
                 console.log(err.response.data)
                 dispatch({type: "LOGIN_REJECTED", payload: err.response.data});
                 return;
-            }            
-            dispatch({type: "LOGIN_REJECTED", payload: {code: "not_accesible", reason: "The request could not be completed."}});
+            }                        
         })
         
     }
