@@ -9,6 +9,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 using Services.Users.Commands;
 using Services.Users.Domain;
+using Services.Users.Events;
 using Services.Users.Factories;
 using Services.Users.Handlers.Events;
 using Services.Users.Repositories;

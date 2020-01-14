@@ -13,7 +13,9 @@ namespace Api.Gateway.Dtos.Users
 
         public string SiteName { get; set; }
 
-        public DateTime TimeStamp { get; set; }
+        public string Time { get; set; }
+
+        public string Date { get; set; }
         public string Action { get; set; }
     }
 }

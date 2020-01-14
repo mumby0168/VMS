@@ -34,6 +34,7 @@ namespace Api.Gateway
             services.AddCustomAuth(_configuration);
             services.AddServiceBus();
             services.AddConvey().AddHttpClient();
+            services.AddCors();
 
             services.AddTransient<IOperationsClient, OperationsClient>();
             services.AddTransient<IBusinessClient, BusinessClient>();
@@ -51,7 +52,14 @@ namespace Api.Gateway
             }
 
             app.UseUdpLogging(Services.Common.Names.Services.Gateway);
-;
+
+            app.UseCors(opts =>
+            {
+                opts.AllowAnyHeader();
+                opts.AllowAnyMethod();
+                opts.AllowAnyOrigin();
+            });
+            ;
             app.UseServiceBus(Services.Common.Names.Services.Gateway, false);
 
             app.UseRouting();

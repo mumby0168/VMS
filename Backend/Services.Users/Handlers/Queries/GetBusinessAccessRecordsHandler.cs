@@ -53,7 +53,8 @@ namespace Services.Users.Handlers.Queries
                         {
                             Action = accessRecord.Action == AccessAction.In ? "in" : "out",
                             Id = accessRecord.Id,
-                            TimeStamp = accessRecord.TimeStamp
+                            Date = accessRecord.TimeStamp.ToShortDateString(),
+                            Time = accessRecord.TimeStamp.ToShortTimeString()
                         });
                     }
 
