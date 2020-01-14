@@ -1,7 +1,7 @@
 import React from 'react';
 import Alert from '@material-ui/lab/Alert';
 import {Button, TextField, Grid} from '@material-ui/core'
-import {loginFormUpdated} from '../actions/accountActions'
+import {loginFormUpdated} from '../../actions/accountActions'
 
 const gridWrapperClass = {
     paddingBottom: '5%'

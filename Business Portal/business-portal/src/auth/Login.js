@@ -4,7 +4,7 @@ import {login} from '../actions/accountActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Progress from '../common/Progress';
-import LoginForm from '../components/LoginForm';
+import LoginForm from '../components/auth/LoginForm';
 
 
 

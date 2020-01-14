@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Nav from './common/Nav'
+import Nav from './hocs/Nav'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Login from './auth/Login'

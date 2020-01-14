@@ -38,8 +38,5 @@ export function loginFormUpdated(username, password) {
 }
 
 export function logout() {
-    console.log("logging out");
-    return {
-        type: "LOGOUT"
-    }
+    return {type: "LOGOUT"}
 }

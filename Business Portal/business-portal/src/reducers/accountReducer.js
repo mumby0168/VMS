@@ -48,6 +48,7 @@ export default function reducer(state = {
         }
 
         case "LOGOUT": {
+            console.log("LOGOUT");
             return {
                 ...state,
                 isLoggedIn: false,
