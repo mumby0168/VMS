@@ -3,7 +3,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 
 export default function ListItemLink(props) {
-    const { icon, primary, to } = props;
+    const { icon, primary, to, onClick } = props;
   
     const renderLink = React.useMemo(
       () => React.forwardRef((itemProps, ref) => <NavLink to={to} ref={ref} {...itemProps} />),
@@ -11,7 +11,7 @@ export default function ListItemLink(props) {
     );
   
     return (
-      <li>
+      <li onClick={onClick}>
         <ListItem button component={renderLink}>
           {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
           <ListItemText primary={primary} />

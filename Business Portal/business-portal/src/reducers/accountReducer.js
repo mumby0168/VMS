@@ -36,14 +36,30 @@ export default function reducer(state = {
         }
 
         case "LOGIN_REJECTED": {
+            console.log(action.payload);
             return {
                 ...state, 
                 loading: false,
                 error: {
-                    code: action.payload.code,
-                    reason: action.payload.reason
+                    code: action.payload.Code,
+                    reason: action.payload.Reason
                 }
             }    
+        }
+
+        case "LOGOUT": {
+            return {
+                ...state,
+                isLoggedIn: false,
+                userDetails: {
+                    id: null,
+                    email: null,
+                    businessId: null,
+                    role: null
+                },
+                jwt: null,
+                refreshToken: null
+            }
         }
 
         default:

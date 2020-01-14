@@ -3,6 +3,7 @@ import {Button, CardContent, Card, CardHeader, TextField, Grid} from '@material-
 import {login, loginFormUpdated} from '../actions/accountActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import Alert from '@material-ui/lab/Alert';
 
 const gridWrapperClass = {
     paddingBottom: '5%'
@@ -43,7 +44,12 @@ class Login extends Component {
             this.props.history.push("/landing");
         }
 
-        const body = this.props.isLoading ? <h1>Loading</h1> : 
+        const error = (this.props.error === null) ? "" : 
+        <Grid style={gridWrapperClass}>
+            <Alert severity="error">{this.props.error}</Alert>
+        </Grid>    
+
+        const body = this.props.isLoading ? <h1>Loading</h1> :         
                     <form onSubmit={this.handleSubmit}>
                         <Grid direction="column" container>
                             <Grid style={gridWrapperClass}>
@@ -51,10 +57,11 @@ class Login extends Component {
                             </Grid>                            
                             <Grid style={gridWrapperClass}>
                             <TextField value={this.props.user.password} required id="password" label="Password" type="password"  onChange={(e) => this.props.dispatch(loginFormUpdated(this.props.user.username, e.target.value))}></TextField>
-                            </Grid>                            
+                            </Grid>              
+                            {error}                  
                             <Grid style={gridWrapperClass}>
                             <Button variant="contained" type="submit">Submit</Button>
-                            </Grid>                            
+                            </Grid>                                                                                   
                         </Grid>
                     </form>
                     
@@ -77,7 +84,7 @@ class Login extends Component {
 const mapStateToProps = (state) => {
      return {
          isLoading: state.account.loading,
-         error: state.account.error,
+         error: state.account.error.reason,
          isLoggedIn: state.account.isLoggedIn,
          user: {
              username: state.login.email,

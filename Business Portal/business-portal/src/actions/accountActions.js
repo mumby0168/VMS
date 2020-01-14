@@ -16,6 +16,7 @@ export function login(username, password) {
         })
         .catch((err) => {            
             if(err.response.status === 400) {                
+                console.log(err.response.data)
                 dispatch({type: "LOGIN_REJECTED", payload: err.response.data});
                 return;
             }            
@@ -29,5 +30,12 @@ export function login(username, password) {
 export function loginFormUpdated(username, password) {
     return (dispatch) => {
         dispatch({type: "LOGIN_UPDATED", payload: {email: username, password: password}})
+    }
+}
+
+export function logout() {
+    console.log("logging out");
+    return {
+        type: "LOGOUT"
     }
 }

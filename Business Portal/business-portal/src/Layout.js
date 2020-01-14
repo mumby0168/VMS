@@ -8,6 +8,7 @@ import Landing from './hocs/Landing';
 import { connect } from 'react-redux';
 import Container from '@material-ui/core/Container';
 import { Paper } from '@material-ui/core';
+import Operations from './operations/Operations';
 
 const Home = () => {
     return <h1>Home</h1>
@@ -24,6 +25,7 @@ class Layout extends Component {
         return (
             <React.Fragment>
                 <CssBaseline/>
+                <Operations></Operations>
                 <Router>
                 <Nav></Nav>      
                 <div className="content-wrapper">

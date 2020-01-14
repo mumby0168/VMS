@@ -14,4 +14,9 @@ code {
 
 .content-wrapper {
   margin: 1%;
+
+}
+
+.fixed-bottom { 
+  bottom: 0px;
 }
