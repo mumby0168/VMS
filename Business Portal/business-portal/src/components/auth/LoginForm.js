@@ -27,6 +27,9 @@ export default function LoginForm(props) {
                     </Grid>              
                     {error}                  
                     <Grid style={gridWrapperClass}>
+                    <Grid style={gridWrapperClass}>
+                        <Button>Forgotten your password?</Button>
+                    </Grid>
                     <Button variant="contained" type="submit">Submit</Button>
                     </Grid>                                                                                   
                 </Grid>

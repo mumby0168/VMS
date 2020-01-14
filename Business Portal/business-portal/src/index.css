@@ -20,3 +20,7 @@ code {
 .fixed-bottom { 
   bottom: 0px;
 }
+
+.padding-main {
+  padding: 100px;
+}

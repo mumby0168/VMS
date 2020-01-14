@@ -19,7 +19,7 @@ class Operations extends Component {
 
 
     render() {
-        this.checkConnection();       
+        this.checkConnection();        
         return (
             <div>
                 

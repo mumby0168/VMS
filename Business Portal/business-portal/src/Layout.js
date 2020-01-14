@@ -7,7 +7,6 @@ import PrivateRoute from './auth/PrivateRoute';
 import Landing from './hocs/Landing';
 import { connect } from 'react-redux';
 import Container from '@material-ui/core/Container';
-import { Paper } from '@material-ui/core';
 import Operations from './operations/Operations';
 
 const Home = () => {
@@ -29,8 +28,8 @@ class Layout extends Component {
                 <Router>
                 <Nav></Nav>      
                 <div className="content-wrapper">
-                <Container >
-                <Paper>
+                <Container >                                    
+                <div className="padded-main">
                     <Switch>
                         <Route exact path="/">
                             <Home></Home>
@@ -45,7 +44,7 @@ class Layout extends Component {
                             <h1>Not Found</h1>
                         </Route>
                     </Switch>
-                </Paper>
+                    </div>                             
                 </Container>
                 </div>          
             </Router>    

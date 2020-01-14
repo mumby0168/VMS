@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {CardContent, Card, CardHeader} from '@material-ui/core'
+import {CardContent, Card, CardHeader, Grid} from '@material-ui/core'
 import {login} from '../actions/accountActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -10,7 +10,7 @@ import LoginForm from '../components/auth/LoginForm';
 
 const wrapperClass = {
     padding: '1%',
-    width: '50%'
+    height: '100%'    
 }
 
 
@@ -51,15 +51,22 @@ class Login extends Component {
                     
                     
         return (
-            <div align="center">
-            <Card variant="outlined" align="center" style={wrapperClass}>
-                <CardHeader title="System Login">                                     
-                </CardHeader>
-                <CardContent>         
-                    {body}           
-                </CardContent>
-            </Card>
-            </div>
+            <Grid container spacing={3}>
+                <Grid item xs={12} md={6}>
+                    <Card variant="outlined" align="center" style={wrapperClass}>
+                        <CardHeader title="System Login">                                     
+                        </CardHeader>
+                        <CardContent>         
+                            {body}           
+                        </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Card align="center" style={wrapperClass} variant="outlined">
+                        <CardHeader title="Information Area"></CardHeader>
+                    </Card>
+                </Grid>
+            </Grid>
         )
     }
 }

@@ -23,7 +23,9 @@ const getButtons = (role) => {
             <div>
             <Button color="inherit">Sites</Button>
             <Button color="inherit">Fire List</Button>
-            <Button color="inherit">Admin</Button>
+            <Button color="inherit">Accounts</Button>
+            <Button color="inherit">Visitors</Button>
+            <Button color="inherit">Employees</Button>
             </div>
         )
     }
