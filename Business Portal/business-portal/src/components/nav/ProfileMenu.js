@@ -2,7 +2,7 @@ import React from 'react';
 import IconButton from '@material-ui/core/IconButton'
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Menu from '@material-ui/core/Menu';
-import { MenuItem, Box } from '@material-ui/core';
+import { MenuItem, Box, Avatar } from '@material-ui/core';
 
 
 export default function ProfileMenu({logout, ...props}) {
@@ -39,7 +39,8 @@ export default function ProfileMenu({logout, ...props}) {
                 color="inherit"
                 onClick={handleMenu}
               >
-                <AccountCircle />
+                {/* TODO: Use real initals */}
+                <Avatar>BM</Avatar>
               </IconButton>    
               <Menu                    
                     onClose={handleClose}

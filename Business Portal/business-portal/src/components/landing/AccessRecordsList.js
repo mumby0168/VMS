@@ -8,7 +8,7 @@ export default function AccessRecordsList(props) {
     const rows = props.records.map((record) => <AccessRecordsTemplate key={record.id} record={record}></AccessRecordsTemplate>)
 
     return (
-        <TableContainer>
+        <TableContainer style={{maxHeight: '650px', overflowY: "auto"}}>
             <Table>
                 <TableHead>
                     <TableRow>

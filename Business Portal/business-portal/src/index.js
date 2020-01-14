@@ -6,12 +6,12 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import store from './store'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core';
-import { blue } from '@material-ui/core/colors';
+import { teal,  deepPurple } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
     palette: {
-        primary: blue,
-        type: 'dark'
+        primary: teal,        
+        secondary: deepPurple
     }    
 })
 

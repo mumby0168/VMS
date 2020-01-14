@@ -20,10 +20,10 @@ export default function LoginForm(props) {
             <form onSubmit={props.handleSubmit}>
                 <Grid direction="column" container>
                     <Grid style={gridWrapperClass}>
-                    <TextField value={props.user.username} required id="email" label="Email" onChange={(e) => props.dispatch(loginFormUpdated(e.target.value, props.user.password))}></TextField>
+                    <TextField value={props.user.username} required label="Standad"  id="email" label="Email" onChange={(e) => props.dispatch(loginFormUpdated(e.target.value, props.user.password))}></TextField>
                     </Grid>                            
                     <Grid style={gridWrapperClass}>
-                    <TextField value={props.user.password} required id="password" label="Password" type="password"  onChange={(e) => props.dispatch(loginFormUpdated(props.user.username, e.target.value))}></TextField>
+                    <TextField value={props.user.password} label="Standard" required id="password" label="Password" type="password"  onChange={(e) => props.dispatch(loginFormUpdated(props.user.username, e.target.value))}></TextField>
                     </Grid>              
                     {error}                  
                     <Grid style={gridWrapperClass}>

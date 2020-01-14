@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import {CardContent, Card, CardHeader, Grid} from '@material-ui/core'
+import {CardContent, Card, CardHeader, Grid, Typography} from '@material-ui/core'
 import {login} from '../actions/accountActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Progress from '../common/Progress';
 import LoginForm from '../components/auth/LoginForm';
+import Process from '../assets/process.jpg'
 
 
 
@@ -64,6 +65,46 @@ class Login extends Component {
                 <Grid item xs={12} md={6}>
                     <Card align="center" style={wrapperClass} variant="outlined">
                         <CardHeader title="Information Area"></CardHeader>
+                        <CardContent>
+                            <img style={{height: '100%', width: '100%'}} alt="visitor management process" src={Process}/>
+                        </CardContent>
+                    </Card>
+                </Grid>
+                <Grid xs={12}  item>
+                    <Card variant="outlined">
+                        <CardHeader title="Why should your business get this system?"/>
+                        <CardContent>
+                            <ul>
+                                <li>
+                                    <Typography variant="body1" gutterBottom>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
+                                        unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam
+                                        dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+                                    </Typography>
+                                </li>
+                                <li>
+                                    <Typography variant="body1" gutterBottom>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
+                                        unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam
+                                        dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+                                    </Typography>
+                                </li>
+                                <li>
+                                    <Typography variant="body1" gutterBottom>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
+                                        unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam
+                                        dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+                                    </Typography>
+                                </li>
+                                <li>
+                                    <Typography variant="body1" gutterBottom>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
+                                        unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam
+                                        dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+                                    </Typography>
+                                </li>
+                            </ul>
+                        </CardContent>
                     </Card>
                 </Grid>
             </Grid>
