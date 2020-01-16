@@ -11,7 +11,7 @@ export function login(username, password) {
             password: password
         }).then((res) => {
             if(res.status === 200) {
-                dispatch({type: "LOGIN_SUCCESFUL", payload: res.data});
+                dispatch({type: "LOGIN_SUCCESFUL", payload: res.data});                                
             }            
         })
         .catch((err) => {

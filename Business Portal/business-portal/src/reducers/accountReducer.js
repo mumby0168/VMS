@@ -1,3 +1,5 @@
+
+
 export default function reducer(state = {
     isLoggedIn: false,
     jwtToken: null,
@@ -24,7 +26,7 @@ export default function reducer(state = {
             }
         }
 
-        case "LOGIN_SUCCESFUL": {                        
+        case "LOGIN_SUCCESFUL": {            
             return {
                 ...state,
                 jwtToken: action.payload.jwt,

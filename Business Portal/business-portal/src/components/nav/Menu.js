@@ -37,12 +37,14 @@ export default function Menu({logout, ...props}) {
 
     var classes = useStyles();
 
+    var title = props.businessName === "" ? "VMS" : props.businessName;
+
     var profile = props.role === null ? "" : <ProfileMenu logout={logout} ></ProfileMenu>
 
     return (
         <Toolbar>            
             <EmojiPeopleIcon></EmojiPeopleIcon>
-            <Typography variant="h6">VMS</Typography>            
+            <Typography variant="h6">{title}</Typography>            
             <Divider orientation="vertical"/>
             <Box align="center" className={classes.center}>
                 {getButtons(props.role)}

@@ -38,6 +38,10 @@ namespace Api.Gateway.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<BusinessDto>> Get([FromRoute]Guid id) => Single(await _client.GetBusiness(id));
 
+        [Authorize(Roles = Roles.PortalUser)]
+        [HttpGet("info/{id}")]
+        public async Task<ActionResult<BusinessDto>> GetBusinessInfo([FromRoute]Guid id) => Single(await _client.GetBusiness(id));
+
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpPost("update-details")]
         public Task<IActionResult> UpdateDetails([FromBody] UpdateBusinessDetails command) => PublishCommand(command, Services.Common.Names.Services.Businesses);

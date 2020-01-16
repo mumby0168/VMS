@@ -9,6 +9,7 @@ import AccessRecordsList from '../components/landing/AccessRecordsList';
 import {getPersonalAccessRecords} from '../actions/accessRecordActions'
 import Progress from '../common/Progress';
 import { Typography, CardContent, Card } from '@material-ui/core';
+import {getBusinessInfo} from '../actions/businessActions'
 
 
 class Landing extends Component {
@@ -27,6 +28,7 @@ class Landing extends Component {
 
     componentDidMount() {        
         this.props.dispatch(getPersonalAccessRecords())
+        this.props.dispatch(getBusinessInfo(this.props.businesId));
     }
 
     render() {
@@ -46,7 +48,7 @@ class Landing extends Component {
                 </Tabs>
                 </AppBar>
                 <TabPanel value={this.props.value} index={0}>
-                    {this.props.accessRecords.length === 0 ?  <Progress message="Loading access records"/> : <AccessRecordsList records={this.props.accessRecords}></AccessRecordsList>}
+                    {this.props.accessRecordsLoading ?  <Progress message="Loading access records"/> : <AccessRecordsList records={this.props.accessRecords}></AccessRecordsList>}
                 </TabPanel>
                 <TabPanel value={this.props.value} index={1}>
                     VISITOR RECORDS LIST
@@ -59,7 +61,9 @@ class Landing extends Component {
 const mapStateToProps = (state) => { 
     return {
         value: state.ui.landingTabIndex,
-        accessRecords: state.access.records
+        accessRecords: state.access.records,
+        accessRecordsLoading: state.access.loading,
+        businesId: state.account.userDetails.businessId
     }
 }
 

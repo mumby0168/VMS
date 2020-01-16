@@ -20,7 +20,7 @@ class Nav extends Component {
     render() {
         return (            
             <AppBar position="static">                                   
-                <Menu role={this.props.role} logout={this.logoutHandle}></Menu>                
+                <Menu role={this.props.role} businessName={this.props.businessName} logout={this.logoutHandle}></Menu>                
             </AppBar>                        
         )
     }
@@ -31,6 +31,7 @@ class Nav extends Component {
 export default withRouter(connect((state) => {
     return {
         isSidebarVisible: state.ui.isSidebarVisible,
-        role: state.account.userDetails.role
+        role: state.account.userDetails.role,
+        businessName: state.business.name
     }
 })(Nav));

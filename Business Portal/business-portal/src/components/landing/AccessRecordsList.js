@@ -7,6 +7,8 @@ export default function AccessRecordsList(props) {
 
     const rows = props.records.map((record) => <AccessRecordsTemplate key={record.id} record={record}></AccessRecordsTemplate>)
 
+    const body = rows.length > 0 ? rows : <h2>No access records</h2>
+
     return (
         <TableContainer style={{maxHeight: '650px', overflowY: "auto"}}>
             <Table>
@@ -19,7 +21,7 @@ export default function AccessRecordsList(props) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows}
+                    {body}
                 </TableBody>
             </Table>
         </TableContainer>
