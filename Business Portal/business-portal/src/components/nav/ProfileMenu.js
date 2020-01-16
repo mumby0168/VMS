@@ -4,7 +4,8 @@ import Menu from '@material-ui/core/Menu';
 import { MenuItem, Box, Avatar } from '@material-ui/core';
 
 
-export default function ProfileMenu({logout, ...props}) {
+export default function ProfileMenu(props) {
+    
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -26,8 +27,7 @@ export default function ProfileMenu({logout, ...props}) {
         vertical: 'top',
         horizontal: 'center',
     }            
-      
-    
+          
 
     return (      
       <Box>
@@ -39,7 +39,7 @@ export default function ProfileMenu({logout, ...props}) {
                 onClick={handleMenu}
               >
                 {/* TODO: Use real initals */}
-                <Avatar>BM</Avatar>
+                <Avatar>{props.initials}</Avatar>
               </IconButton>    
               <Menu                    
                     onClose={handleClose}
@@ -52,7 +52,7 @@ export default function ProfileMenu({logout, ...props}) {
                     >
                 
                 <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={logout}>Logout</MenuItem>
+                <MenuItem onClick={props.logout}>Logout</MenuItem>
               </Menu>            
               </Box>                       
     )

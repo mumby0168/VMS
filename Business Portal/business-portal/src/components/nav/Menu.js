@@ -32,14 +32,13 @@ const getButtons = (role) => {
 }
 
 export default function Menu({logout, ...props}) {
-
-    console.log(props);
+    
 
     var classes = useStyles();
 
     var title = props.businessName === "" ? "VMS" : props.businessName;
 
-    var profile = props.role === null ? "" : <ProfileMenu logout={logout} ></ProfileMenu>
+    var profile = props.role === null ? "" : <ProfileMenu initials={props.initials} logout={logout} ></ProfileMenu>
 
     return (
         <Toolbar>            

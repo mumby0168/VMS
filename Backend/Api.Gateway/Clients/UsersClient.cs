@@ -25,5 +25,10 @@ namespace Api.Gateway.Clients
         {
             return _client.GetAsync<IEnumerable<SiteAccessDetailsDto>>($"{_baseAddress}/business-records/{businessId}");   
         }
+
+        public Task<UserInfoDto> GetUserInfo(Guid accountId)
+        {
+            return _client.GetAsync<UserInfoDto>($"{_baseAddress}/info/{accountId}");
+        }
     }
 }

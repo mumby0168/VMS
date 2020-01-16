@@ -18,9 +18,11 @@ class Nav extends Component {
 
 
     render() {
+        console.log("props");
+        console.log(this.props);
         return (            
             <AppBar position="static">                                   
-                <Menu role={this.props.role} businessName={this.props.businessName} logout={this.logoutHandle}></Menu>                
+                <Menu initials={this.props.initials} role={this.props.role} businessName={this.props.businessName} logout={this.logoutHandle}></Menu>                
             </AppBar>                        
         )
     }
@@ -32,6 +34,7 @@ export default withRouter(connect((state) => {
     return {
         isSidebarVisible: state.ui.isSidebarVisible,
         role: state.account.userDetails.role,
-        businessName: state.business.name
+        businessName: state.business.name,
+        initials: state.user.initials,
     }
 })(Nav));

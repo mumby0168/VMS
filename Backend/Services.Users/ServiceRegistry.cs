@@ -40,6 +40,9 @@ namespace Services.Users
             serviceCollection.AddTransient<IQueryHandler<GetLatestSiteAccessRecords, IEnumerable<LatestAccessRecordDto>>,
                     GetLatestSiteAccessRecordsHandler>();
 
+            serviceCollection.AddTransient<IQueryHandler<GetUserInfo, UserInfoDto>,
+                GetUserInfoHandler>();
+
             serviceCollection
                 .AddTransient<IQueryHandler<GetBusinessAccessRecords, IEnumerable<SiteAccessDetailsDto>>,
                     GetBusinessAccessRecordsHandler>();

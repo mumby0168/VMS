@@ -10,6 +10,7 @@ namespace Api.Gateway.Clients.Interfaces
     {
         Task<IEnumerable<AccessRecordDto>> GetAccessRecordForUserAsync(Guid accountId);
         Task<IEnumerable<SiteAccessDetailsDto>> GetBusinessAccessRecordsAsync(Guid businessId);
+        Task<UserInfoDto> GetUserInfo(Guid accountId);
     }
 }
     

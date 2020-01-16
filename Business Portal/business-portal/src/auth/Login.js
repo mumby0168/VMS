@@ -37,6 +37,10 @@ class Login extends Component {
         this.props.dispatch(login(this.props.user.username, this.props.user.password));
     }
 
+    navigateHandle = () => {        
+        this.props.history.push("/password-reset");
+    }
+
 
     render() {        
 
@@ -45,10 +49,12 @@ class Login extends Component {
             this.props.history.push("/landing");
         }
 
+
+
     
 
         const body = this.props.isLoading ? <Progress message="Logging you in"/> :         
-                    <LoginForm dispatch={this.props.dispatch} handleSubmit={this.handleSubmit} user={this.props.user} error={this.props.error} />
+                    <LoginForm navigateHandle={this.navigateHandle} dispatch={this.props.dispatch} handleSubmit={this.handleSubmit} user={this.props.user} error={this.props.error} />
                     
                     
         return (
@@ -115,7 +121,7 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
      return {
-         isLoading: state.account.loading,
+         isLoading: state.account.loginLoading,
          error: state.account.error.reason,
          isLoggedIn: state.account.isLoggedIn,
          user: {

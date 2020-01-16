@@ -58,5 +58,14 @@ namespace Api.Gateway.Controllers
             if (businessId is null) return Unauthorized();
             return Ok(await _client.GetBusinessAccessRecordsAsync(Guid.Parse(businessId.Value)));
         }
+
+        [Authorize(Roles = Roles.PortalUser)]
+        [HttpGet("info")]
+        public async Task<ActionResult<UserInfoDto>> GetUserInfo()
+        {
+            var accountId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            if (accountId is null) return Unauthorized();
+            return Ok(await _client.GetUserInfo(Guid.Parse(accountId.Value)));
+        }
     }
 }

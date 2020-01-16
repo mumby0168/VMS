@@ -10,6 +10,7 @@ import {getPersonalAccessRecords} from '../actions/accessRecordActions'
 import Progress from '../common/Progress';
 import { Typography, CardContent, Card } from '@material-ui/core';
 import {getBusinessInfo} from '../actions/businessActions'
+import { getUserInfo } from '../actions/userActions';
 
 
 class Landing extends Component {
@@ -29,6 +30,7 @@ class Landing extends Component {
     componentDidMount() {        
         this.props.dispatch(getPersonalAccessRecords())
         this.props.dispatch(getBusinessInfo(this.props.businesId));
+        this.props.dispatch(getUserInfo());
     }
 
     render() {
@@ -37,7 +39,7 @@ class Landing extends Component {
                 <Card style={{marginBottom: '5px'}}>
                     <CardContent>                    
                     {/*TODO: Get real users name form state.*/}
-                    <Typography variant="h6">Good {new Date().getHours() > 12 ? "Afternoon" : "Morning"}, John Ford</Typography>                    
+                    <Typography variant="h6">Good {new Date().getHours() > 12 ? "Afternoon" : "Morning"}, {this.props.name}</Typography>                    
                     </CardContent>
                 </Card>
                 
@@ -63,7 +65,8 @@ const mapStateToProps = (state) => {
         value: state.ui.landingTabIndex,
         accessRecords: state.access.records,
         accessRecordsLoading: state.access.loading,
-        businesId: state.account.userDetails.businessId
+        businesId: state.account.userDetails.businessId,
+        name: state.user.firstName + " " + state.user.secondName,        
     }
 }
 

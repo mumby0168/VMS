@@ -1,5 +1,6 @@
 @url = http://localhost:5020/gateway/api/
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItc3RhbmRhcmRAdGVzdC5jb20iLCJuYW1laWQiOiI3NTc5ODViNC1lZDk3LTQ0MzQtOTkzNC0xMzg0Njg3ZTIwMmQiLCJyb2xlIjoiU3RhbmRhcmQiLCJidXNpbmVzc0lkIjoiNGU2MDE0M2QtMmE0OS00ZjZjLWEwNjktMmI4NGRlYjY3NjQxIiwibmJmIjoxNTc5MDE0OTY1LCJleHAiOjE1NzkwMjU3NjUsImlhdCI6MTU3OTAxNDk2NX0.MF8jSQc64l5OyAZuVMwKnXCg7wpzpj2aPzA7nzrL1qr02B2GjYy01bxsxWRGd3PTKZe5C20ybnEw0OGCBm4QaQ
+
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItc3RhbmRhcmRAdGVzdC5jb20iLCJuYW1laWQiOiI3NTc5ODViNC1lZDk3LTQ0MzQtOTkzNC0xMzg0Njg3ZTIwMmQiLCJyb2xlIjoiU3RhbmRhcmQiLCJidXNpbmVzc0lkIjoiNGU2MDE0M2QtMmE0OS00ZjZjLWEwNjktMmI4NGRlYjY3NjQxIiwibmJmIjoxNTc5MTY3NTA1LCJleHAiOjE1NzkxNzgzMDUsImlhdCI6MTU3OTE2NzUwNX0.ovAqMqYst3WKjQyvjtByHqqdk1X19GTO5Onnritx_Z28LmuN9GXF7QATTetF09PZ5wHBT59QuhDNXHf3OsPzyw
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
@@ -222,6 +223,10 @@ Authorization: Bearer {{jwt}}
 @siteId = aef48a96-1db9-488f-9cbf-034aab882f4b
 
 GET {{url}}sites/availability/{{siteId}}
+Authorization: Bearer {{jwt}}
+
+### Get User Info
+GET {{url}}users/info
 Authorization: Bearer {{jwt}}
 
 

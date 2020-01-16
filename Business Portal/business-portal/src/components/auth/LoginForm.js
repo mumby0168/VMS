@@ -16,6 +16,10 @@ export default function LoginForm(props) {
             <Alert severity="error">{props.error}</Alert>
         </Grid>  
 
+    const navigate = () => {        
+        props.navigateHandle();
+    }
+
     return (
             <form onSubmit={props.handleSubmit}>
                 <Grid direction="column" container>
@@ -28,7 +32,7 @@ export default function LoginForm(props) {
                     {error}                  
                     <Grid style={gridWrapperClass}>
                     <Grid style={gridWrapperClass}>
-                        <Button>Forgotten your password?</Button>
+                        <Button onClick={navigate}>Forgotten your password?</Button>
                     </Grid>
                     <Button variant="contained" type="submit">Submit</Button>
                     </Grid>                                                                                   

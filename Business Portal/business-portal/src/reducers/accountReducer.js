@@ -4,7 +4,8 @@ export default function reducer(state = {
     isLoggedIn: false,
     jwtToken: null,
     refreshToken: null,
-    loading: false,
+    loginLoading: false,
+    resetRequestLoading: false,    
     error: {
         code: null,
         reason: null
@@ -22,7 +23,7 @@ export default function reducer(state = {
         case "LOGIN": {
             return {
                 ...state, 
-                loading: true
+                loginLoading: true
             }
         }
 
@@ -31,22 +32,40 @@ export default function reducer(state = {
                 ...state,
                 jwtToken: action.payload.jwt,
                 refreshToken: action.payload.refreshToken,
-                loading: false,
+                loginLoading: false,
                 isLoggedIn: true,
                 userDetails: processJwt(action.payload.jwt)
             };
         }
 
-        case "LOGIN_REJECTED": {
-            console.log(action.payload);
+        case "LOGIN_REJECTED": {            
             return {
                 ...state, 
-                loading: false,
+                loginLoading: false,
                 error: {
                     code: action.payload.Code,
                     reason: action.payload.Reason
                 }
             }    
+        } 
+        
+        
+        case "REQUEST_RESET_SENT": {
+            return {...state, resetRequestLoading : true, error: {
+                reason: null,
+                code: null,
+            }}
+        }
+
+        case "REQUEST_RESET_SUCCESFUL": {
+            return {...state, resetRequestLoading : false}
+        }        
+
+        case "REQUEST_RESET_REJECTED": {
+            return {...state, resetRequestLoading : false, error: {
+                code: action.payload.Code,
+                reason: action.payload.Reason
+            }}
         }
 
         case "LOGOUT": {

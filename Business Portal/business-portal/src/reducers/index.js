@@ -5,6 +5,8 @@ import login from './loginReducer'
 import operations from './operationsReducer'    
 import access from './accessRecordsReducer'
 import business from './businessReducer'
+import requestReset from './requestResetReducer'
+import user from './userReducer'
 
 export default combineReducers({
     ui,
@@ -12,5 +14,7 @@ export default combineReducers({
     login,
     operations,
     access,
-    business
+    business,
+    requestReset,
+    user
 })

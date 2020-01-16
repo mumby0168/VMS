@@ -7,7 +7,12 @@ export default function AccessRecordsList(props) {
 
     const rows = props.records.map((record) => <AccessRecordsTemplate key={record.id} record={record}></AccessRecordsTemplate>)
 
-    const body = rows.length > 0 ? rows : <h2>No access records</h2>
+    const body = rows.length > 0 ? rows : 
+        <TableRow>
+            <TableCell>
+                <h2>No access records</h2>
+            </TableCell>
+        </TableRow>
 
     return (
         <TableContainer style={{maxHeight: '650px', overflowY: "auto"}}>

@@ -8,6 +8,7 @@ import Landing from './hocs/Landing';
 import { connect } from 'react-redux';
 import Container from '@material-ui/core/Container';
 import Operations from './operations/Operations';
+import RequestReset from './auth/RequestReset';
 
 const Home = () => {
     return <h1>Home</h1>
@@ -36,6 +37,9 @@ class Layout extends Component {
                         </Route>
                         <Route path="/login">
                             <Login></Login>
+                        </Route>
+                        <Route path="/password-reset">
+                            <RequestReset></RequestReset>
                         </Route>
                         <PrivateRoute path="/landing" valid={this.props.valid}>
                             <Landing></Landing>
