@@ -23,11 +23,15 @@ class Nav extends Component {
         this.props.dispatch(logout());        
     }
 
+    navigate = (path) => {
+        this.props.history.push(path);
+    }
+
 
     render() {        
         return (            
             <AppBar style={appBarStyle} position="static">                                   
-                <Menu initials={this.props.initials} role={this.props.role} businessName={this.props.businessName} logout={this.logoutHandle}></Menu>                
+                <Menu navigate={this.navigate} initials={this.props.initials} role={this.props.role} businessName={this.props.businessName} logout={this.logoutHandle}></Menu>                
             </AppBar>                        
         )
     }

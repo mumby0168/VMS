@@ -7,6 +7,7 @@ import access from './accessRecordsReducer'
 import business from './businessReducer'
 import requestReset from './requestResetReducer'
 import user from './userReducer'
+import site from './siteReducer'
 
 export default combineReducers({
     ui,
@@ -16,5 +17,6 @@ export default combineReducers({
     access,
     business,
     requestReset,
-    user
+    user,
+    site
 })

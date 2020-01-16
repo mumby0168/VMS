@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import Container from '@material-ui/core/Container';
 import Operations from './operations/Operations';
 import RequestReset from './auth/RequestReset';
+import Availability from './hocs/Availability';
 
 const Home = () => {
     return <h1>Home</h1>
@@ -43,6 +44,9 @@ class Layout extends Component {
                         </Route>
                         <PrivateRoute path="/landing" valid={this.props.valid}>
                             <Landing></Landing>
+                        </PrivateRoute>
+                        <PrivateRoute path="/availability" valid={this.props.valid}>
+                            <Availability></Availability>
                         </PrivateRoute>
                         <Route path="*">
                             <h1>Not Found</h1>

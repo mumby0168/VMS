@@ -33,6 +33,15 @@ namespace Api.Gateway.Controllers
         [HttpGet("summaries/{businessId}")]
         public async Task<ActionResult<IEnumerable<SiteSummaryDto>>> GetSummaries([FromRoute] Guid businessId) => Collection(await _siteClient.GetSites(businessId));
 
+        [Authorize(Roles = Roles.PortalUser)]
+        [HttpGet("all")]
+        public async Task<ActionResult<IEnumerable<SiteSummaryDto>>> GetSiteSummariesForBusiness()
+        {
+            var businessId = HttpContext.User.Claims.FirstOrDefault(u => u.Type == CustomClaims.BusinessIdClaim);
+            if (businessId is null) return Unauthorized();
+            return Collection(await _siteClient.GetSites(Guid.Parse(businessId.Value)));
+        }
+
         [Authorize(Roles = Roles.SystemAdmin)]
         [HttpGet("get/{siteId}")]
         public async Task<ActionResult<SiteDto>> Get([FromRoute] Guid siteId) => Single(await _siteClient.GetSite(siteId));

@@ -9,30 +9,29 @@ const useStyles = makeStyles({
     }
 });
 
-const getButtons = (role) => {
-    if(role === "Standard") {
-        return (
-            <div>
-            <Button color="inherit">Sites</Button>
-            <Button color="inherit">Fire List</Button>
-            </div>
-        )
-    }
-    else if(role === "BusinessAdmin") {
-        return (
-            <div>
-            <Button color="inherit">Sites</Button>
-            <Button color="inherit">Fire List</Button>
-            <Button color="inherit">Accounts</Button>
-            <Button color="inherit">Visitors</Button>
-            <Button color="inherit">Employees</Button>
-            </div>
-        )
-    }
-}
-
 export default function Menu({logout, ...props}) {
     
+    const getButtons = (role) => {
+        if(role === "Standard") {
+            return (
+                <div>
+                <Button onClick={(e) => props.navigate("/landing")} color="inherit">Dashboard</Button>
+                <Button onClick={(e) => props.navigate("/availability")} color="inherit">Sites</Button>
+                <Button color="inherit">Fire List</Button>
+                </div>
+            )
+        }
+        else if(role === "BusinessAdmin") {
+            return (
+                <div>
+                {getButtons("Standard")}
+                <Button color="inherit">Accounts</Button>
+                <Button color="inherit">Visitors</Button>
+                <Button color="inherit">Employees</Button>
+                </div>
+            )
+        }
+    }
 
     var classes = useStyles();
 

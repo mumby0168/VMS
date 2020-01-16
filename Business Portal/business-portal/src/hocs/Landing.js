@@ -11,6 +11,7 @@ import Progress from '../common/Progress';
 import { Typography } from '@material-ui/core';
 import {getBusinessInfo} from '../actions/businessActions'
 import { getUserInfo } from '../actions/userActions';
+import { getSiteSummaries } from '../actions/siteActions';
 
 
 class Landing extends Component {
@@ -31,6 +32,7 @@ class Landing extends Component {
         this.props.dispatch(getPersonalAccessRecords())
         this.props.dispatch(getBusinessInfo(this.props.businesId));
         this.props.dispatch(getUserInfo());
+        this.props.dispatch(getSiteSummaries());
     }
 
     render() {

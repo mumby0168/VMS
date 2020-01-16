@@ -1,6 +1,7 @@
 export default function reducer(state = {
     isSidebarVisible: false,
-    landingTabIndex: 0
+    landingTabIndex: 0,
+    sitesTabIndex: 2,
 }
 , action) {
     switch (action.type) {
@@ -11,6 +12,10 @@ export default function reducer(state = {
 
         case "UPDATE_LANDING_TAB": {
             return {...state, landingTabIndex: action.payload};
+        }
+
+        case "UPDATE_SITES_TAB": {
+            return {...state, sitesTabIndex: action.payload};
         }
 
         default:
