@@ -40,7 +40,8 @@ namespace Services.Users.Handlers.Queries
                     UserId = user.Id,
                     Email = user.Email,
                     ContactNumber = user.PhoneNumber,
-                    FullName = user.FirstName + " " + user.SecondName
+                    FullName = user.FirstName + " " + user.SecondName,
+                    Initials = $"{user.FirstName[0]}{user.SecondName[0]}"
                 };
 
                 var latest = userAccessRecord.OrderByDescending(a => a.TimeStamp).FirstOrDefault();

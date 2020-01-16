@@ -19,5 +19,7 @@ namespace Services.Sites.Dtos
         public string Email { get; set; }
 
         public string ContactNumber { get; set; }
+
+        public string Initials { get; set; }
     }
 }

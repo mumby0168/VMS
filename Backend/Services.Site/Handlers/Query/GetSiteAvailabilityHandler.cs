@@ -47,11 +47,12 @@ namespace Services.Sites.Handlers.Query
                     Name = record.FullName,
                     Status = record.Action,
                     Time = record.TimeStamp.ToShortTimeString(),
-                    Date = record.TimeStamp.ToShortDateString()
-                });
+                    Date = record.TimeStamp.ToShortDateString(),
+                    Initials = record.Initials
+    });
             }
 
-            siteDto.Users = userRecords;
+            siteDto.Users = userRecords.OrderBy(r => r.Name[0]);
 
             return siteDto;
         }

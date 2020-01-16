@@ -18,5 +18,8 @@ namespace Services.Sites.Dtos
         public string ContactNumber { get; set; }
         public string Time { get; set; }
         public string Date { get; set; }
+
+        public DateTime TimeStamp { get; set; }
+        public string Initials { get; set; }
     }
 }

@@ -47,11 +47,12 @@ namespace Services.Users.Handlers.Queries
                     Id = accessRecord.Id,
                     SiteId = accessRecord.SiteId,
                     Date = accessRecord.TimeStamp.ToShortDateString(),
-                    Time = accessRecord.TimeStamp.ToShortTimeString()
+                    Time = accessRecord.TimeStamp.ToShortTimeString(),
+                    TimeStamp = accessRecord.TimeStamp
                 });
             }
 
-            return ret;
+            return ret.OrderByDescending(r => r.TimeStamp);
         }
     }
 }
