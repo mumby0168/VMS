@@ -5,6 +5,13 @@ import {showSidebar} from '../actions/uiActions'
 import {logout} from '../actions/accountActions'
 import Menu from '../components/nav/Menu';
 import { withRouter } from 'react-router-dom';
+import { teal } from '@material-ui/core/colors';
+
+const appBarColor = teal[700];
+
+const appBarStyle = {
+    backgroundColor: appBarColor
+}
 
 class Nav extends Component {
 
@@ -17,11 +24,9 @@ class Nav extends Component {
     }
 
 
-    render() {
-        console.log("props");
-        console.log(this.props);
+    render() {        
         return (            
-            <AppBar position="static">                                   
+            <AppBar style={appBarStyle} position="static">                                   
                 <Menu initials={this.props.initials} role={this.props.role} businessName={this.props.businessName} logout={this.logoutHandle}></Menu>                
             </AppBar>                        
         )

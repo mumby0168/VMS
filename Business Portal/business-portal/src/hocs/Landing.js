@@ -8,7 +8,7 @@ import { TabPanel } from '../components/landing/TabPanel';
 import AccessRecordsList from '../components/landing/AccessRecordsList';
 import {getPersonalAccessRecords} from '../actions/accessRecordActions'
 import Progress from '../common/Progress';
-import { Typography, CardContent, Card } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import {getBusinessInfo} from '../actions/businessActions'
 import { getUserInfo } from '../actions/userActions';
 
@@ -35,13 +35,8 @@ class Landing extends Component {
 
     render() {
         return (
-            <div>
-                <Card style={{marginBottom: '5px'}}>
-                    <CardContent>                    
-                    {/*TODO: Get real users name form state.*/}
-                    <Typography variant="h6">Good {new Date().getHours() > 12 ? "Afternoon" : "Morning"}, {this.props.name}</Typography>                    
-                    </CardContent>
-                </Card>
+            <div>                                                
+                <Typography style={{paddingBottom: '3px'}} variant="h5">Good {new Date().getHours() > 12 ? "Afternoon" : "Morning"}, {this.props.name}</Typography>                    
                 
                 <AppBar position="static">
                 <Tabs value={this.props.value} onChange={this.handleChange} aria-label="simple tabs example">
