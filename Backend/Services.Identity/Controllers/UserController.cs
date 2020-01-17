@@ -76,7 +76,6 @@ namespace Services.Identity.Controllers
             return Ok();
         }
 
-        [AllowAnonymous]
         [HttpPost("reset-password")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPassword command)
         {

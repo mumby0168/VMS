@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {CardContent, Card, CardHeader, Grid, Typography} from '@material-ui/core'
-import {login} from '../actions/accountActions';
+import {login, loginFormUpdated} from '../actions/accountActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Progress from '../common/Progress';
@@ -35,6 +35,7 @@ class Login extends Component {
         e.preventDefault();            
 
         this.props.dispatch(login(this.props.user.username, this.props.user.password));
+        this.props.dispatch(loginFormUpdated(this.props.username, ""));
     }
 
     navigateHandle = () => {        
@@ -47,6 +48,7 @@ class Login extends Component {
         //TODO: Causing an error.
         if(this.props.isLoggedIn) {
             this.props.history.push("/landing");
+            this.props.dispatch(loginFormUpdated("", ""));
         }
 
 

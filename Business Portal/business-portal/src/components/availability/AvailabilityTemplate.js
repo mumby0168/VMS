@@ -1,7 +1,6 @@
 import React from 'react';
-import { Avatar, Card, Grid, CardContent, Typography, makeStyles, Divider, Chip, CardActions, Button, IconButton } from "@material-ui/core";
-import { green, red } from '@material-ui/core/colors';
-import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import { Avatar, Card, Grid,CardContent, Typography, makeStyles, Divider, CardActions, IconButton, Tooltip } from "@material-ui/core";
+import PhoneIcon from '@material-ui/icons/Phone';
 import MailIcon from '@material-ui/icons/Mail';
 
 const useStyles = makeStyles(theme => ({        
@@ -16,26 +15,46 @@ const useStyles = makeStyles(theme => ({
     content: {
         padding: theme.spacing(1),
         paddingBottom: '0px'        
-    }
+    },
+    shapeActive: {
+        backgroundColor: '#00e676',
+        width: 25,
+        height: 25,
+        border: '1px solid #00e676',
+        borderRadius: '15px'
+      },
+      shapeInative: {
+        backgroundColor: '#ff1744',
+        width: 25,
+        height: 25,
+        border: '1px solid #ff1744',
+        borderRadius: '15px'
+      },
   }));
 
 export default function AvailabilityTemplate(props) {
 
     const classes = useStyles();
 
-    console.log(props.user);
-    const color = props.user.status === "in" ? 'green' : 'red';    
-    const text = props.user.status === "in" ? "Online" : "Offline";
+    const squareClass = props.user.status === "in" ? classes.shapeActive : classes.shapeInative;  
+    const toolTip = props.user.status === "in" ? "In" : "Out";        
+    const rectangle = <Tooltip title={toolTip}><div className={squareClass}/></Tooltip>
 
-    console.log(color);
+    const copyEmail = () => {
+        navigator.clipboard.writeText(props.user.email);
+    }
+
+    const copyPhone = () => {
+        navigator.clipboard.writeText(props.user.contactNumber);        
+    }
 
     return (
         <Grid item xs={12} md={4}>
-            <Card>
+            <Card variant="outlined">
                 <CardContent className={classes.content}>                                                                                                    
                 <div style={{position: 'relative'}}>
-                    <div style={{position: 'absolute', top: '0px', left: '0px'}}>
-                    <RadioButtonCheckedIcon style={{color: color}}/>                                       
+                    <div style={{position: 'absolute', top: '3px', right: '3px'}}>                    
+                        {rectangle}                    
                     </div>           
 
                     <div align="center">
@@ -53,9 +72,16 @@ export default function AvailabilityTemplate(props) {
                 </div>                            
                 </CardContent>
                 <CardActions>
-                    <IconButton variant="contained" color="secondary">
-                        <MailIcon></MailIcon>
-                    </IconButton>
+                    <Tooltip title="Copy Email Address">
+                        <IconButton onClick={copyEmail} variant="contained" color="secondary">
+                            <MailIcon/>
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Copy Phone Number">
+                        <IconButton onClick={copyPhone} variant="contained" color="secondary">
+                            <PhoneIcon/>
+                        </IconButton>
+                    </Tooltip>
                 </CardActions>
             </Card>
         </Grid>

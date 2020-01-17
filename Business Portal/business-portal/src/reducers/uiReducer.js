@@ -1,7 +1,7 @@
 export default function reducer(state = {
     isSidebarVisible: false,
     landingTabIndex: 0,
-    sitesTabIndex: 2,
+    sitesTabIndex: 0,
 }
 , action) {
     switch (action.type) {

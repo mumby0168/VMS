@@ -8,6 +8,12 @@ import { PanelsList } from '../components/availability/PanelsList'
 
 class Availability extends Component {    
 
+
+    componentDidMount()
+    {
+        this.handleChange(null, 0);
+    }
+
     a11yProps(index) {
         return {
           id: `vertical-tab-${index}`,

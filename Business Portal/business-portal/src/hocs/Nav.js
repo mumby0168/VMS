@@ -5,13 +5,6 @@ import {showSidebar} from '../actions/uiActions'
 import {logout} from '../actions/accountActions'
 import Menu from '../components/nav/Menu';
 import { withRouter } from 'react-router-dom';
-import { teal } from '@material-ui/core/colors';
-
-const appBarColor = teal[700];
-
-const appBarStyle = {
-    backgroundColor: appBarColor
-}
 
 class Nav extends Component {
 

@@ -10,6 +10,7 @@ import Container from '@material-ui/core/Container';
 import Operations from './operations/Operations';
 import RequestReset from './auth/RequestReset';
 import Availability from './hocs/Availability';
+import Reset from './auth/Reset';
 
 const Home = () => {
     return <h1>Home</h1>
@@ -40,6 +41,9 @@ class Layout extends Component {
                         </Route>
                         <Route path="/password-reset">
                             <RequestReset></RequestReset>
+                        </Route>
+                        <Route path="/reset/:code">
+                            <Reset/>
                         </Route>
                         <PrivateRoute path="/landing" valid={this.props.valid}>
                             <Landing></Landing>

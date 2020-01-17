@@ -24,17 +24,17 @@ export default function LoginForm(props) {
             <form onSubmit={props.handleSubmit}>
                 <Grid direction="column" container>
                     <Grid style={gridWrapperClass}>
-                    <TextField value={props.user.username} required id="email" label="Email" onChange={(e) => props.dispatch(loginFormUpdated(e.target.value, props.user.password))}></TextField>
+                    <TextField value={props.user.username} required id="email-login" label="Email" onChange={(e) => props.dispatch(loginFormUpdated(e.target.value, props.user.password))}></TextField>
                     </Grid>                            
                     <Grid style={gridWrapperClass}>
-                    <TextField value={props.user.password} required id="password" label="Password" type="password"  onChange={(e) => props.dispatch(loginFormUpdated(props.user.username, e.target.value))}></TextField>
+                    <TextField value={props.user.password} required id="password-login" label="Password" type="password"  onChange={(e) => props.dispatch(loginFormUpdated(props.user.username, e.target.value))}></TextField>
                     </Grid>              
                     {error}                  
                     <Grid style={gridWrapperClass}>
                     <Grid style={gridWrapperClass}>
                         <Button onClick={navigate}>Forgotten your password?</Button>
                     </Grid>
-                    <Button variant="contained" type="submit">Submit</Button>
+                    <Button variant="contained" color="primary" type="submit">Submit</Button>
                     </Grid>                                                                                   
                 </Grid>
             </form>

@@ -1,11 +1,11 @@
-
-
-export default function reducer(state = {
+const intialState = {
     isLoggedIn: false,
     jwtToken: null,
     refreshToken: null,
     loginLoading: false,
-    resetRequestLoading: false,    
+    resetRequestLoading: false,
+    resetLoading: false,
+    resetValid: false,
     error: {
         code: null,
         reason: null
@@ -15,19 +15,26 @@ export default function reducer(state = {
         email: null,
         businessId: null,
         role: null
+    },
+    resetRequest: {
+        email: "",
+        password: "",
+        passwordConfirm: "",
+        code: "",
     }
 }
-, action) {
+
+export default function reducer(state = intialState, action) {
     switch (action.type) {
 
         case "LOGIN": {
             return {
-                ...state, 
+                ...state,
                 loginLoading: true
             }
         }
 
-        case "LOGIN_SUCCESFUL": {            
+        case "LOGIN_SUCCESFUL": {
             return {
                 ...state,
                 jwtToken: action.payload.jwt,
@@ -38,34 +45,37 @@ export default function reducer(state = {
             };
         }
 
-        case "LOGIN_REJECTED": {            
+        case "LOGIN_REJECTED": {
             return {
-                ...state, 
+                ...state,
                 loginLoading: false,
                 error: {
                     code: action.payload.Code,
                     reason: action.payload.Reason
                 }
-            }    
-        } 
-        
-        
+            }
+        }
+
         case "REQUEST_RESET_SENT": {
-            return {...state, resetRequestLoading : true, error: {
-                reason: null,
-                code: null,
-            }}
+            return {
+                ...state, resetRequestLoading: true, error: {
+                    reason: null,
+                    code: null,
+                }
+            }
         }
 
         case "REQUEST_RESET_SUCCESFUL": {
-            return {...state, resetRequestLoading : false}
-        }        
+            return { ...state, resetRequestLoading: false }
+        }
 
         case "REQUEST_RESET_REJECTED": {
-            return {...state, resetRequestLoading : false, error: {
-                code: action.payload.Code,
-                reason: action.payload.Reason
-            }}
+            return {
+                ...state, resetRequestLoading: false, error: {
+                    code: action.payload.Code,
+                    reason: action.payload.Reason
+                }
+            }
         }
 
         case "LOGOUT": {
@@ -83,6 +93,49 @@ export default function reducer(state = {
                 refreshToken: null
             }
         }
+
+
+        case "FETCHING_RESET_STATUS": {
+            return { ...state, resetLoading: true };
+        }
+
+        case "FETCHED_RESET_STATUS": {
+            return {
+                ...state,
+                resetLoading: false,
+                resetValid: action.payload,
+                error: {
+                    code: null,
+                    reason: null
+                }
+            };
+        }
+
+        case "REJECTED_RESET_STATUS": {
+            return {
+                ...state,
+                resetLoading: false,
+                resetValid: false,
+                error: {
+                    code: action.payload.Code,
+                    reason: action.payload.Reason,
+                }
+            };
+        }
+
+        case "UPDATE_RESET_FORM": {
+            return {
+                ...state,
+                resetRequest: {
+                    email: action.payload.email,
+                    password: action.payload.password,
+                    passwordConfirm: action.payload.passwordConfirm,
+                    code: action.payload.code,
+                }
+            }
+        }
+
+        case "RESET_USER_CONFIRMED": return {...state, resetValid: false}
 
         default:
             return state;

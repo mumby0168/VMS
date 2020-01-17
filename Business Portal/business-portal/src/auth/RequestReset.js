@@ -51,7 +51,7 @@ class RequestReset extends Component {
                     <Button onClick={this.login}>Back to login</Button>
                 </Grid>
                 <Grid style={gridWrapperClass}>
-                    <Button variant="contained" type="submit">Submit</Button>
+                    <Button variant="contained" color="primary" type="submit">Submit</Button>
                 </Grid>
             </Grid>
         </form>
@@ -63,8 +63,8 @@ class RequestReset extends Component {
                 <Backdrop style={{zIndex: 250}} open={this.props.shouldConfirm} onClick={this.confirm}>
                     <Card>
                         <CardContent>
-                            <Typography>You will short receive an email with instructions to reset your password.</Typography>
-                            <Button onClick={this.confirm}>Close</Button>
+                            <Typography>You will shortly receive an email with instructions to reset your password.</Typography>
+                            <Button variant="contained" color="primary" onClick={this.confirm}>Close</Button>
                         </CardContent>
                     </Card>
                 </Backdrop>
