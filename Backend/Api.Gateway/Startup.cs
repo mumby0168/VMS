@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Services.Common.Jwt;
 using Services.Common.Logging;
 using Services.Common.Names;
+using Services.Common.Swagger;
 using Services.RabbitMq.Extensions;
 
 namespace Api.Gateway
@@ -29,12 +30,13 @@ namespace Api.Gateway
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddUdpLogging();
-            services.AddMvcCore().AddNewtonsoftJson();
+            services.AddMvcCore().AddNewtonsoftJson().AddApiExplorer();
             services.AddControllers();
             services.AddCustomAuth(_configuration);
             services.AddServiceBus();
             services.AddConvey().AddHttpClient();
             services.AddCors();
+            services.AddSwagger(Services.Common.Names.Services.Gateway);
 
             services.AddTransient<IOperationsClient, OperationsClient>();
             services.AddTransient<IBusinessClient, BusinessClient>();
@@ -50,6 +52,8 @@ namespace Api.Gateway
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwaggerWithUi(Services.Common.Names.Services.Gateway);
 
             app.UseUdpLogging(Services.Common.Names.Services.Gateway);
 

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Tabs, Tab, Paper, Grid, createMuiTheme } from '@material-ui/core'
 import {updateSitesTab} from '../actions/uiActions'
 import { PanelsList } from '../components/availability/PanelsList'
+import { getSiteSummaries } from '../actions/siteActions'
 
 
 class Availability extends Component {    
@@ -11,6 +12,7 @@ class Availability extends Component {
 
     componentDidMount()
     {
+        this.props.dispatch(getSiteSummaries());
         this.handleChange(null, 0);
     }
 

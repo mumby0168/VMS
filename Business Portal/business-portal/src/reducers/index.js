@@ -8,6 +8,7 @@ import business from './businessReducer'
 import requestReset from './requestResetReducer'
 import user from './userReducer'
 import site from './siteReducer'
+import completeAccount from './completeAccountReducer';
 
 export default combineReducers({
     ui,
@@ -18,5 +19,6 @@ export default combineReducers({
     business,
     requestReset,
     user,
-    site
+    site,
+    completeAccount
 })

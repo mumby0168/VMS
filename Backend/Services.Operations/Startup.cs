@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.Common.Logging;
 using Services.Common.Names;
+using Services.Common.Swagger;
 using Services.Operations.Handlers;
 using Services.Operations.Messages.Events.Push;
 using Services.Operations.Services;
@@ -36,6 +37,9 @@ namespace Services.Operations
                 .AddConvey()
                 .AddRedis();
 
+
+            services.AddSwagger(Common.Names.Services.Operations);
+
             services.AddControllers();
 
             services.AddTransient<IOperationsCache, OperationsCache>();
@@ -48,6 +52,8 @@ namespace Services.Operations
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwaggerWithUi(Common.Names.Services.Operations);
 
             app.UseUdpLogging(Common.Names.Services.Operations);
 

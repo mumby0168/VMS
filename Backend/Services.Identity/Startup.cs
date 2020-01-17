@@ -9,12 +9,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Services.Common.Jwt;
 using Services.Common.Logging;
 using Services.Common.Middleware;
 using Services.Common.Mongo;
 using Services.Common.Names;
 using Services.Common.Queries;
+using Services.Common.Swagger;
 using Services.Identity.Domain;
 using Services.Identity.Managers;
 using Services.Identity.Messages.Events;
@@ -40,7 +42,9 @@ namespace Services.Identity
         {
 
             services.AddUdpLogging();
-            services.AddMvcCore().AddNewtonsoftJson();
+            services.AddMvcCore()
+                .AddNewtonsoftJson()
+                .AddApiExplorer();
 
             services.AddControllers();
 
@@ -61,6 +65,8 @@ namespace Services.Identity
                 .AddMongoCollection<ResetRequest>();
 
             services.AddCors();
+
+            services.AddSwagger(Common.Names.Services.Identity);
 
 
 
@@ -86,6 +92,7 @@ namespace Services.Identity
 
             app.UseMongo(Common.Names.Services.Identity);
 
+            app.UseSwaggerWithUi(Common.Names.Services.Identity);
 
             app.UseServiceBus(Common.Names.Services.Identity)
                 .SubscribeEvent<BusinessCreated>();
