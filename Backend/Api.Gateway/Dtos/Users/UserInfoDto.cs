@@ -12,5 +12,7 @@ namespace Api.Gateway.Dtos.Users
         public string FirstName { get; set; }
 
         public string SecondName { get; set; }
+
+        public Guid BasedSiteId { get; set; }
     }
 }

@@ -4,6 +4,7 @@ const initialState = {
     firstName: "",
     secondName: "",
     initials: "",
+    basedSiteId: ""
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -18,7 +19,8 @@ export default (state = initialState, { type, payload }) => {
             id: payload.id, 
             firstName: payload.firstName, 
             secondName: payload.secondName, 
-            initials: extractInitials(payload.firstName, payload.secondName)
+            initials: extractInitials(payload.firstName, payload.secondName),
+            basedSiteId: payload.basedSiteId,
         };
     case "REJECTED_USER_INFO":
         return {...state, loading: false};

@@ -17,7 +17,7 @@ export default function Menu({logout, ...props}) {
                 <div>
                 <Button onClick={(e) => props.navigate("/landing")} color="inherit">Dashboard</Button>
                 <Button onClick={(e) => props.navigate("/availability")} color="inherit">Sites</Button>
-                <Button color="inherit">Fire List</Button>
+                <Button onClick={(e) => props.navigate("/firelist")} color="inherit">Fire List</Button>
                 </div>
             )
         }

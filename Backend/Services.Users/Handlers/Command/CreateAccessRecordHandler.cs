@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MongoDB.Driver;
 using Services.Common.Logging;
+using Services.Common.Mongo;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 using Services.Users.Commands;
@@ -20,19 +22,21 @@ namespace Services.Users.Handlers.Command
         private readonly IAccessRecordRepository _accessRecordRepository;
         private readonly IAccessRecordFactory _factory;
         private readonly IServiceBusMessagePublisher _publisher;
+        private readonly IMongoRepository<User> _collection;
 
-        public CreateAccessRecordHandler(IVmsLogger<CreateAccessRecordHandler> logger, IUserRepository userRepository, IAccessRecordRepository accessRecordRepository, IAccessRecordFactory factory, IServiceBusMessagePublisher publisher)
+        public CreateAccessRecordHandler(IVmsLogger<CreateAccessRecordHandler> logger, IUserRepository userRepository, IAccessRecordRepository accessRecordRepository, IAccessRecordFactory factory, IServiceBusMessagePublisher publisher, IMongoRepository<User> collection)
         {
             _logger = logger;
             _userRepository = userRepository;
             _accessRecordRepository = accessRecordRepository;
             _factory = factory;
             _publisher = publisher;
-
+            _collection = collection;
         }
 
         public async Task HandleAsync(CreateAccessRecord message, IRequestInfo requestInfo)
         {
+            var users = await _collection.GetAllAsync();
             var user = await _userRepository.GetAsync(message.UserId);
             if(user is null)
             {

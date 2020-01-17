@@ -11,6 +11,7 @@ import Operations from './operations/Operations';
 import RequestReset from './auth/RequestReset';
 import Availability from './hocs/Availability';
 import Reset from './auth/Reset';
+import Fire from './hocs/Fire';
 
 const Home = () => {
     return <h1>Home</h1>
@@ -45,6 +46,9 @@ class Layout extends Component {
                         <Route path="/reset/:code">
                             <Reset/>
                         </Route>
+                        <PrivateRoute path="/firelist" valid={this.props.valid}>
+                            <Fire/>
+                        </PrivateRoute>
                         <PrivateRoute path="/landing" valid={this.props.valid}>
                             <Landing></Landing>
                         </PrivateRoute>
@@ -56,7 +60,7 @@ class Layout extends Component {
                         </Route>
                     </Switch>                                          
                 </Container>
-                </div>          
+                </div>
             </Router>    
             </React.Fragment>                   
         )

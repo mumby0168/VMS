@@ -29,10 +29,10 @@ class Landing extends Component {
     };
 
     componentDidMount() {        
-        this.props.dispatch(getPersonalAccessRecords())
-        this.props.dispatch(getBusinessInfo(this.props.businesId));
         this.props.dispatch(getUserInfo());
         this.props.dispatch(getSiteSummaries());
+        this.props.dispatch(getPersonalAccessRecords())
+        this.props.dispatch(getBusinessInfo(this.props.businesId));        
     }
 
     render() {

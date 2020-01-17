@@ -49,7 +49,7 @@ namespace Services.Sites.Handlers.Query
                     Time = record.TimeStamp.ToShortTimeString(),
                     Date = record.TimeStamp.ToShortDateString(),
                     Initials = record.Initials
-    });
+                });
             }
 
             siteDto.Users = userRecords.OrderBy(r => r.Name[0]);

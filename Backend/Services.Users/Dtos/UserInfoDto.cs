@@ -9,5 +9,6 @@ namespace Services.Users.Dtos
         public string FirstName { get; set; }
 
         public string SecondName { get; set; }
+        public Guid BasedSiteId { get; set; }
     }
 }

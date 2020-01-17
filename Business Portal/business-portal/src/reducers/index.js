@@ -9,6 +9,7 @@ import requestReset from './requestResetReducer'
 import user from './userReducer'
 import site from './siteReducer'
 import completeAccount from './completeAccountReducer';
+import fire from './fireListReducer'
 
 export default combineReducers({
     ui,
@@ -20,5 +21,6 @@ export default combineReducers({
     requestReset,
     user,
     site,
-    completeAccount
+    completeAccount,
+    fire,
 })

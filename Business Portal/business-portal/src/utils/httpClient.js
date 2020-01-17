@@ -17,3 +17,21 @@ export function get(url, authenticated = true) {
         }
     })
 }
+
+export function handleError(type, dispatch, err) {
+
+    if(err.response === undefined || null) {
+        dispatch({type: type, payload: {Code: "not_accesible", Reason: "Our services are currently down."}});
+        return;
+    }
+
+    if(err.response.status === 500) {
+        dispatch({type: type, payload: {Code: "not_accesible", Reason: "Our services are currently down."}});
+        return;
+    }
+    
+    if(err.response.status === 400) {
+        dispatch({type: type, payload: err.response.data});
+        return;
+    }     
+}

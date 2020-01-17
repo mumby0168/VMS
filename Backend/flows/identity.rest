@@ -1,5 +1,5 @@
 @url = http://localhost:5010
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5hZG1pbkB0ZXN0LmNvbSIsIm5hbWVpZCI6IjlmZTc3MDgwLTBlNzgtNGJhZC05N2FlLTI0MDMyNDc2ZDRlNCIsInJvbGUiOiJCdXNpbmVzc0FkbWluIiwiYnVzaW5lc3NJZCI6IjRlNjAxNDNkLTJhNDktNGY2Yy1hMDY5LTJiODRkZWI2NzY0MSIsIm5iZiI6MTU3ODIyNDY2OCwiZXhwIjoxNTc4MjM1NDY4LCJpYXQiOjE1NzgyMjQ2Njh9.--aIarnXWfI9EkXTtttDAhSOcmYKn0QkjJnyUO3Gq-t7H3DTFUJFUPrIc3JD4hHD-f_hLqPMMHHy9gd1GhaDdQ
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW5AdGVzdC5jb20iLCJuYW1laWQiOiI0ODFhODRmOC1lZDBiLTQyYzUtYjkyZC0zZDM2ZDQ3NGUzNmUiLCJyb2xlIjoiQnVzaW5lc3NBZG1pbiIsImJ1c2luZXNzSWQiOiI0ZTYwMTQzZC0yYTQ5LTRmNmMtYTA2OS0yYjg0ZGViNjc2NDEiLCJuYmYiOjE1NzkyNzc1NjEsImV4cCI6MTU3OTI4ODM2MSwiaWF0IjoxNTc5Mjc3NTYxfQ.apDE_Ul4xFzpY9NNq7qo70Euao5C5lnIHR10ZovQDjMTsmpEl6Kbr8QJkSrTs-LTeP7P5Syhm-MyA_2u8ud-Mg
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
@@ -19,7 +19,7 @@ POST {{url}}/api/users/sign-in
 Content-Type: application/json
 
 {
-    "email": "johnadmin@test.com",
+    "email": "b-admin@test.com",
     "password": "Test123"
 }
 
@@ -40,7 +40,7 @@ Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
-    "email": "test57563@test.com",
+    "email": "s-admin@test.com",
 }
 
 ### complete admin
@@ -68,14 +68,14 @@ Content-Type: application/json
 
 ### Create Business Admin
 
-@BusinessId = d573565c-4c45-4270-b567-da478c6e614c
+@BusinessId = 4e60143d-2a49-4f6c-a069-2b84deb67641
 
 POST {{url}}/api/admin/create-business-admin
 Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
-    "email": "b-admin3@test.com",
+    "email": "b-admin@test.com",
     "businessId": "{{BusinessId}}"
 }
 
@@ -113,7 +113,7 @@ Content-Type: application/json
 
 {
     "email": "b-standard@test.com",
-    "code": "e7e5e7dc-9fb5-47b0-89b6-ac18a5abf000",
+    "code": "c6146142-a109-4d26-aef9-0ba6f03cba04",
     "password": "Test123",
     "passwordConfirmation": "Test123"
 }

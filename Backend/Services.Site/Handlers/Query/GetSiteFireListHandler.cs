@@ -53,7 +53,7 @@ namespace Services.Sites.Handlers.Query
                 });
             }
 
-            fireList.Employees = users;
+            fireList.Employees = users.OrderBy(e => e.FullName);
 
             return fireList;
         }
