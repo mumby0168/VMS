@@ -15,7 +15,7 @@ export default function AccessRecordsList(props) {
         </TableRow>
 
     return (
-        <TableContainer style={{maxHeight: '650px', overflowY: "auto"}}>
+        <TableContainer>
             <Table>
                 <TableHead>
                     <TableRow>

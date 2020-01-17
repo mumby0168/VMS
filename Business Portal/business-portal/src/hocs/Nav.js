@@ -30,7 +30,7 @@ class Nav extends Component {
 
     render() {        
         return (            
-            <AppBar style={appBarStyle} position="static">                                   
+            <AppBar position="static">                                   
                 <Menu navigate={this.navigate} initials={this.props.initials} role={this.props.role} businessName={this.props.businessName} logout={this.logoutHandle}></Menu>                
             </AppBar>                        
         )

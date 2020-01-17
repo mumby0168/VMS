@@ -30,8 +30,7 @@ class Layout extends Component {
                 <Router>
                 <Nav></Nav>      
                 <div className="content-wrapper">
-                <Container >                                    
-                <div className="padded-main">
+                <Container className="content-wrapper" >                                                    
                     <Switch>
                         <Route exact path="/">
                             <Home></Home>
@@ -51,8 +50,7 @@ class Layout extends Component {
                         <Route path="*">
                             <h1>Not Found</h1>
                         </Route>
-                    </Switch>
-                    </div>                             
+                    </Switch>                                          
                 </Container>
                 </div>          
             </Router>    

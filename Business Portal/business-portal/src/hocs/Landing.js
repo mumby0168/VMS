@@ -37,7 +37,7 @@ class Landing extends Component {
 
     render() {
         return (
-            <div>                                                
+            <div style={{height: '100%'}}>                                                
                 <Typography style={{paddingBottom: '3px'}} variant="h5">Good {new Date().getHours() > 12 ? "Afternoon" : "Morning"}, {this.props.name}</Typography>                    
                 
                 <AppBar position="static">

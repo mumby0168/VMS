@@ -29,7 +29,7 @@ class Availability extends Component {
         });
 
         return (
-        <Paper>
+        <Paper style={{height: '100%'}}>
             <Grid container>
                 <Grid item xs={2} md={3}>
                     <Tabs
