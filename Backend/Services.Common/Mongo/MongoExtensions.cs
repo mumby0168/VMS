@@ -21,7 +21,7 @@ namespace Services.Common.Mongo
         public static IApplicationBuilder UseMongo(this IApplicationBuilder builder, string serviceName)
         { 
             var suffix = serviceName.Split('.')[1];
-            var client = new MongoClient(@"mongodb://localhost:27017");
+            var client = new MongoClient(@"mongodb://mongo:27017");
             var database = client.GetDatabase(suffix);
             var manager = builder.ApplicationServices.GetService<IMongoManager>();
             manager.RegisterDatabase(database);

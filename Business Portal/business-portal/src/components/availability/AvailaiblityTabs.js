@@ -21,7 +21,7 @@ export default function AvailabilityTabs(props) {
 
     const tabs = props.siteSummaries.map((summary, index) => {
         return <Tab key={index} label={summary.name} {...a11yProps(index)}></Tab>        
-    });``
+    });
 
     return (
         <Tabs

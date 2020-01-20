@@ -1,0 +1,208 @@
+version: '3.7'
+services:    
+    mongo:
+        image: mongo:4
+        container_name: mongo
+        ports:
+        - 27017:27017
+        networks:
+        - cruncher    
+        volumes:
+        - mongo:/data/db
+
+    rabbitmq:
+        image: rabbitmq:3-management
+        container_name: rabbit
+        ports:
+        - 5672:5672
+        - 15672:15672
+        depends_on: 
+            - services.logs
+        networks:
+        - cruncher      
+
+    redis:
+        image: redis
+        container_name: redis
+        ports:
+        - 6379:6379
+        networks:
+        - cruncher  
+        volumes: 
+        - redis:/data
+    api.gateway:
+        container_name: gateway
+        image: '${DOCKER_REGISTRY-}apigateway'
+        ports:
+            - '5020:80'
+        depends_on: 
+            - mongo
+            - redis
+            - services.logs
+            - rabbitmq
+        build:
+            context: .
+            dockerfile: Backend/Api.Gateway/Dockerfile      
+        networks: 
+            - cruncher
+            
+    services.identity:
+        container_name: identity
+        image: '${DOCKER_REGISTRY-}servicesidentity'
+        ports:
+            - '5010:80'
+        depends_on: 
+            - mongo
+            - services.logs
+            - redis
+            - rabbitmq
+        build:
+            context: .
+            dockerfile: Backend/Services.Identity/Dockerfile      
+        networks: 
+            - cruncher
+
+    services.operations:
+        container_name: operations
+        image: '${DOCKER_REGISTRY-}servicesoperations'
+        ports: 
+            - '5012:80'
+        depends_on: 
+            - mongo
+            - services.logs
+            - redis
+            - rabbitmq
+        build:
+            context: .
+            dockerfile: Backend/Services.Operations/Dockerfile
+        networks: 
+            - cruncher
+    services.push:
+        container_name: push
+        image: ${DOCKER_REGISTRY-}servicespush
+        build:
+            context: .
+            dockerfile: Backend/Services.Push/Dockerfile
+        ports: 
+            - '5015:80'
+        depends_on: 
+            - mongo
+            - redis
+            - rabbitmq
+            - services.logs
+        networks: 
+            - cruncher
+
+    services.business:
+        container_name: business
+        image: ${DOCKER_REGISTRY-}servicesbusiness
+        build:
+            context: .
+            dockerfile: Backend/Services.Business/Dockerfile
+        ports: 
+            - '5013:80'
+        depends_on: 
+            - mongo
+            - redis
+            - rabbitmq
+            - services.logs
+        networks: 
+            - cruncher
+
+    services.mail:
+        container_name: mail
+        image: ${DOCKER_REGISTRY-}servicesmail
+        build:
+            context: .
+            dockerfile: Backend/Services.Mail/Dockerfile
+        ports: 
+        - '5011:80'
+        depends_on: 
+            - mongo
+            - redis
+            - rabbitmq
+            - services.logs
+        networks: 
+            - cruncher
+
+    services.sites:
+        container_name: sites
+        image: ${DOCKER_REGISTRY-}servicessites
+        build:
+            context: .
+            dockerfile: Backend/Services.Site/Dockerfile
+        ports: 
+        - '5014:80'
+        depends_on: 
+            - mongo
+            - redis
+            - rabbitmq
+            - services.logs
+        networks: 
+            - cruncher
+
+    services.users:
+        container_name: users
+        image: ${DOCKER_REGISTRY-}servicesusers
+        build:
+            context: .
+            dockerfile: Backend/Services.Users/Dockerfile
+        ports: 
+            - '5017:80'
+        depends_on: 
+            - mongo
+            - redis
+            - services.logs
+            - rabbitmq
+        networks: 
+            - cruncher
+
+    services.visitors:
+        container_name: visitors
+        image: ${DOCKER_REGISTRY-}servicesvisitors
+        build:
+            context: .
+            dockerfile: Backend/Services.Visitors/Dockerfile
+        ports: 
+            - '5018:80'
+        depends_on: 
+            - mongo
+            - redis
+            - rabbitmq
+            - services.logs
+        networks: 
+            - cruncher
+
+    services.logs:
+        container_name: logs
+        image: ${DOCKER_REGISTRY-}serviceslogs
+        build:
+            context: .
+            dockerfile: Backend/Services.Logs/Dockerfile
+        ports: 
+            - '5016:80'
+        depends_on: 
+            - mongo
+            - redis            
+        networks: 
+            - cruncher
+
+networks:
+  cruncher:      
+    driver: bridge    
+    name: credit-cruncher-network        
+
+volumes:
+  mongo:
+    driver: local
+  rabbitmq:
+    driver: local
+  redis:
+    driver: local
+
+
+
+
+
+
+

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.Common.Jwt;
+using Services.Common.Logging;
 using Services.Common.Middleware;
 using Services.Common.Names;
 using Services.Mail.Messages.Events;
@@ -33,6 +34,7 @@ namespace Services.Mail
             services.AddMvcCore();
             services.AddServiceBus();
             services.AddCustomAuth(config);
+            services.AddUdpLogging();
             services.AddTransient<VmsExceptionMiddleware>();
             services.AddTransient<IEventHandler<PendingAdminCreated>, PendingAdminCreatedHandler>();
             services.AddTransient<IEventHandler<PendingBusinessAdminCreated>, PendingBusinessAdminCreatedHandler>();

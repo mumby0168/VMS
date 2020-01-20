@@ -11,6 +11,7 @@ using Services.RabbitMq.Messages;
 using Services.Tests.Mocks;
 using Services.Users.Commands;
 using Services.Users.Domain;
+using Services.Users.Events;
 using Services.Users.Factories;
 using Services.Users.Handlers.Command;
 using Services.Users.Handlers.Events;

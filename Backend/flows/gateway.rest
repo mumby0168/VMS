@@ -1,6 +1,6 @@
 @url = http://localhost:5020/gateway/api/
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItc3RhbmRhcmRAdGVzdC5jb20iLCJuYW1laWQiOiI1Mzg3MGY1NC1hMmNkLTQ5MmMtOTMxYi1iZGFkMjcyZmIwMDEiLCJyb2xlIjoiU3RhbmRhcmQiLCJidXNpbmVzc0lkIjoiNGU2MDE0M2QtMmE0OS00ZjZjLWEwNjktMmI4NGRlYjY3NjQxIiwibmJmIjoxNTc5MzQ2MTcxLCJleHAiOjE1NzkzNTY5NzEsImlhdCI6MTU3OTM0NjE3MX0.9ihYQ15Eqvk77cTinfBULE5HyWp7LBHduyYUNCXLfNm21s2n5maB5otsdjQ8wmb5ZPt76zFro_as_JQ0K3fH_g
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItc3RhbmRhcmRAdGVzdC5jb20iLCJuYW1laWQiOiJhZTlkYzg1Ny05NzgxLTQ1MWMtYTIwMS0xYjNjMzRlMzZhMzQiLCJyb2xlIjoiU3RhbmRhcmQiLCJidXNpbmVzc0lkIjoiYjE5YmU2YWYtMTlhYi00YzZkLWE3MDYtZTg0MjA1YzJkNGQ3IiwibmJmIjoxNTc5NTI3MTUyLCJleHAiOjE1Nzk1Mzc5NTIsImlhdCI6MTU3OTUyNzE1Mn0.y0gZOrbkIbG2EXC3jn8MZTqjg_HVWEnWXXTnqcs_o3hIM2XARA91b7sAlhm3O0uNcWA7XQTDbpjhgNpoUUJgFg
 
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
@@ -43,7 +43,7 @@ Authorization: Bearer {{jwt}}
 
 ### Update Business Details
 
-@businessiD = 4e60143d-2a49-4f6c-a069-2b84deb67641
+@businessiD = b19be6af-19ab-4c6d-a706-e84205c2d4d7
 
 POST {{url}}businesses/update-details
 Content-Type: application/json
@@ -179,9 +179,9 @@ Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
-    "accountId": "53870f54-a2cd-492c-931b-bdad272fb001",
-    "basedSiteId": "aef48a96-1db9-488f-9cbf-034aab882f4b",
-    "businessId": "4e60143d-2a49-4f6c-a069-2b84deb67641",
+    "accountId": "ae9dc857-9781-451c-a201-1b3c34e36a34",
+    "basedSiteId": "6bf89b12-2fae-4660-9cf9-27348d109a4b",
+    "businessId": "{{businessiD}}",
     "firstName": "Jeff",
     "secondName": "Bloggs",
     "phoneNumber": "07568 567343",

@@ -86,9 +86,6 @@ async function runAccountProcess() {
         
     }
 
-    
-
-
     //STEP 3: Get Codes
 
     console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
@@ -177,7 +174,7 @@ async function createUserDetails() {
         const dataToPost = {
             accountId: token.id,
             businessId: token.businessId,
-            basedSiteId: "aef48a96-1db9-488f-9cbf-034aab882f4b",
+            basedSiteId: "6bf89b12-2fae-4660-9cf9-27348d109a4b",
             firstName: user.firstName,
             secondName: user.secondName,
             phoneNumber: user.phoneNumber,
@@ -274,5 +271,5 @@ async function signInOutUsers() {
     }
 }
 
-
+createUserDetails();
 signInOutUsers();

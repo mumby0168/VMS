@@ -95,7 +95,7 @@ namespace Services.RabbitMq.Extensions
             manager.CreateConnection(
                 new ServiceBusSettings()
                 {
-                    HostName = "localhost"
+                    HostName = "rabbit"
                 },
                 new ServiceSettings()
                 {

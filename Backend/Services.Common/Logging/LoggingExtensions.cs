@@ -23,7 +23,7 @@ namespace Services.Common.Logging
 
             opts.ServiceName = serviceName;
             opts.Port = 11000;
-            opts.Address = "127.0.0.1";
+            opts.Address = "172.22.0.4";
 
             var client = application.ApplicationServices.GetService<IUdpLoggingClient>();
             client.CreateConnection();

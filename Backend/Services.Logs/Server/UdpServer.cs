@@ -29,7 +29,7 @@ namespace Services.Logs.Server
             _logger = logger;
             _source = new CancellationTokenSource();
             _token = _source.Token;
-            _address = IPAddress.Parse("127.0.0.1");
+            _address = IPAddress.Parse("172.22.0.4");
         }
 
         public void Begin(int port)
