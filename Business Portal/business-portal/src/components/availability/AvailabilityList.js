@@ -4,7 +4,9 @@ import { Grid, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        padding: theme.spacing(2)
+        padding: theme.spacing(2),
+        height: '90%',
+        overflowY: 'auto'        
     }
 }));
 

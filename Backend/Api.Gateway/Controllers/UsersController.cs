@@ -47,7 +47,7 @@ namespace Api.Gateway.Controllers
         {
             var accountId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
             if (accountId is null) return Unauthorized();
-            return Ok(await _client.GetAccessRecordForUserAsync(Guid.Parse(accountId.Value)));
+            return Collection(await _client.GetAccessRecordForUserAsync(Guid.Parse(accountId.Value)));
         }
 
         [Authorize(Roles = Roles.BusinessAdmin)]
@@ -56,7 +56,7 @@ namespace Api.Gateway.Controllers
         {
             var businessId = HttpContext.User.Claims.FirstOrDefault(u => u.Type == CustomClaims.BusinessIdClaim);
             if (businessId is null) return Unauthorized();
-            return Ok(await _client.GetBusinessAccessRecordsAsync(Guid.Parse(businessId.Value)));
+            return Collection(await _client.GetBusinessAccessRecordsAsync(Guid.Parse(businessId.Value)));
         }
 
         [Authorize(Roles = Roles.PortalUser)]
@@ -65,7 +65,7 @@ namespace Api.Gateway.Controllers
         {
             var accountId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
             if (accountId is null) return Unauthorized();
-            return Ok(await _client.GetUserInfo(Guid.Parse(accountId.Value)));
+            return Single(await _client.GetUserInfo(Guid.Parse(accountId.Value)));
         }
     }
 }

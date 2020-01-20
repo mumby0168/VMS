@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Tabs, Tab, Paper, Grid, createMuiTheme } from '@material-ui/core'
+import { Paper, Grid, createMuiTheme } from '@material-ui/core'
 import {updateSitesTab} from '../actions/uiActions'
 import { PanelsList } from '../components/availability/PanelsList'
 import { getSiteSummaries } from '../actions/siteActions'
+import AvailabilityTabs from '../components/availability/AvailaiblityTabs'
+import SizeAwareGridContainer from '../common/SizeAwareGridContainer'
 
 
 class Availability extends Component {    
@@ -16,44 +18,26 @@ class Availability extends Component {
         this.handleChange(null, 0);
     }
 
-    a11yProps(index) {
-        return {
-          id: `vertical-tab-${index}`,
-          'aria-controls': `vertical-tabpanel-${index}`,
-        };
-      }
-
-      handleChange = (event, newValue) => {
+    handleChange = (event, newValue) => {
         var current = this.props.siteSummaries[newValue];
         this.props.dispatch(updateSitesTab(newValue, current.id));
     };
+    
 
     theme = createMuiTheme();
 
-    render() {
-
-        const tabs = this.props.siteSummaries.map((summary, index) => {
-            return <Tab key={index} label={summary.name} {...this.a11yProps(index)}></Tab>        
-        });
+    render() {    
 
         return (
         <Paper style={{height: '100%'}}>
-            <Grid container>
-                <Grid item xs={2} md={3}>
-                    <Tabs
-                    style={{padding: this.theme.spacing(2)}}
-                    orientation="vertical"
-                    variant="scrollable"                
-                    aria-label="Vertical tabs example"  
-                    onChange={this.handleChange}
-                    value={this.props.value}>                
-                        {tabs}
-                    </Tabs>     
+            <SizeAwareGridContainer>
+                <Grid item xs={4} md={3}>
+                    <AvailabilityTabs siteSummaries={this.props.siteSummaries} value={this.props.value} handleChange={this.handleChange.bind(this)}/>
                 </Grid>
-                <Grid item xs={10} md={9}>
+                <Grid item xs={8} md={9}>
                     <PanelsList  availability={this.props.activeAvailability} siteSummaries={this.props.siteSummaries} value={this.props.value} ></PanelsList>     
                 </Grid>        
-            </Grid>
+            </SizeAwareGridContainer>
         </Paper>
         )
     }
