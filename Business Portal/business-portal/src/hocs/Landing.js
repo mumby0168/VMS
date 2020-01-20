@@ -12,6 +12,7 @@ import { Typography } from '@material-ui/core';
 import {getBusinessInfo} from '../actions/businessActions'
 import { getUserInfo } from '../actions/userActions';
 import { getSiteSummaries } from '../actions/siteActions';
+import InOut from '../components/landing/InOut';
 
 
 class Landing extends Component {
@@ -38,7 +39,8 @@ class Landing extends Component {
     render() {
         return (
             <div style={{height: '100%'}}>                                                
-                <Typography style={{paddingBottom: '3px'}} variant="h5">Good {new Date().getHours() > 12 ? "Afternoon" : "Morning"}, {this.props.name}</Typography>                    
+                <Typography style={{paddingBottom: '3px'}} variant="h5">Good {new Date().getHours() > 12 ? "Afternoon" : "Morning"}, {this.props.name}</Typography>
+                <InOut userId={this.props.userId} dispatchHandle={this.props.dispatch}/>                    
                 
                 <AppBar position="static">
                 <Tabs value={this.props.value} onChange={this.handleChange} aria-label="simple tabs example">
@@ -63,7 +65,8 @@ const mapStateToProps = (state) => {
         accessRecords: state.access.records,
         accessRecordsLoading: state.access.loading,
         businesId: state.account.userDetails.businessId,
-        name: state.user.firstName + " " + state.user.secondName,        
+        name: state.user.firstName + " " + state.user.secondName,      
+        userId: state.user.id  
     }
 }
 

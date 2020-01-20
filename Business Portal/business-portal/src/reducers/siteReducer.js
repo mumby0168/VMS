@@ -3,7 +3,9 @@ const initialState = {
     summaries: [
 
     ],
-    availaiblity: null
+    availaiblity: {
+        users: []
+    }
 }
 
 export default (state = initialState, { type, payload }) => {

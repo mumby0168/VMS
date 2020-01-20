@@ -12,6 +12,7 @@ export default function FireListHeader(props) {
 
     const handleChange = (e) => {
         props.updateHandle(e.target.value);
+        props.updateTime();
     }
 
     const classes = useStyles();

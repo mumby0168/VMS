@@ -59,9 +59,11 @@ namespace Api.Gateway
 
             app.UseCors(opts =>
             {
+                opts.AllowAnyOrigin();
                 opts.AllowAnyHeader();
                 opts.AllowAnyMethod();
-                opts.AllowAnyOrigin();
+                opts.WithExposedHeaders("X-Operation");
+
             });
             ;
             app.UseServiceBus(Services.Common.Names.Services.Gateway, false);

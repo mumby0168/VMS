@@ -1,17 +1,23 @@
-export default function reducer(state = { 
+export default function reducer(state = {     
     pendingOperations: [],
-    operationHandler: [],
+    operationHandlers: [],
     isSignalRConnected: false
 }, action)
 {
     switch(action.type) {
 
         case "OPERATION_PUSHED": {
-            return {...state}
+            return {...state, pendingOperations: [...state.pendingOperations, action.payload]}
         }
 
         case "HANDLE_ADDED": {
-            return {...state}
+            return {...state, operationHandlers: [...state.operationHandlers, action.payload] }
+        }
+
+        case "HANDLE_REMOVED": {
+            var index = state.operationHandlers.indexOf(action.payload);
+            state.operationHandlers.splice(index, 1);
+            return {...state }
         }
 
         case "SIGNALR_CONNECTION_UPDATED": {

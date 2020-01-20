@@ -4,9 +4,7 @@ import { Grid, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        padding: theme.spacing(2),
-        height: '90%',
-        overflowY: 'auto'        
+        padding: theme.spacing(2),                        
     }
 }));
 
@@ -16,7 +14,7 @@ export default function AvailabilityList(props) {
     
     console.log(props.availability);
 
-    const available = props.availability !== null ?  props.availability.users.map((user, index) => {
+    const available = props.availability.users !== [] ?  props.availability.users.map((user, index) => {
         return <AvailabilityTemplate key={index} user={user}/>
     }) : <h2>No Info</h2>
 

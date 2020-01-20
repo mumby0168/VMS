@@ -5,9 +5,31 @@ export function post(url, data, authenticated = true){
 
     return axios.post(url, data, {
         headers: {
-            'Authorization': `Bearer ${store.getState().account.jwtToken}`
+            'Authorization': `Bearer ${store.getState().account.jwtToken}`,            
         }
     })
+}
+
+
+export async function postCallback(url, data, toastMessage, dispatchHandle) {
+    var result = await post(url, data);
+    if(result.status === 202) {
+        
+
+        var id = result.request.getResponseHeader('x-operation');                
+
+        dispatchHandle( { type: "HANDLE_ADDED", payload: {
+                    id: id,
+                    action: {
+                        type: "SHOW_TOAST",     
+                        payload: {
+                        failed: false,
+                        message: toastMessage
+                    }
+                }
+            }
+        });                                           
+    }
 }
 
 export function get(url, authenticated = true) {    

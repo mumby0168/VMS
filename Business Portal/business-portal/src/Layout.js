@@ -12,6 +12,7 @@ import RequestReset from './auth/RequestReset';
 import Availability from './hocs/Availability';
 import Reset from './auth/Reset';
 import Fire from './hocs/Fire';
+import Toaster from './operations/Toaster';
 
 const Home = () => {
     return <h1>Home</h1>
@@ -28,7 +29,8 @@ class Layout extends Component {
         return (
             <React.Fragment>
                 <CssBaseline/>
-                <Operations></Operations>
+                <Operations/>
+                <Toaster/>
                 <Router>
                 <Nav></Nav>      
                 <div className="content-wrapper">

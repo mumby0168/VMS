@@ -1,16 +1,10 @@
 import React from 'react'
-import { useTheme, useMediaQuery } from "@material-ui/core"
 import { Tabs, Tab} from '@material-ui/core'
 
 
 
-export default function AvailabilityTabs(props) {
-
-    const theme = useTheme();
-    
-    const matches = useMediaQuery('(min-width:600px)');
-
-    const tabOrientation = matches ? "vertical" : "horizontal";
+export default function AvailabilityTabs(props) {        
+    const tabOrientation = "horizontal"
 
     const a11yProps = (index) =>  {
         return {
@@ -24,8 +18,7 @@ export default function AvailabilityTabs(props) {
     });
 
     return (
-        <Tabs
-            style={{padding: theme.spacing(2)}}
+        <Tabs            
             orientation={tabOrientation}
             variant="scrollable"                
             aria-label="Vertical tabs example"  

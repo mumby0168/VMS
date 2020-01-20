@@ -1,5 +1,6 @@
 import React from 'react'
 import {  Card, CardContent,List, ListItem, ListItemText, ListItemSecondaryAction, Avatar, Checkbox, ListItemAvatar, makeStyles } from '@material-ui/core'
+import Progress from '../../common/Progress'
 
 
 const useStyles = makeStyles(state => ({
@@ -17,7 +18,7 @@ export default function FireList(props) {
                     <ListItemAvatar>
                         <Avatar/>
                     </ListItemAvatar>                                  
-                    <ListItemText label primary={user.fullName}/>
+                    <ListItemText label={index} primary={user.fullName}/>
                     <ListItemSecondaryAction>
                         <Checkbox inputProps={{ 'aria-labelledby': index }}  edge="end"></Checkbox>
                     </ListItemSecondaryAction>
@@ -25,13 +26,16 @@ export default function FireList(props) {
               
     })
 
+    console.log("loading: " + props.loading);
+
+    const render = props.loading ? <Progress message="Loading fire list."/> : <List>{items}</List>;
+
+
 
     return (
         <Card variant="outlined">
-            <CardContent className={classes.root}>
-                <List>
-                    {items}
-                </List>                
+            <CardContent className={classes.root}>                
+                    {render}                
             </CardContent>            
         </Card>
     )

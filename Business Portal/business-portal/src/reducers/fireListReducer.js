@@ -19,12 +19,12 @@ export default (state = initialState, { type, payload }) => {
     case "TIME_UPDATED":
         return { ...state, lastUpdated: payload }
 
-    case "FETCH_SELECTED_SITE": return {...state, site: {id: payload, users: []}};
+    case "FETCH_SELECTED_SITE": return {...state, site: {id: payload, users: []}, loading: true};
 
     case "FETCHED_SELECTED_SITE": {
-        console.log(payload);
         return {
             ...state, 
+            loading: false,
             site: {
                 id: payload.siteId,
                 users: payload.employees
@@ -33,7 +33,7 @@ export default (state = initialState, { type, payload }) => {
         };
     }
 
-    case "REJECTED_SELECTED_SITE": return {...state, error : {code: payload.code, reason: payload.reason}};
+    case "REJECTED_SELECTED_SITE": return {...state, error : {code: payload.code, reason: payload.reason}, loading: false};
 
 
 

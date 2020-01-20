@@ -6,7 +6,7 @@ import {updateSitesTab} from '../actions/uiActions'
 import { PanelsList } from '../components/availability/PanelsList'
 import { getSiteSummaries } from '../actions/siteActions'
 import AvailabilityTabs from '../components/availability/AvailaiblityTabs'
-import SizeAwareGridContainer from '../common/SizeAwareGridContainer'
+// import AvailabilityOptions from '../components/availability/AvailabilityOptions'
 
 
 class Availability extends Component {    
@@ -29,15 +29,22 @@ class Availability extends Component {
     render() {    
 
         return (
-        <Paper style={{height: '100%'}}>
-            <SizeAwareGridContainer>
-                <Grid item xs={4} md={3}>
-                    <AvailabilityTabs siteSummaries={this.props.siteSummaries} value={this.props.value} handleChange={this.handleChange.bind(this)}/>
+        <Paper>
+            <Grid container direction="row">
+                <Grid md={12} item>
+                    <Grid container direction="row">
+                        <Grid item md={10} >
+                            <AvailabilityTabs siteSummaries={this.props.siteSummaries} value={this.props.value} handleChange={this.handleChange.bind(this)}/>
+                        </Grid>           
+                        <Grid item md={2}>
+                            {/* <AvailabilityOptions/> */}
+                        </Grid>                        
+                    </Grid>                    
                 </Grid>
-                <Grid item xs={8} md={9}>
-                    <PanelsList  availability={this.props.activeAvailability} siteSummaries={this.props.siteSummaries} value={this.props.value} ></PanelsList>     
+                <Grid item xs={12} md={12}>
+                    <PanelsList  availability={this.props.activeAvailability} loading={this.props.loading} siteSummaries={this.props.siteSummaries} value={this.props.value} ></PanelsList>     
                 </Grid>        
-            </SizeAwareGridContainer>
+            </Grid>
         </Paper>
         )
     }
@@ -48,6 +55,7 @@ const mapStateToProps = ((state) => {
         siteSummaries: state.site.summaries,
         value: state.ui.sitesTabIndex,
         activeAvailability: state.site.availaiblity,
+        loading: state.site.loading
     }
 })
 
