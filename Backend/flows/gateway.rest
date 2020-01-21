@@ -1,6 +1,6 @@
 @url = http://localhost:5020/gateway/api/
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItc3RhbmRhcmRAdGVzdC5jb20iLCJuYW1laWQiOiJhZTlkYzg1Ny05NzgxLTQ1MWMtYTIwMS0xYjNjMzRlMzZhMzQiLCJyb2xlIjoiU3RhbmRhcmQiLCJidXNpbmVzc0lkIjoiYjE5YmU2YWYtMTlhYi00YzZkLWE3MDYtZTg0MjA1YzJkNGQ3IiwibmJmIjoxNTc5NTI3MTUyLCJleHAiOjE1Nzk1Mzc5NTIsImlhdCI6MTU3OTUyNzE1Mn0.y0gZOrbkIbG2EXC3jn8MZTqjg_HVWEnWXXTnqcs_o3hIM2XARA91b7sAlhm3O0uNcWA7XQTDbpjhgNpoUUJgFg
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW5AdGVzdC5jb20iLCJuYW1laWQiOiIwMWUxYTlhMi0zY2I1LTRlNzUtYjZlOS0xN2ViNzYzNTE3NzAiLCJyb2xlIjoiQnVzaW5lc3NBZG1pbiIsImJ1c2luZXNzSWQiOiJiMTliZTZhZi0xOWFiLTRjNmQtYTcwNi1lODQyMDVjMmQ0ZDciLCJuYmYiOjE1Nzk1OTYxMTEsImV4cCI6MTU3OTYwNjkxMSwiaWF0IjoxNTc5NTk2MTExfQ.iu_e20N-MXNDXb3MVnoaTTMA4Y8A82pa86cPLssSMDAWFfKeh9GveUVUzBbMlKysosyA2dsWBCSA2SMnRfUchQ
 
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
@@ -179,11 +179,11 @@ Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
-    "accountId": "ae9dc857-9781-451c-a201-1b3c34e36a34",
+    "accountId": "01e1a9a2-3cb5-4e75-b6e9-17eb76351770",
     "basedSiteId": "6bf89b12-2fae-4660-9cf9-27348d109a4b",
     "businessId": "{{businessiD}}",
-    "firstName": "Jeff",
-    "secondName": "Bloggs",
+    "firstName": "Bill",
+    "secondName": "Jones",
     "phoneNumber": "07568 567343",
     "businessPhoneNumber": "01482 564323"
 }

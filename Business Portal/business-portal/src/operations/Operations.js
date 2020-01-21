@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import OperationsManager from '../operations/operationsManager';
+import { hideSiteSpinner } from '../actions/uiActions';
 
 class Operations extends Component {
 
@@ -38,6 +39,7 @@ class Operations extends Component {
                     if (counter > 3) {
                         console.log("operation did not come back!");
                         clearInterval(callback);
+                        this.props.dispatch(hideSiteSpinner());
                     }
 
                     var result = this.props.pendingOperations.find(p => p.id === handlerLocal.id);
@@ -51,6 +53,7 @@ class Operations extends Component {
                             handlerLocal.account.payload.failed = true;
                         }
 
+                        this.props.dispatch(hideSiteSpinner());
                         this.props.dispatch(handlerLocal.action);
                     }
                 }, 1000);

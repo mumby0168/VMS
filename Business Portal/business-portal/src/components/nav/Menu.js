@@ -13,7 +13,7 @@ export default function Menu({logout, ...props}) {
     
     const getButtons = (role) => {
         if(role === "Standard") {
-            return (
+            return (                
                 <div>
                 <Button onClick={(e) => props.navigate("/landing")} color="inherit">Dashboard</Button>
                 <Button onClick={(e) => props.navigate("/availability")} color="inherit">Sites</Button>
@@ -23,12 +23,12 @@ export default function Menu({logout, ...props}) {
         }
         else if(role === "BusinessAdmin") {
             return (
-                <div>
-                {getButtons("Standard")}
-                <Button color="inherit">Accounts</Button>
-                <Button color="inherit">Visitors</Button>
-                <Button color="inherit">Employees</Button>
-                </div>
+                <Box align="center">
+                    {getButtons("Standard")}                    
+                    <Button onClick={(e) => props.navigate("/accounts")} color="inherit">Accounts</Button>
+                    <Button onClick={(e) => props.navigate("/visitors")} color="inherit">Visitors</Button>
+                    <Button onClick={(e) => props.navigate("/employees")} color="inherit">Employees</Button>                                        
+                </Box>                
             )
         }
     }
@@ -44,8 +44,8 @@ export default function Menu({logout, ...props}) {
             <EmojiPeopleIcon></EmojiPeopleIcon>
             <Typography variant="h6">{title}</Typography>            
             <Divider orientation="vertical"/>
-            <Box align="center" className={classes.center}>
-                {getButtons(props.role)}
+            <Box  className={classes.center}>                
+                    {getButtons(props.role)}                
             </Box>
             <Divider orientation="vertical"/>
                 {profile}

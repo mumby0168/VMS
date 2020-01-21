@@ -20,3 +20,16 @@ export function updateSitesTab(index, id) {
     }   
     
 }
+
+export function showSiteSpinner(message) {
+    return {
+        type: "SHOW_SITE_SPINNER",
+        payload: message
+    }
+}
+
+export function hideSiteSpinner() {
+    return {
+        type: "HIDE_SITE_SPINNER",        
+    }
+}

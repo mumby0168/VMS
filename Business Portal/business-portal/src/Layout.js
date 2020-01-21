@@ -13,6 +13,10 @@ import Availability from './hocs/Availability';
 import Reset from './auth/Reset';
 import Fire from './hocs/Fire';
 import Toast from './operations/Toast';
+import Visitors from './hocs/Visitors';
+import Employees from './hocs/Employees';
+import Accounts from './hocs/Accounts';
+import SiteSpinner from './common/SiteSpinner';
 
 
 const Home = () => {
@@ -25,13 +29,14 @@ class Layout extends Component {
 
     render() {
 
-        console.log("user is logged in? " + this.props.valid);
+        const isAdmin = this.props.role === "BusinessAdmin";
 
         return (
             <React.Fragment>
                 <CssBaseline/>
                 <Operations/>
-                <Toast/>                
+                <Toast/>        
+                <SiteSpinner/>        
                 <Router>
                 <Nav></Nav>      
                 <div className="content-wrapper">
@@ -58,6 +63,15 @@ class Layout extends Component {
                         <PrivateRoute path="/availability" valid={this.props.valid}>
                             <Availability></Availability>
                         </PrivateRoute>
+                        <PrivateRoute path="/employees" valid={isAdmin}>
+                            <Employees/>
+                        </PrivateRoute>
+                        <PrivateRoute path="/visitors" valid={isAdmin}>
+                            <Visitors/>
+                        </PrivateRoute>
+                        <PrivateRoute path="/accounts" valid={isAdmin}>
+                            <Accounts/>
+                        </PrivateRoute>
                         <Route path="*">
                             <h1>Not Found</h1>
                         </Route>
@@ -71,7 +85,7 @@ class Layout extends Component {
 }
 
 
-const mapStateToProps = (state) => {return {valid: state.account.isLoggedIn} } 
+const mapStateToProps = (state) => {return {valid: state.account.isLoggedIn, role: state.account.userDetails.role} } 
 
 export default connect(mapStateToProps)(Layout);
 

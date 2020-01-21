@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '../store'
+import { showSiteSpinner } from '../actions/uiActions';
 
 export function post(url, data, authenticated = true){
 
@@ -11,10 +12,13 @@ export function post(url, data, authenticated = true){
 }
 
 
-export async function postCallback(url, data, toastMessage, dispatchHandle) {
+export async function postCallback(url, data, toastMessage, dispatchHandle, loadingMessage = null) {
     var result = await post(url, data);
     if(result.status === 202) {
         
+        if(loadingMessage !== null) {
+            dispatchHandle(showSiteSpinner(loadingMessage));
+        }
 
         var id = result.request.getResponseHeader('x-operation');                
 

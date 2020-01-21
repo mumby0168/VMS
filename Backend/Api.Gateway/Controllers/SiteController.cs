@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -67,7 +68,7 @@ namespace Api.Gateway.Controllers
         [HttpGet("resources/{siteId}")]
         public async Task<ActionResult<IEnumerable<SiteResourceDto>>> GetSiteResources([FromRoute] Guid siteId) => Collection(await _siteClient.GetResourcesForSite(siteId));
         
-        [Authorize(Roles = Roles.StandardPortalUser)]
+        [Authorize(Roles = Roles.PortalUser)]
         [HttpGet("availability/{siteId}")]
         public async Task<ActionResult<SiteAvailabilityDto>> GetAvailability([FromRoute] Guid siteId) => Single(await _siteClient.GetSiteAvailabilityAsync(siteId));
 
