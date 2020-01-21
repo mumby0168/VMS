@@ -21,13 +21,10 @@ class Operations extends Component {
     render() {
         this.checkConnection();
         if (this.props.handlers.length !== this.handlerCount) {
-            this.handlerCount = this.props.handlers.length;
-
-            console.log("Handler count: " + this.handlerCount);
-
-            const handler = this.props.handlers[this.handlerCount - 1];
-
             
+            this.handlerCount = this.props.handlers.length;            
+
+            const handler = this.props.handlers[this.handlerCount - 1];            
 
             if (handler !== null || undefined) {
                 var counter = 0;

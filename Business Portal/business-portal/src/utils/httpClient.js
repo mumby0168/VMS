@@ -24,7 +24,8 @@ export async function postCallback(url, data, toastMessage, dispatchHandle) {
                         type: "SHOW_TOAST",     
                         payload: {
                         failed: false,
-                        message: toastMessage
+                        message: toastMessage,
+                        handled: false
                     }
                 }
             }

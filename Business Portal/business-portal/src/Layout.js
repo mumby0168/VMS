@@ -12,7 +12,8 @@ import RequestReset from './auth/RequestReset';
 import Availability from './hocs/Availability';
 import Reset from './auth/Reset';
 import Fire from './hocs/Fire';
-import Toaster from './operations/Toaster';
+import Toast from './operations/Toast';
+
 
 const Home = () => {
     return <h1>Home</h1>
@@ -30,7 +31,7 @@ class Layout extends Component {
             <React.Fragment>
                 <CssBaseline/>
                 <Operations/>
-                <Toaster/>
+                <Toast/>                
                 <Router>
                 <Nav></Nav>      
                 <div className="content-wrapper">

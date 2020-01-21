@@ -36,7 +36,6 @@ namespace Services.Users.Handlers.Command
 
         public async Task HandleAsync(CreateAccessRecord message, IRequestInfo requestInfo)
         {
-            var users = await _collection.GetAllAsync();
             var user = await _userRepository.GetAsync(message.UserId);
             if(user is null)
             {

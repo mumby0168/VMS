@@ -12,6 +12,13 @@ export default function InOut(props) {
         await postCallback(`${urls.gatewayBaseUrl}users/in`, body, "You have succesfully signed in.", props.dispatchHandle);
     }
 
+    const outHandle = async function(e) {
+        var body = {
+            userId: props.userId
+        }
+        await postCallback(`${urls.gatewayBaseUrl}users/out`, body, "You have succesfully signed out.", props.dispatchHandle);
+    }
+
 
 
     return (        
@@ -20,7 +27,7 @@ export default function InOut(props) {
             float: 'right'            
         }} color="secondary" aria-label="outlined secondary button group">
             <Button onClick={inHandle}>Sign in</Button>
-            <Button>Sign out</Button>            
+            <Button onClick={outHandle}>Sign out</Button>            
         </ButtonGroup>        
     )
 }
