@@ -10,7 +10,6 @@ import { getPersonalAccessRecords } from '../actions/accessRecordActions'
 import Progress from '../common/Progress';
 import { Typography, Grid } from '@material-ui/core';
 import { getBusinessInfo } from '../actions/businessActions'
-import { getUserInfo } from '../actions/userActions';
 import { getSiteSummaries } from '../actions/siteActions';
 import InOut from '../components/landing/InOut';
 
@@ -29,8 +28,7 @@ class Landing extends Component {
         this.props.dispatch(updateLandingTab(newValue));
     };
 
-    componentDidMount() {
-        this.props.dispatch(getUserInfo());
+    componentDidMount() {        
         this.props.dispatch(getSiteSummaries());
         this.props.dispatch(getPersonalAccessRecords())
         this.props.dispatch(getBusinessInfo(this.props.businesId));

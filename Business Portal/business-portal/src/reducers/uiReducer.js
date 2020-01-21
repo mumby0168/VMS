@@ -3,7 +3,8 @@ export default function reducer(state = {
     landingTabIndex: 0,
     sitesTabIndex: 0,
     siteSpinner: false,
-    message: null
+    message: null,
+    isDark: true
 }
 , action) {
     switch (action.type) {
@@ -26,6 +27,10 @@ export default function reducer(state = {
 
         case "HIDE_SITE_SPINNER": {
             return {...state, siteSpinner: false, message: null}
+        }
+
+        case "THEME_UPDATED": {
+            return {...state, isDark: action.payload};
         }
 
         default:

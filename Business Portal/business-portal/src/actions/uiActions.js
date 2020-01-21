@@ -33,3 +33,7 @@ export function hideSiteSpinner() {
         type: "HIDE_SITE_SPINNER",        
     }
 }
+
+export function updateTheme(isDark) {
+    return {type: "THEME_UPDATED", payload: isDark};
+}

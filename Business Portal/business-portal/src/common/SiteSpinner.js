@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
         zIndex: 255
     },
     card: {
-        padding: '30px'
+        padding: '15%'
     }
 }));
 

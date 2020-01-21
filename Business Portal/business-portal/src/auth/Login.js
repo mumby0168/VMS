@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import Progress from '../common/Progress';
 import LoginForm from '../components/auth/LoginForm';
 import Process from '../assets/process.jpg'
+import { getUserInfo } from '../actions/userActions';
 
 
 
@@ -49,6 +50,7 @@ class Login extends Component {
         if(this.props.isLoggedIn) {
             this.props.history.push("/landing");
             this.props.dispatch(loginFormUpdated("", ""));
+            this.props.dispatch(getUserInfo());
         }
 
 

@@ -5,22 +5,15 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import store from './store'
-import { ThemeProvider, createMuiTheme } from '@material-ui/core';
-import { blue } from '@material-ui/core/colors';
+import ThemeWrapper from './ui/ThemeWrapper'
 
-const theme = createMuiTheme({
-    palette: {
-        primary: blue,
-        type: 'dark'
-    }
-})
 
 ReactDOM.render(
-<ThemeProvider theme={theme}>
     <Provider store={store}>
-        <App />
-    </Provider>
-</ThemeProvider>, 
+        <ThemeWrapper>
+            <App />
+        </ThemeWrapper>
+    </Provider>, 
 document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

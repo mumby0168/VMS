@@ -37,7 +37,7 @@ export default function Menu({logout, ...props}) {
 
     var title = props.businessName === "" ? "VMS" : props.businessName;
 
-    var profile = props.role === null ? "" : <ProfileMenu initials={props.initials} logout={logout} ></ProfileMenu>
+    var profile = props.role === null ? "" : <ProfileMenu handleThemeChange={props.handleThemeChange} initials={props.initials} logout={logout} ></ProfileMenu>
 
     return (
         <Toolbar>            

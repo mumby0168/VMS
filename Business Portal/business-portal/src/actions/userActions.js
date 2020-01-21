@@ -5,7 +5,7 @@ import { showSiteSpinner, hideSiteSpinner } from './uiActions';
 export function getUserInfo() {
     return (dispatch) => {
         dispatch({type: "FETCHING_USER_INFO"});
-        dispatch(showSiteSpinner("Setting up ..."));
+        dispatch(showSiteSpinner("Personalizing your experience ..."));
         get(`${urls.gatewayBaseUrl}users/info/`)
         .then((res) => {
             if(res.status === 200) {
