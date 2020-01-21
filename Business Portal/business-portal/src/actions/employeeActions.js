@@ -1,4 +1,4 @@
-import {get, handleError} from '../utils/httpClient'
+import {get, handleError, handleErrorWithToast} from '../utils/httpClient'
 import * as urls from '../names/urls'
 
 
@@ -10,7 +10,7 @@ export function openEmployeeRecords(employee) {
 }
 
 
-export function closeEmployeeRecords(employee) {
+export function closeEmployeeRecords() {
     return {type: "CLOSE_EMPLOYEE_RECORDS"};
 }
 
@@ -41,6 +41,9 @@ export function getEmployeeAccessRecords(employeeId) {
                 console.log("failed");
             }
         })
-        .catch(err => handleError("REJECTED_EMPLOYEE_RECORDS", dispatch, err));
+        .catch(err => {
+            dispatch(closeEmployeeRecords());
+            handleErrorWithToast(dispatch, err)
+        });
     }
 }

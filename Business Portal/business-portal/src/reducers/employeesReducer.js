@@ -24,7 +24,7 @@ export default (state = initialState, { type, payload }) => {
 
     case "FETCHED_EMPLOYEE_RECORDS": return {...state, access: {...state.access, loading: false, records: payload}};
 
-    case "REJECTED_EMPLOYEE_RECORDS": return {...state, access: {...state, loading: false, records: []}};
+    case "REJECTED_EMPLOYEE_RECORDS": return {...state, access: {...state.access, loading: false, records: []}};
 
     case "FETCH_EMPLOYEE_SUMMARIES": return {...state, loading: true};
 

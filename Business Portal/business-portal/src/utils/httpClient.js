@@ -62,3 +62,20 @@ export function handleError(type, dispatch, err) {
         return;
     }     
 }
+
+export function handleErrorWithToast(dispatch, err) {
+    if(err.response === undefined || null) {
+        dispatch({type: "SHOW_TOAST", payload: {failed: true, message: "Our services are currently down."}});
+        return;
+    }
+
+    if(err.response.status === 500) {
+        dispatch({type: "SHOW_TOAST", payload: {failed: true, message: "Our services are currently down."}});
+        return;
+    }
+    
+    if(err.response.status === 400) {
+        dispatch({type: "SHOW_TOAST", payload: {failed: true, message: err.response.data.Reason}});
+        return;
+    }     
+}

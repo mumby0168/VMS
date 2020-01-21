@@ -4,7 +4,7 @@ import {Grid} from '@material-ui/core'
 import EmployeesHeader from '../components/employees/EmployeesHeader'
 import EmployeesTable from '../components/employees/EmployeesTable'
 import CardDialog from '../common/CardDialog'
-import {closeEmployeeRecords, getLatestEmployeeRecords, getEmployeeAccessRecords} from '../actions/employeeActions'
+import {closeEmployeeRecords, getLatestEmployeeRecords} from '../actions/employeeActions'
 import AccessRecordList from '../components/landing/AccessRecordsList'
 import Progress from '../common/Progress'
 
