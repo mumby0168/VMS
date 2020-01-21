@@ -1,6 +1,6 @@
 @url = http://localhost:5020/gateway/api/
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW5AdGVzdC5jb20iLCJuYW1laWQiOiIwMWUxYTlhMi0zY2I1LTRlNzUtYjZlOS0xN2ViNzYzNTE3NzAiLCJyb2xlIjoiQnVzaW5lc3NBZG1pbiIsImJ1c2luZXNzSWQiOiJiMTliZTZhZi0xOWFiLTRjNmQtYTcwNi1lODQyMDVjMmQ0ZDciLCJuYmYiOjE1Nzk1OTYxMTEsImV4cCI6MTU3OTYwNjkxMSwiaWF0IjoxNTc5NTk2MTExfQ.iu_e20N-MXNDXb3MVnoaTTMA4Y8A82pa86cPLssSMDAWFfKeh9GveUVUzBbMlKysosyA2dsWBCSA2SMnRfUchQ
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW5AdGVzdC5jb20iLCJuYW1laWQiOiIwMWUxYTlhMi0zY2I1LTRlNzUtYjZlOS0xN2ViNzYzNTE3NzAiLCJyb2xlIjoiQnVzaW5lc3NBZG1pbiIsImJ1c2luZXNzSWQiOiJiMTliZTZhZi0xOWFiLTRjNmQtYTcwNi1lODQyMDVjMmQ0ZDciLCJuYmYiOjE1Nzk2MTgzMjAsImV4cCI6MTU3OTYyOTEyMCwiaWF0IjoxNTc5NjE4MzIwfQ.4BwpLGhABOY9bjgWgYigZPxdfhIGQCB1vewTLfhH-_9PAqVxD6FFQDGEq_IA3owy1JMgLWmcPykdEM9AHPnqew
 
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
@@ -210,6 +210,12 @@ Authorization: Bearer {{jwt}}
 }
 
 ### Get User Info
+
+
+### Get Users For Business
+
+GET {{url}}users/users/
+Authorization: Bearer {{jwt}}
 
 
 

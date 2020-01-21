@@ -12,5 +12,6 @@ namespace Services.Users.Repositories
 
         Task<IUser> GetAsync(Guid id);
         Task<IUser> GetFromAccountId(Guid accountId);
+        Task<IEnumerable<IUser>> GetUsersByBusinessId(Guid businessId);
     }
 }

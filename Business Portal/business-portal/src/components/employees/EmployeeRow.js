@@ -2,7 +2,7 @@ import React from 'react'
 import { Avatar, Typography, Fab, Tooltip, TableRow, TableCell, makeStyles } from '@material-ui/core'
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import { useDispatch } from 'react-redux';
-import { openEmployeeRecords } from '../../actions/employeeActions';
+import { openEmployeeRecords, getEmployeeAccessRecords } from '../../actions/employeeActions';
 
 
 
@@ -12,31 +12,31 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function EmployeeRow() {
+export default function EmployeeRow(props) {
 
     const dispatch = useDispatch();
 
     const classes = useStyles();
 
     const showDialog = () => {
-        dispatch(openEmployeeRecords(null))
+        console.log(props.employee);
+        dispatch(openEmployeeRecords(props.employee))
+        dispatch(getEmployeeAccessRecords(props.employee.id));
     }
 
     return (
         <TableRow>
-            <TableCell>
-                <div style={{float: 'left'}}>
-                    <div align="center">
-                        <Avatar className={classes.avatar}>EG</Avatar>
-                        <Typography>Elliot Giles</Typography>
-                    </div>
-                </div>
+            <TableCell>                
+                <Avatar className={classes.avatar}>{props.employee.initials}</Avatar>                                    
             </TableCell>
             <TableCell>
-                <Typography>Brough</Typography>
+                <Typography>{props.employee.name}</Typography>                                    
             </TableCell>
             <TableCell>
-                <Typography>In (09:55)</Typography>
+                <Typography>{props.employee.siteName}</Typography>
+            </TableCell>
+            <TableCell>
+                <Typography>{`${props.employee.lastAction} (${props.employee.lastTime})`}</Typography>
             </TableCell>
             <TableCell>
                 <Tooltip title="View Records">

@@ -29,6 +29,7 @@ namespace Services.Business
             serviceCollection
                 .AddTransient<IQueryHandler<BusinessesSummary, IEnumerable<BusinessSummaryDto>>, BusinessesSummaryHandler>();
             serviceCollection.AddTransient<IQueryHandler<GetBusiness, BusinessDto>, GetBusinessQueryHandler>();
+
             return serviceCollection;
         }
     }

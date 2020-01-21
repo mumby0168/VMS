@@ -21,11 +21,11 @@ namespace Services.Users.Controllers
             _dispatcher = dispatcher;
         }
 
-        [HttpGet("records/{userId}")]
-        public async Task<ActionResult<IEnumerable<AccessRecordDto>>> Get([FromRoute]Guid userId)
+        [HttpGet("records/{accountId}")]
+        public async Task<ActionResult<IEnumerable<AccessRecordDto>>> Get([FromRoute]Guid accountId)
         {
             return Collection(await _dispatcher.Dispatch<GetPersonalAccessRecords, IEnumerable<AccessRecordDto>>(
-                new GetPersonalAccessRecords(userId)));
+                new GetPersonalAccessRecords(accountId, Guid.Empty)));
         }
 
         [HttpGet("business-records/{businessId}")]

@@ -45,27 +45,35 @@ namespace Api.Gateway.Controllers
         [HttpGet("records")]
         public async Task<ActionResult<IEnumerable<AccessRecordDto>>> GetRecords()
         {
-            var accountId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
-            if (accountId is null) return Unauthorized();
-            return Collection(await _client.GetAccessRecordForUserAsync(Guid.Parse(accountId.Value)));
+            return Collection(await _client.GetAccessRecordForUserAsync(GetAccountId()));
         }
+
+        [Authorize(Roles = Roles.BusinessAdmin)]
+        [HttpGet("records/{userId}")]
+        public async Task<ActionResult<IEnumerable<AccessRecordDto>>> GetRecordForUser(Guid userId)
+        {
+            return Collection(await _client.GetAccessRecordForUserAsyncById(userId));
+        }
+        
 
         [Authorize(Roles = Roles.BusinessAdmin)]
         [HttpGet("business-records")]
         public async Task<ActionResult<IEnumerable<SiteAccessDetailsDto>>> GetBusinessRecords()
         {
-            var businessId = HttpContext.User.Claims.FirstOrDefault(u => u.Type == CustomClaims.BusinessIdClaim);
-            if (businessId is null) return Unauthorized();
-            return Collection(await _client.GetBusinessAccessRecordsAsync(Guid.Parse(businessId.Value)));
+            return Collection(await _client.GetBusinessAccessRecordsAsync(GetBusinessId()));
         }
 
         [Authorize(Roles = Roles.PortalUser)]
         [HttpGet("info")]
         public async Task<ActionResult<UserInfoDto>> GetUserInfo()
         {
-            var accountId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
-            if (accountId is null) return Unauthorized();
-            return Single(await _client.GetUserInfo(Guid.Parse(accountId.Value)));
+            return Single(await _client.GetUserInfo(GetAccountId()));
         }
+
+
+        [Authorize(Roles = Roles.BusinessAdmin)]
+        [HttpGet("users")]
+        public async Task<ActionResult<IEnumerable<UserSnapshotDto>>> GetUserSnapshots() 
+            => Collection(await _client.GetUsersForBusiness(GetBusinessId()));
     }
 }

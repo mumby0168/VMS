@@ -10,9 +10,12 @@ namespace Services.Users.Queries
     {
         public Guid AccountId { get; set; }
 
-        public GetPersonalAccessRecords(Guid accountId)
+        public Guid UserId { get; set; }
+
+        public GetPersonalAccessRecords(Guid accountId, Guid userId)
         {
             AccountId = accountId;
+            UserId = userId;
         }
     }
 }

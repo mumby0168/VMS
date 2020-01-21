@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Common.Base;
+using Services.Common.Exceptions;
+using Services.Common.Jwt;
 using Services.Common.Names;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
@@ -27,6 +29,23 @@ namespace Api.Gateway.Controllers
             _client = new HttpClient();
             Dispatcher = dispatcher;
         }
+
+        protected Guid GetAccountId()
+        {
+            var accountId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            if (accountId is null) throw new VmsException("", "");
+            return Guid.Parse(accountId.Value);
+        }
+
+
+        protected Guid GetBusinessId()
+        {
+            var businessId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == CustomClaims.BusinessIdClaim);
+            if (businessId is null) throw new VmsException("", "");
+            return Guid.Parse(businessId.Value);
+        }
+
+
         protected IActionResult Accepted(IRequestInfo requestInfo)
         {
             HttpContext.Response.Headers.Add(OperationHeader, requestInfo.OperationId.ToString());

@@ -31,5 +31,8 @@ namespace Services.Users.Repositories
         {
             return await _repository.GetAsync(u => u.AccountId == accountId);
         }
+
+        public async Task<IEnumerable<IUser>> GetUsersByBusinessId(Guid businessId) 
+            => await _repository.FindAsync(u => u.BusinessId == businessId);
     }
 }

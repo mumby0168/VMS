@@ -7,7 +7,7 @@ export default function CardDialog(props) {
     const cancel = props.showCancel ? <Button onClick={props.handleClose}>Cancel</Button> : ""
 
     return (
-        <Dialog onClose={props.handleClose} open={props.open}>
+        <Dialog maxWidth="md" fullWidth onClose={props.handleClose} open={props.open}>
             <DialogTitle>{props.title}</DialogTitle>
             <DialogContent>
                 <DialogContentText>

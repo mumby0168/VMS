@@ -37,6 +37,21 @@ namespace Services.Users.Controllers
             return Single(await _dispatcher.Dispatch<GetUserInfo, UserInfoDto>(new GetUserInfo(accountId)));
         }
 
+        [HttpGet("admin-records/{userId}")]
+        public async Task<ActionResult<IEnumerable<AccessRecordDto>>> Get([FromRoute]Guid userId)
+        {
+            return Collection(await _dispatcher.Dispatch<GetPersonalAccessRecords, IEnumerable<AccessRecordDto>>(
+                new GetPersonalAccessRecords(Guid.Empty, userId)));
+        }
+
+        [HttpGet("users/{businessId}")]
+        public async Task<ActionResult<IEnumerable<UserSnapshotDto>>> GetUsersForBusiness(Guid businessId)
+        {
+            return Collection(
+                await _dispatcher.Dispatch<GetUserSnapshotsForBusiness, IEnumerable<UserSnapshotDto>>(
+                    new GetUserSnapshotsForBusiness(businessId)));
+        }
+
 
     }
 }

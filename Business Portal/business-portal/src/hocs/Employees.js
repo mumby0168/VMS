@@ -4,29 +4,18 @@ import {Grid} from '@material-ui/core'
 import EmployeesHeader from '../components/employees/EmployeesHeader'
 import EmployeesTable from '../components/employees/EmployeesTable'
 import CardDialog from '../common/CardDialog'
-import {closeEmployeeRecords} from '../actions/employeeActions'
+import {closeEmployeeRecords, getLatestEmployeeRecords, getEmployeeAccessRecords} from '../actions/employeeActions'
+import AccessRecordList from '../components/landing/AccessRecordsList'
+import Progress from '../common/Progress'
 
 class Employees extends Component {
 
     componentDidMount() {
-        //api calls to load initial data.
+        this.props.dispatch(getLatestEmployeeRecords())
         this.title = "Records Title"
     }
 
-
-    employees = [
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-    ]
+    
 
     handleClose() {
         this.props.dispatch(closeEmployeeRecords())
@@ -34,11 +23,17 @@ class Employees extends Component {
 
 
 
-    render() {
+    render() {       
+        
+        console.log(this.props);
 
-        if(this.props.accessDialog.employee !== null || undefined) {
-            this.title = this.props.accessDialog.employee.name + " Records"
-        }
+        if(this.props.accessDialog.employee !== null && this.props.accessDialog.employee !== undefined) {
+            this.title = this.props.accessDialog.employee.name + " Records"            
+        }        
+
+
+        const content = this.props.accessDialog.loading ? <Progress message="Loading employee access records ..."/> : 
+            <AccessRecordList records={this.props.accessDialog.records} />
 
 
         return (
@@ -49,10 +44,10 @@ class Employees extends Component {
                 handleClose={this.handleClose.bind(this)} 
                 title={this.title}
                 >
-                    <h1>Content</h1>
+                    {content}
                 </CardDialog>
                 <EmployeesHeader/>
-                <EmployeesTable employees={this.employees}/>
+                <EmployeesTable loading={this.props.loading} employees={this.props.employees}/>
             </Grid>
         )
     }
@@ -65,7 +60,9 @@ const mapStateToProps = (state => {
             open: state.employee.access.isOpen,
             employee: state.employee.access.employee,
             records: state.employee.access.records
-        }
+        },
+        loading: state.employee.loading,
+        employees: state.employee.summaries
     }
 })
 

@@ -27,7 +27,11 @@ namespace Services.Users.Handlers.Queries
 
         public async Task<IEnumerable<AccessRecordDto>> HandleAsync(GetPersonalAccessRecords query)
         {
-            var user = await _userRepository.GetFromAccountId(query.AccountId);
+            var user = query.AccountId == Guid.Empty ? 
+                await _userRepository.GetAsync(query.UserId) : 
+                await _userRepository.GetFromAccountId(query.AccountId);
+
+
             if (user is null)
             {
                 _logger.LogError($"User not found with id: {query.AccountId}");
