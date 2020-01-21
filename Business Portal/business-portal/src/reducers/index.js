@@ -11,6 +11,7 @@ import site from './siteReducer'
 import completeAccount from './completeAccountReducer';
 import fire from './fireListReducer'
 import toast from './toastReducer'
+import employee from './employeesReducer'
 
 export default combineReducers({
     ui,
@@ -24,5 +25,6 @@ export default combineReducers({
     site,
     completeAccount,
     fire,
-    toast
+    toast,
+    employee
 })

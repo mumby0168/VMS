@@ -4,7 +4,7 @@ export default function reducer(state = {
     sitesTabIndex: 0,
     siteSpinner: false,
     message: null,
-    isDark: true
+    isDark: true,    
 }
 , action) {
     switch (action.type) {
