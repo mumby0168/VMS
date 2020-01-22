@@ -13,6 +13,7 @@ class LogsList extends Component {
 
         const logs = (
             <div className="log-list-wrapper">
+                <h5>Log count: {this.props.logs.length}</h5>
                 <ul className="list-group">
 
                     <li className="list-group-item log-header-item">

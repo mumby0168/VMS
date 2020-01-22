@@ -49,6 +49,15 @@ namespace Services.Identity.Controllers
         }
 
         [Authorize(Roles = Roles.BusinessAdmin)]
+        [HttpGet("pending")]
+        public async Task<ActionResult<IEnumerable<PendingAccountDto>>> GetPendingForBusiness()
+        {
+            var businessId = HttpContext.User.Claims.FirstOrDefault(u => u.Type == CustomClaims.BusinessIdClaim);
+            if (businessId is null) return Unauthorized();
+            return Collection(await _userService.GetPendingAccountsForBusinessAsync(Guid.Parse(businessId.Value)));
+        }
+
+        [Authorize(Roles = Roles.BusinessAdmin)]
         [HttpGet("accounts")]
         public async Task<ActionResult<IEnumerable<StandardUserAccountDto>>> GetAccounts()
         {

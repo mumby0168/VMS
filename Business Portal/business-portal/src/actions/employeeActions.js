@@ -1,4 +1,4 @@
-import {get, handleError, handleErrorWithToast} from '../utils/httpClient'
+import {get, handleError, handleErrorWithToast, post} from '../utils/httpClient'
 import * as urls from '../names/urls'
 
 
@@ -40,10 +40,70 @@ export function getEmployeeAccessRecords(employeeId) {
             else {
                 console.log("failed");
             }
-        })
+        })        
         .catch(err => {
             dispatch(closeEmployeeRecords());
             handleErrorWithToast(dispatch, err)
         });
+    }
+}
+
+export function showAddEmployee() {
+    return {
+        type: "SHOW_ADD_EMPLOYEE"
+    }
+}
+
+export function hideAddEmployee() {
+    return {
+        type: "HIDE_ADD_EMPLOYEE"
+    }
+}
+
+export function showPending() {
+    return {
+        type: "SHOW_PENDING"
+    }
+}
+
+export function hidePending() {
+    return {
+        type: "HIDE_PENDING"
+    }
+}
+
+export function createEmployee(email) {
+    return (dispatch) => {
+        dispatch({type: "CREATE_EMPLOYEE"});
+        post(`${urls.identityBaseUrl}create`, {email: email})
+        .then((res) => {
+            if(res.status === 200) {
+                dispatch({type: "CREATED_EMPLOYEE"});
+                dispatch(hideAddEmployee());
+                dispatch({type: "SHOW_TOAST", payload: {
+                    failed: false,
+                    message: `${email} will recieve an email shortly to setup there account`
+                }})
+            }            
+        })
+        .catch((err) => {
+            handleError("CREATE_EMPLOYEE_FAILED", dispatch, err);
+        });
+    }
+}
+
+
+export function getPendingAccounts() {
+    return (dispatch) => {
+        dispatch({type: "FETCH_PENDING_ACCOUNTS"});
+        get(`${urls.identityBaseUrl}pending`)
+        .then((res) => {
+            if(res.status === 200) {
+                dispatch({type: "FETCHED_PENDING_ACCOUNTS", payload: res.data});
+            }            
+        })
+        .catch((err) => {
+
+        })
     }
 }

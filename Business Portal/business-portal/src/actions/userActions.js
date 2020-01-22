@@ -1,4 +1,4 @@
-import {get, handleError} from '../utils/httpClient';
+import {get, handleErrorWithCritical} from '../utils/httpClient';
 import * as urls from '../names/urls'
 import { showSiteSpinner, hideSiteSpinner } from './uiActions';
 
@@ -15,7 +15,7 @@ export function getUserInfo() {
         })
         .catch(err => {
             dispatch(hideSiteSpinner());
-            handleError("REJECTED_USER_INFO", dispatch, err)            
+            handleErrorWithCritical(dispatch, err, "REJECTED_USER_INFO")            
         });
     }
 }

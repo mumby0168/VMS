@@ -5,6 +5,10 @@ export default function reducer(state = {
     siteSpinner: false,
     message: null,
     isDark: true,    
+    critical: {
+        visible: false,
+        message: null
+    }
 }
 , action) {
     switch (action.type) {
@@ -31,6 +35,14 @@ export default function reducer(state = {
 
         case "THEME_UPDATED": {
             return {...state, isDark: action.payload};
+        }
+
+        case "SHOW_CRITICAL_ERROR": {
+            return {...state, critical: {visible: true, message: action.payload}};
+        }
+
+        case "HIDE_CRITICAL_ERROR": {
+            return {...state, critical: {visible: false, message: null}}
         }
 
         default:

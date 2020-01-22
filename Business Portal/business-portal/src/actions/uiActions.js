@@ -37,3 +37,12 @@ export function hideSiteSpinner() {
 export function updateTheme(isDark) {
     return {type: "THEME_UPDATED", payload: isDark};
 }
+
+
+export function showCriticalError(message) {
+    return {type: "SHOW_CRITICAL_ERROR", payload: message};
+}
+
+export function hideCriticalError() {
+    return{type: "HIDE_CRITICAL_ERROR"};
+}

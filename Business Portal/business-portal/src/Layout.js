@@ -15,8 +15,8 @@ import Fire from './hocs/Fire';
 import Toast from './operations/Toast';
 import Visitors from './hocs/Visitors';
 import Employees from './hocs/Employees';
-import Accounts from './hocs/Accounts';
 import SiteSpinner from './common/SiteSpinner';
+import CriticalError from './common/CriticalError';
 
 
 const Home = () => {
@@ -29,18 +29,19 @@ class Layout extends Component {
 
     render() {
 
-        const isAdmin = this.props.role === "BusinessAdmin";
+        const isAdmin = this.props.role === "BusinessAdmin";        
 
         return (
             <React.Fragment>
                 <CssBaseline/>
                 <Operations/>
                 <Toast/>        
-                <SiteSpinner/>        
+                <SiteSpinner/>                      
                 <Router>
                 <Nav></Nav>      
                 <div className="content-wrapper">
                 <Container className="content-wrapper" >                                                    
+                    <CriticalError/>  
                     <Switch>
                         <Route exact path="/">
                             <Home></Home>
@@ -68,9 +69,6 @@ class Layout extends Component {
                         </PrivateRoute>
                         <PrivateRoute path="/visitors" valid={isAdmin}>
                             <Visitors/>
-                        </PrivateRoute>
-                        <PrivateRoute path="/accounts" valid={isAdmin}>
-                            <Accounts/>
                         </PrivateRoute>
                         <Route path="*">
                             <h1>Not Found</h1>

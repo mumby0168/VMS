@@ -19,5 +19,6 @@ namespace Services.Identity.Services
         IAsyncEnumerable<StandardUserAccountDto> GetStandardAccountsForBusiness(Guid businessId);
 
         Task RemoveAsync(Guid accountId, Guid businessId);
+        Task<IEnumerable<PendingAccountDto>> GetPendingAccountsForBusinessAsync(Guid businessId);
     }
 }

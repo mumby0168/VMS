@@ -7,6 +7,8 @@ import CardDialog from '../common/CardDialog'
 import {closeEmployeeRecords, getLatestEmployeeRecords} from '../actions/employeeActions'
 import AccessRecordList from '../components/landing/AccessRecordsList'
 import Progress from '../common/Progress'
+import AddEmployee from '../components/employees/AddEmployee'
+import PendingAccounts from '../components/employees/PendingAccounts'
 
 class Employees extends Component {
 
@@ -20,6 +22,7 @@ class Employees extends Component {
     handleClose() {
         this.props.dispatch(closeEmployeeRecords())
     }
+
 
 
 
@@ -38,6 +41,8 @@ class Employees extends Component {
 
         return (
             <Grid direction="row" container>
+                <AddEmployee error={this.props.addEmployee.errorMessage} dispatch={this.props.dispatch} data={this.props.addEmployee}/>
+                <PendingAccounts {...this.props.pending} dispatch={this.props.dispatch}/>
                 <CardDialog 
                 showCancel={true} 
                 open={this.props.accessDialog.open} 
@@ -59,7 +64,16 @@ const mapStateToProps = (state => {
             loading: state.employee.access.loading,
             open: state.employee.access.isOpen,
             employee: state.employee.access.employee,
-            records: state.employee.access.records
+            records: state.employee.access.records,            
+        },
+        addEmployee: {
+            isOpen: state.employee.addEmployee.isOpen,   
+            errorMessage: state.employee.addEmployee.errorMessage         
+        },
+        pending: {
+            accounts: state.employee.pending.accounts,
+            isOpen: state.employee.pending.isOpen,
+            loading: state.employee.pending.loading
         },
         loading: state.employee.loading,
         employees: state.employee.summaries

@@ -3,14 +3,14 @@ import { Backdrop, Card, makeStyles } from '@material-ui/core'
 import Progress from './Progress'
 import { useSelector } from 'react-redux'
 
-const useStyles = makeStyles(theme => ({
-    backdrop: {
-        zIndex: 255
-    },
-    card: {
-        padding: '15%'
-    }
-}));
+    const useStyles = makeStyles(theme => ({
+        backdrop: {
+            zIndex: 255
+        },
+        card: {
+            padding: '15%'
+        }
+    }));
 
 export default function SiteSpinner() {
 

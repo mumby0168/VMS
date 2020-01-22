@@ -186,6 +186,24 @@ namespace Services.Identity.Services
             if (account is null) throw new VmsException(Codes.NoIdentityFound, $"The account with the id {accountId} could not be found");
             await _identityRepository.RemoveAsync(account);
             _logger.LogInformation($"Account with id {accountId} deleted");
-        }        
+        }
+
+        public async Task<IEnumerable<PendingAccountDto>> GetPendingAccountsForBusinessAsync(Guid businessId)
+        {
+            var accounts = await _pendingIdentityRepository.GetForBusinessAsync(businessId);
+
+            var ret = new List<PendingAccountDto>();
+
+            foreach (var pendingIdentity in accounts)
+            {
+                ret.Add(new PendingAccountDto
+                {
+                    Id = pendingIdentity.Id,
+                    EmailAddress = pendingIdentity.Email
+                });
+            }
+
+            return ret;
+        }
     }
 }

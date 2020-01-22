@@ -26,5 +26,5 @@ export default combineReducers({
     completeAccount,
     fire,
     toast,
-    employee
+    employee,    
 })

@@ -17,12 +17,14 @@ namespace Services.Users.Handlers.Queries
         private readonly IVmsLogger<GetPersonalAccessRecordsHandler> _logger;
         private readonly IAccessRecordRepository _accessRecordRepository;
         private readonly IUserRepository _userRepository;
+        private readonly ISiteRepository _siteRepository;
 
-        public GetPersonalAccessRecordsHandler(IVmsLogger<GetPersonalAccessRecordsHandler> logger, IAccessRecordRepository accessRecordRepository, IUserRepository userRepository)
+        public GetPersonalAccessRecordsHandler(IVmsLogger<GetPersonalAccessRecordsHandler> logger, IAccessRecordRepository accessRecordRepository, IUserRepository userRepository, ISiteRepository siteRepository)
         {
             _logger = logger;
             _accessRecordRepository = accessRecordRepository;
             _userRepository = userRepository;
+            _siteRepository = siteRepository;
         }
 
         public async Task<IEnumerable<AccessRecordDto>> HandleAsync(GetPersonalAccessRecords query)
@@ -42,9 +44,11 @@ namespace Services.Users.Handlers.Queries
             var records = await _accessRecordRepository.GetForUser(user.Id);
 
             var ret = new List<AccessRecordDto>();
-            //TODO: Get site name somehow. (cross service | hold internal)
             foreach (var accessRecord in records)
             {
+
+                var site = await _siteRepository.GetSiteNameAsync(accessRecord.SiteId);
+
                 ret.Add(new AccessRecordDto
                 {
                     Action = accessRecord.Action == AccessAction.In ? "in" : "out",
@@ -52,7 +56,8 @@ namespace Services.Users.Handlers.Queries
                     SiteId = accessRecord.SiteId,
                     Date = accessRecord.TimeStamp.ToShortDateString(),
                     Time = accessRecord.TimeStamp.ToShortTimeString(),
-                    TimeStamp = accessRecord.TimeStamp
+                    TimeStamp = accessRecord.TimeStamp,
+                    SiteName = site
                 });
             }
 

@@ -102,7 +102,6 @@ namespace Services.Identity.Services
 
         public async Task CreateBusinessAdmin(string email, Guid businessId)
         {
-            //TODO: consider normal accounts as well when get round to it.
             if (await _identityRepository.IsEmailInUse(email, Roles.BusinessAdmin) ||
                 await _pendingIdentityRepository.IsEmailInUse(email, Roles.BusinessAdmin))
                 throw new VmsException(Codes.EmailInUse, "The email supplied is in use.");
