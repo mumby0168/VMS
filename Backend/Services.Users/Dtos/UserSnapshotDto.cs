@@ -15,5 +15,6 @@ namespace Services.Users.Dtos
         public string LastTime { get; set; }
 
         public string SiteName { get; set; }
+        public Guid AccountId { get; set; }
     }
 }

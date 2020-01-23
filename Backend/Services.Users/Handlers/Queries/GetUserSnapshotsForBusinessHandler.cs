@@ -48,7 +48,8 @@ namespace Services.Users.Handlers.Queries
                     LastAction = latest.Action.ToString(),
                     LastTime = latest.TimeStamp.ToShortTimeString(),
                     Name = user.FirstName + " " + user.SecondName,
-                    SiteName = siteName
+                    SiteName = siteName,
+                    AccountId = user.AccountId
                 });
 
             }

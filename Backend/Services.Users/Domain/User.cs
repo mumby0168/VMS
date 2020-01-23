@@ -16,10 +16,17 @@ namespace Services.Users.Domain
         public string Email { get; private set; }
         public string PhoneNumber { get; private set; }
         public string BusinessPhoneNumber { get; private set; }
+        public bool IsAccountValid { get; private set; }
         public Guid BasedSiteId { get; private set; }
         public Guid BusinessId { get; private set; }
 
         public Guid AccountId { get; private set; }
+
+        public void SuspendAccount()
+        {
+            IsAccountValid = false;
+            AccountId = Guid.Empty;
+        }
 
         public IUser Setup(string firstName, string secondName, string email, string phoneNumber, string businessPhoneNumber,
             Guid basedSiteId, Guid businessId, Guid accountId) =>
@@ -49,6 +56,7 @@ namespace Services.Users.Domain
             BasedSiteId = basedSiteId;
             BusinessId = businessId;
             AccountId = accountId;
+            IsAccountValid = true;
         }
     }
 }

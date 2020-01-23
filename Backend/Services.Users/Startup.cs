@@ -60,7 +60,8 @@ namespace Services.Users
                 .SubscribeEvent<UserAccountCreated>()
                 .SubscribeCommand<CreateUser>()
                 .SubscribeCommand<CreateAccessRecord>()
-                .SubscribeEvent<SiteCreated>();
+                .SubscribeEvent<SiteCreated>()
+                .SubscribeEvent<AccountRemoved>();
 
             app.UseUdpLogging(Common.Names.Services.Users);
 

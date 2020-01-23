@@ -60,6 +60,19 @@ export function hideAddEmployee() {
     }
 }
 
+export function showRemoveConfirmation(id) {
+    return {
+        type: "SHOW_CONFIRM_REMOVE_EMPLOYEE",
+        payload: id
+    }
+}
+
+export function hideRemoveConfirmation() {
+    return {
+        type: "HIDE_CONFIRM_REMOVE_EMPLOYEE"
+    }
+}
+
 export function showPending() {
     return {
         type: "SHOW_PENDING"
@@ -115,13 +128,30 @@ export function removePendingAccount(id) {
     return (dispatch) => {
         dispatch({ type: "REMOVE_PENDING_ACCOUNT" });
         post(`${urls.identityBaseUrl}remove/pending/${id}`, null)
-            .then((res) => {            
+            .then((res) => {
                 dispatch({ type: "REMOVED_PENDING_ACCOUNT" });
                 dispatch(getPendingAccounts());
-                dispatch({type: "SHOW_TOAST", payload: {failed: false, message: "Succesfully removed account."}})
+                dispatch({ type: "SHOW_TOAST", payload: { failed: false, message: "Succesfully removed account." } })
             })
             .catch((err) => {
                 handleErrorWithToast("REMOVE_PENDING_ACCOUNT_FAILED", dispatch, err);
+            });
+    }
+}
+
+
+export function removeAccount(id) {
+    return (dispatch) => {
+        post(`${urls.identityBaseUrl}remove/${id}`, null)
+            .then((res) => {
+                if (res.status === 200) {
+                    dispatch(hideRemoveConfirmation());
+                    dispatch(getLatestEmployeeRecords());
+                    dispatch({ type: "SHOW_TOAST", payload: { failed: false, message: "Succesfully removed account." } })
+                }
+            })
+            .catch((err) => {
+                handleErrorWithToast(dispatch, err);
             });
     }
 }

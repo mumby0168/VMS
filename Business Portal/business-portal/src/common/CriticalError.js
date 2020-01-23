@@ -5,12 +5,15 @@ import { hideCriticalError } from '../actions/uiActions';
 import { useHistory } from 'react-router-dom';
 import { logout } from '../actions/accountActions';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     backdrop: {
         zIndex: 255
     },
     card: {
         padding: '15%'
+    },
+    items: {
+        paddingBottom: theme.spacing(1)
     }
 }));
 
@@ -39,10 +42,10 @@ export default function CriticalError(props) {
     return (
         <Backdrop className={classes.backdrop} open={state.visible}>
             <div align="center">
-                <Typography variant="h3">Oops ! </Typography>
-                <Typography variant="h4">Something went wrong in which we cannot recover :(</Typography>
-                <Typography variant="h6">{state.message}</Typography>
-                <Button variant="contained" color="secondary" onClick={handleClose}>Close</Button>
+                <Typography className={classes.items} variant="h3">Oops ! </Typography>                
+                <Typography className={classes.items} variant="h4">{state.message}</Typography>
+                <Typography className={classes.items} variant="h6">Unfortunately we cannot recover from this.</Typography>
+                <Button className={classes.items} variant="contained" color="secondary" onClick={handleClose}>Exit Application</Button>
             </div>
         </Backdrop>
     )

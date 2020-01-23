@@ -31,6 +31,7 @@ namespace Services.Users
             serviceCollection.AddTransient<IAccessRecordRepository, AccessRecordRepository>();
             serviceCollection.AddTransient<ISiteFactory, SiteFactory>();
 
+            serviceCollection.AddTransient<IEventHandler<AccountRemoved>, AccountRemovedHandler>();
             serviceCollection.AddTransient<IEventHandler<UserAccountCreated>, UserAccountCreatedHandler>();
 
             serviceCollection

@@ -21,5 +21,7 @@ namespace Services.Common.Mongo
         Task UpdateAsync(T newEntity, Guid id);
 
         Task RemoveAsync(Guid id);
+
+        Task RemoveRangeAsync(Expression<Func<T, bool>> predicate);
     }
 }

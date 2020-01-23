@@ -3,12 +3,16 @@ import { Avatar, Typography, Fab, Tooltip, TableRow, TableCell, makeStyles } fro
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import { useDispatch } from 'react-redux';
 import { openEmployeeRecords, getEmployeeAccessRecords } from '../../actions/employeeActions';
+import { Delete } from '@material-ui/icons';
 
 
 
 const useStyles = makeStyles(theme => ({
     avatar: {
         marginBottom: theme.spacing(0.5)
+    },
+    actionButtons: {
+        marginLeft: theme.spacing(0.5)
     }
 }));
 
@@ -22,6 +26,11 @@ export default function EmployeeRow(props) {
         console.log(props.employee);
         dispatch(openEmployeeRecords(props.employee))
         dispatch(getEmployeeAccessRecords(props.employee.id));
+    }
+
+    const handleRemove = (id) => {
+        console.log(id);
+        props.showConfirm(id);
     }
 
     return (
@@ -39,9 +48,14 @@ export default function EmployeeRow(props) {
                 <Typography>{`${props.employee.lastAction} (${props.employee.lastTime})`}</Typography>
             </TableCell>
             <TableCell>
-                <Tooltip title="View Records">
+                <Tooltip className={classes.actionButtons} title="View Records">
                     <Fab onClick={showDialog} color="primary">
                         <WatchLaterIcon></WatchLaterIcon>
+                    </Fab>
+                </Tooltip>
+                <Tooltip className={classes.actionButtons} title="Remove Employee"> 
+                    <Fab onClick={(e) => handleRemove(props.employee.accountId)} color="primary">
+                        <Delete/>
                     </Fab>
                 </Tooltip>
             </TableCell>

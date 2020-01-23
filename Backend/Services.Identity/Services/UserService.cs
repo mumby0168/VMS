@@ -183,9 +183,10 @@ namespace Services.Identity.Services
         public async Task RemoveAsync(Guid accountId, Guid businessId)
         {
             var account = await _identityRepository.GetStandardAccountsForBusinessAsync(businessId, accountId);
-            if (account is null) throw new VmsException(Codes.NoIdentityFound, $"The account with the id {accountId} could not be found");
+            if (account is null) throw new VmsException(Codes.NoIdentityFound, $"The account to be removed could not be found");
             await _identityRepository.RemoveAsync(account);
             _logger.LogInformation($"Account with id {accountId} deleted");
+            _publisher.PublishEvent(new AccountRemoved(accountId), RequestInfo.Empty);
         }
 
         public async Task<IEnumerable<PendingAccountDto>> GetPendingAccountsForBusinessAsync(Guid businessId)

@@ -18,11 +18,15 @@ namespace Services.Users.Domain
 
         string BusinessPhoneNumber { get; }
 
+        bool IsAccountValid { get; }
+
         Guid BasedSiteId { get; }
 
         Guid BusinessId { get; }
 
         Guid AccountId { get; }
+
+        void SuspendAccount();
 
         IUser Setup(string firstName, string secondName, string email, string phoneNumber, string businessPhoneNumber,
             Guid basedSiteId, Guid businessId, Guid accountId);

@@ -32,5 +32,10 @@ namespace Services.Users.Repositories
         {
             return await _repository.FindAsync(a => a.BusinessId == businessId);
         }
+
+        public Task RemoveRangeByUserId(Guid userId)
+        {
+            return _repository.RemoveRangeAsync(a => a.UserId == userId);
+        }
     }
 }

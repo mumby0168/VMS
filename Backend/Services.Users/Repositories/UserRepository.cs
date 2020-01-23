@@ -33,6 +33,9 @@ namespace Services.Users.Repositories
         }
 
         public async Task<IEnumerable<IUser>> GetUsersByBusinessId(Guid businessId) 
-            => await _repository.FindAsync(u => u.BusinessId == businessId);
+            => await _repository.FindAsync(u => u.BusinessId == businessId && u.IsAccountValid);
+
+        public Task UpdateAsync(IUser user) => 
+            _repository.UpdateAsync(user as User, user.Id);
     }
 }

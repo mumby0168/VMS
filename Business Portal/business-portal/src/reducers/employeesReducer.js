@@ -21,6 +21,10 @@ const initialState = {
         loading: false,
         error: ""
     },
+    confirmRemove: {
+        isOpen: false,
+        id: "",
+    },
     loading: false,
     summaries: [
 
@@ -78,6 +82,10 @@ export default (state = initialState, { type, payload }) => {
         case "REMOVED_PENDING_ACCOUNT": return {...state, remove: {...state.remove, loading: false}};
 
         case "REMOVE_PENDING_ACCOUNT_FAILED": return {...state, remove: {...state.remove, loading: false, error: payload.Reason}};
+
+        case "SHOW_CONFIRM_REMOVE_EMPLOYEE": return {...state, confirmRemove: {...state.confirmRemove, isOpen: true, id: payload}};
+
+        case "HIDE_CONFIRM_REMOVE_EMPLOYEE": return {...state, confirmRemove: {...state.confirmRemove, isOpen: false, id: ""}};        
 
 
 

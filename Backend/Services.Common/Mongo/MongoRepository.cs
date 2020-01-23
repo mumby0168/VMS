@@ -32,5 +32,6 @@ namespace Services.Common.Mongo
         public Task UpdateAsync(T newEntity, Guid id) => _collection.ReplaceOneAsync(e => e.Id == id, newEntity);
 
         public Task RemoveAsync(Guid id) => _collection.DeleteOneAsync(e => e.Id == id);
+        public Task RemoveRangeAsync(Expression<Func<T, bool>> predicate) => _collection.DeleteManyAsync(predicate);
     }
 }

@@ -12,5 +12,6 @@ namespace Services.Users.Repositories
         Task<IEnumerable<IAccessRecord>> GetForUser(Guid userId);
         Task<IEnumerable<IAccessRecord>> GetForSite(Guid siteId);
         Task<IEnumerable<AccessRecord>> GetForBusiness(Guid businessId);
+        Task RemoveRangeByUserId(Guid userId);
     }
 }

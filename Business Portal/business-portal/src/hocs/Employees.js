@@ -52,7 +52,7 @@ class Employees extends Component {
                     {content}
                 </CardDialog>
                 <EmployeesHeader/>
-                <EmployeesTable loading={this.props.loading} employees={this.props.employees}/>
+                <EmployeesTable dispatch={this.props.dispatch} confirm={this.props.confirmRemove} loading={this.props.loading} employees={this.props.employees}/>
             </Grid>
         )
     }
@@ -76,6 +76,10 @@ const mapStateToProps = (state => {
             loading: state.employee.pending.loading,
             removing: state.employee.remove.loading,
             error: state.employee.remove.error
+        },
+        confirmRemove: {
+            isOpen: state.employee.confirmRemove.isOpen,
+            id: state.employee.confirmRemove.id,            
         },
         loading: state.employee.loading,
         employees: state.employee.summaries

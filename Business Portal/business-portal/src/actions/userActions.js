@@ -1,6 +1,6 @@
 import {get, handleErrorWithCritical} from '../utils/httpClient';
 import * as urls from '../names/urls'
-import { showSiteSpinner, hideSiteSpinner } from './uiActions';
+import { showSiteSpinner, hideSiteSpinner, showCriticalError } from './uiActions';
 
 export function getUserInfo() {
     return (dispatch) => {
@@ -11,6 +11,10 @@ export function getUserInfo() {
             if(res.status === 200) {
                 dispatch(hideSiteSpinner());
                 dispatch({type: "FETCHED_USER_INFO", payload: res.data});            
+            }
+            else if(res.status === 204) {
+                dispatch(hideSiteSpinner());
+                dispatch(showCriticalError("Your personalized user settings could not be retreived"));
             }
         })
         .catch(err => {
