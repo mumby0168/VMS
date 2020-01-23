@@ -17,6 +17,10 @@ const initialState = {
         isOpen: false,
         loading: false
     },
+    remove: {
+        loading: false,
+        error: ""
+    },
     loading: false,
     summaries: [
 
@@ -68,6 +72,12 @@ export default (state = initialState, { type, payload }) => {
 
         case "FETCHED_PENDING_ACCOUNTS":
             return { ...state, pending: { ...state.pending, loading: false, accounts: payload } };
+
+        case "REMOVE_PENDING_ACCOUNT": return {...state, remove: {...state.remove, loading: true}};
+
+        case "REMOVED_PENDING_ACCOUNT": return {...state, remove: {...state.remove, loading: false}};
+
+        case "REMOVE_PENDING_ACCOUNT_FAILED": return {...state, remove: {...state.remove, loading: false, error: payload.Reason}};
 
 
 

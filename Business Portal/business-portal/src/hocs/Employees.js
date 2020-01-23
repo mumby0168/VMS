@@ -73,7 +73,9 @@ const mapStateToProps = (state => {
         pending: {
             accounts: state.employee.pending.accounts,
             isOpen: state.employee.pending.isOpen,
-            loading: state.employee.pending.loading
+            loading: state.employee.pending.loading,
+            removing: state.employee.remove.loading,
+            error: state.employee.remove.error
         },
         loading: state.employee.loading,
         employees: state.employee.summaries

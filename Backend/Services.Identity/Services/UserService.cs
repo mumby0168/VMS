@@ -205,5 +205,18 @@ namespace Services.Identity.Services
 
             return ret;
         }
+
+        public async Task RemovePendingAsync(Guid pendingId, Guid businessId)
+        {
+            var pendingIdentity = await _pendingIdentityRepository.GetAsync(pendingId, businessId);
+            if (pendingIdentity is null)
+            {
+                _logger.LogInformation($"The pending identity could not be found with id: ${pendingId}.");
+                throw new VmsException(Codes.NoIdentityFound, "The pending identity could not be found.");
+            }
+
+            await _pendingIdentityRepository.RemoveAsync(pendingIdentity);
+            _logger.LogInformation($"Pending account removed with email address: {pendingIdentity.Email}");
+        }
     }
 }

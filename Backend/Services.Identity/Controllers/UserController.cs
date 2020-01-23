@@ -74,6 +74,16 @@ namespace Services.Identity.Controllers
             var businessId = HttpContext.User.Claims.FirstOrDefault(u => u.Type == CustomClaims.BusinessIdClaim);
             if (businessId is null) return Unauthorized();
             await _userService.RemoveAsync(accountId, Guid.Parse(businessId.Value));
+            return Ok();    
+        }
+
+        [Authorize(Roles = Roles.BusinessAdmin)]
+        [HttpPost("remove/pending/{pendingId}")]
+        public async Task<IActionResult> DeletePending([FromRoute]Guid pendingId)
+        {
+            var businessId = HttpContext.User.Claims.FirstOrDefault(u => u.Type == CustomClaims.BusinessIdClaim);
+            if (businessId is null) return Unauthorized();
+            await _userService.RemovePendingAsync(pendingId, Guid.Parse(businessId.Value));
             return Ok();
         }
 
