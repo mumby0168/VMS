@@ -24,8 +24,7 @@ export default function Menu({logout, ...props}) {
         else if(role === "BusinessAdmin") {
             return (
                 <Box align="center">
-                    {getButtons("Standard")}                    
-                    <Button onClick={(e) => props.navigate("/accounts")} color="inherit">Accounts</Button>
+                    {getButtons("Standard")}                                        
                     <Button onClick={(e) => props.navigate("/visitors")} color="inherit">Visitors</Button>
                     <Button onClick={(e) => props.navigate("/employees")} color="inherit">Employees</Button>                                        
                 </Box>                

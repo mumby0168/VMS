@@ -12,6 +12,7 @@ import { Typography, Grid } from '@material-ui/core';
 import { getBusinessInfo } from '../actions/businessActions'
 import { getSiteSummaries } from '../actions/siteActions';
 import InOut from '../components/landing/InOut';
+import { withRouter } from 'react-router-dom';
 
 
 class Landing extends Component {
@@ -35,6 +36,11 @@ class Landing extends Component {
     }
 
     render() {
+
+        if(this.props.userDataAvailable === false) {
+            this.props.history.push(`/complete/${this.props.accountId}`);
+        }
+
         return (
             <div style={{ height: '100%' }}>
                 <Grid style={{marginBottom: '5px'}} container>
@@ -72,8 +78,10 @@ const mapStateToProps = (state) => {
         accessRecordsLoading: state.access.loading,
         businesId: state.account.userDetails.businessId,
         name: state.user.firstName + " " + state.user.secondName,
-        userId: state.user.id
+        userId: state.user.id,
+        userDataAvailable: state.user.isAvailable,
+        accountId: state.account.userDetails.id,
     }
 }
 
-export default connect(mapStateToProps)(Landing);
+export default withRouter(connect(mapStateToProps)(Landing));

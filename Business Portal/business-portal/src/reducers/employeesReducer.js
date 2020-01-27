@@ -85,9 +85,7 @@ export default (state = initialState, { type, payload }) => {
 
         case "SHOW_CONFIRM_REMOVE_EMPLOYEE": return {...state, confirmRemove: {...state.confirmRemove, isOpen: true, id: payload}};
 
-        case "HIDE_CONFIRM_REMOVE_EMPLOYEE": return {...state, confirmRemove: {...state.confirmRemove, isOpen: false, id: ""}};        
-
-
+        case "HIDE_CONFIRM_REMOVE_EMPLOYEE": return {...state, confirmRemove: {...state.confirmRemove, isOpen: false, id: ""}};
 
         default:
             return state

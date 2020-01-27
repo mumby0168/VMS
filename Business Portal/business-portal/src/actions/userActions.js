@@ -1,6 +1,12 @@
-import {get, handleErrorWithCritical} from '../utils/httpClient';
+import {get, handleErrorWithCritical, postCallback} from '../utils/httpClient';
 import * as urls from '../names/urls'
-import { showSiteSpinner, hideSiteSpinner, showCriticalError } from './uiActions';
+import { showSiteSpinner, hideSiteSpinner } from './uiActions';
+
+export function userInformationNotPresent() {
+    return {
+        type:"USER_INFO_NOT_PRESENT"
+    }
+}
 
 export function getUserInfo() {
     return (dispatch) => {
@@ -14,12 +20,27 @@ export function getUserInfo() {
             }
             else if(res.status === 204) {
                 dispatch(hideSiteSpinner());
-                dispatch(showCriticalError("Your personalized user settings could not be retreived"));
+                dispatch(userInformationNotPresent());
             }
         })
         .catch(err => {
             dispatch(hideSiteSpinner());
             handleErrorWithCritical(dispatch, err, "REJECTED_USER_INFO")            
         });
+    }
+}
+
+
+export function createUser(accountId, businessId, siteId, firstName, secondName, phone, businessPhone) {
+    return (dispatch) => {
+        postCallback(`${urls.gatewayBaseUrl}users/create`, {
+            accountId: accountId,
+            firstName: firstName,
+            secondName: secondName,
+            phoneNumber: phone,
+            businessPhoneNumber: businessPhone,
+            basedSiteId: siteId,
+            businessId: businessId
+        }, "Saving your personal details");
     }
 }

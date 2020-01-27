@@ -17,6 +17,8 @@ import Visitors from './hocs/Visitors';
 import Employees from './hocs/Employees';
 import SiteSpinner from './common/SiteSpinner';
 import CriticalError from './common/CriticalError';
+import CompleteUser from './hocs/CompleteUser';
+import CompleteAccount from './components/auth/CompleteAccount';
 
 
 const Home = () => {
@@ -30,6 +32,8 @@ class Layout extends Component {
     render() {
 
         const isAdmin = this.props.role === "BusinessAdmin";        
+        console.log("valid: " + this.props.valid);
+        console.log("role: " + this.props.role);
 
         return (
             <React.Fragment>
@@ -55,6 +59,12 @@ class Layout extends Component {
                         <Route path="/reset/:code">
                             <Reset/>
                         </Route>
+                        <Route path="/complete/:code">
+                            <CompleteAccount/>
+                        </Route>
+                        <PrivateRoute path="/create/:accountId" valid={this.props.valid}>
+                            <CompleteUser/>
+                        </PrivateRoute>                    
                         <PrivateRoute path="/firelist" valid={this.props.valid}>
                             <Fire/>
                         </PrivateRoute>

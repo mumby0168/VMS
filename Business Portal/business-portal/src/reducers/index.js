@@ -1,17 +1,18 @@
 import {combineReducers} from 'redux'
 import ui from './uiReducer'
 import account from './accountReducer'
-import login from './loginReducer'
+import login from './forms/loginReducer'
 import operations from './operationsReducer'    
 import access from './accessRecordsReducer'
 import business from './businessReducer'
 import requestReset from './requestResetReducer'
 import user from './userReducer'
 import site from './siteReducer'
-import completeAccount from './completeAccountReducer';
 import fire from './fireListReducer'
 import toast from './toastReducer'
 import employee from './employeesReducer'
+import completeUser from './forms/completeUserReducer'
+import completeAccount from './forms/completeAccountReducer'
 
 export default combineReducers({
     ui,
@@ -22,9 +23,10 @@ export default combineReducers({
     business,
     requestReset,
     user,
-    site,
-    completeAccount,
+    site,    
     fire,
     toast,
     employee,    
+    completeUser,
+    completeAccount
 })

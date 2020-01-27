@@ -1,5 +1,7 @@
 import axios from 'axios'
 import * as Urls from '../names/urls'
+import { post, handleErrorWithToast } from '../utils/httpClient';
+import { showSiteSpinner, hideSiteSpinner } from './uiActions';
 
 
 export function login(username, password) {
@@ -108,5 +110,28 @@ export function resetPasswordComplete(email, password, passwordConfirm, code) {
                 return;
             }        
         })
+    }
+}
+
+
+export function completeAccount(code, email, password, passwordConfirmation) {
+    return (dispatch) => {    
+        dispatch(showSiteSpinner("Completing your account"));
+        post(`${Urls.identityBaseUrl}complete`, {
+            code,
+            email,
+            password,
+            passwordConfirmation
+        })
+        .then((res) => {
+            if(res.status === 200) {
+                dispatch(hideSiteSpinner());
+                dispatch({type: "SHOW_TOAST", payload: {failed: false, message: "Succsefully completed your account."}});
+            }            
+        })
+        .catch((e) => {
+            dispatch(hideSiteSpinner());
+            handleErrorWithToast(dispatch, e)
+        });
     }
 }

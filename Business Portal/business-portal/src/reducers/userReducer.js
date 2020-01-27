@@ -1,4 +1,5 @@
 const initialState = {
+    isAvailabile: true,
     loading: false,
     id: null,
     firstName: "",
@@ -8,7 +9,7 @@ const initialState = {
 }
 
 export default (state = initialState, { type, payload }) => {
-    switch (type) {
+    switch (type) {    
 
     case "FETCHING_USER_INFO":
         return { ...state, loading: true}
@@ -24,6 +25,11 @@ export default (state = initialState, { type, payload }) => {
         };
     case "REJECTED_USER_INFO":
         return {...state, loading: false};
+
+
+    case "USER_INFO_NOT_PRESENT": {
+        return {...state, isAvailabile: false};
+    }
 
     default:
         return state

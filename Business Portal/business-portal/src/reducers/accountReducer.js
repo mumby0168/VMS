@@ -5,7 +5,7 @@ const intialState = {
     loginLoading: false,
     resetRequestLoading: false,
     resetLoading: false,
-    resetValid: false,
+    resetValid: false,    
     error: {
         code: null,
         reason: null
@@ -63,7 +63,7 @@ export default function reducer(state = intialState, action) {
                     code: null,
                 }
             }
-        }
+        }        
 
         case "REQUEST_RESET_SUCCESFUL": {
             return { ...state, resetRequestLoading: false }
