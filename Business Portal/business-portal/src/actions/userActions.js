@@ -32,6 +32,7 @@ export function getUserInfo() {
 
 
 export function createUser(accountId, businessId, siteId, firstName, secondName, phone, businessPhone) {
+    console.log(firstName)
     return (dispatch) => {
         postCallback(`${urls.gatewayBaseUrl}users/create`, {
             accountId: accountId,
@@ -41,6 +42,6 @@ export function createUser(accountId, businessId, siteId, firstName, secondName,
             businessPhoneNumber: businessPhone,
             basedSiteId: siteId,
             businessId: businessId
-        }, "Saving your personal details");
+        }, "Saving your personal details", dispatch, "Saving your infromation.");
     }
 }

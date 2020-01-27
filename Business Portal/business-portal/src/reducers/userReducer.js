@@ -1,5 +1,5 @@
 const initialState = {
-    isAvailabile: true,
+    isAvailable: true,
     loading: false,
     id: null,
     firstName: "",
@@ -22,13 +22,14 @@ export default (state = initialState, { type, payload }) => {
             secondName: payload.secondName, 
             initials: extractInitials(payload.firstName, payload.secondName),
             basedSiteId: payload.basedSiteId,
+            isAvailable: true
         };
     case "REJECTED_USER_INFO":
         return {...state, loading: false};
 
 
     case "USER_INFO_NOT_PRESENT": {
-        return {...state, isAvailabile: false};
+        return {...state, isAvailable: false};
     }
 
     default:

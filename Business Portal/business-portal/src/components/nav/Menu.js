@@ -5,29 +5,31 @@ import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 
 const useStyles = makeStyles({
     center: {
-        flexGrow: 1
+        flexGrow: 1,
+        paddingLeft: '1rem',
+        paddingRight: '1rem'
     }
 });
 
-export default function Menu({logout, ...props}) {
-    
+export default function Menu({ logout, ...props }) {
+
     const getButtons = (role) => {
-        if(role === "Standard") {
-            return (                
-                <div>
-                <Button onClick={(e) => props.navigate("/landing")} color="inherit">Dashboard</Button>
-                <Button onClick={(e) => props.navigate("/availability")} color="inherit">Sites</Button>
-                <Button onClick={(e) => props.navigate("/firelist")} color="inherit">Fire List</Button>
-                </div>
+        if (role === "Standard") {
+            return (
+                <React.Fragment>
+                    <Button onClick={(e) => props.navigate("/landing")} color="inherit">Dashboard</Button>
+                    <Button onClick={(e) => props.navigate("/availability")} color="inherit">Sites</Button>
+                    <Button onClick={(e) => props.navigate("/firelist")} color="inherit">Fire List</Button>
+                </React.Fragment>
             )
         }
-        else if(role === "BusinessAdmin") {
+        else if (role === "BusinessAdmin") {
             return (
-                <Box align="center">
-                    {getButtons("Standard")}                                        
+                <React.Fragment>
+                    {getButtons("Standard")}
                     <Button onClick={(e) => props.navigate("/visitors")} color="inherit">Visitors</Button>
-                    <Button onClick={(e) => props.navigate("/employees")} color="inherit">Employees</Button>                                        
-                </Box>                
+                    <Button onClick={(e) => props.navigate("/employees")} color="inherit">Employees</Button>
+                </React.Fragment>
             )
         }
     }
@@ -39,15 +41,15 @@ export default function Menu({logout, ...props}) {
     var profile = props.role === null ? "" : <ProfileMenu handleThemeChange={props.handleThemeChange} initials={props.initials} logout={logout} ></ProfileMenu>
 
     return (
-        <Toolbar>            
+        <Toolbar>
             <EmojiPeopleIcon></EmojiPeopleIcon>
-            <Typography variant="h6">{title}</Typography>            
-            <Divider orientation="vertical"/>
-            <Box  className={classes.center}>                
-                    {getButtons(props.role)}                
+            <Typography variant="h6">{title}</Typography>
+            <Divider orientation="vertical" />
+            <Box className={classes.center}>
+                {getButtons(props.role)}
             </Box>
-            <Divider orientation="vertical"/>
-                {profile}
-            </Toolbar>
+            <Divider orientation="vertical" />
+            {profile}
+        </Toolbar>
     )
 }

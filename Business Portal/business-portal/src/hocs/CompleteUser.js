@@ -40,9 +40,9 @@ class CompleteUser extends Component {
 
     handleFormSubmit() {
         this.props.dispatch(createUser(this.props.accountId, this.props.businessId, 
-            this.props.data.selectedSiteId, this.props.firstName, 
-            this.props.secondName, this.props.phone,
-            this.props.businessPhone));
+            this.props.data.selectedSiteId, this.props.data.firstName, 
+            this.props.data.secondName, this.props.data.phone,
+            this.props.data.businessPhone));
     }
 
     handleChange(value, key) {

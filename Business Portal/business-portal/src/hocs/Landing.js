@@ -33,12 +33,15 @@ class Landing extends Component {
         this.props.dispatch(getSiteSummaries());
         this.props.dispatch(getPersonalAccessRecords())
         this.props.dispatch(getBusinessInfo(this.props.businesId));
-    }
+    }    
 
     render() {
 
+        console.log("Checking for user data.");
+        console.log(this.props.userDataAvailable);
+
         if(this.props.userDataAvailable === false) {
-            this.props.history.push(`/complete/${this.props.accountId}`);
+            this.props.history.push(`/create/${this.props.accountId}`);
         }
 
         return (

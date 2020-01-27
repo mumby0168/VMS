@@ -50,7 +50,7 @@ class Operations extends Component {
 
                         if (result.status === "failed") {
                             handlerLocal.action.payload.message = result.reason;
-                            handlerLocal.account.payload.failed = true;
+                            handlerLocal.action.payload.failed = true;
                         }
 
                         this.props.dispatch(hideSiteSpinner());
