@@ -47,10 +47,7 @@ class Layout extends Component {
                 <div className="content-wrapper">
                 <Container className="content-wrapper" >                                                    
                     <CriticalError/>  
-                    <Switch>
-                        <Route exact path="/">
-                            <Home></Home>
-                        </Route>
+                    <Switch>                        
                         <Route path="/login">
                             <Login></Login>
                         </Route>

@@ -41,9 +41,13 @@ namespace Services.Visitors.Domain
         private DataSpecification(string label, int order, string validationMessage, string validationCode,
             Guid businessId)
         {
-            if(!Validation.Options.Contains(validationCode)) throw new VmsException(Codes.InvalidValidationCode, $"The validation code {validationCode} is not valid.");
+
+            if (label.IsEmpty()) throw new VmsException(Codes.EmptyProperty, "The label cannot be empty."); 
+
+            if (!Validation.Options.Contains(validationCode)) throw new VmsException(Codes.InvalidValidationCode, $"The validation code {validationCode} is not valid.");
 
             if(validationMessage.IsEmpty()) throw new VmsException(Codes.EmptyProperty, "The validation message cannot be empty.");
+
 
             Id = Guid.NewGuid();
             BusinessId = businessId;

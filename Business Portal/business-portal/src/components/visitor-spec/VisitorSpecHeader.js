@@ -20,7 +20,7 @@ export default function VisitorSpecHeader(props) {
             <Card className={classes.card}>
                 <CardHeader title="Visitors Specification"/>                  
                     <CardActions>
-                        <Fab size="small" onClick={(e) => props.specHandle()} color="secondary" variant="extended">
+                        <Fab size="small" onClick={(e) => props.openAdd()} color="secondary" variant="extended">
                             <Add/>
                              Add Specification
                         </Fab>

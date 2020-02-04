@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 
     const useStyles = makeStyles(theme => ({
         backdrop: {
-            zIndex: 255
+            zIndex: 1500
         },
         card: {
             padding: '15%'

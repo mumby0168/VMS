@@ -17,6 +17,14 @@ namespace Api.Gateway.Messages.Visitors
         public string ValidationCode { get; }
 
         [JsonConstructor]
+        public CreateDataEntry(string label, string validationMessage, string validationCode)
+        {
+            Label = label;
+            ValidationMessage = validationMessage;
+            ValidationCode = validationCode;
+            BusinessId = Guid.Empty;
+        }
+
         public CreateDataEntry(string label, string validationMessage, string validationCode, Guid businessId)
         {
             Label = label;

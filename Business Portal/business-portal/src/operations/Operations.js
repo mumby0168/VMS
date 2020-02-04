@@ -48,9 +48,9 @@ class Operations extends Component {
 
                         if (result.status === "failed") {
                             handlerLocal.action.payload.message = result.reason;
-                            handlerLocal.action.payload.failed = true;
+                            handlerLocal.action.payload.failed = true;                                                        
                         }
-                        if (handlerLocal.completionAction !== null) {                            
+                        if (handlerLocal.completionAction !== null && result.status !== "failed") {                            
                             this.props.dispatch(handlerLocal.completionAction);
                         }
 

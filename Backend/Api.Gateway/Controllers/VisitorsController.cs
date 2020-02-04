@@ -24,12 +24,7 @@ namespace Api.Gateway.Controllers
 
         [Authorize(Roles = Roles.BusinessAdmin)]
         [HttpPost("spec/create")]
-        public IActionResult CreateDataEntry([FromBody] CreateDataEntry command)
-        {
-            var businessId = HttpContext.User.Claims.FirstOrDefault(u => u.Type == CustomClaims.BusinessIdClaim);
-            if (businessId is null) return Unauthorized();
-            return PublishCommand(new CreateDataEntry(command.Label, command.ValidationMessage, command.ValidationCode, Guid.Parse(businessId.Value)));
-        }
+        public IActionResult CreateDataEntry([FromBody] CreateDataEntry command) => PublishCommand(new CreateDataEntry(command.Label, command.ValidationMessage, command.ValidationCode, GetBusinessId()));
 
         [Authorize(Roles = Roles.BusinessAdmin)]
         [HttpPost("spec/reorder")]
