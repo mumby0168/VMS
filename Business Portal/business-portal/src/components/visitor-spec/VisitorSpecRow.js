@@ -1,8 +1,19 @@
 import React from 'react'
 import { TableRow, TableCell, Tooltip, Fab } from '@material-ui/core'
 import { Delete } from '@material-ui/icons'
+import { useDispatch } from 'react-redux'
+import { deprecateDataSpec } from '../../actions/specificationActions';
 
 export default function VisitorSpecRow(props) {
+
+    const dispatch = useDispatch();
+
+    const deprecate = () => {
+        deprecateDataSpec(dispatch, props.spec.id);
+    }
+
+
+
     return (
         <TableRow>
             <TableCell>
@@ -19,7 +30,7 @@ export default function VisitorSpecRow(props) {
             </TableCell>
             <TableCell>
                 <Tooltip  title="Deprecate">
-                    <Fab color="primary">
+                    <Fab onClick={deprecate} color="primary">
                         <Delete/>
                     </Fab>
                 </Tooltip>

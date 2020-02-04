@@ -1,6 +1,6 @@
 @url = http://localhost:5020/gateway/api/
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW5AdGVzdC5jb20iLCJuYW1laWQiOiIwMWUxYTlhMi0zY2I1LTRlNzUtYjZlOS0xN2ViNzYzNTE3NzAiLCJyb2xlIjoiQnVzaW5lc3NBZG1pbiIsImJ1c2luZXNzSWQiOiJiMTliZTZhZi0xOWFiLTRjNmQtYTcwNi1lODQyMDVjMmQ0ZDciLCJuYmYiOjE1ODA4MzAzMDksImV4cCI6MTU4MDg0MTEwOSwiaWF0IjoxNTgwODMwMzA5fQ.-NxlqKMqAoTVcxqRLJ-Bt9ZQJA4eYFR4lJ5c31q0Oj0TjEVq9kIqcZ8RmLSE-YDbySthsKx9KQ9ClHxAcLxtbw
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW5AdGVzdC5jb20iLCJuYW1laWQiOiIwMWUxYTlhMi0zY2I1LTRlNzUtYjZlOS0xN2ViNzYzNTE3NzAiLCJyb2xlIjoiQnVzaW5lc3NBZG1pbiIsImJ1c2luZXNzSWQiOiJiMTliZTZhZi0xOWFiLTRjNmQtYTcwNi1lODQyMDVjMmQ0ZDciLCJuYmYiOjE1ODA4NDU1ODAsImV4cCI6MTU4MDg1NjM4MCwiaWF0IjoxNTgwODQ1NTgwfQ.XrthCdsXhZ_QYxNrPMgx2MNh2uuEmiLE5AffmfOYLHR12pjjYEBDjJL1J1ze77CiphKpDVMuPLD4k-UQUPwvTg
 
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
@@ -256,7 +256,7 @@ Authorization: Bearer {{jwt}}
 
 ### Get Data Entries
 
-GET {{url}}visitors/spec/entries/b19be6af-19ab-4c6d-a706-e84205c2d4d7
+GET {{url}}visitors/specs
 Authorization: Bearer {{jwt}}
 
 ### Update Order
@@ -301,13 +301,17 @@ Content-Type:  application/json
 
 ### Depreacte Data Entry
 
-POST {{url}}visitors/spec/deprecate
+DELETE {{url}}visitors/spec/deprecate
 Authorization: Bearer {{jwt}}
 Content-Type:  application/json
 
 {
-    "id": "017848ee-0b7c-4dba-bdb4-e52e57c7223d",    
+    "id": "6a45a1fd-fbcc-49ed-9050-06b868620f23",    
 }
+
+### Get Validators
+GET {{url}}visitors/specs/validators
+Authorization: Bearer {{jwt}}
 
 
 ### Get Site Fire List

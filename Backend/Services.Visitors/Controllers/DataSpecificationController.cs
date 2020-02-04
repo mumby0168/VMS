@@ -31,5 +31,10 @@ namespace Services.Visitors.Controllers
                 _dispatcher.Dispatch<GetBusinessDataSpecifications, IEnumerable<DataSpecificationDto>>(
                     new GetBusinessDataSpecifications(businessId)));
         }
+
+
+        [HttpGet("spec/validators/")]
+        public ActionResult<IEnumerable<string>> GetSpecificationValidators() =>
+            Collection(Validation.Options);
     }
 }

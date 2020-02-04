@@ -9,5 +9,6 @@ namespace Api.Gateway.Clients.Interfaces
     public interface IVisitorsClient
     {
         Task<IEnumerable<DataSpecificationDto>> GetDataSpecificationsForBusinessAsync(Guid businessId);
+        Task<IEnumerable<string>> GetDataSpecificationValidatorsAsync();
     }
 }

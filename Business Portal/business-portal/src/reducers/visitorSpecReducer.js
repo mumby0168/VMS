@@ -56,6 +56,7 @@ export default (state = initialState, { type, payload }) => {
                     [payload.key]: payload.value
                 }
             }}
+        case "FETCHED_VALIDATORS": return {...state, add: {...state.add, options: payload}}
 
         default:
             return state

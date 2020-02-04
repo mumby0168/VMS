@@ -12,6 +12,17 @@ export function post(url, data, authenticated = true) {
     })
 }
 
+
+export function deleteCall(url, data, authenticated = true) {
+
+    return axios.delete(url, {
+        data: data,
+        headers: {
+            'Authorization': `Bearer ${store.getState().account.jwtToken}`,
+        }
+    })
+}
+
 export function showToast(message) {
     return {
         type: "SHOW_TOAST",
@@ -31,6 +42,28 @@ export async function postCallback(url, data, toastMessage, dispatchHandle, load
     }
 
     var result = await post(url, data);
+
+    if (result.status === 202) {
+
+        var id = result.request.getResponseHeader('x-operation');
+
+        dispatchHandle({
+            type: "HANDLE_ADDED", payload: {
+                id: id,
+                action: showToast(toastMessage),
+                completionAction: completionAction
+            }
+        });
+    }
+}
+
+export async function deleteCallback(url, data, toastMessage, dispatchHandle, loadingMessage = null, completionAction = null) {
+
+    if (loadingMessage !== null) {
+        dispatchHandle(showSiteSpinner(loadingMessage));
+    }
+
+    var result = await deleteCall(url, data);
 
     if (result.status === 202) {
 

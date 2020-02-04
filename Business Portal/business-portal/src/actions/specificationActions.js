@@ -1,4 +1,4 @@
-import { get, handleErrorWithToast, postCallback } from "../utils/httpClient";
+import { get, handleErrorWithToast, postCallback, deleteCallback } from "../utils/httpClient";
 import * as urls from '../names/urls'
 
 export function getBusinessSpecifications() {
@@ -65,4 +65,27 @@ export function createDataSpec(dispatch, label, validationMessage, validationCod
         dispatch(clearAddSpecForm());
         dispatch(closeAdd());
     })
+}
+
+
+export function deprecateDataSpec(dispatch, id) {
+    deleteCallback(`${urls.gatewayBaseUrl}visitors/spec/deprecate`, {
+        id,       
+    }, "Succesfully deprecated data specification", dispatch, "Deprecating data specification ...", 
+    () => {
+        dispatch(getBusinessSpecifications());        
+    })
+}
+
+
+export function getVaidationOptions() {
+    return (dispatch) => {
+        dispatch({type: "FETCH_VALIDATORS"});
+        get(`${urls.gatewayBaseUrl}visitors/specs/validators`)
+        .then((res) => {
+            if(res.status === 200) {
+                dispatch({type: "FETCHED_VALIDATORS", payload: res.data});
+            }
+        })
+    }
 }

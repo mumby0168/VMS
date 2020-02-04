@@ -40,12 +40,14 @@ namespace Api.Gateway.Controllers
         public async Task<ActionResult<IEnumerable<DataSpecificationDto>>> GetSpecifications() => Collection(await _client.GetDataSpecificationsForBusinessAsync(GetBusinessId()));
 
         [Authorize(Roles = Roles.BusinessAdmin)]
-        [HttpPost("spec/deprecate")]
+        [HttpGet("specs/validators")]
+        public async Task<ActionResult<IEnumerable<string>>> GetSpecificationValidators() => Collection(await _client.GetDataSpecificationValidatorsAsync());
+
+        [Authorize(Roles = Roles.BusinessAdmin)]
+        [HttpDelete("spec/deprecate")]
         public IActionResult DeprecateEntry([FromBody] DeprecateDataEntry command)
         {
-            var businessId = HttpContext.User.Claims.FirstOrDefault(u => u.Type == CustomClaims.BusinessIdClaim);
-            if (businessId is null) return Unauthorized();
-            return PublishCommand(new DeprecateDataEntry(command.Id, Guid.Parse(businessId.Value)));
+            return PublishCommand(new DeprecateDataEntry(command.Id, GetBusinessId()));
         }
 
     }

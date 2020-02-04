@@ -9,7 +9,9 @@ namespace Services.Visitors.Names
     {
         public static IEnumerable<string> Options => new List<string>()
         {
-            "Required"
+            "Required",
+            "Email",
+            "Post Code"
         };
     }
 }

@@ -4,7 +4,7 @@ import VisitorSpecHeader from '../components/visitor-spec/VisitorSpecHeader'
 import VisitorSpecTable from '../components/visitor-spec/VisitorSpecTable'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getBusinessSpecifications, showAdd } from '../actions/specificationActions'
+import { getBusinessSpecifications, showAdd, getVaidationOptions } from '../actions/specificationActions'
 import AddUserSpec from '../components/visitor-spec/AddDataSpec'
 import { StarRate } from '@material-ui/icons'
 
@@ -15,7 +15,8 @@ class VisitorSpec extends Component {
     }
 
     openAdd() {
-        this.props.dispatch(showAdd());
+        this.props.dispatch(getVaidationOptions())
+        this.props.dispatch(showAdd());        
     }
 
 
