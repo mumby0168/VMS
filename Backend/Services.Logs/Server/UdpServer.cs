@@ -20,7 +20,6 @@ namespace Services.Logs.Server
         private readonly ILogger<UdpServer> _logger;
         private readonly CancellationTokenSource _source;
         private readonly CancellationToken _token;
-        private readonly IPAddress _address;
 
         public UdpServer(ILogDecoder decoder, IMongoRepository<Log> repository, ILogger<UdpServer> logger)
         {
@@ -29,15 +28,18 @@ namespace Services.Logs.Server
             _logger = logger;
             _source = new CancellationTokenSource();
             _token = _source.Token;
-            _address = IPAddress.Parse("172.23.0.4");
         }
 
         public void Begin(int port)
         {
             Task.Run(() =>
             {
-                //create connection
-                var endpoint = new IPEndPoint(_address, port);
+                var hostName = Dns.GetHostName();
+                var addresses = Dns.GetHostAddresses(hostName);
+
+                _logger.LogInformation($"The log service has started on IP Address: ${addresses[0]}");
+
+                var endpoint = new IPEndPoint(addresses[0], port);
                 var listener = new UdpClient(endpoint);
 
                 while (!_token.IsCancellationRequested)

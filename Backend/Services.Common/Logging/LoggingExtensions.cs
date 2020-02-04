@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,7 +24,8 @@ namespace Services.Common.Logging
 
             opts.ServiceName = serviceName;
             opts.Port = 11000;
-            opts.Address = "172.23.0.4";
+            var addresses = Dns.GetHostAddresses("logs");
+            opts.Address = addresses[0].ToString();
 
             var client = application.ApplicationServices.GetService<IUdpLoggingClient>();
             client.CreateConnection();

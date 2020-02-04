@@ -13,6 +13,7 @@ import toast from './toastReducer'
 import employee from './employeesReducer'
 import completeUser from './forms/completeUserReducer'
 import completeAccount from './forms/completeAccountReducer'
+import specs from './visitorSpecReducer'
 
 export default combineReducers({
     ui,
@@ -28,5 +29,6 @@ export default combineReducers({
     toast,
     employee,    
     completeUser,
-    completeAccount
+    completeAccount,
+    specs
 })

@@ -24,7 +24,7 @@ namespace Services.Identity.Handlers.Query
             var accounts = new List<AccountInfoDto>();
 
             var pending = await _pendingRepository.GetForBusinessAsync(query.BusinessId);
-            var identities = await _identityRepository.GetForBusinessAsync(query.BusinessId);
+            var identities = await _identityRepository.GetAdminsForBusinessAsync(query.BusinessId);
 
             foreach (var pendingIdentity in pending)
                 accounts.Add(new AccountInfoDto{Email = pendingIdentity.Email, Id = pendingIdentity.Id, IsPending = true});

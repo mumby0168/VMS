@@ -12,6 +12,8 @@ namespace Services.Identity.Repositorys
         Task AddAsync(PendingIdentity pending);
         Task<PendingIdentity> GetAsync(Guid code, string email);
         Task<IEnumerable<PendingIdentity>> GetForBusinessAsync(Guid queryBusinessId);
+
+        Task<IEnumerable<PendingIdentity>> GetAdminsForBusinessAsync(Guid queryBusinessId);
         Task<PendingIdentity> GetAsync(Guid id, Guid businessId);
         Task RemoveAsync(PendingIdentity pending);
     }

@@ -30,7 +30,7 @@ export default (state = initialState, { type, payload }) => {
 
     case "USER_INFO_NOT_PRESENT": {
         return {...state, isAvailable: false};
-    }
+    }    
 
     default:
         return state

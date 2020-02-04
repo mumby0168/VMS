@@ -19,6 +19,7 @@ import SiteSpinner from './common/SiteSpinner';
 import CriticalError from './common/CriticalError';
 import CompleteUser from './hocs/CompleteUser';
 import CompleteAccount from './components/auth/CompleteAccount';
+import VisitorSpec from './hocs/VisitorSpec';
 
 
 const Home = () => {
@@ -67,6 +68,9 @@ class Layout extends Component {
                         </PrivateRoute>                    
                         <PrivateRoute path="/firelist" valid={this.props.valid}>
                             <Fire/>
+                        </PrivateRoute>
+                        <PrivateRoute path="/specification" valid={isAdmin}>
+                            <VisitorSpec/>
                         </PrivateRoute>
                         <PrivateRoute path="/landing" valid={this.props.valid}>
                             <Landing></Landing>

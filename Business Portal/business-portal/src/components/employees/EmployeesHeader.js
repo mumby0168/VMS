@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Card, makeStyles, CardHeader, CardActionArea, CardActions, Fab } from '@material-ui/core'
+import { Grid, Card, makeStyles, CardHeader, CardActions, Fab } from '@material-ui/core'
 import {Add, HourglassEmpty } from '@material-ui/icons'
 import { useDispatch } from 'react-redux'
 import { showAddEmployee, showPending, getPendingAccounts } from '../../actions/employeeActions'
@@ -26,19 +26,17 @@ export default function EmployeesHeader() {
     return (
         <Grid className={classes.root} item xs={12} md={12}>
             <Card className={classes.card}>
-                <CardHeader title="Employee's"/>  
-                <CardActionArea>
+                <CardHeader title="Employee's"/>                  
                     <CardActions>
-                        <Fab onClick={(e) => dispatch(showAddEmployee())} color="secondary" variant="extended">
+                        <Fab onClick={(e) => dispatch(showAddEmployee())} size="small" color="secondary" variant="extended">
                             <Add/>
                             Add Employee
                         </Fab>
-                        <Fab onClick={openPending} variant="extended" color="secondary">
+                        <Fab onClick={openPending} size="small" variant="extended" color="secondary">
                             <HourglassEmpty/>
                             Pending Accounts
                         </Fab>
-                    </CardActions>
-                </CardActionArea>
+                    </CardActions>                
             </Card>
         </Grid>
     )

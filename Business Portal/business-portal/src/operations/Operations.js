@@ -23,23 +23,21 @@ class Operations extends Component {
     render() {
         this.checkConnection();
         if (this.props.handlers.length !== this.handlerCount) {
-            
-            this.handlerCount = this.props.handlers.length;            
 
-            const handler = this.props.handlers[this.handlerCount - 1];            
+            this.handlerCount = this.props.handlers.length;
+
+            const handler = this.props.handlers[this.handlerCount - 1];
 
             if (handler !== null || undefined) {
                 var counter = 0;
                 var handlerLocal = handler;
 
                 var callback = setInterval(() => {
-                    counter++;
-
-                    console.log(counter);
+                    counter++;                    
 
                     if (counter > 3) {
                         this.props.dispatch(getOperationStatus(handler));
-                        clearInterval(callback);                        
+                        clearInterval(callback);
                     }
 
                     var result = this.props.pendingOperations.find(p => p.id === handlerLocal.id);
@@ -52,6 +50,11 @@ class Operations extends Component {
                             handlerLocal.action.payload.message = result.reason;
                             handlerLocal.action.payload.failed = true;
                         }
+                        if (handlerLocal.completionAction !== null) {                            
+                            this.props.dispatch(handlerLocal.completionAction);
+                        }
+
+                        console.log(handlerLocal.action);
 
                         this.props.dispatch(hideSiteSpinner());
                         this.props.dispatch(handlerLocal.action);

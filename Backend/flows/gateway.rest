@@ -1,6 +1,6 @@
 @url = http://localhost:5020/gateway/api/
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW5AdGVzdC5jb20iLCJuYW1laWQiOiIwMWUxYTlhMi0zY2I1LTRlNzUtYjZlOS0xN2ViNzYzNTE3NzAiLCJyb2xlIjoiQnVzaW5lc3NBZG1pbiIsImJ1c2luZXNzSWQiOiJiMTliZTZhZi0xOWFiLTRjNmQtYTcwNi1lODQyMDVjMmQ0ZDciLCJuYmYiOjE1Nzk3NzM4NDEsImV4cCI6MTU3OTc4NDY0MSwiaWF0IjoxNTc5NzczODQxfQ.05aOBCuRkqBqAuTXqSxs5puhzPv7z8CKzSv2S7VLW3E7sjckd584kHhKFEkOGTHQoLuZwvkLSlyhH3GYL1cqbw
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW5AdGVzdC5jb20iLCJuYW1laWQiOiIwMWUxYTlhMi0zY2I1LTRlNzUtYjZlOS0xN2ViNzYzNTE3NzAiLCJyb2xlIjoiQnVzaW5lc3NBZG1pbiIsImJ1c2luZXNzSWQiOiJiMTliZTZhZi0xOWFiLTRjNmQtYTcwNi1lODQyMDVjMmQ0ZDciLCJuYmYiOjE1ODA4MzAzMDksImV4cCI6MTU4MDg0MTEwOSwiaWF0IjoxNTgwODMwMzA5fQ.-NxlqKMqAoTVcxqRLJ-Bt9ZQJA4eYFR4lJ5c31q0Oj0TjEVq9kIqcZ8RmLSE-YDbySthsKx9KQ9ClHxAcLxtbw
 
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
@@ -249,14 +249,14 @@ Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
-    "label": "4",
+    "label": "Second Name",
     "validationMessage": "Second name is required",
     "validationCode": "Required"
 }
 
 ### Get Data Entries
 
-GET {{url}}visitors/spec/entries/4e60143d-2a49-4f6c-a069-2b84deb67641
+GET {{url}}visitors/spec/entries/b19be6af-19ab-4c6d-a706-e84205c2d4d7
 Authorization: Bearer {{jwt}}
 
 ### Update Order

@@ -10,24 +10,16 @@ export default function InOut(props) {
         var body = {
             userId: props.userId
         }
-        await postCallback(`${urls.gatewayBaseUrl}users/in`, body, "You have succesfully signed in.", props.dispatchHandle, "Signing you in ...");
-        reload();
+        await postCallback(`${urls.gatewayBaseUrl}users/in`, body, "You have succesfully signed in.", props.dispatchHandle, "Signing you in ...", getPersonalAccessRecords());        
     }
 
     const outHandle = async function(e) {
         var body = {
             userId: props.userId
         }
-        await postCallback(`${urls.gatewayBaseUrl}users/out`, body, "You have succesfully signed out.", props.dispatchHandle, "Signing you out ...");
-        reload();
+        await postCallback(`${urls.gatewayBaseUrl}users/out`, body, "You have succesfully signed out.", props.dispatchHandle, "Signing you out ...", getPersonalAccessRecords());        
     }
-
-    const reload = () => {
-        var update = setInterval(() => {
-            props.dispatchHandle(getPersonalAccessRecords());
-            clearInterval(update)
-        }, 2000);        
-    }
+  
 
 
 

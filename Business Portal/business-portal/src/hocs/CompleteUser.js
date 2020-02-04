@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Card, CardContent } from '@material-ui/core';
+import { Card, CardContent, Button } from '@material-ui/core';
 import CompleteUserForm from '../components/user/CompleteUserForm';
 import { getSiteSummaries } from '../actions/siteActions';
 import { createUser } from '../actions/userActions';
@@ -65,17 +65,20 @@ class CompleteUser extends Component {
 
 
     render() {
-        
-        return (
-            <div align="center">
-                <Card style={{ maxWidth: '400px' }}>
-                    <CardContent>
-                        <CompleteUserForm 
+
+        const content = this.props.goToDashboard ? <Button>To Dashboard</Button> : 
+        <CompleteUserForm 
                         handleSiteChanged={this.handleSiteChanged.bind(this)} 
                         sites={this.props.sites} handleBlur={this.handleBlur.bind(this)} 
                         data={this.props.data} errors={this.props.errors} 
                         handleFormSubmit={this.handleFormSubmit.bind(this)}
                         handleChange={this.handleChange.bind(this)} />
+        
+        return (
+            <div align="center">
+                <Card style={{ maxWidth: '400px' }}>
+                    <CardContent>
+                        {content}
                     </CardContent>
                 </Card>
             </div>
@@ -90,7 +93,8 @@ const mapStateToProps = (state => {
         errors: state.completeUser.errors,
         sites: state.site.summaries,
         accountId: state.account.userDetails.id,
-        businessId: state.account.userDetails.businessId
+        businessId: state.account.userDetails.businessId,
+        goToDashboard: state.completeUser.goToDashboard
     }
 })
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Driver;
+using Services.Common.Jwt;
 using Services.Common.Mongo;
 using Services.Identity.Domain;
 
@@ -28,6 +29,9 @@ namespace Services.Identity.Repositorys
 
         public Task<IEnumerable<PendingIdentity>> GetForBusinessAsync(Guid queryBusinessId) =>
             _repository.FindAsync(p => p.BusinessId == queryBusinessId);
+
+        public Task<IEnumerable<PendingIdentity>> GetAdminsForBusinessAsync(Guid queryBusinessId) =>
+            _repository.FindAsync(p => p.BusinessId == queryBusinessId && p.Role == Roles.BusinessAdmin);
 
         public Task<PendingIdentity> GetAsync(Guid id, Guid businessId) =>
             _repository.GetAsync(p => p.Id == id && p.BusinessId == businessId);

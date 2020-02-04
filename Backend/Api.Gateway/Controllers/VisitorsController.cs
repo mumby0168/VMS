@@ -41,8 +41,8 @@ namespace Api.Gateway.Controllers
         }
 
         [Authorize(Roles = Roles.BusinessAdmin)]
-        [HttpGet("spec/entries/{businessId}")]
-        public async Task<ActionResult<IEnumerable<DataSpecificationDto>>> GetSpecifications(Guid businessId) => Collection(await _client.GetDataSpecificationsForBusinessAsync(businessId));
+        [HttpGet("specs")]
+        public async Task<ActionResult<IEnumerable<DataSpecificationDto>>> GetSpecifications() => Collection(await _client.GetDataSpecificationsForBusinessAsync(GetBusinessId()));
 
         [Authorize(Roles = Roles.BusinessAdmin)]
         [HttpPost("spec/deprecate")]

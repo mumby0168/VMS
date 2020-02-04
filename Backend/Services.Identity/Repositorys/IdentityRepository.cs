@@ -26,8 +26,8 @@ namespace Services.Identity.Repositorys
         public Task AddAsync(Domain.Identity identity) =>
             _repository.AddAsync(identity);
 
-        public Task<IEnumerable<Domain.Identity>> GetForBusinessAsync(Guid businessId) =>
-            _repository.FindAsync(p => p.BusinessId == businessId);
+        public Task<IEnumerable<Domain.Identity>> GetAdminsForBusinessAsync(Guid businessId) =>
+            _repository.FindAsync(p => p.BusinessId == businessId && p.Role == Roles.BusinessAdmin);
 
         public Task<Domain.Identity> GetAsync(Guid id, Guid businessId) =>
             _repository.GetAsync(i => i.Id == id && i.BusinessId == businessId);

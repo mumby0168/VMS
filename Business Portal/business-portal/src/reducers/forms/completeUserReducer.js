@@ -13,7 +13,8 @@ const initialState = {
         secondName: false,
         phone: false,
         businessPhone: false,
-    }
+    },
+    goToDashboard: false
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -39,6 +40,8 @@ export default (state = initialState, { type, payload }) => {
         case "COMPLETE_USER_SITE_UPDATED": {
             return {...state, data: {...state.data, selectedSiteId: payload}}
         }
+
+        case "USER_CREATION_COMPLETE": return {...state, goToDashboard: true};
 
         default:
             return state

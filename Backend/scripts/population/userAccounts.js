@@ -174,7 +174,7 @@ async function createUserDetails() {
         const dataToPost = {
             accountId: token.id,
             businessId: token.businessId,
-            basedSiteId: "6bf89b12-2fae-4660-9cf9-27348d109a4b",
+            basedSiteId: "609ecd69-004b-400f-9ca8-6a8bb0e0ddc7",
             firstName: user.firstName,
             secondName: user.secondName,
             phoneNumber: user.phoneNumber,
@@ -271,5 +271,6 @@ async function signInOutUsers() {
     }
 }
 
+runAccountProcess();
 createUserDetails();
 signInOutUsers();

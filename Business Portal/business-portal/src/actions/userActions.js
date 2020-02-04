@@ -42,6 +42,6 @@ export function createUser(accountId, businessId, siteId, firstName, secondName,
             businessPhoneNumber: businessPhone,
             basedSiteId: siteId,
             businessId: businessId
-        }, "Saving your personal details", dispatch, "Saving your infromation.");
+        }, "Saving your personal details", dispatch, "Saving your infromation.", {type: "USER_CREATION_COMPLETE"});
     }
 }

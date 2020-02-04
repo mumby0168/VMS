@@ -30,11 +30,13 @@ export default function LoginForm(props) {
                     <TextField value={props.user.password} required id="password-login" label="Password" type="password"  onChange={(e) => props.dispatch(loginFormUpdated(props.user.username, e.target.value))}></TextField>
                     </Grid>              
                     {error}                  
+                    <Grid style={gridWrapperClass}>    
                     <Grid style={gridWrapperClass}>
+                        <Button variant="contained" color="primary" type="submit">Submit</Button>
+                    </Grid>                
                     <Grid style={gridWrapperClass}>
                         <Button onClick={navigate}>Forgotten your password?</Button>
                     </Grid>
-                    <Button variant="contained" color="primary" type="submit">Submit</Button>
                     </Grid>                                                                                   
                 </Grid>
             </form>

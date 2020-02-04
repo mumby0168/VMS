@@ -11,7 +11,7 @@ namespace Services.Identity.Repositorys
 
         Task<Domain.Identity> GetByEmailAndRole(string email, string role);
         Task AddAsync(Domain.Identity identity);
-        Task<IEnumerable<Domain.Identity>> GetForBusinessAsync(Guid businessId);
+        Task<IEnumerable<Domain.Identity>> GetAdminsForBusinessAsync(Guid businessId);
         Task<Domain.Identity> GetAsync(Guid id, Guid businessId);
         Task RemoveAsync(Domain.Identity identity);
         Task<Domain.Identity> GetByEmail(string email);
