@@ -29,38 +29,7 @@ class Operations extends Component {
             const handler = this.props.handlers[this.handlerCount - 1];
 
             if (handler !== null || undefined) {
-                var counter = 0;
-                var handlerLocal = handler;
-
-                var callback = setInterval(() => {
-                    counter++;                    
-
-                    if (counter > 3) {
-                        console.log("Timeout for push expired");
-                        this.props.dispatch(getOperationStatus(handler));
-                        clearInterval(callback);
-                    }
-
-                    var result = this.props.pendingOperations.find(p => p.id === handlerLocal.id);
-                    if (result !== undefined || null) {
-                        clearInterval(callback);
-                        this.props.dispatch({ type: "REMOVE_HANDLE", payload: callback });
-                        console.log(handlerLocal);
-
-                        if (result.status === "failed") {
-                            handlerLocal.action.payload.message = result.reason;
-                            handlerLocal.action.payload.failed = true;                                                        
-                        }
-                    
-
-                        if (handlerLocal.completionAction !== null && result.status !== "failed") {                                                        
-                            handlerLocal.completionAction();
-                        }                        
-
-                        this.props.dispatch(hideSiteSpinner());
-                        this.props.dispatch(handlerLocal.action);
-                    }
-                }, 300);
+                beginListening(handler, this.props.pendingOperations, this.props.dispatch);
             }
         }
 
@@ -84,3 +53,32 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(Operations);
+
+
+function beginListening(handler, pendingOperations, dispatch) {
+    var counter = 0;    
+    var callback = setInterval(() => {
+        counter++;
+        if (counter > 3) {
+            console.log("Timeout for push expired");
+            dispatch(getOperationStatus(handler));
+            clearInterval(callback);
+        }
+        var result = pendingOperations.find(p => p.id === handler.id);
+        if (result !== undefined || null) {
+            clearInterval(callback);
+            dispatch({ type: "REMOVE_HANDLE", payload: callback });
+            console.log(handler);
+            if (result.status === "failed") {
+                handler.action.payload.message = result.reason;
+                handler.action.payload.failed = true;
+            }
+            if (handler.completionAction !== null && result.status !== "failed") {
+                handler.completionAction();
+            }
+            dispatch(hideSiteSpinner());
+            dispatch(handler.action);
+        }
+    }, 300);
+}
+
