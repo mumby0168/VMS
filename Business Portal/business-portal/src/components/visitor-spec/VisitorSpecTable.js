@@ -17,12 +17,14 @@ export default function VisitorSpecTable(props) {
     console.log(props);
 
     const { loading, specifications } = props;
-    const classes = useStyles();
+    const classes = useStyles();    
 
-    console.log(specifications);
+    const updateOrder = (newOrder) => {
+        console.log(newOrder);
+    } 
 
     const specs = specifications.map((spec, index) => {
-        return <VisitorSpecRow spec={spec} key={index}/>
+        return <VisitorSpecRow maxOrder={specifications.length} updateOrder={updateOrder} spec={spec} key={index}/>
     });
 
 
