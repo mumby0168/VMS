@@ -13,15 +13,11 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function VisitorSpecTable(props) {
+    
 
-    console.log(props);
-
-    const { loading, specifications } = props;
+    const { loading, specifications, updateOrder } = props;
     const classes = useStyles();    
-
-    const updateOrder = (newOrder) => {
-        console.log(newOrder);
-    } 
+    
 
     const specs = specifications.map((spec, index) => {
         return <VisitorSpecRow maxOrder={specifications.length} updateOrder={updateOrder} spec={spec} key={index}/>

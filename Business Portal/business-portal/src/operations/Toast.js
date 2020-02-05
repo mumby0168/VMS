@@ -26,9 +26,7 @@ export default function Toast() {
         severity = toastState.message.failed ? "error" : "success";
         text = toastState.message.message;
         title = toastState.message.failed ? "Error" : "Success";
-    }
-
-    console.log(toastState);
+    }    
 
 
     return (

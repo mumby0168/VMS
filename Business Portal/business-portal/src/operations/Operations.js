@@ -36,6 +36,7 @@ class Operations extends Component {
                     counter++;                    
 
                     if (counter > 3) {
+                        console.log("Timeout for push expired");
                         this.props.dispatch(getOperationStatus(handler));
                         clearInterval(callback);
                     }
@@ -50,11 +51,11 @@ class Operations extends Component {
                             handlerLocal.action.payload.message = result.reason;
                             handlerLocal.action.payload.failed = true;                                                        
                         }
-                        if (handlerLocal.completionAction !== null && result.status !== "failed") {                            
-                            this.props.dispatch(handlerLocal.completionAction);
-                        }
+                    
 
-                        console.log(handlerLocal.action);
+                        if (handlerLocal.completionAction !== null && result.status !== "failed") {                                                        
+                            handlerLocal.completionAction();
+                        }                        
 
                         this.props.dispatch(hideSiteSpinner());
                         this.props.dispatch(handlerLocal.action);

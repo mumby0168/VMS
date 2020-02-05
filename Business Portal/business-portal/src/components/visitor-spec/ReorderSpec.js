@@ -10,7 +10,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function ReorderSpec(props) {
 
-    const { updateOrder, max, current } = props;
+    const { updateOrder, max, current, id } = props;
+
+    console.log(id);
 
     const [count, setCount] = React.useState(current)
 
@@ -31,7 +33,7 @@ export default function ReorderSpec(props) {
                     InputProps={{ inputProps: { min: 1, max: max } }}
                     />     
                     <br/>           
-                <Button variant="contained" color="secondary" onClick={() => updateOrder(count)}>Update</Button>
+                <Button variant="contained" color="secondary" onClick={() => updateOrder(count, id)}>Update</Button>
             </CardContent>
         </Card>
     )

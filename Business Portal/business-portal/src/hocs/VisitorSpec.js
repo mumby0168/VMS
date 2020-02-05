@@ -4,9 +4,8 @@ import VisitorSpecHeader from '../components/visitor-spec/VisitorSpecHeader'
 import VisitorSpecTable from '../components/visitor-spec/VisitorSpecTable'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getBusinessSpecifications, showAdd, getVaidationOptions } from '../actions/specificationActions'
+import { getBusinessSpecifications, showAdd, getVaidationOptions, updateSpecOrder } from '../actions/specificationActions'
 import AddUserSpec from '../components/visitor-spec/AddDataSpec'
-import { StarRate } from '@material-ui/icons'
 
 class VisitorSpec extends Component {
 
@@ -19,6 +18,11 @@ class VisitorSpec extends Component {
         this.props.dispatch(showAdd());        
     }
 
+    updateOrder(newOrder, id) {
+        var dispatch = this.props.dispatch;
+        updateSpecOrder(id, newOrder, dispatch);
+    }
+
 
     render() {
         return (
@@ -26,7 +30,7 @@ class VisitorSpec extends Component {
                 <AddUserSpec form={this.props.add.form} options={this.props.add.options} open={this.props.add.open}/>
                 <Grid direction="row" container>
                     <VisitorSpecHeader openAdd={this.openAdd.bind(this)} />
-                    <VisitorSpecTable loading={this.props.loading} specifications={this.props.specifications} />
+                    <VisitorSpecTable updateOrder={this.updateOrder.bind(this)} loading={this.props.loading} specifications={this.props.specifications} />
                 </Grid>
             </div>
         )

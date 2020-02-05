@@ -1,6 +1,6 @@
 @url = http://localhost:5020/gateway/api/
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW5AdGVzdC5jb20iLCJuYW1laWQiOiIwMWUxYTlhMi0zY2I1LTRlNzUtYjZlOS0xN2ViNzYzNTE3NzAiLCJyb2xlIjoiQnVzaW5lc3NBZG1pbiIsImJ1c2luZXNzSWQiOiJiMTliZTZhZi0xOWFiLTRjNmQtYTcwNi1lODQyMDVjMmQ0ZDciLCJuYmYiOjE1ODA4NDU1ODAsImV4cCI6MTU4MDg1NjM4MCwiaWF0IjoxNTgwODQ1NTgwfQ.XrthCdsXhZ_QYxNrPMgx2MNh2uuEmiLE5AffmfOYLHR12pjjYEBDjJL1J1ze77CiphKpDVMuPLD4k-UQUPwvTg
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW5AdGVzdC5jb20iLCJuYW1laWQiOiIwMWUxYTlhMi0zY2I1LTRlNzUtYjZlOS0xN2ViNzYzNTE3NzAiLCJyb2xlIjoiQnVzaW5lc3NBZG1pbiIsImJ1c2luZXNzSWQiOiJiMTliZTZhZi0xOWFiLTRjNmQtYTcwNi1lODQyMDVjMmQ0ZDciLCJuYmYiOjE1ODA5MDYyNzcsImV4cCI6MTU4MDkxNzA3NywiaWF0IjoxNTgwOTA2Mjc3fQ.NDS4LYm2t_6BtMnxdMQjVtpErurW0PfWwFE9fBDpn9t8zCrT1CWNMWr5En8QhkxfhHXCBpbDCh2vgkw18CKOaw
 
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
@@ -265,37 +265,8 @@ Authorization: Bearer {{jwt}}
 Content-Type:  application/json
 
 {
-    "businessId": "4e60143d-2a49-4f6c-a069-2b84deb67641",
-    "entries": [
-{
-    "id": "27343344-ee56-4f9c-a94b-3f54c7f7d042",
-    "label": "4",
-    "validationCode": "Required",
-    "validationMessage": "Second name is required",
-    "order": 3
-  },
-  {
-    "id": "017848ee-0b7c-4dba-bdb4-e52e57c7223d",
-    "label": "3",
-    "validationCode": "Required",
-    "validationMessage": "Second name is required",
-    "order": 4
-  },
-  {
-    "id": "96b2e999-695a-4225-b175-bc90038118a4",
-    "label": "1",
-    "validationCode": "Required",
-    "validationMessage": "Second name is required",
-    "order": 2
-  },
-  {
-    "id": "3e057c93-5ee9-4577-bf7d-3b2ed042d5c0",
-    "label": "2",
-    "validationCode": "Required",
-    "validationMessage": "Second name is required",
-    "order": 1
-  }
-    ]
+    "entryId": "a37f3034-65c6-42f9-9e30-8c3c5d96fe0f",
+    "order": "1"
 }
 
 

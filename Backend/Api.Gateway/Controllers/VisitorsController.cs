@@ -30,9 +30,7 @@ namespace Api.Gateway.Controllers
         [HttpPost("spec/reorder")]
         public IActionResult ReorderDataEntries([FromBody] UpdateEntryOrder command)
         {
-            var businessId = HttpContext.User.Claims.FirstOrDefault(u => u.Type == CustomClaims.BusinessIdClaim);
-            if (businessId is null) return Unauthorized();
-            return PublishCommand(new UpdateEntryOrder(command.Entries, Guid.Parse(businessId.Value)));
+            return PublishCommand(new UpdateEntryOrder( GetBusinessId(), command.EntryId, command.Order));
         }
 
         [Authorize(Roles = Roles.BusinessAdmin)]

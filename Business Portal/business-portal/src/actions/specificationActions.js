@@ -89,3 +89,13 @@ export function getVaidationOptions() {
         })
     }
 }
+
+
+export function updateSpecOrder(id, order, dispatch) {
+    postCallback(`${urls.gatewayBaseUrl}visitors/spec/reorder`, {
+        entryId: id,
+        order
+    }, "Succesfully updated order.", dispatch, "Updating order", () => {
+        dispatch(getBusinessSpecifications());
+    })
+}

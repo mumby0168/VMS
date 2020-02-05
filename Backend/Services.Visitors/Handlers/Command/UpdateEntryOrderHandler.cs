@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic;
 using MongoDB.Bson;
 using Services.Common.Exceptions;
 using Services.Common.Logging;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 using Services.Visitors.Commands;
+using Services.Visitors.Domain;
 using Services.Visitors.Events;
 using Services.Visitors.Repositorys;
 
@@ -31,23 +33,23 @@ namespace Services.Visitors.Handlers.Command
         {
             var entries = await _repository.GetEntriesAsync(message.BusinessId);
 
-            var dataSpecifications = entries.ToList();
+            var specifications = entries.OrderBy(s => s.Order).ToList();
 
-            if (dataSpecifications.Count != message.Entries.Count())
+            var updating = specifications.FirstOrDefault(d => d.Id == message.EntryId);
+            if (updating is null)
             {
-                _publisher.PublishEvent(new EntryOrderUpdateRejected(Codes.InvalidAmount, "The collection provided does not contain all of the items."), requestInfo);
+                _logger.LogWarning($"No entry found with ID: {message.EntryId}");
+                _publisher.PublishEvent(new EntryOrderUpdateRejected(Codes.InvalidId, $"Entry with the id {message.EntryId} could not be found."), requestInfo);
                 return;
             }
 
-            //TODO: Check the order when applied possibly. Purely API checks here client could deal with it.
+            var replacing = specifications.FirstOrDefault(s => s.Order == message.Order);
+            int oldOrder = updating.Order;
+            updating.UpdateOrder(message.Order);
+            replacing.UpdateOrder(oldOrder);
 
-            foreach (var entry in dataSpecifications)
-            {
-                var messageEntry = message.Entries.FirstOrDefault(e => e.Id == entry.Id);
-                if(messageEntry is null) continue;
-                entry.UpdateOrder(messageEntry.Order);
-                await _repository.UpdateAsync(entry);
-            }
+            await _repository.UpdateAsync(updating);
+            await _repository.UpdateAsync(replacing);
 
             _publisher.PublishEvent(new EntryOrderUpdated(), requestInfo);
         }
