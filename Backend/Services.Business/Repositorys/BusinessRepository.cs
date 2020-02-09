@@ -19,5 +19,7 @@ namespace Services.Business.Repositorys
         public async Task<IEnumerable<IBusiness>> GetBusinessesAsync() => await _repository.GetAllAsync();
         public async Task<IBusiness> GetBusinessAsync(Guid id) => await _repository.GetAsync(id);
         public Task UpdateAsync(IBusiness business) => _repository.UpdateAsync(business as Domain.Business, business.Id);
+        public async Task<bool> IsCodeInUseAsync(int number) => 
+            await _repository.GetAsync(b => b.Code == number) != null;
     }
 }

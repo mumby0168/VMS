@@ -13,20 +13,22 @@ namespace Services.Business.Domain
         public string Name { get; private set; }
 
         public string TradingName { get; private set; }
+        public int Code { get; private set; }
 
         public Uri WebAddress { get; private set; }
         public HeadOffice Office { get; private set; }
         public HeadContact Contact { get; private set; }
 
-        public IBusiness Setup(string name, string tradingName, string webAddress, IHeadOffice headOffice, IHeadContact headContact)
+        public IBusiness Setup(string name, string tradingName, string webAddress, IHeadOffice headOffice, IHeadContact headContact, int code)
         {
-            Validate(name, tradingName, webAddress);
+            Validate(name, tradingName, webAddress, code);
 
             Id = new Guid();
             Name = name;
             TradingName = tradingName;
             Office = headOffice as HeadOffice;
             Contact = headContact as HeadContact;
+            Code = code;
 
             return this;
         }
@@ -34,7 +36,7 @@ namespace Services.Business.Domain
 
         public void Update(string name, string tradingName, string webAddress)
         {
-            Validate(name, tradingName, webAddress);
+            Validate(name, tradingName, webAddress, Code);
             Name = name;
             TradingName = tradingName;
         }
@@ -43,8 +45,10 @@ namespace Services.Business.Domain
 
         public IHeadContact GetContact() => Contact;
 
-        private void Validate(string name, string tradingName, string webAddress)
+        private void Validate(string name, string tradingName, string webAddress, int code)
         {
+            if (code.ToString().ToCharArray().Length != 6) throw new VmsException(Codes.InvalidId,
+                    "A unique code could not be generated for this business at this time.");
             if (name.IsEmpty()) throw new VmsException(Codes.EmptyProperty, "The name cannot be empty");
             if (tradingName.IsEmpty()) throw new VmsException(Codes.EmptyProperty, "The tradingName cannot be empty");
             try

@@ -9,7 +9,7 @@ namespace Services.Business.Domain
     public interface IBusiness : IDomain
     {
 
-        IBusiness Setup(string name, string tradingName, string webAddress, IHeadOffice headOffice, IHeadContact headContact);
+        IBusiness Setup(string name, string tradingName, string webAddress, IHeadOffice headOffice, IHeadContact headContact, int code);
 
         void Update(string name, string tradingName, string webAddress);
 
@@ -20,6 +20,8 @@ namespace Services.Business.Domain
         string Name { get; }
 
         string TradingName { get; }
+
+        int Code { get; }
 
         Uri WebAddress { get; }
 

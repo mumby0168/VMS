@@ -12,5 +12,6 @@ namespace Services.Business.Repositorys
         Task<IEnumerable<IBusiness>> GetBusinessesAsync();
         Task<IBusiness> GetBusinessAsync(Guid queryId);
         Task UpdateAsync(IBusiness business);
+        Task<bool> IsCodeInUseAsync(int number);
     }
 }

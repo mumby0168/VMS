@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.Business.Messages.Commands;
+using Services.Common.Generation;
 using Services.Common.Logging;
 using Services.Common.Mongo;
 using Services.Common.Names;
@@ -23,6 +24,7 @@ namespace Services.Business
             services.AddControllers();
             services.AddMongo().AddMongoCollection<Domain.Business>();
             services.AddQuerySupport();
+            services.AddNumberGenerator();
             //Adds service specific services.
             ServiceRegistry.RegisterServices(services);
         }
