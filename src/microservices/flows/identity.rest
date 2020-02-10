@@ -1,0 +1,151 @@
+@url = http://localhost:5010
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW5AdGVzdC5jb20iLCJuYW1laWQiOiIwMWUxYTlhMi0zY2I1LTRlNzUtYjZlOS0xN2ViNzYzNTE3NzAiLCJyb2xlIjoiQnVzaW5lc3NBZG1pbiIsImJ1c2luZXNzSWQiOiJiMTliZTZhZi0xOWFiLTRjNmQtYTcwNi1lODQyMDVjMmQ0ZDciLCJuYmYiOjE1Nzk1MjY5NjYsImV4cCI6MTU3OTUzNzc2NiwiaWF0IjoxNTc5NTI2OTY2fQ.T1EDrAvs4LUC9xQeskuOBmI2YWrfA6KN6vK0KKVyhC6-1iNdKCYxF1N0FjqWvMuH9B5X0EYX2ri-0_g1JIxbUQ
+
+@refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
+
+### sign in portal (standard || admin)
+
+POST {{url}}/api/users/sign-in
+Content-Type: application/json
+
+{
+    "email": "b-standard@test.com",
+    "password": "Test123"
+}
+
+### portal admin
+
+POST {{url}}/api/users/sign-in
+Content-Type: application/json
+
+{
+    "email": "b-admin@test.com",
+    "password": "Test123"
+}
+
+### sign in admin
+
+POST {{url}}/api/admin/sign-in-system
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "Test123"
+}
+
+### create admin
+
+POST {{url}}/api/admin/create
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "email": "s-admin@test.com",
+}
+
+### complete admin
+
+POST {{url}}/api/admin/complete
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "email": "test@test.com",
+    "code": "2a2877a4-c085-40c0-8a44-e04147288808",
+    "password": "Test123",
+    "passwordMatch": "Test123"
+}
+
+### revoke refresh token
+POST {{url}}/api/tokens/revoke
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+    "token": "{{refreshToken}}",    
+}
+
+
+### Create Business Admin
+
+@BusinessId = b19be6af-19ab-4c6d-a706-e84205c2d4d7
+
+POST {{url}}/api/admin/create-business-admin
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "email": "b-admin@test.com",
+    "businessId": "{{BusinessId}}"
+}
+
+### Get Business Accounts
+
+GET {{url}}/api/admin/get-for-business/d573565c-4c45-4270-b567-da478c6e614c
+Authorization: Bearer {{jwt}}
+
+### Remove Business Admin
+
+POST {{url}}/api/admin/remove
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "id": "c90c827c-a742-4829-8435-c792f39351e1",
+    "businessId": "{{BusinessId}}"
+}
+
+### Create Standard User
+POST {{url}}/api/users/create
+Content-Type: application/json
+Authorization: Bearer {{jwt}}
+
+{
+    "email": "b-standard@test.com",
+    "businessId": "{{BusinessId}}"
+}
+
+
+### Complete User
+
+POST {{url}}/api/users/complete
+Content-Type: application/json
+
+{
+    "email": "b-standard@test.com",
+    "code": "e98dd79e-210d-4f2d-8a6e-5de6f1634253",
+    "password": "Test123",
+    "passwordConfirmation": "Test123"
+}
+
+### Request Reset User Password
+
+
+POST {{url}}/api/users/request-reset
+Content-Type: application/json
+
+{
+    "email": "b-adminsafsf@test.com",
+}
+
+### Reset User Password
+
+
+POST {{url}}/api/users/reset-password
+Content-Type: application/json
+
+{
+    "code": "518dd46d-a3d9-49ab-8083-1efd23dfc8c2",
+    "email": "b-admin3@test.com",
+    "password": "Test145",
+    "passwordConfirm": "Test12345"
+}
+
+
+### Remove Account
+POST {{url}}/api/users/remove/55a1d569-e0e6-49c4-a300-460d9473aaa2
+Authorization: Bearer {{jwt}}
+
+### Get All User Accounts
+GET {{url}}/api/users/accounts
+Authorization: Bearer {{jwt}}
