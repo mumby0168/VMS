@@ -44,7 +44,7 @@ services:
             - rabbitmq
         build:
             context: .
-            dockerfile: Backend/Api.Gateway/Dockerfile      
+            dockerfile: microservices/Api.Gateway/Dockerfile      
         networks: 
             - cruncher
             
@@ -60,7 +60,7 @@ services:
             - rabbitmq
         build:
             context: .
-            dockerfile: Backend/Services.Identity/Dockerfile      
+            dockerfile: microservices/Services.Identity/Dockerfile      
         networks: 
             - cruncher
 
@@ -76,7 +76,7 @@ services:
             - rabbitmq
         build:
             context: .
-            dockerfile: Backend/Services.Operations/Dockerfile
+            dockerfile: microservices/Services.Operations/Dockerfile
         networks: 
             - cruncher
     services.push:
@@ -84,7 +84,7 @@ services:
         image: ${DOCKER_REGISTRY-}servicespush
         build:
             context: .
-            dockerfile: Backend/Services.Push/Dockerfile
+            dockerfile: microservices/Services.Push/Dockerfile
         ports: 
             - '5015:80'
         depends_on: 
@@ -100,7 +100,7 @@ services:
         image: ${DOCKER_REGISTRY-}servicesbusiness
         build:
             context: .
-            dockerfile: Backend/Services.Business/Dockerfile
+            dockerfile: microservices/Services.Business/Dockerfile
         ports: 
             - '5013:80'
         depends_on: 
@@ -116,7 +116,7 @@ services:
         image: ${DOCKER_REGISTRY-}servicesmail
         build:
             context: .
-            dockerfile: Backend/Services.Mail/Dockerfile
+            dockerfile: microservices/Services.Mail/Dockerfile
         ports: 
         - '5011:80'
         depends_on: 
@@ -132,7 +132,7 @@ services:
         image: ${DOCKER_REGISTRY-}servicessites
         build:
             context: .
-            dockerfile: Backend/Services.Site/Dockerfile
+            dockerfile: microservices/Services.Site/Dockerfile
         ports: 
         - '5014:80'
         depends_on: 
@@ -148,7 +148,7 @@ services:
         image: ${DOCKER_REGISTRY-}servicesusers
         build:
             context: .
-            dockerfile: Backend/Services.Users/Dockerfile
+            dockerfile: microservices/Services.Users/Dockerfile
         ports: 
             - '5017:80'
         depends_on: 
@@ -164,7 +164,7 @@ services:
         image: ${DOCKER_REGISTRY-}servicesvisitors
         build:
             context: .
-            dockerfile: Backend/Services.Visitors/Dockerfile
+            dockerfile: microservices/Services.Visitors/Dockerfile
         ports: 
             - '5018:80'
         depends_on: 
@@ -180,7 +180,7 @@ services:
         image: ${DOCKER_REGISTRY-}serviceslogs
         build:
             context: .
-            dockerfile: Backend/Services.Logs/Dockerfile
+            dockerfile: microservices/Services.Logs/Dockerfile
         ports: 
             - '5016:80'
         depends_on: 

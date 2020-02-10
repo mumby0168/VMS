@@ -1,0 +1,165 @@
+@url = http://localhost:5020/gateway/api/
+
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW5AdGVzdC5jb20iLCJuYW1laWQiOiIwMWUxYTlhMi0zY2I1LTRlNzUtYjZlOS0xN2ViNzYzNTE3NzAiLCJyb2xlIjoiQnVzaW5lc3NBZG1pbiIsImJ1c2luZXNzSWQiOiJiMTliZTZhZi0xOWFiLTRjNmQtYTcwNi1lODQyMDVjMmQ0ZDciLCJuYmYiOjE1ODA5MDYyNzcsImV4cCI6MTU4MDkxNzA3NywiaWF0IjoxNTgwOTA2Mjc3fQ.NDS4LYm2t_6BtMnxdMQjVtpErurW0PfWwFE9fBDpn9t8zCrT1CWNMWr5En8QhkxfhHXCBpbDCh2vgkw18CKOaw
+
+@refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
+
+### Get Operations
+
+GET {{url}}operations/2b122f24-e2c2-48a2-9a30-a6e5aeef5d3d
+
+### Create Business POST {{url}}businesses/create Content-Type: application/json Authorization: Bearer {{jwt}}
+
+{
+"Name": "Test Business 233", "TradingName": "Test Trading Name", "WebAddress" : "http://wwww.google.co.ul", "HeadContactFirstName": "John", "HeadContactSecondName": "Bloggs", "HeadContactContactNumber": "07568512675", "HeadContactEmail": "joe.bloggs@outlook.com", "HeadOfficeAddressLine1": " 56 Bond Street", "HeadOfficeAddressLine2": "Hull", "HeadOfficePostCode": "HU1 7RT"
+}
+
+### Get Business Summaries
+
+GET {{url}}businesses/ Authorization: Bearer {{jwt}}
+
+### Get Business
+
+GET {{url}}businesses/f11014b5-fd21-4bde-90f5-726782ba6b16 Authorization: Bearer {{jwt}}
+
+### Update Business Details
+
+@businessiD = b19be6af-19ab-4c6d-a706-e84205c2d4d7
+
+POST {{url}}businesses/update-details Content-Type: application/json Authorization: Bearer {{jwt}}
+
+{
+"id": "{{businessiD}}", "name": "John Ford", "tradingName": "Ford LTD", "webAddress": "http://amazon.co.uk"
+}
+
+### Update Business Contact POST {{url}}businesses/update-contact Content-Type: application/json Authorization: Bearer {{jwt}}
+
+{
+"businessId": "{{businessiD}}", "firstName": "John", "secondName": "Gooman", "email": "john.goodman@outlook.com", "contactNumber": "07456987456"
+}
+
+### Update Business Office POST {{url}}businesses/update-office Content-Type: application/json Authorization: Bearer {{jwt}}
+
+{
+"businessId": "{{businessiD}}", "addressLine1": "unit 100 argyle street", "addressLine2": "Hull", "postCode": "HU12 8TH"
+}
+
+################################################## SITE ####################################################################
+
+POST {{url}}sites/create Content-Type: application/json Authorization: Bearer {{jwt}}
+
+{
+"businessId": "{{businessiD}}", "Name": "Main Office", "firstName": "Joe", "secondName": "Bloggs", "contactNumber": "07568512675", "email": "joe.bloggs@outlook.com", "addressLine1": " 56 Bond Street", "addressLine2": "Hull", "postCode": "Hu10 7rt"
+}
+
+@siteId = ac3fed5d-3277-409e-972c-e800e072ae35
+
+### Get Site GET {{url}}sites/get/{{siteId}} Authorization: Bearer {{jwt}}
+
+### Get Site Summaries GET {{url}}sites/summaries/{{businessiD}} Authorization: Bearer {{jwt}}
+
+### Update Site Details POST {{url}}sites/update Content-Type: application/json Authorization: Bearer {{jwt}}
+
+{
+"siteId": "{{siteId}}", "name": "Update Office", "addressLine1": " (Update) 56 Bond Street", "addressLine2": "Hull (Update)", "postCode": "LS10 7rt"
+}
+
+### Update Site Contact POST {{url}}sites/update-contact Content-Type: application/json Authorization: Bearer {{jwt}}
+
+{
+"siteId": "{{siteId}}", "firstName": "Fred", "secondName": "Brand", "contactNumber": "07568512675", "email": "joe.bloggs@outlook.com"
+}
+
+### Add Site Resource
+
+POST {{url}}sites/create-site-resource Content-Type: application/json Authorization: Bearer {{jwt}}
+
+{
+"siteId": "{{siteId}}", "name": "iPhone 10", "identifier": "45678457896243798589725346rgtwhghjfksdhkjfg"
+}
+
+@resourceId = 42e564e8-1c20-4a8e-afc2-6f76611585c9
+
+### Get Site Resources GET {{url}}sites/resources/{{siteId}} Authorization: Bearer {{jwt}}
+
+### Remove Site Resource
+
+POST {{url}}sites/remove-site-resource Content-Type: application/json Authorization: Bearer {{jwt}}
+
+{
+"resourceId": "{{resourceId}}"
+}
+
+################################################## USERS ###################################################################
+
+### Create User POST {{url}}users/create Content-Type: application/json Authorization: Bearer {{jwt}}
+
+{
+"accountId": "01e1a9a2-3cb5-4e75-b6e9-17eb76351770", "basedSiteId": "6bf89b12-2fae-4660-9cf9-27348d109a4b", "businessId": "{{businessiD}}", "firstName": "Bill", "secondName": "Jones", "phoneNumber": "07568 567343", "businessPhoneNumber": "01482 564323"
+}
+
+@userId = 416ac433-7964-4e73-ba0a-473a5ae38dbf
+
+### In User POST {{url}}users/in Content-Type: application/json Authorization: Bearer {{jwt}}
+
+{
+"userId": "{{userId}}"
+}
+
+### Out User POST {{url}}users/out Content-Type: application/json Authorization: Bearer {{jwt}}
+
+{
+"userId": "{{userId}}"
+}
+
+### Get User Info
+
+### Get Users For Business
+
+GET {{url}}users/users/ Authorization: Bearer {{jwt}}
+
+### Get User Access Records
+
+GET {{url}}users/records/ Authorization: Bearer {{jwt}}
+
+### Get Business Records GET {{url}}users/business-records Authorization: Bearer {{jwt}}
+
+### Get Site Availability
+
+@siteId = aef48a96-1db9-488f-9cbf-034aab882f4b
+
+GET {{url}}sites/availability/{{siteId}} Authorization: Bearer {{jwt}}
+
+### Get User Info GET {{url}}users/info Authorization: Bearer {{jwt}}
+
+### VISITORS +===================================================================
+
+### Create Data Entry POST {{url}}visitors/spec/create Content-Type: application/json Authorization: Bearer {{jwt}}
+
+{
+"label": "Second Name", "validationMessage": "Second name is required", "validationCode": "Required"
+}
+
+### Get Data Entries
+
+GET {{url}}visitors/specs Authorization: Bearer {{jwt}}
+
+### Update Order POST {{url}}visitors/spec/reorder Authorization: Bearer {{jwt}} Content-Type: application/json
+
+{
+"entryId": "a37f3034-65c6-42f9-9e30-8c3c5d96fe0f", "order": "1"
+}
+
+### Depreacte Data Entry
+
+DELETE {{url}}visitors/spec/deprecate Authorization: Bearer {{jwt}} Content-Type: application/json
+
+{
+"id": "6a45a1fd-fbcc-49ed-9050-06b868620f23",
+}
+
+### Get Validators GET {{url}}visitors/specs/validators Authorization: Bearer {{jwt}}
+
+### Get Site Fire List
+
+GET {{url}}sites/fire/{{siteId}} Authorization: Bearer {{jwt}}
