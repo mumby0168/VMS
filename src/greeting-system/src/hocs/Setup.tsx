@@ -1,10 +1,12 @@
 import { IAppState } from "../redux/store";
 import React from "react";
 import { connect } from "react-redux";
-import { compose } from "redux";
+import { loginSuccesful } from "../redux/actions/systemActions";
+import {Button} from '@material-ui/core'
 
 interface ISetupProps {
     online: boolean;
+    login(): void
 }
 
 const mapStateToProps = (state: IAppState) => {
@@ -13,26 +15,27 @@ const mapStateToProps = (state: IAppState) => {
     }
 }
 
-class Setup extends React.Component<ISetupProps> {
-    
-    constructor(props: ISetupProps) {
-        super(props);        
+const mapDispatch = (dispatch: any) => {
+    return {
+        login: () => dispatch(loginSuccesful("hellooooooo"))
     }
-    
-    componentDidMount() {
-
-    }
+}
 
 
-    public render() {        
+class Setup extends React.Component<ISetupProps> {    
+
+    public render() {
 
         const online = this.props.online ? "Online" : "Offline";
 
         return (
-        <h1>Setup Page: Online: {online}</h1>
+            <div>
+                <h1>Setup Page: Online: {online}</h1>
+                <Button onClick={this.props.login}>Click me to login</Button>
+            </div>
         )
     }
 }
 
-export default connect(mapStateToProps, {})(Setup)
+export default connect(mapStateToProps, mapDispatch)(Setup)
 
