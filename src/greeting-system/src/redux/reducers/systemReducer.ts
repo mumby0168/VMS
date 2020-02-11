@@ -24,6 +24,6 @@ export const reducer = (state: ISystemState = initState, action: ISystemActions)
         case SystemEvents.LOGIN_SUCCESFUL:
             return {...state, online: true, auth: {...state.auth, jwt: action.payload}}
 
-        default: state;
+        default: return state;
     }
 }
