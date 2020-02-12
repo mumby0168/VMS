@@ -43,7 +43,8 @@ namespace Services.Test
             app.UseUdpLogging(Common.Names.Services.Logs);
 
             app.UseServiceBus(Common.Names.Services.Test, true)
-                .SubscribeCommand<TestCommand>().SubscribeCommand<IssueCommand>();
+                .SubscribeCommand<TestCommand>()
+                .SubscribeCommand<IssueCommand>();
 
 
             app.UseRouting();

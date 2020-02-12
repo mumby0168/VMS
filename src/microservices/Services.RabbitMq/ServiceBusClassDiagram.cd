@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Interface Name="Services.RabbitMq.Interfaces.Exchange.IServiceBusExchange">
+    <Position X="27.25" Y="7.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Exchange\IServiceBusExchange.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Exchange.IServiceBusExchangeFactory">
+    <Position X="25.25" Y="8.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Exchange\IServiceBusExchangeFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Factories.IHandlerFactory">
+    <Position X="28" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACEAAAAAAAAAAAAAAAAAAAAAIBAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Factories\IHandlerFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Factories.IServiceBusConnectionFactory">
+    <Position X="28" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Factories\IServiceBusConnectionFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Factories.IServiceBusConsumerFactory">
+    <Position X="31" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Factories\IServiceBusConsumerFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Messaging.ICommand" Collapsed="true">
+    <Position X="18.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Messaging\ICommand.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Messaging.ICommandDispatcher">
+    <Position X="25" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Messaging\ICommandDispatcher.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Messaging.ICommandHandler&lt;TCommand&gt;">
+    <Position X="27" Y="2.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Messaging\ICommandHandler.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Messaging.IDispatcher">
+    <Position X="29.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Messaging\IDispatcher.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Messaging.IEvent" Collapsed="true">
+    <Position X="21" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Messaging\IEvent.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Messaging.IEventHandler&lt;T&gt;">
+    <Position X="31.5" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Messaging\IEventHandler.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Messaging.IGenericBusHandler">
+    <Position X="23.25" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Messaging\IGenericBusHandler.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Messaging.IGenericCommandHandler">
+    <Position X="25.5" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Messaging\IGenericCommandHandler.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Messaging.IRejectedEvent" Collapsed="true">
+    <Position X="21" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Messaging\IRejectedEvent.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Messaging.IRequestInfo">
+    <Position X="23.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAIAAAAAAAgAAAAAAAQAAAAABAAAAAA=</HashCode>
+      <FileName>Interfaces\Messaging\IRequestInfo.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Messaging.IServiceBusMessage" Collapsed="true">
+    <Position X="20" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Messaging\IServiceBusMessage.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Queues.IServiceBusQueue">
+    <Position X="23.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAQAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Queues\IServiceBusQueue.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Queues.IServiceBusQueueFactory">
+    <Position X="29.25" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Interfaces\Queues\IServiceBusQueueFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Settings.IServiceBusSettings">
+    <Position X="25.25" Y="7.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Settings\IServiceBusSettings.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Settings.IServiceSettings">
+    <Position X="29.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Settings\IServiceSettings.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Storage.IHandlerStorage">
+    <Position X="29.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Storage\IHandlerStorage.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Wrappers.IBase64Wrapper">
+    <Position X="23.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Wrappers\IBase64Wrapper.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Wrappers.IJsonConvertWrapper">
+    <Position X="31.5" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAACBAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Wrappers\IJsonConvertWrapper.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.Wrappers.IUtf8Wrapper">
+    <Position X="27.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\Wrappers\IUtf8Wrapper.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.IServiceBusConnection">
+    <Position X="25" Y="5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAABAAAICAAAA=</HashCode>
+      <FileName>Interfaces\IServiceBusConnection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Services.RabbitMq.Interfaces.IServiceBusManager">
+    <Position X="31.5" Y="7.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAgAAARAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Interfaces\IServiceBusManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Services.RabbitMq.Interfaces.Messaging.RequestState">
+    <Position X="18.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAABAAIAAAAAA=</HashCode>
+      <FileName>Interfaces\Messaging\IRequestInfo.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

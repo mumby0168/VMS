@@ -17,6 +17,7 @@ namespace Services.Test.Handlers
         {
             _serviceBusMessagePublisher = serviceBusMessagePublisher;
         }
+
         public Task HandleAsync(TestCommand message, IRequestInfo requestInfo)
         {
             if (message.IsPass)
