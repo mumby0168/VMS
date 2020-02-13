@@ -31,15 +31,12 @@ class Setup extends React.Component<ISetupProps> {
         const online = this.props.online ? "Online" : "Offline";
 
         return (
-            <div className="center">
-                <Card>
+            <div className="center background">
+                <Card className="card">
                     <CardHeader title="Please login to setup account"></CardHeader>
                     <CardContent>
                         <LoginForm/>
-                    </CardContent>
-                    <CardActions>
-                        <Button variant="contained" color="primary">Login</Button>
-                    </CardActions>
+                    </CardContent>                    
                 </Card>
             </div>
         )

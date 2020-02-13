@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { TextField, makeStyles, Theme, createStyles } from '@material-ui/core'
+import { TextField, makeStyles, Theme, createStyles, Button } from '@material-ui/core'
 
 interface Props {
 
@@ -22,6 +22,9 @@ export default function LoginForm({ }: Props): ReactElement {
             <TextField className={classes.textFieldSpacing} fullWidth type="number" label="Business Code" />
             <TextField className={classes.textFieldSpacing} fullWidth type="email" label="Email Address" />
             <TextField className={classes.textFieldSpacing} fullWidth type="password" label="Password" />
+            <div className="center">
+            <Button className={classes.textFieldSpacing} variant="contained" color="primary">Login</Button>
+            </div>
         </form>
     )
 }

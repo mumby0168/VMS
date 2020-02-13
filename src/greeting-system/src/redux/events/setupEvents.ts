@@ -1,0 +1,5 @@
+export enum SetupEvents {
+    LOGIN = "LOGIN",
+    LOGIN_SUCCESFUL = "LOGIN_SUCCESFUL",
+    LOGIN_REJECTED = "LOGIN_REJECTED"
+}

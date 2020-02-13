@@ -5,6 +5,12 @@ export const makeAction = <T, P>(type: T) => (payload: P) => {
     }
 }
 
+export const makeVoidAction = <T>(type: T) => {
+    return {
+        type
+    }
+}
+
 interface IStringMap<T> {
     [key: string]: T
 }

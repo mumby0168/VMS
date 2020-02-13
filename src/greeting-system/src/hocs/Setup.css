@@ -2,3 +2,20 @@ form {
     width: 50%;    
     margin: auto;
 }
+
+.background {
+    background-image: url('../images/shaking.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+} 
+
+.card {
+    opacity: 0.8;
+}
+
+@media only screen and (max-width: 600px) {
+    .card {
+        opacity: 0.8;
+        max-width: 300px;
+    }
+  }
