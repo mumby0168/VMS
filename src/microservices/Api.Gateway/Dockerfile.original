@@ -6,12 +6,12 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
 WORKDIR /src
-COPY ["microservices/Api.Gateway/Api.Gateway.csproj", "microservices/Api.Gateway/"]
-COPY ["microservices/Services.RabbitMq/Services.RabbitMq.csproj", "microservices/Services.RabbitMq/"]
-COPY ["microservices/Services.Common/Services.Common.csproj", "microservices/Services.Common/"]
-RUN dotnet restore "microservices/Api.Gateway/Api.Gateway.csproj"
+COPY ["Backend/Api.Gateway/Api.Gateway.csproj", "Backend/Api.Gateway/"]
+COPY ["Backend/Services.RabbitMq/Services.RabbitMq.csproj", "Backend/Services.RabbitMq/"]
+COPY ["Backend/Services.Common/Services.Common.csproj", "Backend/Services.Common/"]
+RUN dotnet restore "Backend/Api.Gateway/Api.Gateway.csproj"
 COPY . .
-WORKDIR "/src/microservices/Api.Gateway"
+WORKDIR "/src/Backend/Api.Gateway"
 RUN dotnet build "Api.Gateway.csproj" -c Release -o /app/build
 
 FROM build AS publish
