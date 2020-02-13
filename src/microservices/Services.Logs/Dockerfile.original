@@ -6,9 +6,9 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
 WORKDIR /src
-COPY ["microservices/Services.Logs/Services.Logs.csproj", "microservices/Services.Logs/"]
-COPY ["microservices/Services.Common/Services.Common.csproj", "microservices/Services.Common/"]
-RUN dotnet restore "microservices/Services.Logs/Services.Logs.csproj"
+COPY ["microservices/Services.Logs/Services.Logs.csproj", "Backend/Services.Logs/"]
+COPY ["microservices/Services.Common/Services.Common.csproj", "Backend/Services.Common/"]
+RUN dotnet restore "Backend/Services.Logs/Services.Logs.csproj"
 COPY . .
 WORKDIR "/src/microservices/Services.Logs"
 RUN dotnet build "Services.Logs.csproj" -c Release -o /app/build

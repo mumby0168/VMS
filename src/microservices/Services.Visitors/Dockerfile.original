@@ -6,12 +6,12 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["microservices/Services.Visitors/Services.Visitors.csproj", "microservices/Services.Visitors/"]
-COPY ["microservices/Services.RabbitMq/Services.RabbitMq.csproj", "microservices/Services.RabbitMq/"]
-COPY ["microservices/Services.Common/Services.Common.csproj", "microservices/Services.Common/"]
-RUN dotnet restore "microservices/Services.Visitors/Services.Visitors.csproj"
+COPY ["Backend/Services.Visitors/Services.Visitors.csproj", "Backend/Services.Visitors/"]
+COPY ["Backend/Services.RabbitMq/Services.RabbitMq.csproj", "Backend/Services.RabbitMq/"]
+COPY ["Backend/Services.Common/Services.Common.csproj", "Backend/Services.Common/"]
+RUN dotnet restore "Backend/Services.Visitors/Services.Visitors.csproj"
 COPY . .
-WORKDIR "/src/microservices/Services.Visitors"
+WORKDIR "/src/Backend/Services.Visitors"
 RUN dotnet build "Services.Visitors.csproj" -c Release -o /app/build
 
 FROM build AS publish

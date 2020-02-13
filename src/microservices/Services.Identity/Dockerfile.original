@@ -6,12 +6,12 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
 WORKDIR /src
-COPY ["microservices/Services.Identity/Services.Identity.csproj", "microservices/Services.Identity/"]
-COPY ["microservices/Services.RabbitMq/Services.RabbitMq.csproj", "microservices/Services.RabbitMq/"]
-COPY ["microservices/Services.Common/Services.Common.csproj", "microservices/Services.Common/"]
-RUN dotnet restore "microservices/Services.Identity/Services.Identity.csproj"
+COPY ["Backend/Services.Identity/Services.Identity.csproj", "Backend/Services.Identity/"]
+COPY ["Backend/Services.RabbitMq/Services.RabbitMq.csproj", "Backend/Services.RabbitMq/"]
+COPY ["Backend/Services.Common/Services.Common.csproj", "Backend/Services.Common/"]
+RUN dotnet restore "Backend/Services.Identity/Services.Identity.csproj"
 COPY . .
-WORKDIR "/src/microservices/Services.Identity"
+WORKDIR "/src/Backend/Services.Identity"
 RUN dotnet build "Services.Identity.csproj" -c Release -o /app/build
 
 FROM build AS publish

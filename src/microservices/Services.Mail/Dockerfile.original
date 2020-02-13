@@ -7,12 +7,12 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
 WORKDIR /src
-COPY ["microservices/Services.Mail/Services.Mail.csproj", "microservices/Services.Mail/"]
-COPY ["microservices/Services.RabbitMq/Services.RabbitMq.csproj", "microservices/Services.RabbitMq/"]
-COPY ["microservices/Services.Common/Services.Common.csproj", "microservices/Services.Common/"]
-RUN dotnet restore "microservices/Services.Mail/Services.Mail.csproj"
+COPY ["Backend/Services.Mail/Services.Mail.csproj", "Backend/Services.Mail/"]
+COPY ["Backend/Services.RabbitMq/Services.RabbitMq.csproj", "Backend/Services.RabbitMq/"]
+COPY ["Backend/Services.Common/Services.Common.csproj", "Backend/Services.Common/"]
+RUN dotnet restore "Backend/Services.Mail/Services.Mail.csproj"
 COPY . .
-WORKDIR "/src/microservices/Services.Mail"
+WORKDIR "/src/Backend/Services.Mail"
 RUN dotnet build "Services.Mail.csproj" -c Release -o /app/build
 
 FROM build AS publish
