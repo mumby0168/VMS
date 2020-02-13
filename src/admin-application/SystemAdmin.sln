@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F0BD984F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{46AA66EE-20DB-458C-8554-0B9C4A1A9BD3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.LoadingIndicator", "..\External\BlazorLoadingFork\src\Blazor.LoadingIndicator\Blazor.LoadingIndicator.csproj", "{F4C4A9E7-1740-4362-8F9B-C5AF6FBF112B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.LoadingIndicator", "..\..\External\BlazorLoadingFork\src\Blazor.LoadingIndicator\Blazor.LoadingIndicator.csproj", "{F4C4A9E7-1740-4362-8F9B-C5AF6FBF112B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Sites", "App.Sites\App.Sites.csproj", "{AB1896EE-6B89-4DCB-B3D0-AE89B89A8D4C}"
 EndProject

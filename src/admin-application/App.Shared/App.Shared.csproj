@@ -23,7 +23,7 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\..\External\BlazorLoadingFork\src\Blazor.LoadingIndicator\Blazor.LoadingIndicator.csproj" />
+    <ProjectReference Include="..\..\..\External\BlazorLoadingFork\src\Blazor.LoadingIndicator\Blazor.LoadingIndicator.csproj" />
   </ItemGroup>
 
 </Project>
