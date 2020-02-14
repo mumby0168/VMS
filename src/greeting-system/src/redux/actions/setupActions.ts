@@ -9,12 +9,19 @@ export const loginSuccesfulAction = makeAction<SetupEvents.LOGIN_SUCCESFUL, bool
 
 export const loginRejectedAction = makeAction<SetupEvents.LOGIN_REJECTED, IFailedRequestResponse>(SetupEvents.LOGIN_REJECTED);
 
+export const loginFormUpdate = makeAction<SetupEvents.LOGIN_FORM_UPDATED, ISetupForm>(SetupEvents.LOGIN_FORM_UPDATED);
+
+export interface ISetupForm {
+    code: string;
+    email: string;
+    password: string;
+}
 
 const actions = {
     loginSuccesfulAction,
     loginAction,
-    loginRejectedAction
-
+    loginRejectedAction,
+    loginFormUpdate
 }
 
 export type ISetupAction = IActionUnion<typeof actions>

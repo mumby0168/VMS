@@ -12,7 +12,7 @@ export interface IAuthTokenReponse {
 }
 
 
-export const login = (code: number, email: string, password: string) => {
+export const login = (code: string, email: string, password: string) => {
     return async (dispatch: (action: any) => void) => {
         dispatch(loginAction(true));
 
