@@ -1,7 +1,6 @@
 import { IAppState } from "../redux/store";
 import React from "react";
 import { connect } from "react-redux";
-import { loginSuccesful } from "../redux/actions/systemActions";
 import { Button, Card, CardHeader, CardContent, CardActions } from '@material-ui/core'
 import LoginForm from "../components/setup/LoginForm";
 import './Setup.css'

@@ -9,21 +9,31 @@ export interface ISetupState {
     code: string;
     email: string;
     password: string;
+    errorCode: string;
+    errorMessage: string;
 }
 
 const initState: ISetupState = {
-    code: "" ,
+    code: "",
     email: "",
     password: "",
     loading: false,
+    errorCode: "",
+    errorMessage: ""
 }
 
 export const reducer = (state: ISetupState = initState, action: ISetupAction) => {
-    switch(action.type) {
+    switch (action.type) {
 
         case SetupEvents.LOGIN:
+            return {...state, loading: action.payload }
 
+        case SetupEvents.LOGIN_SUCCESFUL:
+            return {...state, loading: false }
 
+        case SetupEvents.LOGIN_REJECTED:
+            return {...state, loading: false, errorCode: action.payload.Code, errorMessage: action.payload.Reason }
+            
         default: return state;
     }
 }

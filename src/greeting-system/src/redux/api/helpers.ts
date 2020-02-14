@@ -18,6 +18,6 @@ export const gatewayClient = axios.create({
 
 
 export interface IFailedRequestResponse {
-    code: string;
-    reason: string;
+    Code: string;
+    Reason: string;
 }

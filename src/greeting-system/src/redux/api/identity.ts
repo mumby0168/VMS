@@ -2,6 +2,7 @@
 import { loginAction, loginSuccesfulAction, loginRejectedAction } from '../actions/setupActions'
 import { identityClient, IFailedRequestResponse } from './helpers';
 import { AxiosError } from 'axios';
+import { authObtained } from '../actions/systemActions';
 
 
 
@@ -23,7 +24,8 @@ export const login = (code: number, email: string, password: string) => {
             });
             
             if(res.status === 200) {
-                dispatch(loginSuccesfulAction(res.data));
+                dispatch(loginSuccesfulAction(false));
+                dispatch(authObtained(res.data));
             }
 
             

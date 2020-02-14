@@ -5,7 +5,7 @@ import { IFailedRequestResponse } from "../api/helpers";
 
 export const loginAction = makeAction<SetupEvents.LOGIN, boolean>(SetupEvents.LOGIN);
 
-export const loginSuccesfulAction = makeAction<SetupEvents.LOGIN_SUCCESFUL, IAuthTokenReponse>(SetupEvents.LOGIN_SUCCESFUL);
+export const loginSuccesfulAction = makeAction<SetupEvents.LOGIN_SUCCESFUL, boolean>(SetupEvents.LOGIN_SUCCESFUL);
 
 export const loginRejectedAction = makeAction<SetupEvents.LOGIN_REJECTED, IFailedRequestResponse>(SetupEvents.LOGIN_REJECTED);
 

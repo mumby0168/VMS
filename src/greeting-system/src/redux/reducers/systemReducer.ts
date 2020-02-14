@@ -4,6 +4,7 @@ import { ISystemActions } from '../actions/systemActions';
 
 export interface IAuth {
     jwt: string;
+    refreshToken: string;
 }
 
 export interface ISystemState {
@@ -14,15 +15,19 @@ export interface ISystemState {
 const initState: ISystemState = {
     online: false,
     auth: {
-        jwt: ""
+        jwt: "",
+        refreshToken: ""
     }
 }
 
 export const reducer = (state: ISystemState = initState, action: ISystemActions) => {
     switch(action.type) {
 
-        case SystemEvents.LOGIN_SUCCESFUL:
-            return {...state, online: true, auth: {...state.auth, jwt: action.payload}}
+        case SystemEvents.AUTH_OBTAINED:
+            return {...state, online: true, auth: {
+                jwt: action.payload.jwt,
+                refreshToken: action.payload.refreshToken
+            }}
 
         default: return state;
     }
