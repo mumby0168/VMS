@@ -5,10 +5,11 @@ import { loginSuccesful } from "../redux/actions/systemActions";
 import { Button, Card, CardHeader, CardContent, CardActions } from '@material-ui/core'
 import LoginForm from "../components/setup/LoginForm";
 import './Setup.css'
+import { login } from "../redux/api/identity";
 
 interface ISetupProps {
     online: boolean;
-    login(): void
+    login(code: number, email: string, password: string): void
 }
 
 const mapStateToProps = (state: IAppState) => {
@@ -19,7 +20,7 @@ const mapStateToProps = (state: IAppState) => {
 
 const mapDispatch = (dispatch: any) => {
     return {
-        login: () => dispatch(loginSuccesful("hellooooooo"))
+        login: (code: number, email: string, password: string) => dispatch(login(code, email, password))
     }
 }
 
@@ -36,6 +37,9 @@ class Setup extends React.Component<ISetupProps> {
                     <CardHeader title="Please login to setup account"></CardHeader>
                     <CardContent>
                         <LoginForm/>
+                        <Button onClick={(e) => {
+                            this.props.login(123456, 'test@test.com', 'Test123')
+                        }}>Test</Button>
                     </CardContent>                    
                 </Card>
             </div>

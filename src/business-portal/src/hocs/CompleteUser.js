@@ -66,7 +66,7 @@ class CompleteUser extends Component {
 
     render() {
 
-        const content = this.props.goToDashboard ? <Button>To Dashboard</Button> : 
+        const content = this.props.goToDashboard ? <Button onClick={(e) => this.props.history.push('/landing')}>To Dashboard</Button> : 
         <CompleteUserForm 
                         handleSiteChanged={this.handleSiteChanged.bind(this)} 
                         sites={this.props.sites} handleBlur={this.handleBlur.bind(this)} 

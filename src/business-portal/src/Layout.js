@@ -22,9 +22,6 @@ import CompleteAccount from './components/auth/CompleteAccount';
 import VisitorSpec from './hocs/VisitorSpec';
 
 
-const Home = () => {
-    return <h1>Home</h1>
-}
 
 
 class Layout extends Component {

@@ -39,6 +39,7 @@ namespace Services.Identity
             serviceCollection.AddTransient<IQueryHandler<GetAllBusinessAdmins, IEnumerable<AccountInfoDto>>, GetAllBusinessAdminsHandler>();
 
             serviceCollection.AddTransient<IUserService, UserService>();
+            serviceCollection.AddTransient<IGreetingSystemService, GreetingSystemService>();
 
             return serviceCollection;
         }

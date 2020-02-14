@@ -1,5 +1,5 @@
 import React from 'react'
-import { TableRow, TableCell, Tooltip, Fab, Popover, Typography } from '@material-ui/core'
+import { TableRow, TableCell, Tooltip, Fab, Popover } from '@material-ui/core'
 import { Delete, Reorder } from '@material-ui/icons'
 import { useDispatch } from 'react-redux'
 import { deprecateDataSpec } from '../../actions/specificationActions';
