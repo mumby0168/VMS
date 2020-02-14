@@ -13,6 +13,7 @@ interface ISetupProps {
     login(code: string, email: string, password: string): void,
     updateForm(data: ISetupForm): void,
     formData: ISetupForm,
+    error: string
 }
 
 const mapStateToProps = (state: IAppState) => {
@@ -22,7 +23,8 @@ const mapStateToProps = (state: IAppState) => {
             email: state.setup.email,
             password: state.setup.password,
             code: state.setup.code
-        }
+        },
+        error: state.setup.errorMessage
     }
 }
 
@@ -52,7 +54,7 @@ class Setup extends React.Component<ISetupProps> {
                 <Card className="card">
                     <CardHeader title="Please login to setup account"></CardHeader>
                     <CardContent>
-                        <LoginForm login={this.login.bind(this)} formData={this.props.formData} updateForm={this.props.updateForm}/>
+                        <LoginForm error={this.props.error} login={this.login.bind(this)} formData={this.props.formData} updateForm={this.props.updateForm}/>
                     </CardContent>                    
                 </Card>
             </div>
