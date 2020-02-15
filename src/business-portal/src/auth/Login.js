@@ -7,6 +7,7 @@ import Progress from '../common/Progress';
 import LoginForm from '../components/auth/LoginForm';
 import Process from '../assets/process.jpg'
 import { getUserInfo } from '../actions/userActions';
+import {Redirect} from 'react-router-dom'
 
 
 
@@ -46,20 +47,19 @@ class Login extends Component {
 
     render() {        
 
+       
+
         //TODO: Causing an error.
         if(this.props.isLoggedIn) {
-            this.props.history.push("/landing");
+            
             this.props.dispatch(loginFormUpdated("", ""));
             this.props.dispatch(getUserInfo());
+
+            return <Redirect to='/landing'/>
         }
 
-
-
-    
-
         const body = this.props.isLoading ? <Progress message="Logging you in"/> :         
-                    <LoginForm navigateHandle={this.navigateHandle} dispatch={this.props.dispatch} handleSubmit={this.handleSubmit} user={this.props.user} error={this.props.error} />
-                    
+        <LoginForm navigateHandle={this.navigateHandle} dispatch={this.props.dispatch} handleSubmit={this.handleSubmit} user={this.props.user} error={this.props.error} />
                     
         return (
             <Grid container spacing={3}>
