@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react'
 import { TextField, makeStyles, Theme, createStyles, Button } from '@material-ui/core'
 import { ISetupForm } from '../../redux/actions/setupActions'
+import {Alert} from '@material-ui/lab'
 
 interface Props {
     updateForm(data: ISetupForm): void;
@@ -25,7 +26,7 @@ export default function LoginForm(props: Props): ReactElement {
         props.login(props.formData);
     }
 
-    const err = props.error !== "" ? <div><br/><span>{props.error}</span></div> : ''
+    const err = props.error !== "" ? <Alert variant="filled" severity="error">{props.error}</Alert> : ''
 
 
     return (

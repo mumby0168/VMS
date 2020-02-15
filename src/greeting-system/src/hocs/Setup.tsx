@@ -1,11 +1,13 @@
 import { IAppState } from "../redux/store";
 import React from "react";
 import { connect } from "react-redux";
-import { Button, Card, CardHeader, CardContent, CardActions } from '@material-ui/core'
+import { Card, CardHeader, CardContent } from '@material-ui/core'
 import LoginForm from "../components/setup/LoginForm";
-import './Setup.css'
+import '../hoc-styles/Setup.css'
 import { login } from "../redux/api/identity";
 import { ISetupForm, loginFormUpdate } from "../redux/actions/setupActions";
+import { Loader } from "../components/common/Loader";
+import { RouteComponentProps, Redirect } from "react-router";
 
 
 interface ISetupProps {
@@ -13,7 +15,8 @@ interface ISetupProps {
     login(code: string, email: string, password: string): void,
     updateForm(data: ISetupForm): void,
     formData: ISetupForm,
-    error: string
+    error: string,
+    loading: boolean;
 }
 
 const mapStateToProps = (state: IAppState) => {
@@ -24,7 +27,8 @@ const mapStateToProps = (state: IAppState) => {
             password: state.setup.password,
             code: state.setup.code
         },
-        error: state.setup.errorMessage
+        error: state.setup.errorMessage,
+        loading: state.setup.loading,
     }
 }
 
@@ -38,23 +42,26 @@ const mapDispatch = (dispatch: any) => {
 
 class Setup extends React.Component<ISetupProps> {
 
-
     login(data: ISetupForm) {
         this.props.login(data.code, data.email, data.password);
     }
 
     public render() {
 
-        const online = this.props.online ? "Online" : "Offline";
+        if(this.props.online) {
+            return <Redirect to='/main'></Redirect>
+        }
 
-        
+
+        const content = this.props.loading ? <Loader message="Logging you in ..."/> : 
+        <LoginForm error={this.props.error} login={this.login.bind(this)} formData={this.props.formData} updateForm={this.props.updateForm}/>
 
         return (
             <div className="center background">
                 <Card className="card">
                     <CardHeader title="Please login to setup account"></CardHeader>
                     <CardContent>
-                        <LoginForm error={this.props.error} login={this.login.bind(this)} formData={this.props.formData} updateForm={this.props.updateForm}/>
+                        {content}
                     </CardContent>                    
                 </Card>
             </div>

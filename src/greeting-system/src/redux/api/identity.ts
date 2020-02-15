@@ -3,6 +3,7 @@ import { loginAction, loginSuccesfulAction, loginRejectedAction } from '../actio
 import { identityClient, IFailedRequestResponse } from './helpers';
 import { AxiosError } from 'axios';
 import { authObtained } from '../actions/systemActions';
+import { useHistory } from 'react-router';
 
 
 
@@ -12,7 +13,11 @@ export interface IAuthTokenReponse {
 }
 
 
+
+
 export const login = (code: string, email: string, password: string) => {
+
+
     return async (dispatch: (action: any) => void) => {
         dispatch(loginAction(true));
 
@@ -36,6 +41,10 @@ export const login = (code: string, email: string, password: string) => {
                 {
                     dispatch(loginRejectedAction(errorResponse.response.data))
                 }            
+              }
+              else {
+                  console.error('The reponse was not handled and failed. (no error response');
+                  dispatch(loginRejectedAction({Code: 'failed', Reason: 'Our services are currently having difficulty please try again later.'}))
               }
         }
 
