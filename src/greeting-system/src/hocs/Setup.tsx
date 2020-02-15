@@ -5,9 +5,11 @@ import { Card, CardHeader, CardContent } from '@material-ui/core'
 import LoginForm from "../components/setup/LoginForm";
 import '../hoc-styles/Setup.css'
 import { login } from "../redux/api/identity";
-import { ISetupForm, loginFormUpdate, loginRejectedAction } from "../redux/actions/setupActions";
+import { ISetupForm, loginFormUpdate, loginRejectedAction, siteSelectionConfirmed, siteSelectionChangedAction } from "../redux/actions/setupActions";
 import { Loader } from "../components/common/Loader";
-import { RouteComponentProps, Redirect } from "react-router";
+import { IKeyValuePair } from "../redux/common/types";
+import { SiteSelect } from "../components/setup/SiteSelect";
+import { Redirect } from "react-router";
 
 
 interface ISetupProps {
@@ -18,6 +20,11 @@ interface ISetupProps {
     error: string,
     loading: boolean;
     updateFormError(message: string): void;
+    sites: IKeyValuePair[];
+    selectedSite: IKeyValuePair;
+    siteConfirmed: boolean;
+    confirmHandle(): void;
+    selectionChangedHandle(choice: IKeyValuePair): void;
 }
 
 const mapStateToProps = (state: IAppState) => {
@@ -30,6 +37,9 @@ const mapStateToProps = (state: IAppState) => {
         },
         error: state.setup.errorMessage,
         loading: state.setup.loading,
+        sites: state.setup.sites,
+        selectedSite: state.setup.selectedSite,
+        siteConfirmed: state.setup.siteConfirmed
     }
 }
 
@@ -37,7 +47,9 @@ const mapDispatch = (dispatch: any) => {
     return {
         login: (code: string, email: string, password: string) => dispatch(login(code, email, password)),
         updateForm: (data: ISetupForm) => dispatch(loginFormUpdate(data)),
-        updateFormError: (message: string) => dispatch(loginRejectedAction({Code: 'validation', Reason: message}))
+        updateFormError: (message: string) => dispatch(loginRejectedAction({Code: 'validation', Reason: message})),
+        confirmHandle: () => dispatch(siteSelectionConfirmed(true)),
+        selectionChangedHandle: (c: IKeyValuePair) => dispatch(siteSelectionChangedAction(c)),
     }
 }
 
@@ -56,18 +68,25 @@ class Setup extends React.Component<ISetupProps> {
 
     public render() {
 
-        if(this.props.online) {
+        if(this.props.siteConfirmed) {
             return <Redirect to='/main'></Redirect>
-        }
+        }       
+
+        var title = "Please login to setup account"
 
 
-        const content = this.props.loading ? <Loader message="Logging you in ..."/> : 
+        var content = this.props.loading ? <Loader message="Logging you in ..."/> : 
         <LoginForm error={this.props.error} login={this.login.bind(this)} formData={this.props.formData} updateForm={this.props.updateForm}/>
+
+        if(this.props.online) {
+            content =  <SiteSelect confirmHandle={this.props.confirmHandle} selectionChangedHandle={this.props.selectionChangedHandle} sites={this.props.sites} selected={this.props.selectedSite} />
+            title = "Please select a site"
+        }
 
         return (
             <div className="center background">
                 <Card className="card">
-                    <CardHeader title="Please login to setup account"></CardHeader>
+                    <CardHeader title={title}></CardHeader>
                     <CardContent>
                         {content}
                     </CardContent>                    

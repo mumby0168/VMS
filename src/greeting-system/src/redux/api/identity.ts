@@ -3,7 +3,6 @@ import { loginAction, loginSuccesfulAction, loginRejectedAction } from '../actio
 import { identityClient, IFailedRequestResponse } from './helpers';
 import { AxiosError } from 'axios';
 import { authObtained } from '../actions/systemActions';
-import { useHistory } from 'react-router';
 
 
 

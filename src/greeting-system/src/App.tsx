@@ -6,6 +6,8 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import { IAppState } from './redux/store';
 import { useSelector } from 'react-redux';
 import {PrivateRoute} from './components/routing/PrivateRoute'
+import {Main} from './components/common/Main'
+import {InitialSignIn} from './hocs/InitialSignIn'
 
 
 
@@ -20,7 +22,9 @@ const App = () => {
     <Router>
       <Switch>
       <PrivateRoute path='/main' online={state}>
-        <div>Logged in yay</div>
+          <Main>
+            <InitialSignIn></InitialSignIn>
+          </Main>
       </PrivateRoute>
       <Route path='/' exact>
         <Setup/>
