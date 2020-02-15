@@ -27,8 +27,7 @@ export const SiteSelect: React.FunctionComponent<ISiteSelectProps> = (props: ISi
         return <MenuItem key={index} value={site.key}>{site.value}</MenuItem>
     })
 
-    const change = (e: any) =>{
-        const id = e.targert.value;
+    const change = (id: any) =>{                
         const selected = props.sites.find(s => s.key === id);
         if(selected) {
             props.selectionChangedHandle(selected);
@@ -41,8 +40,8 @@ export const SiteSelect: React.FunctionComponent<ISiteSelectProps> = (props: ISi
             <Select 
             className={classes.textFieldSpacing}
                 fullWidth
-                value={props.selected}
-                onChange={change}
+                value={props.selected.key}
+                onChange={(e) => change(e.target.value)}
             >
                 {items}
             </Select>            

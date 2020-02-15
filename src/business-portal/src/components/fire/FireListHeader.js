@@ -11,6 +11,7 @@ const useStyles = makeStyles(theme => ({
 export default function FireListHeader(props) {
 
     const handleChange = (e) => {
+        console.log(e);
         props.updateHandle(e.target.value);
         props.updateTime();
     }
