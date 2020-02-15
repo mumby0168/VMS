@@ -30,7 +30,7 @@ namespace Api.Gateway.Controllers
         [HttpPost("create")]
         public Task<IActionResult> Create([FromBody]CreateSite command) => PublishCommand(command, Services.Common.Names.Services.Sites);
 
-        [Authorize(Roles = Roles.SystemAdmin)]
+        [Authorize(Roles = Roles.SystemAdmin + "," + Roles.PortalGreeting)]
         [HttpGet("summaries/{businessId}")]
         public async Task<ActionResult<IEnumerable<SiteSummaryDto>>> GetSummaries([FromRoute] Guid businessId) => Collection(await _siteClient.GetSites(businessId));
 

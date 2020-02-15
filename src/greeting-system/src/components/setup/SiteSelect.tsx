@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Select, MenuItem, Button, Typography, makeStyles, Theme, createStyles } from '@material-ui/core'
+import { Select, MenuItem, Button, makeStyles, Theme, createStyles } from '@material-ui/core'
 import { IKeyValuePair } from '../../redux/common/types'
 
 

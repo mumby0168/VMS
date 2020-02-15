@@ -50,7 +50,7 @@ namespace Services.Identity.Services
                 throw new VmsException(Codes.InvalidCredentials, "The credentials provided where incorrect.");
             }
 
-            var jwt = _jwtManager.CreateToken(Guid.NewGuid(), identity.Email, Roles.Greeting);
+            var jwt = _jwtManager.CreateToken(Guid.NewGuid(), identity.Email, Roles.Greeting, identity.BusinessId);
             //var refresh = await _tokenService.CreateRefreshToken(id)
             //TODO: Add a mechanism to store more that just email here unique id needs to be stored instead.
 

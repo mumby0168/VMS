@@ -15,40 +15,32 @@ export interface IAuthTokenReponse {
 
 
 export const login = (code: string, email: string, password: string) => {
-
-
     return async (dispatch: (action: any) => void) => {
         dispatch(loginAction(true));
-
         try {
             const res = await identityClient.post<IAuthTokenReponse>('sign-in', {
                 code: code,
                 email: email,
                 password: password
             });
-            
-            if(res.status === 200) {
+
+            if (res.status === 200) {
                 dispatch(loginSuccesfulAction(false));
                 dispatch(authObtained(res.data));
             }
 
-            
+
         } catch (error) {
             if (error && error.response) {
                 const errorResponse = error as AxiosError<IFailedRequestResponse>
-                if(errorResponse.response)
-                {
+                if (errorResponse.response) {
                     dispatch(loginRejectedAction(errorResponse.response.data))
-                }            
-              }
-              else {
-                  console.error('The reponse was not handled and failed. (no error response');
-                  dispatch(loginRejectedAction({Code: 'failed', Reason: 'Our services are currently having difficulty please try again later.'}))
-              }
+                }
+            }
+            else {
+                console.error('The reponse was not handled and failed. (no error response');
+                dispatch(loginRejectedAction({ Code: 'failed', Reason: 'Our services are currently having difficulty please try again later.' }))
+            }
         }
-
-        
-
-        
     }
 }

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { store } from '../store'
 
 
 export const identityClient = axios.create({
@@ -9,12 +10,16 @@ export const identityClient = axios.create({
     }
 })
 
-export const gatewayClient = axios.create({
+export const gatewayClient = () => axios.create({    
+    baseURL: 'http://localhost:5020/gateway/api/',
     responseType: 'json',
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${store.getState().system.auth.jwt}`
     }
 })
+
+
 
 
 export interface IFailedRequestResponse {

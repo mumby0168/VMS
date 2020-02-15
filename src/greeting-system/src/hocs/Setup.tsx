@@ -10,6 +10,7 @@ import { Loader } from "../components/common/Loader";
 import { IKeyValuePair } from "../redux/common/types";
 import { SiteSelect } from "../components/setup/SiteSelect";
 import { Redirect } from "react-router";
+import { getSites } from "../redux/api/sites";
 
 
 interface ISetupProps {
@@ -25,6 +26,8 @@ interface ISetupProps {
     siteConfirmed: boolean;
     confirmHandle(): void;
     selectionChangedHandle(choice: IKeyValuePair): void;
+    loadSites(businessId: string): void;
+    businessId: string;
 }
 
 const mapStateToProps = (state: IAppState) => {
@@ -39,7 +42,8 @@ const mapStateToProps = (state: IAppState) => {
         loading: state.setup.loading,
         sites: state.setup.sites,
         selectedSite: state.setup.selectedSite,
-        siteConfirmed: state.setup.siteConfirmed
+        siteConfirmed: state.setup.siteConfirmed,
+        businessId: state.system.token.businessId
     }
 }
 
@@ -50,6 +54,7 @@ const mapDispatch = (dispatch: any) => {
         updateFormError: (message: string) => dispatch(loginRejectedAction({Code: 'validation', Reason: message})),
         confirmHandle: () => dispatch(siteSelectionConfirmed(true)),
         selectionChangedHandle: (c: IKeyValuePair) => dispatch(siteSelectionChangedAction(c)),
+        loadSites: (bid: string) => dispatch(getSites(bid))
     }
 }
 
@@ -79,6 +84,10 @@ class Setup extends React.Component<ISetupProps> {
         <LoginForm error={this.props.error} login={this.login.bind(this)} formData={this.props.formData} updateForm={this.props.updateForm}/>
 
         if(this.props.online) {
+            if(this.props.sites.length === 0) {
+                this.props.loadSites(this.props.businessId);                
+            }
+
             content =  <SiteSelect confirmHandle={this.props.confirmHandle} selectionChangedHandle={this.props.selectionChangedHandle} sites={this.props.sites} selected={this.props.selectedSite} />
             title = "Please select a site"
         }
