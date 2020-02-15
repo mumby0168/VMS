@@ -5,7 +5,7 @@ import { Card, CardHeader, CardContent } from '@material-ui/core'
 import LoginForm from "../components/setup/LoginForm";
 import '../hoc-styles/Setup.css'
 import { login } from "../redux/api/identity";
-import { ISetupForm, loginFormUpdate } from "../redux/actions/setupActions";
+import { ISetupForm, loginFormUpdate, loginRejectedAction } from "../redux/actions/setupActions";
 import { Loader } from "../components/common/Loader";
 import { RouteComponentProps, Redirect } from "react-router";
 
@@ -17,6 +17,7 @@ interface ISetupProps {
     formData: ISetupForm,
     error: string,
     loading: boolean;
+    updateFormError(message: string): void;
 }
 
 const mapStateToProps = (state: IAppState) => {
@@ -36,6 +37,7 @@ const mapDispatch = (dispatch: any) => {
     return {
         login: (code: string, email: string, password: string) => dispatch(login(code, email, password)),
         updateForm: (data: ISetupForm) => dispatch(loginFormUpdate(data)),
+        updateFormError: (message: string) => dispatch(loginRejectedAction({Code: 'validation', Reason: message}))
     }
 }
 
@@ -43,6 +45,12 @@ const mapDispatch = (dispatch: any) => {
 class Setup extends React.Component<ISetupProps> {
 
     login(data: ISetupForm) {
+
+        if(data.code.length !== 6) {
+            this.props.updateFormError('The business code must be 6 digits.');
+            return;
+        }
+
         this.props.login(data.code, data.email, data.password);
     }
 

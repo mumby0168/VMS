@@ -25,6 +25,9 @@ const App = () => {
       <Route path='/' exact>
         <Setup/>
       </Route>
+      <Route>
+        <div>404 not found  </div> 
+      </Route>
       </Switch>
     </Router>
       )

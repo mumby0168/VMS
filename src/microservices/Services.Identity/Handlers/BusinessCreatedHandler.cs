@@ -23,7 +23,7 @@ namespace Services.Identity.Handlers
         }
         public async Task HandleAsync(BusinessCreated message, IRequestInfo requestInfo)
         {
-            await _repository.AddAsync(new Business(message.Id));
+            await _repository.AddAsync(new Business(message.Id, message.Code));
             _logger.LogInformation($"Business with id: {message.Id} stored in identity service");
         }
     }

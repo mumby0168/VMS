@@ -12,6 +12,7 @@ using Services.Business.Messages.Events;
 using Services.Business.Messages.Events.Rejected;
 using Services.Business.Repositorys;
 using Services.Common.Exceptions;
+using Services.Common.Generation;
 using Services.Common.Logging;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
@@ -28,6 +29,7 @@ namespace Services.Businesses.Tests.Handlers
         private Mock<IRequestInfo> _request;
         private Mock<IBusinessesFactory> _factory;
         private Mock<Business.Domain.Business> _business;
+        private Mock<INumberGenerator> _numberGenerator;
 
         private const string TestCode = "TestCode";
         private const string TestReason = "TestReason";
@@ -42,11 +44,12 @@ namespace Services.Businesses.Tests.Handlers
             _repo = new Mock<IBusinessRepository>();
             _message = new Mock<CreateBusiness>();
             _request = new Mock<IRequestInfo>();
+            _numberGenerator = new Mock<INumberGenerator>();
             _factory = new Mock<IBusinessesFactory>();
             _business = new Mock<Business.Domain.Business>();
             _factory.Setup(o => o.CreateBusiness(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
                 It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns(_business.Object);
+                It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>())).Returns(_business.Object);
         }
 
 
@@ -71,7 +74,7 @@ namespace Services.Businesses.Tests.Handlers
             var sut = CreateSut();
             _factory.Setup(o => o.CreateBusiness(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
                 It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Throws(new VmsException(TestCode, TestReason));
+                It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>())).Throws(new VmsException(TestCode, TestReason));
 
             //Act
             await sut.HandleAsync(_message.Object, _request.Object);
@@ -85,6 +88,6 @@ namespace Services.Businesses.Tests.Handlers
             _publisher.Verify(o => o.PublishEvent(It.Is<CreateBusinessRejected>(m => m.Code == code && m.Reason.Contains(contains)), _request.Object));
         }
 
-        public CreateBusinessHandler CreateSut() => new CreateBusinessHandler(_repo.Object, _logger.Object, _publisher.Object, _factory.Object);
+        public CreateBusinessHandler CreateSut() => new CreateBusinessHandler(_repo.Object, _logger.Object, _publisher.Object, _factory.Object, _numberGenerator.Object);
     }
 }

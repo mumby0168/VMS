@@ -22,16 +22,14 @@ namespace Services.Users.Handlers.Command
         private readonly IAccessRecordRepository _accessRecordRepository;
         private readonly IAccessRecordFactory _factory;
         private readonly IServiceBusMessagePublisher _publisher;
-        private readonly IMongoRepository<User> _collection;
 
-        public CreateAccessRecordHandler(IVmsLogger<CreateAccessRecordHandler> logger, IUserRepository userRepository, IAccessRecordRepository accessRecordRepository, IAccessRecordFactory factory, IServiceBusMessagePublisher publisher, IMongoRepository<User> collection)
+        public CreateAccessRecordHandler(IVmsLogger<CreateAccessRecordHandler> logger, IUserRepository userRepository, IAccessRecordRepository accessRecordRepository, IAccessRecordFactory factory, IServiceBusMessagePublisher publisher)
         {
             _logger = logger;
             _userRepository = userRepository;
             _accessRecordRepository = accessRecordRepository;
             _factory = factory;
             _publisher = publisher;
-            _collection = collection;
         }
 
         public async Task HandleAsync(CreateAccessRecord message, IRequestInfo requestInfo)

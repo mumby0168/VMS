@@ -10,9 +10,12 @@ namespace Services.Identity.Domain
     {
         public Guid Id { get; private set; }
 
-        public Business(Guid id)
+        public int Code { get; private set; }
+
+        public Business(Guid id, int code)
         {
             Id = id;
+            Code = code;
         }
     }
 }

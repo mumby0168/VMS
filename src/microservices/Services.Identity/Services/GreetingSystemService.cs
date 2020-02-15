@@ -38,6 +38,12 @@ namespace Services.Identity.Services
                 throw new VmsException(Codes.InvalidCredentials, "The credentials provided where incorrect.");
             }
 
+            if(!await _businessRepository.IsCodeValidAsync(businessCode))
+            {
+                _logger.LogInformation($"No business found with code {businessCode}.");
+                throw new VmsException(Codes.InvalidCredentials, "The credentials provided where incorrect.");
+            }
+
             if (!_passwordManager.IsPasswordCorrect(password, identity.Hash, identity.Salt))
             {
                 _logger.LogWarning($"Incorrect password for: {email}");

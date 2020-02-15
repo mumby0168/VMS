@@ -54,7 +54,7 @@ namespace Services.Business.Handlers.Command
             }
 
             _logger.LogInformation("Create business succeeded.");
-            _publisher.PublishEvent(new BusinessCreated(business.Id), requestInfo);
+            _publisher.PublishEvent(new BusinessCreated(business.Id, business.Code), requestInfo);
         }
 
         private async Task<int> CheckCode(int code)

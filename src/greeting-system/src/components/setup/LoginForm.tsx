@@ -33,12 +33,12 @@ export default function LoginForm(props: Props): ReactElement {
 
         <form>
             <TextField name='b-code' onChange={(e) => props.updateForm({...props.formData, code: e.target.value})} value={props.formData.code} className={classes.textFieldSpacing} fullWidth type="number" label="Business Code" />
-            <TextField name='email' onChange={(e) => props.updateForm({...props.formData, email: e.target.value})} value={props.formData.email} className={classes.textFieldSpacing} fullWidth type="email" label="Email Address" />
-            <TextField name='password' onChange={(e) => props.updateForm({...props.formData, password: e.target.value})} value={props.formData.password} className={classes.textFieldSpacing} fullWidth type="password" label="Password" />
+            <TextField required name='email' onChange={(e) => props.updateForm({...props.formData, email: e.target.value})} value={props.formData.email} className={classes.textFieldSpacing} fullWidth type="email" label="Email Address" />
+            <TextField required name='password' onChange={(e) => props.updateForm({...props.formData, password: e.target.value})} value={props.formData.password} className={classes.textFieldSpacing} fullWidth type="password" label="Password" />
             {err}
             <div className="center">
            
-            <Button onClick={execute} className={classes.textFieldSpacing} variant="contained" color="primary">Login</Button>
+            <Button type="submit" onClick={execute} className={classes.textFieldSpacing} variant="contained" color="primary">Login</Button>
             
             </div>
         </form>

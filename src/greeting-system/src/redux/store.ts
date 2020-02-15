@@ -3,9 +3,10 @@ import {reducer as systemReducer} from '../redux/reducers/systemReducer'
 import {reducer as setupReducer} from '../redux/reducers/setupReducer'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 
 
-const middleware = applyMiddleware(thunk)
+const middleware = applyMiddleware(thunk, logger)
 
 const reducers = combineReducers({
     system: systemReducer,

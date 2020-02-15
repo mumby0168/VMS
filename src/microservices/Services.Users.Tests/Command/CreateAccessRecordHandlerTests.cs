@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
+using Services.Common.Mongo;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 using Services.Tests.Mocks;

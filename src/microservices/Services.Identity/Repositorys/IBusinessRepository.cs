@@ -8,5 +8,6 @@ namespace Services.Identity.Repositorys
     public interface IBusinessRepository
     {
         Task<bool> ContainsBusinessAsync(Guid business);
+        Task<bool> IsCodeValidAsync(int businessCode);
     }
 }

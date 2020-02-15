@@ -18,5 +18,11 @@ namespace Services.Identity.Repositorys
 
 
         public async Task<bool> ContainsBusinessAsync(Guid business) => await _repository.GetAsync(business) != null;
+
+        public async Task<bool> IsCodeValidAsync(int businessCode)
+        {
+            var business = await _repository.GetAsync(b => b.Code == businessCode);
+            return business != null;
+        }
     }
 }

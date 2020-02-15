@@ -14,10 +14,13 @@ namespace Services.Identity.Messages.Events.Subscribed
     {
         public Guid Id { get; }
 
+        public int Code { get; }
+
         [JsonConstructor]
-        public BusinessCreated(Guid id)
+        public BusinessCreated(Guid id, int code)
         {
             Id = id;
+            Code = code;
         }
     }
 }
