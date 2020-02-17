@@ -36,7 +36,6 @@ export const SiteSelect: React.FunctionComponent<ISiteSelectProps> = (props: ISi
 
     return (
         <React.Fragment>            
-
             <Select 
             className={classes.textFieldSpacing}
                 fullWidth

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Paper } from '@material-ui/core'
 
 interface IMainProps {
 
@@ -8,9 +9,9 @@ interface IMainProps {
 export class Main extends React.Component<IMainProps> {
     public render() {
         return (
-            <div>
+            <Paper className="full-height" >
                 {this.props.children}
-            </div>
+            </Paper>
         )
     }
 }
