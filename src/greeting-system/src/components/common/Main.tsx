@@ -1,5 +1,5 @@
 import React from 'react'
-import { Paper, Grid } from '@material-ui/core'
+import { Paper, Grid, Card } from '@material-ui/core'
 import { Time, } from '../main/Time'
 
 interface IMainProps {
@@ -12,9 +12,10 @@ export class Main extends React.Component<IMainProps> {
 
     public render() {
         return (
-            <Paper className="hundred-percent" >
-                <div className="hundred-percent">
-                    <div>
+            <Paper className="hundred-percent background" >
+                <div className="hundred-percent opaque ">
+                    <div style={{height: '10%'}} className="main-header">
+                    <Card style={{padding: '4px'}}>
                         <Grid alignItems="center"  container spacing={2}>
                             <Grid style={{textAlign: 'center'}} item xs={4}>
                                 <Time></Time>
@@ -26,10 +27,10 @@ export class Main extends React.Component<IMainProps> {
                                 Date
                             </Grid>
                         </Grid>
+                    </Card>
                     </div>
-                    <div style={{ height: '80%' }} >
-                        {this.props.children}
-                    </div>
+
+                        {this.props.children}                
                 </div>
             </Paper>
         )

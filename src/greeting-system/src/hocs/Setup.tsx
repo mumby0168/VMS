@@ -85,6 +85,7 @@ class Setup extends React.Component<ISetupProps> {
 
         if(this.props.online) {
             if(this.props.sites.length === 0) {
+                console.log('load sites.')
                 this.props.loadSites(this.props.businessId);                
             }
 

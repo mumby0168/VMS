@@ -25,7 +25,7 @@ export const login = (code: string, email: string, password: string) => {
             });
 
             if (res.status === 200) {
-                dispatch(loginSuccesfulAction(false));
+                dispatch(loginSuccesfulAction(false)); 
                 dispatch(authObtained(res.data));
             }
 

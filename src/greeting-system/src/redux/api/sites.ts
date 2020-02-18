@@ -9,8 +9,10 @@ interface IGetSitesResponse {
 }
 
 
-export const getSites = (businessId: string) => {
+export const getSites = (businessId: string) => {    
     
+    console.log('sites fetching ...')
+
     return async (dispatch: (action: any) => void) => {
         dispatch(fetchSitesAction);
 
@@ -25,8 +27,14 @@ export const getSites = (businessId: string) => {
                 ]);
                 dispatch(fetchedSitesAction(sites))                
             }
+            else {
+                console.error(result)
+            }
 
         } catch (error) {
+
+            console.log(error)
+
             if (error && error.response) {
                 const errorResponse = error as AxiosError<IFailedRequestResponse>
                 if(errorResponse.response)

@@ -1,12 +1,18 @@
+
+
+.button-grid {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 1fr 2fr 2fr 1fr;
+    grid-template-rows: 100%;        
+    align-items: center;
+    height: 85%;
+}
+
+.grid-item {
+    height: 70%;
+    opacity: 0.8;
+}
 .card-button {
-    height: 50%;
-    width: 100%;
-}
-
-.icon {
-    width: 100%;
-}
-
-.root {
-    height: 50%;
+    height: 100%;
 }

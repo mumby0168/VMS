@@ -17,9 +17,9 @@ export interface ISetupState {
 }
 
 const initState: ISetupState = {
-    code: "",
-    email: "",
-    password: "",
+    code: "735778",
+    email: "b-admin@test.com",
+    password: "Test123",
     loading: false,
     errorCode: "",
     errorMessage: "",
