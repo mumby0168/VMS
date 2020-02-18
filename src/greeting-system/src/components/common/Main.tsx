@@ -12,18 +12,18 @@ export class Main extends React.Component<IMainProps> {
 
     public render() {
         return (
-            <Paper className="full-height" >
-                <Grid className="full-height" container direction="row">
-                    <Grid style={{ height: '20%' }} item md={12}>
-                        <Grid spacing={2} alignItems="center" container direction="column">
-                            <Grid item md>
+            <Paper className="hundred-percent" >
+                <Grid className="hundred-percent" container direction="row">
+                    <Grid item md={12}>
+                        <Grid spacing={2} container direction="column">
+                            <Grid item xs={4}>
                                 <Time></Time>
                             </Grid>
-                            <Grid item md={6}>
-                                Data 
+                            <Grid item xs={6}>
+                                Business Data
                             </Grid>
-                            <Grid item md>
-
+                            <Grid item xs={4}>
+                                Date
                             </Grid>
                         </Grid>
                     </Grid>
@@ -31,7 +31,6 @@ export class Main extends React.Component<IMainProps> {
                         {this.props.children}
                     </Grid>
                 </Grid>
-
             </Paper>
         )
     }
