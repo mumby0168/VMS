@@ -14,8 +14,8 @@ namespace Services.Common.Mongo
         }
 
 
-        public static IServiceCollection AddMongoCollection<T>(this IServiceCollection services) where T : IDomain =>
-            services.AddTransient<IMongoRepository<T>, MongoRepository<T>>();
+        public static IServiceCollection AddMongoCollection<T>(this IServiceCollection services) where T : IDomain
+            => services.AddTransient<IMongoRepository<T>, MongoRepository<T>>();
 
 
         public static IApplicationBuilder UseMongo(this IApplicationBuilder builder, string serviceName)

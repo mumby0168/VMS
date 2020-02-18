@@ -8,7 +8,7 @@ import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
 export const InitialSignIn = () => {
     return (
-        <Grid spacing={2} container className="center">
+        <Grid spacing={2} container className="center root">
             <Grid item xs={2}></Grid>
             <Grid xs={4} item className="center">
                 <Card className="card-button">

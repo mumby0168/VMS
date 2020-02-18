@@ -1,7 +1,7 @@
 import { IAppState } from "../redux/store";
 import React from "react";
 import { connect } from "react-redux";
-import { Card, CardHeader, CardContent } from '@material-ui/core'
+import { Card, CardHeader, CardContent, Grid } from '@material-ui/core'
 import LoginForm from "../components/setup/LoginForm";
 import '../hoc-styles/Setup.css'
 import { login } from "../redux/api/identity";
@@ -93,14 +93,19 @@ class Setup extends React.Component<ISetupProps> {
         }
 
         return (
-            <div className="center background">
+            <Grid style={{height: '100%'}} alignItems="center" container className="center background full-height">
+                <Grid item md={4}></Grid>
+                <Grid item md={4}>
                 <Card className="card">
                     <CardHeader title={title}></CardHeader>
                     <CardContent>
                         {content}
                     </CardContent>                    
                 </Card>
-            </div>
+                </Grid>
+                <Grid item
+                 md={4}></Grid>
+            </Grid>
         )
     }
 }
