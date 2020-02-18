@@ -13,24 +13,24 @@ export class Main extends React.Component<IMainProps> {
     public render() {
         return (
             <Paper className="hundred-percent" >
-                <Grid className="hundred-percent" container direction="row">
-                    <Grid item md={12}>
-                        <Grid spacing={2} container direction="column">
-                            <Grid item xs={4}>
+                <div className="hundred-percent">
+                    <div>
+                        <Grid alignItems="center"  container spacing={2}>
+                            <Grid style={{textAlign: 'center'}} item xs={4}>
                                 <Time></Time>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid style={{textAlign: 'center'}} item xs={4}>
                                 Business Data
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid style={{textAlign: 'center'}} item xs={4}>
                                 Date
                             </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid style={{ height: '80%' }} item md={12}>
+                    </div>
+                    <div style={{ height: '80%' }} >
                         {this.props.children}
-                    </Grid>
-                </Grid>
+                    </div>
+                </div>
             </Paper>
         )
     }

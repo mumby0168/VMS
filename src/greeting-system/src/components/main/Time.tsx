@@ -19,7 +19,7 @@ export const Time = () => {
     return (
             <div >
                 <Typography variant="h4">{time}</Typography>
-                </div>        
+            </div>        
     )
 
 }
