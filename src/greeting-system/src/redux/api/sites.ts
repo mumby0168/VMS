@@ -2,6 +2,8 @@ import { fetchSitesAction, fetchedSitesAction, rejectedSitesAction } from "../ac
 import { gatewayClient, IFailedRequestResponse } from "./helpers";
 import { IKeyValuePair } from "../common/types";
 import { AxiosError } from "axios";
+import { ISite } from "../reducers/systemReducer";
+import { siteFetchedAction } from "../actions/systemActions";
 
 interface IGetSitesResponse {
     id: string,
@@ -47,6 +49,26 @@ export const getSites = (businessId: string) => {
                   dispatch(rejectedSitesAction({Code: 'failed', Reason: 'Our services are currently having difficulty please try again later.'}))
               }
         }
+
+    }
+}
+
+export const getSiteInfo = (siteId: string) => {
+    return async (dispatch: (action: any) => void) => {
+
+        try {
+            const result = await gatewayClient().get<ISite>(`sites/get/${siteId}`);
+
+            if(result.status === 200) {
+                dispatch(siteFetchedAction(result.data));
+            }   
+            else {
+                console.error(result);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+         
 
     }
 }

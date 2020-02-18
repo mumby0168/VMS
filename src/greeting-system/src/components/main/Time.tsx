@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Card, CardContent, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 
 
@@ -18,7 +18,7 @@ export const Time = () => {
 
     return (
             <div >
-                <Typography variant="h4">{time}</Typography>
+                <Typography variant="h5">{time}</Typography>
             </div>        
     )
 

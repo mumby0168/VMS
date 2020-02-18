@@ -43,7 +43,7 @@ namespace Api.Gateway.Controllers
             return Collection(await _siteClient.GetSites(Guid.Parse(businessId.Value)));
         }
 
-        [Authorize(Roles = Roles.SystemAdmin)]
+        [Authorize(Roles = Roles.SystemAdmin + "," + Roles.Greeting)]
         [HttpGet("get/{siteId}")]
         public async Task<ActionResult<SiteDto>> Get([FromRoute] Guid siteId) => Single(await _siteClient.GetSite(siteId));
 

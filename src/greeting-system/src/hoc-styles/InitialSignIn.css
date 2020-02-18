@@ -6,7 +6,7 @@
     grid-template-columns: 1fr 2fr 2fr 1fr;
     grid-template-rows: 100%;        
     align-items: center;
-    height: 85%;
+    height: 80%;
 }
 
 .grid-item {

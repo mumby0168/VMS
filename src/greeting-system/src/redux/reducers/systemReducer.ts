@@ -7,10 +7,30 @@ export interface IAuth {
     refreshToken: string;
 }
 
+export interface ISite {
+    id: string;
+    name: string;
+}
+
+export interface IBusiness {
+    id: string;
+    name: string;
+}
+
+export interface ITokenStructure {
+    id: string;
+    email: string;
+    businessId:
+     string;
+    role: string;
+}
+
 export interface ISystemState {
     online: boolean;
     auth: IAuth
     token: ITokenStructure;
+    site: ISite;
+    business: IBusiness;
 }
 
 const initState: ISystemState = {
@@ -24,6 +44,14 @@ const initState: ISystemState = {
         email: '',
         businessId: '',
         role: ''
+    },
+    site: {
+        id: "",
+        name: ""
+    },
+    business: {
+        id: "",
+        name: ""
     }
 }
 
@@ -42,16 +70,14 @@ export const reducer = (state: ISystemState = initState, action: ISystemActions)
                 token: { ...state.token, email: tokenData.email, businessId: tokenData.businessId, role: tokenData.role, id: tokenData.id }
             }
 
+        case SystemEvents.SITE_FETCHED:
+            return {...state, site: {...action.payload}};
+
         default: return state;
     }
 }
 
-export interface ITokenStructure {
-    id: string;
-    email: string;
-    businessId: string;
-    role: string;
-}
+
 
 const processJwt = (jwt: string): ITokenStructure => {
     var body = jwt.split('.')[1];

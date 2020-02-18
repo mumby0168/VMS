@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Grid, Card, CardActionArea, Typography, Button } from '@material-ui/core'
+import { Card, CardActionArea, Typography } from '@material-ui/core'
 import '../hoc-styles/InitialSignIn.css'
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';

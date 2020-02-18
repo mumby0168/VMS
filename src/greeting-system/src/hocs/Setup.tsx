@@ -10,7 +10,7 @@ import { Loader } from "../components/common/Loader";
 import { IKeyValuePair } from "../redux/common/types";
 import { SiteSelect } from "../components/setup/SiteSelect";
 import { Redirect } from "react-router";
-import { getSites } from "../redux/api/sites";
+import { getSites, getSiteInfo } from "../redux/api/sites";
 
 
 interface ISetupProps {
@@ -28,6 +28,7 @@ interface ISetupProps {
     selectionChangedHandle(choice: IKeyValuePair): void;
     loadSites(businessId: string): void;
     businessId: string;
+    fetchSite(siteId: string): void;
 }
 
 const mapStateToProps = (state: IAppState) => {
@@ -54,7 +55,8 @@ const mapDispatch = (dispatch: any) => {
         updateFormError: (message: string) => dispatch(loginRejectedAction({Code: 'validation', Reason: message})),
         confirmHandle: () => dispatch(siteSelectionConfirmed(true)),
         selectionChangedHandle: (c: IKeyValuePair) => dispatch(siteSelectionChangedAction(c)),
-        loadSites: (bid: string) => dispatch(getSites(bid))
+        loadSites: (bid: string) => dispatch(getSites(bid)),
+        fetchSite: (siteId: string) => dispatch(getSiteInfo(siteId)),
     }
 }
 
@@ -74,6 +76,7 @@ class Setup extends React.Component<ISetupProps> {
     public render() {
 
         if(this.props.siteConfirmed) {
+            this.props.fetchSite(this.props.selectedSite.key);
             return <Redirect to='/main'></Redirect>
         }       
 
