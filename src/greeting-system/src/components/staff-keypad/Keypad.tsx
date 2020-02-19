@@ -4,6 +4,8 @@ import BackspaceIcon from '@material-ui/icons/Backspace';
 import CheckIcon from '@material-ui/icons/Check';
 import { useDispatch } from 'react-redux';
 import { updateCodeAction } from '../../redux/actions/staffKeypadActions';
+import {userInOut, UserAccess} from '../../redux/api/user'
+import { operationsAggregator } from '../../operations/operationsAggregator';
 
 interface IKeypadProps {
     code: string;
@@ -42,8 +44,13 @@ export default function Keypad({ code}: IKeypadProps): ReactElement {
         dispatch(updateCodeAction(newCode));
     }
 
-    const submitCode = () => {
-        console.log('sending code  ...' + code)
+    const submitCode = async () => {
+        var res = await userInOut(code, UserAccess.IN);
+        if(res !== "") {
+            operationsAggregator.listen(res, () => {
+                console.log('Succesfully signed in.')
+            })
+        }
     }
 
     return (
@@ -55,8 +62,8 @@ export default function Keypad({ code}: IKeypadProps): ReactElement {
                     <KeyPadItem onclick={() => updateCode('4')} content="4"/>
                     <KeyPadItem onclick={() => updateCode('5')} content="5"/>
                     <KeyPadItem onclick={() => updateCode('6')} content="6"/>
-                    <KeyPadItem onclick={() => updateCode('7')} content="8"/>
-                    <KeyPadItem onclick={() => updateCode('8')} content="9"/>
+                    <KeyPadItem onclick={() => updateCode('7')} content="7"/>
+                    <KeyPadItem onclick={() => updateCode('8')} content="8"/>
                     <KeyPadItem onclick={() => updateCode('9')} content="9"/>
                     <KeyPadItem onclick={submitCode} content={<CheckIcon/>}/>
                     <KeyPadItem onclick={() => updateCode('0')} content="0"/>

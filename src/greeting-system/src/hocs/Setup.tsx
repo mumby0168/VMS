@@ -11,6 +11,7 @@ import { IKeyValuePair } from "../redux/common/types";
 import { SiteSelect } from "../components/setup/SiteSelect";
 import { Redirect } from "react-router";
 import { getSites, getSiteInfo } from "../redux/api/sites";
+import { operationsAggregator } from "../operations/operationsAggregator";
 
 
 interface ISetupProps {
@@ -29,6 +30,7 @@ interface ISetupProps {
     loadSites(businessId: string): void;
     businessId: string;
     fetchSite(siteId: string): void;
+    jwt: string;
 }
 
 const mapStateToProps = (state: IAppState) => {
@@ -44,7 +46,8 @@ const mapStateToProps = (state: IAppState) => {
         sites: state.setup.sites,
         selectedSite: state.setup.selectedSite,
         siteConfirmed: state.setup.siteConfirmed,
-        businessId: state.system.token.businessId
+        businessId: state.system.token.businessId,
+        jwt: state.system.auth.jwt
     }
 }
 
@@ -77,6 +80,7 @@ class Setup extends React.Component<ISetupProps> {
 
         if(this.props.siteConfirmed) {
             this.props.fetchSite(this.props.selectedSite.key);
+            operationsAggregator.start(this.props.jwt);
             return <Redirect to='/main'></Redirect>
         }       
 

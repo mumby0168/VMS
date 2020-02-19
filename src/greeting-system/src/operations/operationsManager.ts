@@ -1,5 +1,4 @@
 import * as push from '@microsoft/signalr'
-import { timingSafeEqual } from 'crypto';
 
 class OperationsManager {
 
@@ -20,6 +19,10 @@ class OperationsManager {
 
     public getConnectionStatus(): boolean {
         return this.connected;
+    }
+
+    public shutdown() {
+        this.connection.stop();
     }
 
     public startConnection(jwt: string) {        
@@ -55,9 +58,7 @@ class OperationsManager {
         else {
             console.error('No handlers for messages have been defined.')            
         }        
-    }
-
-    
+    }    
 
 
     private handleConnectionFailure(error: any, jwt: string) {
@@ -66,9 +67,14 @@ class OperationsManager {
     }
 }
 
+export enum OperationStatus {
+    Failed = 1,
+    Completed = 2,
+}
+
 export interface IOperation {
     id: string;
-    status: string;
+    status: OperationStatus;
     reason: string | null;
     code: string | null;
 }
