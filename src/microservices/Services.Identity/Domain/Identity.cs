@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Services.Common.Domain;
+using Services.Common.Exceptions;
 using Services.Common.Jwt;
 
 namespace Services.Identity.Domain
@@ -22,6 +23,8 @@ namespace Services.Identity.Domain
 
         public DateTime CreatedOn { get; private set; }
 
+        public int Code {get; private set;}
+
         public Identity(string email, byte[] hash, byte[] salt, string role)
         {
 
@@ -38,10 +41,15 @@ namespace Services.Identity.Domain
             Salt = salt;
             Role = role;
             CreatedOn = DateTime.UtcNow;
+            Code = 0;
         }
 
-        public Identity(string email, byte[] hash, byte[] salt, string role, Guid businessId)
+        public Identity(string email, byte[] hash, byte[] salt, string role, Guid businessId, int code)
         {
+            if(role == Roles.SystemAdmin)
+            {
+                throw new VmsException(Codes.InvalidCredentials, "This type of user is invalid with this identity type.");
+            }
             BusinessId = businessId;
             Id = new Guid();
             Email = email;
@@ -49,6 +57,7 @@ namespace Services.Identity.Domain
             Salt = salt;
             Role = role;
             CreatedOn = DateTime.UtcNow;
+            Code = code;
         }
 
         public void UpdatePassword(byte[] hash, byte[] salt)

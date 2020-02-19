@@ -44,5 +44,8 @@ namespace Services.Identity.Repositorys
 
         public Task<Domain.Identity> GetStandardAccountsForBusinessAsync(Guid businessId, Guid accountId)
         => _repository.GetAsync(i => i.Role == Roles.StandardPortalUser && i.BusinessId == businessId && i.Id == accountId);
+
+        public async Task<bool> IsCodeInUseAsync(int number, Guid businessid) => 
+                await _repository.GetAsync(i => i.BusinessId == businessid && i.Code == number) != null;
     }
 }

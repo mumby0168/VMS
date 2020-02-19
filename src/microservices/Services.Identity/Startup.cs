@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Services.Common.Generation;
 using Services.Common.Jwt;
 using Services.Common.Logging;
 using Services.Common.Middleware;
@@ -45,6 +46,8 @@ namespace Services.Identity
 
             services.AddServiceBus();
 
+            services.AddNumberGenerator();
+
             services.AddCustomAuth(_configuration);
 
             services.AddTransient<VmsExceptionMiddleware>();
@@ -81,7 +84,7 @@ namespace Services.Identity
 
             app.UseRouting();
             app.UseAuthentication();
-            app.UseAuthorization();
+            app.UseAuthorization();            
 
             app.UseMongo(Common.Names.Services.Identity);
 
@@ -125,17 +128,7 @@ namespace Services.Identity
             {
                 var password = passwordManager.EncryptPassword("Test123");
                 repo.AddAsync(new Domain.Identity("test@test.com", password.Hash, password.Salt, Roles.SystemAdmin));
-            }
-
-            if (repo.GetStandardAccountsForBusinessAsync(Guid.Parse("4e60143d-2a49-4f6c-a069-2b84deb67641")).Result.Count() == 0)
-            {
-                for(int i = 0; i < 6; i++)
-                {
-                    var password = passwordManager.EncryptPassword("Test123");
-                    var account = new Domain.Identity($"test@test{i}.com", password.Hash, password.Salt, Roles.StandardPortalUser, Guid.Parse("4e60143d-2a49-4f6c-a069-2b84deb67641"));
-                    repo.AddAsync(account);
-                }
-            }
+            }           
         }
     }
 }

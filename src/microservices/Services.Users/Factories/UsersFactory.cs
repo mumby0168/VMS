@@ -12,9 +12,9 @@ namespace Services.Users.Factories
             Guid basedSiteId, Guid businessId, Guid accountId) =>
             new User().Setup(firstName, secondName, email, phoneNumber, businessPhoneNumber, basedSiteId, businessId, accountId);
 
-        public IAccount CreateAccount(Guid id, string email)
+        public IAccount CreateAccount(Guid id, string email, int code)
         {
-            return new Account().Create(id, email);
+            return new Account().Create(id, email, code);
         }
     }
 }

@@ -10,6 +10,8 @@ namespace Services.Users.Domain
     {
         string Email { get; }
 
-        IAccount Create(Guid id, string email);
+        int Code { get; }
+
+        IAccount Create(Guid id, string email, int code);
     }
 }

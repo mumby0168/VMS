@@ -9,9 +9,12 @@ namespace Services.Users.Domain
     {
         public Guid Id { get; private set; }
         public string Email { get; private set; }
-        public IAccount Create(Guid id, string email)
+
+        public int Code { get; private set;}
+
+        public IAccount Create(Guid id, string email, int code)
         {
-            return new Account(id, email);
+            return new Account(id, email, code);
         }
 
         public Account()
@@ -21,10 +24,11 @@ namespace Services.Users.Domain
         }
 
 
-        private Account(Guid id, string email)
+        private Account(Guid id, string email, int code)
         {
             Id = id;
             Email = email;
+            Code = code;
         }
 
     }

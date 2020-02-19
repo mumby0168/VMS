@@ -25,7 +25,7 @@ namespace Services.Users.Handlers.Events
 
         public async Task HandleAsync(UserAccountCreated message, IRequestInfo requestInfo)
         {
-            await _accountRepository.AddAsync(_factory.CreateAccount(message.Id, message.Email));
+            await _accountRepository.AddAsync(_factory.CreateAccount(message.Id, message.Email, message.Code));
             _logger.LogInformation($"Account added to users service with id: {message.Id} and email: {message.Email}");
         }
     }

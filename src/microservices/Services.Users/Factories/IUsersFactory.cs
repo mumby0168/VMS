@@ -11,6 +11,6 @@ namespace Services.Users.Factories
         IUser CreateUser(string firstName, string secondName, string email, string phoneNumber, string businessPhoneNumber,
             Guid basedSiteId, Guid businessId, Guid accountId);
 
-        IAccount CreateAccount(Guid id, string email);
+        IAccount CreateAccount(Guid id, string email, int code);
     }
 }

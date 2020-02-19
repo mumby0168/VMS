@@ -19,5 +19,6 @@ namespace Services.Identity.Repositorys
 
         Task<IEnumerable<Domain.Identity>> GetStandardAccountsForBusinessAsync(Guid businessId);
         Task<Domain.Identity> GetStandardAccountsForBusinessAsync(Guid businessId, Guid accountId);
+        Task<bool> IsCodeInUseAsync(int number, Guid businessid);
     }
 }

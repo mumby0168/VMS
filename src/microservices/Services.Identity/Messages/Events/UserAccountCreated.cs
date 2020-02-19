@@ -14,11 +14,14 @@ namespace Services.Identity.Messages.Events
 
         public string Email { get; }
 
+        public int Code { get; }
+
         [JsonConstructor]
-        public UserAccountCreated(Guid id, string email)
+        public UserAccountCreated(Guid id, string email, int code)
         {
             Id = id;
             Email = email;
+            Code = code;
         }
     }
 }

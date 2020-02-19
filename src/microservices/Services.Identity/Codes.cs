@@ -21,5 +21,7 @@ namespace Services.Identity
 
         public const string BusinessNotFound = "busness_not_found";
         public const string NoIdentityFound = "identity_not_found";
+
+        public static string InvalidId = "code_not_generatated";
     }
 }

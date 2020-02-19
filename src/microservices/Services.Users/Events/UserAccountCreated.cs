@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 using Services.Common.Names;
 using Services.RabbitMq.Attributes;
 using Services.RabbitMq.Interfaces.Messaging;
@@ -12,10 +13,14 @@ namespace Services.Users.Events
 
         public string Email { get; }
 
-        public UserAccountCreated(Guid id, string email)
+        public int Code { get;}
+
+        [JsonConstructor]
+        public UserAccountCreated(Guid id, string email, int code)
         {
             Id = id;
             Email = email;
+            Code = code;
         }
     }
 }

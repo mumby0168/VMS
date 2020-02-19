@@ -9,7 +9,7 @@ using Convey.HTTP;
 namespace Api.Gateway.Clients
 {
     public class BusinessClient : IBusinessClient
-    {
+    {        
         private readonly IHttpClient _client;
         private readonly string _baseAddress;
 

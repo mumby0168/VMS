@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Services.Common.Exceptions;
+using Services.Common.Generation;
 using Services.Common.Jwt;
 using Services.Common.Logging;
 using Services.Identity.Domain;
@@ -27,9 +28,11 @@ namespace Services.Identity.Services
         private readonly IResetRequestFactory _resetRequestFactory;
         private readonly IResetRequestRepository _resetRequestRepository;
         private readonly IBusinessRepository _businessRepository;
-        private readonly TimeSpan _passwordExpiryTime = TimeSpan.FromMinutes(30);   
+        private readonly INumberGenerator _numberGenerator;
+        private readonly TimeSpan _passwordExpiryTime = TimeSpan.FromMinutes(30);
+        private int _checks;
 
-        public UserService(IPendingIdentityRepository pendingIdentityRepository, IIdentityRepository identityRepository, IVmsLogger<UserService> logger, IPasswordManager passwordManager, IServiceBusMessagePublisher publisher, IJwtManager jwtManager, IRefreshTokenService tokenService, IResetRequestFactory resetRequestFactory, IResetRequestRepository resetRequestRepository, IBusinessRepository businessRepository)
+        public UserService(IPendingIdentityRepository pendingIdentityRepository, IIdentityRepository identityRepository, IVmsLogger<UserService> logger, IPasswordManager passwordManager, IServiceBusMessagePublisher publisher, IJwtManager jwtManager, IRefreshTokenService tokenService, IResetRequestFactory resetRequestFactory, IResetRequestRepository resetRequestRepository, IBusinessRepository businessRepository, INumberGenerator numberGenerator)
         {
             _pendingIdentityRepository = pendingIdentityRepository;
             _identityRepository = identityRepository;
@@ -41,6 +44,7 @@ namespace Services.Identity.Services
             _resetRequestFactory = resetRequestFactory;
             _resetRequestRepository = resetRequestRepository;
             _businessRepository = businessRepository;
+            _numberGenerator = numberGenerator;
         }
 
 
@@ -65,11 +69,12 @@ namespace Services.Identity.Services
                 throw new VmsException(Codes.InvalidCredentials, "The credentials are invalid.");
 
             var pword = _passwordManager.EncryptPassword(password);
-            var identity = new Domain.Identity(email, pword.Hash, pword.Salt, pending.Role, pending.BusinessId);
+            var numberCode = await CheckCode(_numberGenerator.GenerateNumber(6), pending.BusinessId);
+            var identity = new Domain.Identity(email, pword.Hash, pword.Salt, pending.Role, pending.BusinessId, numberCode);
 
             await _identityRepository.AddAsync(identity);
             await _pendingIdentityRepository.RemoveAsync(pending);
-            _publisher.PublishEvent(new UserAccountCreated(identity.Id, identity.Email), RequestInfo.Empty);
+            _publisher.PublishEvent(new UserAccountCreated(identity.Id, identity.Email, identity.Code), RequestInfo.Empty);
         }
 
         public async Task<IAuthToken> SignIn(string email, string password)
@@ -218,6 +223,22 @@ namespace Services.Identity.Services
 
             await _pendingIdentityRepository.RemoveAsync(pendingIdentity);
             _logger.LogInformation($"Pending account removed with email address: {pendingIdentity.Email}");
+        }
+
+        private async Task<int> CheckCode(int code, Guid businessid)
+        {
+            if(_checks == 6) throw new VmsException(Codes.InvalidId, "A unique code for this business could not be created.");
+            var number = _numberGenerator.GenerateNumber(6);
+            if (await _identityRepository.IsCodeInUseAsync(number, businessid))
+            {
+                _checks++;
+                number = _numberGenerator.GenerateNumber(6);
+                await CheckCode(number, businessid);
+            }
+
+            _checks = 0;
+
+            return number;
         }
     }
 }
