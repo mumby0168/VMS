@@ -1,0 +1,23 @@
+.staff-keypad-grid {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 20% 80%;
+    height: 100%;
+    align-items: center;
+    justify-items: center;
+}
+
+.staff-keypad-item {
+    height: 100%;
+    width: 50%;
+}
+
+.keypad-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    height: calc(100% - 16px);    
+    padding-bottom: 2px;
+    grid-gap: 0.5rem;    
+}
+

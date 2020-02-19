@@ -6,7 +6,7 @@ import { IAppState } from '../../redux/store'
 import { connect } from 'react-redux'
 import { SystemViews, viewChangedAction } from '../../redux/actions/systemActions'
 import { InitialSignIn } from '../../hocs/InitialSignIn'
-import Keypad from '../../hocs/Keypad'
+import StaffKeypad from '../../hocs/StaffKeypad'
 import StaffSelect from '../../hocs/StaffSelect'
 
 interface IMainProps {
@@ -21,7 +21,7 @@ interface IMainProps {
     renderInternals() {
         switch(this.props.view) {
             case SystemViews.INIT_SIGN_IN: return <InitialSignIn naviagate={this.props.navigate}/>
-            case SystemViews.STAFF_KEYPAD: return <Keypad/>
+            case SystemViews.STAFF_KEYPAD: return <StaffKeypad/>
             case SystemViews.STAFF_SELECT: return <StaffSelect/>
             default: return <h1>404 Not Found</h1>
         }
