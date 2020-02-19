@@ -1,6 +1,6 @@
 
 import { SystemEvents } from '../events/systemEvents';
-import { ISystemActions } from '../actions/systemActions';
+import { ISystemActions, SystemViews } from '../actions/systemActions';
 
 export interface IAuth {
     jwt: string;
@@ -31,6 +31,7 @@ export interface ISystemState {
     token: ITokenStructure;
     site: ISite;
     business: IBusiness;
+    systemView: SystemViews;
 }
 
 const initState: ISystemState = {
@@ -39,6 +40,7 @@ const initState: ISystemState = {
         jwt: "",
         refreshToken: ""
     },
+    systemView: SystemViews.INIT_SIGN_IN,
     token: {
         id: '',
         email: '',

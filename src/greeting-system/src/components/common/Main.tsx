@@ -4,13 +4,23 @@ import { Time, } from '../main/Time'
 import { ISite } from '../../redux/reducers/systemReducer'
 import { IAppState } from '../../redux/store'
 import { connect } from 'react-redux'
+import { SystemViews } from '../../redux/actions/systemActions'
+import { InitialSignIn } from '../../hocs/InitialSignIn'
 
 interface IMainProps {
     site: ISite
+    view: SystemViews;
 }
 
  class Main extends React.Component<IMainProps> {
 
+
+    renderInternals() {
+        switch(this.props.view) {
+            case SystemViews.INIT_SIGN_IN: return <InitialSignIn/>
+            default: return <h1>404 Not Found</h1>
+        }
+    }
 
     public render() {
         return (
@@ -31,7 +41,9 @@ interface IMainProps {
                             </Grid>
                         </Card>
                     </div>
-                    {this.props.children}
+                    <div style={{height: '80%'}}>
+                        {this.renderInternals()}
+                    </div>
                     <div className="opaque main-footer">
                         <div className="main-footer-grid">                               
                                 <div className="main-footer-back-button">
@@ -50,7 +62,8 @@ interface IMainProps {
 
 const mapStateToProps = (state: IAppState) => {
     return {
-        site: state.system.site
+        site: state.system.site,
+        view: state.system.systemView
     }
 }
 

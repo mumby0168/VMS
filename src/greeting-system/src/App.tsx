@@ -22,8 +22,7 @@ const App = () => {
     <Router>
       <Switch>
       <PrivateRoute path='/main' online={state}>
-          <Main>
-            <InitialSignIn></InitialSignIn>
+          <Main>            
           </Main>
       </PrivateRoute>
       <Route path='/' exact>
