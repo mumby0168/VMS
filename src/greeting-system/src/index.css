@@ -31,6 +31,10 @@ code {
   height: 100%;
 }
 
+.h-50 {
+  height: 50%;
+}
+
 .ta {
   text-align: center;
 }

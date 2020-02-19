@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { Card, CardContent, Typography, CardActionArea } from '@material-ui/core'
+import { Card, Typography, CardActionArea } from '@material-ui/core'
 import BackspaceIcon from '@material-ui/icons/Backspace';
 import CheckIcon from '@material-ui/icons/Check';
 import { useDispatch } from 'react-redux';

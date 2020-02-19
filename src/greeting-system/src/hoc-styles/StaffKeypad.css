@@ -9,7 +9,7 @@
 
 .staff-keypad-item {
     height: 100%;
-    width: 50%;
+    width: 50%;    
 }
 
 .keypad-grid {
@@ -21,3 +21,8 @@
     grid-gap: 0.5rem;    
 }
 
+.number-card {
+    display: grid;
+    align-items: center;
+    height: 100%;
+}
