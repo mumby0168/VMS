@@ -34,15 +34,15 @@ namespace Services.Users.Handlers.Command
 
         public async Task HandleAsync(CreateAccessRecord message, IRequestInfo requestInfo)
         {
-            var user = await _userRepository.GetAsync(message.UserId);
+            IUser user = await _userRepository.GetByCodeAsync(message.Code);
             if(user is null)
             {
                 _publisher.PublishEvent(new AccessRecordRejected(Codes.InvalidId, "No user could be found to insert access record."), requestInfo);
-                _logger.LogError($"User with id: {message.UserId} could not be found.");
+                _logger.LogError($"User with id: {user.Id} could not be found.");
                 return;
             }
 
-            var record = _factory.Create(message.UserId, user.BasedSiteId, message.Action, user.BusinessId);
+            var record = _factory.Create(user.Id, user.BasedSiteId, message.Action, user.BusinessId);
             await _accessRecordRepository.AddAsync(record);
             _publisher.PublishEvent(new AccessRecordCreated(), requestInfo);
 

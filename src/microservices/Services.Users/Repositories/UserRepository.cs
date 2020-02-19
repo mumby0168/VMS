@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Runtime.CompilerServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,6 +27,8 @@ namespace Services.Users.Repositories
             var user = await _repository.GetAsync(id);
             return user;
         }
+
+        public async Task<IUser> GetByCodeAsync(int code) => await _repository.GetAsync(u => u.Code == code);
 
         public async Task<IUser> GetFromAccountId(Guid accountId)
         {

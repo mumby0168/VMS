@@ -7,11 +7,11 @@ namespace Api.Gateway.Messages.Users.Commands
 {
     public class UserSignOn
     {
-        public Guid UserId { get; }
+        public int Code { get; }
 
-        public UserSignOn(Guid userId)
+        public UserSignOn(int code)
         {
-            UserId = userId;
+            Code = code;
         }
     }
 }

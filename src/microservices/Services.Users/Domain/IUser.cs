@@ -26,9 +26,11 @@ namespace Services.Users.Domain
 
         Guid AccountId { get; }
 
+        int Code { get; }
+
         void SuspendAccount();
 
         IUser Setup(string firstName, string secondName, string email, string phoneNumber, string businessPhoneNumber,
-            Guid basedSiteId, Guid businessId, Guid accountId);
+            Guid basedSiteId, Guid businessId, Guid accountId, int code);
     }
 }

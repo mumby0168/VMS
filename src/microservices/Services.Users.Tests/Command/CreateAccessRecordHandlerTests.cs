@@ -51,7 +51,7 @@ namespace Services.Users.Tests.Command
             var sut = CreateSut();
 
             //Act
-            await sut.HandleAsync(new CreateAccessRecord(Guid.NewGuid(), action), _requestInfo.Object);
+            await sut.HandleAsync(new CreateAccessRecord(It.IsAny<int>(), action), _requestInfo.Object);
 
             //Assert
             _publisher.Verify(o => o.PublishEvent(It.IsAny<AccessRecordRejected>(), _requestInfo.Object));
@@ -69,7 +69,7 @@ namespace Services.Users.Tests.Command
                 .Returns(_record.Object);
 
             //Act
-            await sut.HandleAsync(new CreateAccessRecord(Guid.NewGuid(), action), _requestInfo.Object);
+            await sut.HandleAsync(new CreateAccessRecord(It.IsAny<int>(), action), _requestInfo.Object);
 
             //Assert
             _publisher.Verify(o => o.PublishEvent(It.IsAny<AccessRecordCreated>(), _requestInfo.Object));

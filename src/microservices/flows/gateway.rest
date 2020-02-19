@@ -188,7 +188,7 @@ Authorization: Bearer {{jwt}}
     "businessPhoneNumber": "01482 564323"
 }
 
-@userId = 416ac433-7964-4e73-ba0a-473a5ae38dbf
+@code = 188247
 
 ### In User
 POST {{url}}users/in
@@ -196,7 +196,7 @@ Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
-    "userId": "{{userId}}"
+    "code": "{{code}}"
 }
 
 
@@ -206,7 +206,7 @@ Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
-    "userId": "{{userId}}"
+    "code": "{{code}}"
 }
 
 ### Get User Info

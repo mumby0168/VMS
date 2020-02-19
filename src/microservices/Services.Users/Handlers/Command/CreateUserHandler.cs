@@ -65,7 +65,7 @@ namespace Services.Users.Handlers.Command
             try
             {
                 user = _factory.CreateUser(message.FirstName, message.SecondName, account.Email, message.PhoneNumber,
-                    message.BusinessPhoneNumber, message.BasedSiteId, message.BusinessId, message.AccountId);
+                    message.BusinessPhoneNumber, message.BasedSiteId, message.BusinessId, message.AccountId, account.Code);
             }
             catch (VmsException e)
             {

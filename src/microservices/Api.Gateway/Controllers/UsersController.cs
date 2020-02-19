@@ -29,17 +29,15 @@ namespace Api.Gateway.Controllers
         [HttpPost("create")]
         public IActionResult Create([FromBody] CreateUser command) => PublishCommand(command);
 
-        //TODO: decide on security restriction for this.
-        [AllowAnonymous]
+        [Authorize(Roles = Roles.PortalGreeting)]
         [HttpPost("in")]
         public IActionResult SignOn([FromBody]UserSignOn command) =>
-            PublishCommand(new CreateAccessRecord(command.UserId, AccessAction.In));
+            PublishCommand(new CreateAccessRecord(command.Code, AccessAction.In));
 
-        //TODO: decide on security restriction for this.
-        [AllowAnonymous]
+        [Authorize(Roles = Roles.PortalGreeting)]
         [HttpPost("out")]
         public IActionResult SignOn([FromBody]UserSignOff command) =>
-            PublishCommand(new CreateAccessRecord(command.UserId, AccessAction.Out));
+            PublishCommand(new CreateAccessRecord(command.Code, AccessAction.Out));
 
         [Authorize(Roles = Roles.PortalUser)]
         [HttpGet("records")]

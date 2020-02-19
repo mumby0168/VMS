@@ -10,14 +10,14 @@ namespace Services.Users.Commands
 {
     public class CreateAccessRecord : ICommand
     {
-        public Guid UserId { get; }
+        public int Code { get; }
 
         public AccessAction Action { get; }
 
         [JsonConstructor]
-        public CreateAccessRecord(Guid userId, AccessAction action)
+        public CreateAccessRecord(int code, AccessAction action)
         {
-            UserId = userId;
+            Code = code;
             Action = action;
         }
     }

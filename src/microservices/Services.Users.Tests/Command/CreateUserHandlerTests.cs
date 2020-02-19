@@ -101,7 +101,7 @@ namespace Services.Users.Tests.Command
 
             _userFactory
                 .Setup(o => o.CreateUser(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
-                    It.IsAny<string>(), It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<Guid>()))
+                    It.IsAny<string>(), It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<int>()))
                 .Throws(new VmsException("code", "reason"));
 
             //Act
@@ -122,7 +122,7 @@ namespace Services.Users.Tests.Command
 
             _userFactory
                 .Setup(o => o.CreateUser(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
-                    It.IsAny<string>(), It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<Guid>())).Returns(_user.Object);
+                    It.IsAny<string>(), It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<int>())).Returns(_user.Object);
 
             //Act
             await sut.HandleAsync(_createUser, _requestInfo.Object);
