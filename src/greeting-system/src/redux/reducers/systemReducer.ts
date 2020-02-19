@@ -40,7 +40,7 @@ const initState: ISystemState = {
         jwt: "",
         refreshToken: ""
     },
-    systemView: SystemViews.INIT_SIGN_IN,
+    systemView: SystemViews.INIT_SIGN_IN,    
     token: {
         id: '',
         email: '',
@@ -74,6 +74,9 @@ export const reducer = (state: ISystemState = initState, action: ISystemActions)
 
         case SystemEvents.SITE_FETCHED:
             return {...state, site: {...action.payload}};
+
+        case SystemEvents.VIEW_CHANGED:
+            return {...state, systemView: action.payload}
 
         default: return state;
     }

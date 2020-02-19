@@ -5,6 +5,8 @@ import { ISite } from "../reducers/systemReducer";
 
 export enum SystemViews {
     INIT_SIGN_IN = 0,
+    STAFF_SELECT = 1,
+    STAFF_KEYPAD = 2,
 }
 
 export const authObtained = makeAction<SystemEvents.AUTH_OBTAINED, IAuthTokenReponse>(SystemEvents.AUTH_OBTAINED);

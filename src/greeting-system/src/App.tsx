@@ -7,7 +7,6 @@ import { IAppState } from './redux/store';
 import { useSelector } from 'react-redux';
 import {PrivateRoute} from './components/routing/PrivateRoute'
 import Main from './components/common/Main'
-import {InitialSignIn} from './hocs/InitialSignIn'
 
 
 
