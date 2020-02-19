@@ -78,6 +78,9 @@ class Layout extends Component {
                         <PrivateRoute path="/visitors" valid={isAdmin}>
                             <Visitors/>
                         </PrivateRoute>
+                        <Route path='/' exact>
+                            <Login/>
+                        </Route>
                         <Route path="*">
                             <h1>Not Found</h1>
                         </Route>
