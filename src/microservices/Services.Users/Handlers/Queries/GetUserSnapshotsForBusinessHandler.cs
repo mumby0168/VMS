@@ -36,8 +36,10 @@ namespace Services.Users.Handlers.Queries
 
             foreach (var user in users)
             {
-                var state = await _statusRepository.GetStatusAsync(user.Id);                
+                //TODO: This could get these all in one go then iterate the list in memory. (FirstOrDefault())
+                var state = await _statusRepository.GetStatusForUserAsync(user.Id);                
 
+                //TODO: Could get list of sites and access then from memory.
                 var siteName = await _siteRepository.GetSiteNameAsync(state.SiteId);
 
                 ret.Add(new UserSnapshotDto

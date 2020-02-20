@@ -22,7 +22,7 @@ namespace Services.Users.Services
 
         public async Task Update(Guid userId, AccessAction action, Guid siteId)
         {
-            var status = await repository.GetStatusAsync(userId);
+            var status = await repository.GetStatusForUserAsync(userId);
             if(status is null)
             {
                 logger.LogInformation("No status found creating one now for user: " + userId);

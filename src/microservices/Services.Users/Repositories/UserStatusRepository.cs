@@ -19,7 +19,7 @@ namespace Services.Users.Repositories
             return _repository.AddAsync(status as UserStatus);
         }
 
-        public async Task<IUserStatus> GetStatusAsync(Guid userId)
+        public async Task<IUserStatus> GetStatusForUserAsync(Guid userId)
         {
             return await _repository.GetAsync(s => s.UserId == userId);
         }

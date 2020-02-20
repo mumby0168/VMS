@@ -6,7 +6,7 @@ namespace Services.Users.Repositories
 {
     public interface IUserStatusRepository
     {
-        Task<IUserStatus> GetStatusAsync(Guid userId);
+        Task<IUserStatus> GetStatusForUserAsync(Guid userId);
 
         Task AddAsync(IUserStatus status);
 
