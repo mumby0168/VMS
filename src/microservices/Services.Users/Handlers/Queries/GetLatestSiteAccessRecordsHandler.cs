@@ -17,44 +17,44 @@ namespace Services.Users.Handlers.Queries
         private readonly IVmsLogger<GetBusinessAccessRecordsHandler> _logger;
         private readonly IAccessRecordRepository _accessRecordRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IUserStatusRepository _statusRepository;
 
-        public GetLatestSiteAccessRecordsHandler(IVmsLogger<GetBusinessAccessRecordsHandler> logger, IAccessRecordRepository accessRecordRepository, IUserRepository userRepository)
+        public GetLatestSiteAccessRecordsHandler(IVmsLogger<GetBusinessAccessRecordsHandler> logger, IAccessRecordRepository accessRecordRepository, IUserRepository userRepository, IUserStatusRepository statusRepository)
         {
             _logger = logger;
             _accessRecordRepository = accessRecordRepository;
             _userRepository = userRepository;
+            _statusRepository = statusRepository;
         }
         public async Task<IEnumerable<LatestAccessRecordDto>> HandleAsync(GetLatestSiteAccessRecords query)
         {
-            var records = new List<LatestAccessRecordDto>();
 
-            var accessRecords = await _accessRecordRepository.GetForSite(query.SiteId);
-            var userAccessRecords = accessRecords.GroupBy(a => a.UserId);
+            IEnumerable<IUserStatus> states = await _statusRepository.GetForSiteAsync(query.SiteId);            
 
-            foreach (var userAccessRecord in userAccessRecords)
+            var records = new List<LatestAccessRecordDto>();        
+            
+
+            foreach (var state in states)
             {
-                var user = await _userRepository.GetAsync(userAccessRecord.Key);
+                var user = await _userRepository.GetAsync(state.UserId);
 
-                var recordDto = new LatestAccessRecordDto
+                if(user is null) 
                 {
-                    UserId = user.Id,
-                    Email = user.Email,
-                    ContactNumber = user.PhoneNumber,
-                    FullName = user.FirstName + " " + user.SecondName,
-                    Initials = $"{user.FirstName[0]}{user.SecondName[0]}"
-                };
+                    _logger.LogWarning($"User not found to match with current state id is: {state.UserId}");                    
+                }
 
-                var latest = userAccessRecord.OrderByDescending(a => a.TimeStamp).FirstOrDefault();
-
-                //TODO: don't be lazy.
-                if (latest is null)
-                    continue;
-
-                recordDto.Action = latest.Action == AccessAction.In ? "in" : "out";
-                recordDto.Id = latest.Id;
-                recordDto.TimeStamp = latest.TimeStamp;
-                records.Add(recordDto);
-            }
+                records.Add(new LatestAccessRecordDto
+                {
+                    Action = state.CurrentState == AccessAction.In ? "in" : "out",
+                    Id = state.Id,
+                    TimeStamp = state.Updated,
+                    UserId = state.UserId,
+                    FullName = user?.FirstName + " " + user?.SecondName,
+                    Email = user?.Email,
+                    ContactNumber = user?.PhoneNumber,
+                    Initials = $"{user?.FirstName[0]}{user?.SecondName[0]}"                    
+                });                                        
+            }                        
 
             return records;
         }

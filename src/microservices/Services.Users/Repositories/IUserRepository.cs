@@ -15,5 +15,6 @@ namespace Services.Users.Repositories
         Task<IEnumerable<IUser>> GetUsersByBusinessId(Guid businessId);
         Task UpdateAsync(IUser user);
         Task<IUser> GetByCodeAsync(int code);
+        
     }
 }

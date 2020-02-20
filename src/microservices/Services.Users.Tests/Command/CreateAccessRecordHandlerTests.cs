@@ -28,7 +28,7 @@ namespace Services.Users.Tests.Command
         private Mock<IAccessRecordRepository> _accessRecordRepo;
         private Mock<IAccessRecordFactory> _accessFactory;
         private Mock<IUserStatusService> _userStatusService;
-        private Mock<ISiteRepository> _siteRepository;
+        private Mock<IServicesRepository> _serviceRepository;
 
         private Mock<IUser> _user;
         private Mock<IAccessRecord> _record; 
@@ -45,7 +45,7 @@ namespace Services.Users.Tests.Command
             _user = new Mock<IUser>();
             _record = new Mock<IAccessRecord>();
             _userStatusService = new Mock<IUserStatusService>();
-            _siteRepository = new Mock<ISiteRepository>();
+            _serviceRepository = new Mock<IServicesRepository>();
         }
 
         [TestCase(AccessAction.In)]
@@ -84,7 +84,7 @@ namespace Services.Users.Tests.Command
 
 
         public CreateAccessRecordHandler CreateSut() => new CreateAccessRecordHandler(LoggerMock.CreateVms<CreateAccessRecordHandler>(), _userRepo.Object, _accessRecordRepo.Object, _accessFactory.Object, _publisher.Object
-         , _siteRepository.Object  , _userStatusService.Object);
+         , _serviceRepository.Object  , _userStatusService.Object);
         
     }
 }

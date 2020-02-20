@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Services.Users.Domain;
 
@@ -11,5 +12,6 @@ namespace Services.Users.Repositories
         Task AddAsync(IUserStatus status);
 
         Task UpdateAsync(IUserStatus status);
+        Task<IEnumerable<IUserStatus>> GetForSiteAsync(Guid siteId);
     }
 }
