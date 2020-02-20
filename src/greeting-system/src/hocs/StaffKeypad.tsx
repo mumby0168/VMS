@@ -6,7 +6,7 @@ import { IAppState } from '../redux/store'
 import { Card, Typography } from '@material-ui/core'
 import { viewChangedAction, SystemViews } from '../redux/actions/systemActions'
 import { updateCodeAction } from '../redux/actions/staffKeypadActions'
-import { updateOverlayAction } from '../redux/actions/overlayActions'
+import { updateOverlayAction, IconType, closeOverlay, openOverlay } from '../redux/actions/overlayActions'
 
 interface IStaffKeypadProps {   
     staffCode: string;
@@ -50,29 +50,16 @@ const mapStateToProps = (state: IAppState) => {
 const mapDispatchToProps = (dispatch: any) => {
     return {
         handleSucessfulSignIn: () => {
-            dispatch(updateOverlayAction({
-                isOpen: true,
-                showSpinner: false,
-                message: 'You have succesfully signed in.'
-
-            }));
+            dispatch(updateOverlayAction(openOverlay('Sign in succesful', IconType.TICK)));
             setTimeout(() => {
-                dispatch(updateOverlayAction({
-                    isOpen: false,
-                    showSpinner: false,
-                    message: ''
-    
-                }));
+                dispatch(updateOverlayAction(closeOverlay()));
                 dispatch(updateCodeAction(""));
                 dispatch(viewChangedAction(SystemViews.INIT_SIGN_IN));
                 
             }, 1000)
             
         },
-        handleSignInFailure: (reason: string) => {
-            // Show Failure pop up.
-            // Clear code.
-        }
+        handleSignInFailure: (reason: string) => dispatch(updateOverlayAction(openOverlay(reason, IconType.ERROR, false, true)))
     }
 }
 
