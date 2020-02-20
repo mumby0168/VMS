@@ -52,7 +52,8 @@ namespace Services.Users.Handlers.Queries
                     FullName = user?.FirstName + " " + user?.SecondName,
                     Email = user?.Email,
                     ContactNumber = user?.PhoneNumber,
-                    Initials = $"{user?.FirstName[0]}{user?.SecondName[0]}"                    
+                    Initials = $"{user?.FirstName[0]}{user?.SecondName[0]}",
+                    Code = user?.Code.ToString()            
                 });                                        
             }                        
 

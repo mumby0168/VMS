@@ -38,5 +38,10 @@ namespace Api.Gateway.Clients
         {
             return _client.GetAsync<IEnumerable<AccessRecordDto>>($"{_baseAddress}/admin-records/{userId}");
         }
+
+        public Task<IEnumerable<LatestAccessRecordDto>> GetLatestStateForSite(Guid siteId)
+        {
+            return  _client.GetAsync<IEnumerable<LatestAccessRecordDto>>($"{_baseAddress}/site-availability/{siteId}");
+        }
     }
 }

@@ -13,6 +13,8 @@ namespace Api.Gateway.Clients.Interfaces
         Task<UserInfoDto> GetUserInfo(Guid accountId);
         Task<IEnumerable<UserSnapshotDto>> GetUsersForBusiness(Guid businessId);
         Task<IEnumerable<AccessRecordDto>> GetAccessRecordForUserAsyncById(Guid userId);
+
+        Task<IEnumerable<LatestAccessRecordDto>> GetLatestStateForSite(Guid siteId);
     }
 }
         

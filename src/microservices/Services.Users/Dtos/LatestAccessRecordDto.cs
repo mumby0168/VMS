@@ -15,6 +15,8 @@ namespace Services.Users.Dtos
 
         private Guid SiteId { get; set; }
 
+        public string Code {get; set; }
+
         public DateTime TimeStamp { get; set; }
 
         public string FullName { get; set; }

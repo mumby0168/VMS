@@ -69,6 +69,15 @@ namespace Api.Gateway.Controllers
         }
 
 
+        //TODO: this could be better placed in the site API Controller
+        [Authorize(Roles = Roles.Greeting)]
+        [HttpGet("site-state/{siteId}")]
+        public async Task<ActionResult<IEnumerable<LatestAccessRecordDto>>> GetLatestAccessRecordsForSiteAsync([FromRoute] Guid siteId) 
+        {
+            return Collection(await _client.GetLatestStateForSite(siteId));
+        }
+
+
         [Authorize(Roles = Roles.BusinessAdmin)]
         [HttpGet("users")]
         public async Task<ActionResult<IEnumerable<UserSnapshotDto>>> GetUserSnapshots() 

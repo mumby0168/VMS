@@ -6,11 +6,14 @@ import { useDispatch } from 'react-redux';
 import { updateCodeAction } from '../../redux/actions/staffKeypadActions';
 import { userInOut, UserAccess } from '../../redux/api/user'
 import { operationsAggregator } from '../../operations/operationsAggregator';
+import { IStaffCurrentState } from '../../redux/actions/staffActioms';
 
 interface IKeypadProps {
     code: string;
-    handleSucessfulSignIn: () => void;
+    handleSucessfulSignIn: (staffState: IStaffCurrentState) => void;
     handleSignInFailure: (reason: string) => void;
+    siteId: string;
+    states: IStaffCurrentState[]
 }
 
 interface IKeyPadItemProps {
@@ -18,7 +21,7 @@ interface IKeyPadItemProps {
     onclick: () => void;
 }
 
-const KeyPadItem = ({ content, onclick }: IKeyPadItemProps) => {
+const KeyPadItem = ({ content, onclick, }: IKeyPadItemProps) => {
     return (
         <div className="keypad-item">
             <Card className="h-100 ta">
@@ -32,7 +35,7 @@ const KeyPadItem = ({ content, onclick }: IKeyPadItemProps) => {
     )
 }
 
-export default function Keypad({ code, handleSignInFailure, handleSucessfulSignIn }: IKeypadProps): ReactElement {
+export default function Keypad({ code, handleSignInFailure, handleSucessfulSignIn, siteId, states }: IKeypadProps): ReactElement {
 
     const dispatch = useDispatch();
 
@@ -46,30 +49,38 @@ export default function Keypad({ code, handleSignInFailure, handleSucessfulSignI
         dispatch(updateCodeAction(newCode));
     }
 
+    //TODO: this should be pulled out to top level componet.
     const submitCode = async () => {
-        var res = await userInOut(code, UserAccess.IN);
-        if (res !== "") {
-            operationsAggregator.listen(res, handleSucessfulSignIn, 
-                (op) => handleSignInFailure(op.reason ?? "The reason could not be determined"));
+        const state = states.find(s => s.code === code);      
+        if(state == undefined) { 
+            handleSignInFailure('The code entered is not valid');            
+            return;
+        }
+        //perform the opossite to current state
+        const action = state.action === "in" ? UserAccess.OUT : UserAccess.IN
+        var res = await userInOut(code, action, siteId);
+        if (res !== "") {                          
+            operationsAggregator.listen(res, () => handleSucessfulSignIn(state),
+            (op) => handleSignInFailure(op.reason ?? "The reason could not be determined"));            
         }
     }
 
-    return (
-        <Card className="h-100">
-            <div className="keypad-grid">
-                <KeyPadItem onclick={() => updateCode('1')} content="1" />
-                <KeyPadItem onclick={() => updateCode('2')} content="2" />
-                <KeyPadItem onclick={() => updateCode('3')} content="3" />
-                <KeyPadItem onclick={() => updateCode('4')} content="4" />
-                <KeyPadItem onclick={() => updateCode('5')} content="5" />
-                <KeyPadItem onclick={() => updateCode('6')} content="6" />
-                <KeyPadItem onclick={() => updateCode('7')} content="7" />
-                <KeyPadItem onclick={() => updateCode('8')} content="8" />
-                <KeyPadItem onclick={() => updateCode('9')} content="9" />
-                <KeyPadItem onclick={submitCode} content={<CheckIcon />} />
-                <KeyPadItem onclick={() => updateCode('0')} content="0" />
-                <KeyPadItem onclick={trimCode} content={<BackspaceIcon />} />
-            </div>
-        </Card>
-    )
-}
+        return (
+            <Card className="h-100">
+                <div className="keypad-grid">
+                    <KeyPadItem onclick={() => updateCode('1')} content="1" />
+                    <KeyPadItem onclick={() => updateCode('2')} content="2" />
+                    <KeyPadItem onclick={() => updateCode('3')} content="3" />
+                    <KeyPadItem onclick={() => updateCode('4')} content="4" />
+                    <KeyPadItem onclick={() => updateCode('5')} content="5" />
+                    <KeyPadItem onclick={() => updateCode('6')} content="6" />
+                    <KeyPadItem onclick={() => updateCode('7')} content="7" />
+                    <KeyPadItem onclick={() => updateCode('8')} content="8" />
+                    <KeyPadItem onclick={() => updateCode('9')} content="9" />
+                    <KeyPadItem onclick={submitCode} content={<CheckIcon />} />
+                    <KeyPadItem onclick={() => updateCode('0')} content="0" />
+                    <KeyPadItem onclick={trimCode} content={<BackspaceIcon />} />
+                </div>
+            </Card>
+        )
+    }
