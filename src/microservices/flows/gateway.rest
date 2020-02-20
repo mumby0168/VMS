@@ -1,7 +1,6 @@
 @url = http://localhost:5020/gateway/api/
 
-@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW5AdGVzdC5jb20iLCJuYW1laWQiOiJlNThmODdmMi0zZDMzLTRmZjQtYTA0NC05MTVmMjQ2ZGZhMzQiLCJyb2xlIjoiQnVzaW5lc3NBZG1pbiIsImJ1c2luZXNzSWQiOiI5ZWFmMDljOC03NDIyLTQxNDItYjliNS1jMTYyYzk4OGE4Y2UiLCJuYmYiOjE1ODIxMTQwOTYsImV4cCI6MTU4MjEyNDg5NiwiaWF0IjoxNTgyMTE0MDk2fQ.hzF_iKvaOmh3Eh2OJlOTQmK1rh0NU_c4QuoP88uJnxIj8bXlOTjIj7TNMLuhj7H8yv-GikOsomBnk3FMTLw8nA
-
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW5AdGVzdC5jb20iLCJuYW1laWQiOiI1OWNhMmRkMy0xZjYwLTQ5ODQtODI1YS01NTBiNzRjMGIyMWQiLCJyb2xlIjoiQnVzaW5lc3NBZG1pbiIsImJ1c2luZXNzSWQiOiJmMGZkYzY5Yy1kN2I2LTQ0NGUtOTc0Ny0yZTY2OGZmZmMwMGYiLCJuYmYiOjE1ODIyMTk3MzksImV4cCI6MTU4MjIzMDUzOSwiaWF0IjoxNTgyMjE5NzM5fQ.4NOZwsil6KMkQPu4KhHISsiPRDCRa7EN-8P4fNySBHof14NDqsLzIzxWlbyjzH9P9jXuPjmcDEWuQ1COBtN6Yg
 
 @refreshToken = WSvpmPpLEsQEVusaDi2zDXV0Ey/c6MPKIxLw3Ny574s=
 
@@ -105,7 +104,7 @@ Authorization: Bearer {{jwt}}
 }
 
 
-@siteId = ac3fed5d-3277-409e-972c-e800e072ae35
+@siteId = f0fdc69c-d7b6-444e-9747-2e668fffc00f
 
 ### Get Site
 GET {{url}}sites/get/{{siteId}}
@@ -196,7 +195,8 @@ Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
-    "code": "{{code}}"
+    "code": "{{code}}",
+    "siteId": "5f7c90be-2b3b-447e-96ff-3af68099c141"
 }
 
 
@@ -206,7 +206,8 @@ Content-Type: application/json
 Authorization: Bearer {{jwt}}
 
 {
-    "code": "{{code}}"
+    "code": "{{code}}",
+    "siteId": "5f7c90be-2b3b-447e-96ff-3af68099c141"
 }
 
 ### Get User Info
@@ -230,7 +231,7 @@ Authorization: Bearer {{jwt}}
 
 ### Get Site Availability
 
-@siteId = aef48a96-1db9-488f-9cbf-034aab882f4b
+@siteId = f0fdc69c-d7b6-444e-9747-2e668fffc00f
 
 GET {{url}}sites/availability/{{siteId}}
 Authorization: Bearer {{jwt}}

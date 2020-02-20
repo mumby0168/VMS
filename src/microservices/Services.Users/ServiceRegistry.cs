@@ -25,11 +25,14 @@ namespace Services.Users
             serviceCollection.AddTransient<IUserRepository, UserRepository>();
             serviceCollection.AddTransient<IServicesRepository, ServicesRepository>();
             serviceCollection.AddTransient<ISiteRepository, SiteRepository>();
+            serviceCollection.AddTransient<IUserStatusRepository, UserStatusRepository>();
 
 
             serviceCollection.AddSingleton<IAccessRecordFactory, AccessRecordFactory>();
             serviceCollection.AddTransient<IAccessRecordRepository, AccessRecordRepository>();
             serviceCollection.AddTransient<ISiteFactory, SiteFactory>();
+
+            serviceCollection.AddTransient<IUserStatusService, UserStatusService>();
 
             serviceCollection.AddTransient<IEventHandler<AccountRemoved>, AccountRemovedHandler>();
             serviceCollection.AddTransient<IEventHandler<UserAccountCreated>, UserAccountCreatedHandler>();

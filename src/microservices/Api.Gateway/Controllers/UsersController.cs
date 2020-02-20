@@ -32,12 +32,12 @@ namespace Api.Gateway.Controllers
         [Authorize(Roles = Roles.PortalGreeting)]
         [HttpPost("in")]
         public IActionResult SignOn([FromBody]UserSignOn command) =>
-            PublishCommand(new CreateAccessRecord(command.Code, AccessAction.In));
+            PublishCommand(new CreateAccessRecord(command.Code, AccessAction.In, command.SiteId));
 
         [Authorize(Roles = Roles.PortalGreeting)]
         [HttpPost("out")]
         public IActionResult SignOn([FromBody]UserSignOff command) =>
-            PublishCommand(new CreateAccessRecord(command.Code, AccessAction.Out));
+            PublishCommand(new CreateAccessRecord(command.Code, AccessAction.Out, command.SiteId));
 
         [Authorize(Roles = Roles.PortalUser)]
         [HttpGet("records")]

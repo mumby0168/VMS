@@ -12,5 +12,10 @@ namespace Services.Users.Factories
         {
             return new AccessRecord().Create(userId, siteId, action, userBusinessId);
         }
+
+        public IUserStatus Create(Guid userId, Guid siteId, AccessAction action)
+        {
+            return new UserStatus().Create(userId, action, siteId);
+        }
     }
 }

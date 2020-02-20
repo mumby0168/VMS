@@ -9,5 +9,7 @@ namespace Services.Users.Factories
     public interface IAccessRecordFactory
     {
         IAccessRecord Create(Guid userId, Guid siteId, AccessAction action, Guid userBusinessId);
+
+        IUserStatus Create(Guid userId, Guid siteId, AccessAction action);
     }
 }

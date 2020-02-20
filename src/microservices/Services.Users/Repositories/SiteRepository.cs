@@ -31,5 +31,7 @@ namespace Services.Users.Repositories
         {
             return _repository.AddAsync(site as Site);
         }
+
+        public async Task<ISite> GetSiteAsync(Guid siteId) => await _repository.GetAsync(siteId);
     }
 }

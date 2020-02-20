@@ -33,7 +33,8 @@ namespace Services.Users
                 .AddMongoCollection<User>()
                 .AddMongoCollection<Account>()
                 .AddMongoCollection<AccessRecord>()
-                .AddMongoCollection<Site>();
+                .AddMongoCollection<Site>()
+                .AddMongoCollection<UserStatus>();
 
             services.AddQuerySupport();
 

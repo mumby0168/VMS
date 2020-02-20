@@ -14,11 +14,14 @@ namespace Api.Gateway.Messages.Users.Commands
 
         public AccessAction Action { get; }
 
+        public Guid SiteId { get; }
+
         [JsonConstructor]
-        public CreateAccessRecord(int code, AccessAction action)
+        public CreateAccessRecord(int code, AccessAction action, Guid siteId)
         {
             Code = code;
             Action = action;
+            SiteId = siteId;
         }
     }
 }

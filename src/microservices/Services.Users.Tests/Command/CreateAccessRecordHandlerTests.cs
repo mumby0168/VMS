@@ -14,6 +14,7 @@ using Services.Users.Events;
 using Services.Users.Factories;
 using Services.Users.Handlers.Command;
 using Services.Users.Repositories;
+using Services.Users.Services;
 
 namespace Services.Users.Tests.Command
 {
@@ -26,6 +27,8 @@ namespace Services.Users.Tests.Command
         private Mock<IUserRepository> _userRepo;
         private Mock<IAccessRecordRepository> _accessRecordRepo;
         private Mock<IAccessRecordFactory> _accessFactory;
+        private Mock<IUserStatusService> _userStatusService;
+        private Mock<ISiteRepository> _siteRepository;
 
         private Mock<IUser> _user;
         private Mock<IAccessRecord> _record; 
@@ -41,6 +44,8 @@ namespace Services.Users.Tests.Command
             _userRepo = new Mock<IUserRepository>();
             _user = new Mock<IUser>();
             _record = new Mock<IAccessRecord>();
+            _userStatusService = new Mock<IUserStatusService>();
+            _siteRepository = new Mock<ISiteRepository>();
         }
 
         [TestCase(AccessAction.In)]
@@ -51,7 +56,7 @@ namespace Services.Users.Tests.Command
             var sut = CreateSut();
 
             //Act
-            await sut.HandleAsync(new CreateAccessRecord(It.IsAny<int>(), action), _requestInfo.Object);
+            await sut.HandleAsync(new CreateAccessRecord(It.IsAny<int>(), action, It.IsAny<Guid>()), _requestInfo.Object);
 
             //Assert
             _publisher.Verify(o => o.PublishEvent(It.IsAny<AccessRecordRejected>(), _requestInfo.Object));
@@ -69,7 +74,7 @@ namespace Services.Users.Tests.Command
                 .Returns(_record.Object);
 
             //Act
-            await sut.HandleAsync(new CreateAccessRecord(It.IsAny<int>(), action), _requestInfo.Object);
+            await sut.HandleAsync(new CreateAccessRecord(It.IsAny<int>(), action, It.IsAny<Guid>()), _requestInfo.Object);
 
             //Assert
             _publisher.Verify(o => o.PublishEvent(It.IsAny<AccessRecordCreated>(), _requestInfo.Object));
@@ -78,7 +83,8 @@ namespace Services.Users.Tests.Command
 
 
 
-        public CreateAccessRecordHandler CreateSut() => new CreateAccessRecordHandler(LoggerMock.CreateVms<CreateAccessRecordHandler>(), _userRepo.Object, _accessRecordRepo.Object, _accessFactory.Object, _publisher.Object);
+        public CreateAccessRecordHandler CreateSut() => new CreateAccessRecordHandler(LoggerMock.CreateVms<CreateAccessRecordHandler>(), _userRepo.Object, _accessRecordRepo.Object, _accessFactory.Object, _publisher.Object
+         , _siteRepository.Object  , _userStatusService.Object);
         
     }
 }

@@ -9,9 +9,12 @@ namespace Api.Gateway.Messages.Users.Commands
     {
         public int Code { get; }
 
-        public UserSignOff(int code)
+        public Guid SiteId { get; }
+
+        public UserSignOff(int code, Guid siteId)
         {
             Code = code;
+            SiteId = siteId;
         }
     }
 }

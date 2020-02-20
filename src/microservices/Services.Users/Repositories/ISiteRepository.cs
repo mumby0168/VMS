@@ -12,5 +12,6 @@ namespace Services.Users.Repositories
 
         Task<string> GetSiteNameAsync(Guid id);
         Task AddSiteAsync(ISite site);
+        Task<ISite> GetSiteAsync(Guid siteId);
     }
 }
