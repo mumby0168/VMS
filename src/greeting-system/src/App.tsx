@@ -7,6 +7,7 @@ import { IAppState } from './redux/store';
 import { useSelector } from 'react-redux';
 import {PrivateRoute} from './components/routing/PrivateRoute'
 import Main from './components/common/Main'
+import Overlay from './components/common/Overlay';
 
 
 
@@ -17,7 +18,7 @@ const App = () => {
   
 
   return (
-    
+    <React.Fragment>      
     <Router>
       <Switch>
       <PrivateRoute path='/main' online={state}>
@@ -32,6 +33,7 @@ const App = () => {
       </Route>
       </Switch>
     </Router>
+    </React.Fragment>
       )
 }
 

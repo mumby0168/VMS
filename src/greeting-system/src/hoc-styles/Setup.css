@@ -3,11 +3,11 @@ form {
     margin: auto;
 }
 
-.background {
+/* .background {
     background-image: url('../images/shaking.jpg');
     background-repeat: no-repeat;
-    background-size: cover;
-} 
+    background-size: cover; 
+}*/
 
 .card {
     opacity: 0.8;

@@ -4,9 +4,14 @@ import Keypad from '../components/staff-keypad/Keypad'
 import { connect } from 'react-redux'
 import { IAppState } from '../redux/store'
 import { Card, Typography } from '@material-ui/core'
+import { viewChangedAction, SystemViews } from '../redux/actions/systemActions'
+import { updateCodeAction } from '../redux/actions/staffKeypadActions'
+import { updateOverlayAction } from '../redux/actions/overlayActions'
 
 interface IStaffKeypadProps {   
     staffCode: string;
+    handleSucessfulSignIn: () => void;
+    handleSignInFailure: (reason: string) => void;
 }
 
 
@@ -26,7 +31,10 @@ class StaffKeypad extends Component<IStaffKeypadProps> {
                     </div>
                 </div>
                 <div className="staff-keypad-item">
-                    <Keypad code={this.props.staffCode}/>
+                    <Keypad 
+                    handleSucessfulSignIn={this.props.handleSucessfulSignIn}
+                    handleSignInFailure={this.props.handleSignInFailure}
+                    code={this.props.staffCode}/>
                 </div>
             </div>
         )
@@ -39,5 +47,34 @@ const mapStateToProps = (state: IAppState) => {
     }
 }
 
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        handleSucessfulSignIn: () => {
+            dispatch(updateOverlayAction({
+                isOpen: true,
+                showSpinner: false,
+                message: 'You have succesfully signed in.'
 
-export default connect(mapStateToProps)(StaffKeypad)
+            }));
+            setTimeout(() => {
+                dispatch(updateOverlayAction({
+                    isOpen: false,
+                    showSpinner: false,
+                    message: ''
+    
+                }));
+                dispatch(updateCodeAction(""));
+                dispatch(viewChangedAction(SystemViews.INIT_SIGN_IN));
+                
+            }, 1000)
+            
+        },
+        handleSignInFailure: (reason: string) => {
+            // Show Failure pop up.
+            // Clear code.
+        }
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(StaffKeypad)

@@ -20,11 +20,14 @@ code {
 .background {
   background-image: url('./images/shaking.jpg');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover;  
 } 
 
 .opaque {
   opacity: 0.7;
+}
+#z-max {
+  z-index: 255;
 }
 
 .h-100{

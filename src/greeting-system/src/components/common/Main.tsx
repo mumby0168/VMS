@@ -8,6 +8,7 @@ import { SystemViews, viewChangedAction } from '../../redux/actions/systemAction
 import { InitialSignIn } from '../../hocs/InitialSignIn'
 import StaffKeypad from '../../hocs/StaffKeypad'
 import StaffSelect from '../../hocs/StaffSelect'
+import Overlay from './Overlay'
 
 interface IMainProps {
     site: ISite
@@ -31,8 +32,9 @@ interface IMainProps {
 
         const internal = this.renderInternals();
 
-        return (
-            <Paper className="hundred-percent background" >
+        return (            
+            <Paper className="hundred-percent background" >                
+            <Overlay/>
                 <div className="hundred-percent opaque ">
                     <div style={{ height: '5%' }} className="main-header">
                         <Card>

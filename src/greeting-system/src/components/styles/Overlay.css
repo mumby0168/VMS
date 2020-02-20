@@ -1,0 +1,14 @@
+.backdrop-grid {
+    height: 100%;
+    display: grid;
+    align-items: center;    
+    justify-items: center;       
+    width: 100%;
+}
+
+.backdrop-item  {
+    padding: 10%;     
+    text-align: center;  
+    width: 30%;
+}
+
