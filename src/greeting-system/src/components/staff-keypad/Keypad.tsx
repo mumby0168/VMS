@@ -10,7 +10,7 @@ import { IStaffCurrentState } from '../../redux/actions/staffActioms';
 
 interface IKeypadProps {
     code: string;
-    handleSucessfulSignIn: (staffState: IStaffCurrentState) => void;
+    handleSucessfulSignIn: (staffState: IStaffCurrentState | undefined) => void;
     handleSignInFailure: (reason: string) => void;
     siteId: string;
     states: IStaffCurrentState[]
@@ -51,13 +51,16 @@ export default function Keypad({ code, handleSignInFailure, handleSucessfulSignI
 
     //TODO: this should be pulled out to top level componet.
     const submitCode = async () => {
-        const state = states.find(s => s.code === code);      
-        if(state == undefined) { 
-            handleSignInFailure('The code entered is not valid');            
-            return;
-        }
+        const state = states.find(s => s.code === code);              
         //perform the opossite to current state
-        const action = state.action === "in" ? UserAccess.OUT : UserAccess.IN
+        var action; 
+        if(state !== undefined) {
+            action = state.action === "in" ? UserAccess.OUT : UserAccess.IN
+        }
+        else {
+            action = UserAccess.IN;
+        }
+        
         var res = await userInOut(code, action, siteId);
         if (res !== "") {                          
             operationsAggregator.listen(res, () => handleSucessfulSignIn(state),

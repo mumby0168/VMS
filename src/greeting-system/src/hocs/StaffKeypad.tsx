@@ -10,9 +10,9 @@ import { updateOverlayAction, IconType, closeOverlay, openOverlay } from '../red
 import { getStaffState } from '../redux/api/user'
 import { IStaffCurrentState } from '../redux/actions/staffActioms'
 
-interface IStaffKeypadProps {   
+interface IStaffKeypadProps {
     staffCode: string;
-    handleSucessfulSignIn: (staffState: IStaffCurrentState) => void;
+    handleSucessfulSignIn: (staffState: IStaffCurrentState | undefined) => void;
     handleSignInFailure: (reason: string) => void;
     loadCurrentStaffState: (siteId: string) => void;
     currentSiteId: string;
@@ -21,7 +21,7 @@ interface IStaffKeypadProps {
 
 
 class StaffKeypad extends Component<IStaffKeypadProps> {
-    
+
     componentDidMount() {
         this.props.loadCurrentStaffState(this.props.currentSiteId);
     }
@@ -31,20 +31,20 @@ class StaffKeypad extends Component<IStaffKeypadProps> {
             <div className="staff-keypad-grid">
                 <div className="staff-keypad-item">
                     <div className="number-card">
-                    <Card className='ta h-50'>                        
-                        <Typography variant="h3">
-                            {this.props.staffCode !== "" ? this.props.staffCode : "Enter Code"}
-                        </Typography>                        
-                    </Card>
+                        <Card className='ta h-50'>
+                            <Typography variant="h3">
+                                {this.props.staffCode !== "" ? this.props.staffCode : "Enter Code"}
+                            </Typography>
+                        </Card>
                     </div>
                 </div>
                 <div className="staff-keypad-item">
-                    <Keypad 
-                    states={this.props.staffStates}
-                    siteId={this.props.currentSiteId}
-                    handleSucessfulSignIn={this.props.handleSucessfulSignIn}
-                    handleSignInFailure={this.props.handleSignInFailure}
-                    code={this.props.staffCode}/>
+                    <Keypad
+                        states={this.props.staffStates}
+                        siteId={this.props.currentSiteId}
+                        handleSucessfulSignIn={this.props.handleSucessfulSignIn}
+                        handleSignInFailure={this.props.handleSignInFailure}
+                        code={this.props.staffCode} />
                 </div>
             </div>
         )
@@ -54,26 +54,29 @@ class StaffKeypad extends Component<IStaffKeypadProps> {
 const mapStateToProps = (state: IAppState) => {
     return {
         staffCode: state.staffKeypad.staffCode,
-        currentSiteId: state.system.site.id,       
-        staffStates: state.staff.states 
+        currentSiteId: state.system.site.id,
+        staffStates: state.staff.states
     }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        handleSucessfulSignIn: (staffState: IStaffCurrentState) => {
-            dispatch(updateOverlayAction(openOverlay(`${staffState.fullName} Signed ${staffState.action === "in" ? "out" : "in"} succesfully`, IconType.TICK)));
-            setTimeout(() => {
-                dispatch(updateOverlayAction(closeOverlay()));
-                dispatch(updateCodeAction(""));
-                dispatch(viewChangedAction(SystemViews.INIT_SIGN_IN));
-                
-            }, 1000)
-            
-        },
+        handleSucessfulSignIn: (staffState: IStaffCurrentState | undefined) => handleSuccessMessage(staffState, dispatch),
         handleSignInFailure: (reason: string) => dispatch(updateOverlayAction(openOverlay(reason, IconType.ERROR, false, true))),
         loadCurrentStaffState: (siteId: string) => dispatch(getStaffState(siteId)),
     }
+}
+
+const handleSuccessMessage = (staffState: IStaffCurrentState | undefined, dispatch: any) => {
+
+    const overlayMessage = staffState ? `${staffState.fullName} Signed ${staffState.action === "in" ? "out" : "in"} succesfully` : 'Signed in succesfully';
+    dispatch(updateOverlayAction(openOverlay(overlayMessage, IconType.TICK)));
+    setTimeout(() => {
+        dispatch(updateOverlayAction(closeOverlay()));
+        dispatch(updateCodeAction(""));
+        dispatch(viewChangedAction(SystemViews.INIT_SIGN_IN));
+
+    }, 1000)
 }
 
 
