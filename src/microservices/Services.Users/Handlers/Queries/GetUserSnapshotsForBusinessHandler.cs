@@ -16,13 +16,15 @@ namespace Services.Users.Handlers.Queries
         private readonly IUserRepository _userRepository;
         private readonly IAccessRecordRepository _accessRecordRepository;
         private readonly ISiteRepository _siteRepository;
+        private readonly IUserStatusRepository _statusRepository;
 
-        public GetUserSnapshotsForBusinessHandler(IVmsLogger<GetUserSnapshotsForBusinessHandler> logger, IUserRepository userRepository, IAccessRecordRepository accessRecordRepository, ISiteRepository siteRepository)
+        public GetUserSnapshotsForBusinessHandler(IVmsLogger<GetUserSnapshotsForBusinessHandler> logger, IUserRepository userRepository, IAccessRecordRepository accessRecordRepository, ISiteRepository siteRepository, IUserStatusRepository statusRepository)
         {
             _logger = logger;
             _userRepository = userRepository;
             _accessRecordRepository = accessRecordRepository;
             _siteRepository = siteRepository;
+            _statusRepository = statusRepository;
         }
 
 
@@ -34,19 +36,16 @@ namespace Services.Users.Handlers.Queries
 
             foreach (var user in users)
             {
-                var records = await _accessRecordRepository.GetForUser(user.Id);
-                var latest = records.OrderByDescending(r => r.TimeStamp).FirstOrDefault();
+                var state = await _statusRepository.GetStatusAsync(user.Id);                
 
-                if(latest is null) continue;
-
-                var siteName = await _siteRepository.GetSiteNameAsync(latest.SiteId);
+                var siteName = await _siteRepository.GetSiteNameAsync(state.SiteId);
 
                 ret.Add(new UserSnapshotDto
                 {
                     Id = user.Id, 
                     Initials = $"{user.FirstName[0]}{user.SecondName[0]}",
-                    LastAction = latest.Action.ToString(),
-                    LastTime = latest.TimeStamp.ToShortTimeString(),
+                    LastAction = state.CurrentState.ToString(),
+                    LastTime = state.Updated.ToShortTimeString(),
                     Name = user.FirstName + " " + user.SecondName,
                     SiteName = siteName,
                     AccountId = user.AccountId
