@@ -1,0 +1,13 @@
+.staff-select-grid {
+    display: grid;
+    height: 100%;    
+    grid-template-rows: 1fr 4fr;
+    row-gap: 1rem;
+    align-items: center;
+    justify-items: center;
+}
+
+.staff-select-grid-item {
+    height: 100%;
+    width: 60%;
+}

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import '../hoc-styles/StaffSelect.css'
 import { connect } from 'react-redux'
 import { IAppState } from '../redux/store'
+import StaffSearchHeader from '../components/staff-search/StaffSearchHeader'
+import StaffResults from '../components/staff-search/StaffResults'
 
 interface IStaffSelectProps {
     searchTerm: string;
@@ -13,8 +15,13 @@ class StaffSelect extends Component<IStaffSelectProps> {
 
     render() {
         return (
-            <div className="h-100">
-                Staff Select 
+            <div className="staff-select-grid">
+                <div className="staff-select-grid-item">
+                    <StaffSearchHeader/>
+                </div>
+                <div className="staff-select-grid-item">
+                    <StaffResults/>
+                </div>
             </div>
         )
     }
