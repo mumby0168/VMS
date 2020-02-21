@@ -39,7 +39,24 @@
     width: 80%;    
     padding: 1rem;
     overflow-y: auto;
+    text-align: center;
 }
+
+@media (min-width: 550px) and (max-width: 1024px) {
+  
+    .results-grid {
+        grid-template-rows: 1fr 1fr 1fr;     
+    }   
+    
+  }
+
+  @media (min-width: 0px) and (max-width: 550px) {
+  
+    .results-grid { 
+        grid-template-columns: 1fr;   
+    }   
+    
+  }
 
 .results-inner-wrapper {
     display: grid;      

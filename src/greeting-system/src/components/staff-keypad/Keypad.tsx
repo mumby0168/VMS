@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { Card, Typography, CardActionArea } from '@material-ui/core'
+import { Card, Typography, CardActionArea, Paper } from '@material-ui/core'
 import BackspaceIcon from '@material-ui/icons/Backspace';
 import CheckIcon from '@material-ui/icons/Check';
 import { useDispatch } from 'react-redux';
@@ -24,7 +24,7 @@ interface IKeyPadItemProps {
 const KeyPadItem = ({ content, onclick, }: IKeyPadItemProps) => {
     return (
         <div className="keypad-item">
-            <Card className="h-100 ta">
+            <Card variant='outlined' className="h-100 ta">
                 <CardActionArea onClick={onclick} className="h-100">
                     <Typography variant="h4">
                         {content}
@@ -69,7 +69,7 @@ export default function Keypad({ code, handleSignInFailure, handleSucessfulSignI
     }
 
         return (
-            <Card className="h-100">
+            <Paper className='numpad-wrapper'>
                 <div className="keypad-grid">
                     <KeyPadItem onclick={() => updateCode('1')} content="1" />
                     <KeyPadItem onclick={() => updateCode('2')} content="2" />
@@ -84,6 +84,6 @@ export default function Keypad({ code, handleSignInFailure, handleSucessfulSignI
                     <KeyPadItem onclick={() => updateCode('0')} content="0" />
                     <KeyPadItem onclick={trimCode} content={<BackspaceIcon />} />
                 </div>
-            </Card>
+            </Paper>
         )
     }
