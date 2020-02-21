@@ -1,4 +1,5 @@
 import { IOperation, operationsHub, OperationStatus } from "./operationsManager";
+import { gatewayClient } from "../redux/api/helpers";
 
 
 
@@ -26,7 +27,8 @@ class OperationsAggregator {
             
             if(counter > 3000) {
                 clearInterval(intervalId);
-                console.error('failed to get operation feedback');
+                console.log("Handling response using http connection.")
+                handleWithHttp(id, handleSucess, handleFailure)
             }
 
             const op = this.operations.find(op => op.id === id);
@@ -49,6 +51,19 @@ class OperationsAggregator {
     private defaultFailureHandler(op: IOperation) {
         console.error(op);
     }
+}
+
+
+const handleWithHttp = (id: string, sucess: (op: IOperation) => void, failure: (op: IOperation) => void) => {
+    gatewayClient().get<IOperation>(`operations/${id}`)
+    .then((res) => {
+        if(res.status === 200) {
+            res.status === OperationStatus.Completed ? sucess(res.data) : failure(res.data);                
+        }
+    })
+    .catch((err) => {
+        console.error('Operation could not be retrieved.')
+    })
 }
 
 export const operationsAggregator = new OperationsAggregator();

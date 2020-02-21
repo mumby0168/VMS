@@ -4,6 +4,7 @@ import {reducer as setupReducer} from '../redux/reducers/setupReducer'
 import {reducer as staffKeypadReducer} from '../redux/reducers/staffKeypadReducer'
 import {reducer as overReducer} from './reducers/overlayReducer'
 import {reducer as staffReducer} from './reducers/staffReducer'
+import {reducer as staffSearchReducer} from './reducers/staffSearchReducer'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
@@ -16,7 +17,8 @@ const reducers = combineReducers({
     setup: setupReducer,
     staffKeypad: staffKeypadReducer,
     overlay: overReducer,
-    staff: staffReducer
+    staff: staffReducer,
+    staffSearch: staffSearchReducer
 })
 
 export type IAppState = ReturnType<typeof reducers>

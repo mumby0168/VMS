@@ -58,8 +58,8 @@ namespace Services.Push
                 opts.AllowAnyHeader();
                 opts.AllowAnyMethod();
                 opts.AllowCredentials();
-                //TODO: Need decide what doing here with this CORS Policy for when deployed.
-                opts.WithOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:3002");
+                //It turns out this static list is required as part of latest CORS Polcies TODO: Move this list to config file.
+                opts.WithOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://192.168.1.97:3002", "http://192.168.1.97:3000", "http://192.168.1.97:3001");
             });
 
             app.UseUdpLogging(Common.Names.Services.Push);

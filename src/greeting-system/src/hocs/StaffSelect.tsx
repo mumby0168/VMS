@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
+import '../hoc-styles/StaffSelect.css'
+import { connect } from 'react-redux'
+import { IAppState } from '../redux/store'
 
-interface Props {
-    
-}
-interface State {
-    
+interface IStaffSelectProps {
+    searchTerm: string;
+    selectedId: string
 }
 
-export default class StaffSelect extends Component<Props, State> {
-    state = {}
+
+class StaffSelect extends Component<IStaffSelectProps> {
 
     render() {
         return (
@@ -18,3 +19,18 @@ export default class StaffSelect extends Component<Props, State> {
         )
     }
 }
+
+const mapStateToProps = (state: IAppState) => {
+    return {
+        searchTerm: state.staffSearch.searchTerm,
+        selectedId: state.staffSearch.selectedId
+    }
+}
+
+const mapDispatch = () => {
+    return {
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatch)(StaffSelect)

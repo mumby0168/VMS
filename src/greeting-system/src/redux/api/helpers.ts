@@ -3,7 +3,7 @@ import { store } from '../store'
 
 
 export const identityClient = axios.create({
-    baseURL: 'http://localhost:5010/api/greeting/',
+    baseURL: 'http://192.168.1.97:5010/api/greeting/',
     responseType: 'json',
     headers: {
         'Content-Type': 'application/json'
@@ -11,7 +11,7 @@ export const identityClient = axios.create({
 })
 
 export const gatewayClient = () => axios.create({    
-    baseURL: 'http://localhost:5020/gateway/api/',
+    baseURL: 'http://192.168.1.97:5020/gateway/api/',
     responseType: 'json',
     headers: {
         'Content-Type': 'application/json',

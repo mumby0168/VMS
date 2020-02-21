@@ -79,4 +79,4 @@ export interface IOperation {
     code: string | null;
 }
 
-export const operationsHub = new OperationsManager('http://localhost:5015/operations');
+export const operationsHub = new OperationsManager('http://192.168.1.97:5015/operations');
