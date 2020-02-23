@@ -14,29 +14,15 @@ export default function StaffResultsView({ staff, searchTerm }: IStaffResultsVie
 
 
     const filterStaff = (name: string): IStaffCurrentState[] => {
-
-        const ret: IStaffCurrentState[] = []
-
-        for (let index = 0; index < 25; index++) {
-            ret.push({
-                id: "",
-                fullName: "Test Full",
-                initials: "TF",
-                code: "",
-                action: '',
-                timeStamp: new Date()
-            })
-        }
-
-        return ret;
+        return staff.filter(s => s.fullName.includes(name));
     }
 
 
     const staffToRender = searchTerm === '' ? staff : filterStaff(searchTerm);
 
-    const items = staffToRender.map((staff, index) => {
+    const items = staffToRender.length !== 0 ? staffToRender.map((staff, index) => {
         return <StaffResult staffMemeber={staff} key={index} />
-    })
+    }) : <h4>No results</h4>
 
     return (
         <div className="center h-100">
