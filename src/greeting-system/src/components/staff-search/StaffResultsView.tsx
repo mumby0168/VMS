@@ -1,18 +1,34 @@
 import React, { ReactElement } from 'react'
-import { Paper } from '@material-ui/core'
+import { Paper, Container } from '@material-ui/core'
 import { IStaffCurrentState } from '../../redux/actions/staffActioms'
 import StaffResult from './StaffResult';
+
+
 
 interface IStaffResultsViewProps {
     staff: IStaffCurrentState[]
     searchTerm: string;
 }
 
-export default function StaffResultsView({staff, searchTerm}: IStaffResultsViewProps): ReactElement {
+export default function StaffResultsView({ staff, searchTerm }: IStaffResultsViewProps): ReactElement {
 
 
     const filterStaff = (name: string): IStaffCurrentState[] => {
-        return [];
+
+        const ret: IStaffCurrentState[] = []
+
+        for (let index = 0; index < 25; index++) {
+            ret.push({
+                id: "",
+                fullName: "Test Full",
+                initials: "TF",
+                code: "",
+                action: '',
+                timeStamp: new Date()
+            })
+        }
+
+        return ret;
     }
 
 
@@ -23,8 +39,8 @@ export default function StaffResultsView({staff, searchTerm}: IStaffResultsViewP
     })
 
     return (
-        <div className='center h-100'>
-            <Paper  className='results-grid'>
+        <div className="center h-100">
+            <Paper className='results-grid'>
                 {items}
             </Paper>
         </div>

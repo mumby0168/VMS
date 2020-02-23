@@ -11,7 +11,7 @@ export default function StaffResult({ staffMemeber }: IStaffResultProps): ReactE
 
 
     return (
-        <Card variant='outlined'>
+        <Card className='staff-result-wrapper' variant='outlined'>
             <CardActionArea className='h-100'>
                 <div className='results-inner-wrapper'>
                     <div>
