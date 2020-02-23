@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react'
 import { TextField, Paper, InputAdornment } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search';
-import { IStaffCurrentState } from '../../redux/actions/staffActioms';
 
 interface IStaffSearchHeaderProps {
     searchText: string;

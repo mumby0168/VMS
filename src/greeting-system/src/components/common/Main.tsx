@@ -9,6 +9,7 @@ import { InitialSignIn } from '../../hocs/InitialSignIn'
 import StaffKeypad from '../../hocs/StaffKeypad'
 import StaffSelect from '../../hocs/StaffSelect'
 import Overlay from './Overlay'
+import VisitorForm from '../../hocs/VisitorForm'
 
 interface IMainProps {
     site: ISite
@@ -24,6 +25,7 @@ interface IMainProps {
             case SystemViews.INIT_SIGN_IN: return <InitialSignIn naviagate={this.props.navigate}/>
             case SystemViews.STAFF_KEYPAD: return <StaffKeypad/>
             case SystemViews.STAFF_SELECT: return <StaffSelect/>
+            case SystemViews.VISITOR_FORM: return <VisitorForm/>
             default: return <h1>404 Not Found</h1>
         }
     }
