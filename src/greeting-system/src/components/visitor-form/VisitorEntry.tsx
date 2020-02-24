@@ -11,6 +11,9 @@ interface IVisitorEntryProps {
 export default function VisitorEntry({ entry, index, updateHandle }: IVisitorEntryProps): ReactElement {
     return (
         <TextField
+            style={{
+                margin: '0.5rem'
+            }}            
             fullWidth
             label={entry.label}
             value={entry.value}

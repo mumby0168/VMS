@@ -23,12 +23,16 @@ export const rejectedVisitorFormSpecAction = makeAction<VisitorFormEvents.REJECT
 
 export const visitorFormUpdatedAction = makeAction<VisitorFormEvents.UPDATED, IDataSpecificationUpdateParams>(VisitorFormEvents.UPDATED);
 
+export const updateErrorsAction = makeAction<VisitorFormEvents.ERRORS, string[]>(VisitorFormEvents.ERRORS);
+
 
 const actions = {
     fetchVisitorFormSpecAction,
     fetchedVisitorFormSpecAction,
     rejectedVisitorFormSpecAction,
-    visitorFormUpdatedAction
+    visitorFormUpdatedAction,
+    updateErrorsAction
+    
 }
 
 export type IVisitorFormActions = IActionUnion<typeof actions>;

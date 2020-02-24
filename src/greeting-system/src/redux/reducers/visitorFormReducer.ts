@@ -49,6 +49,8 @@ export const reducer = (state: IVisitorFormState = initState, action: IVisitorFo
                 })
             }
 
+        case VisitorFormEvents.ERRORS: return {...state, errors: action.payload}
+
         default: return state;
     }
 }
