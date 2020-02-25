@@ -8,6 +8,6 @@ namespace Services.Visitors.Domain
     public class Visitor : IVisitor
     {
         public Guid Id { get; }
-        public Guid UserId { get; }
+        public Guid VisitingUserId { get; }
     }
 }

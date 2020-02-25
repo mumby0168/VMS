@@ -12,7 +12,7 @@ export default function VisitorEntry({ entry, index, updateHandle }: IVisitorEnt
     return (
         <TextField
             style={{
-                margin: '0.5rem'
+                margin: '2px'
             }}            
             fullWidth
             label={entry.label}
