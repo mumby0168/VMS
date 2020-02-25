@@ -11,7 +11,24 @@ export interface IVisitorFormState {
 
 const initState: IVisitorFormState = {
     errors: [],
-    fields: [],
+    fields: [
+        {
+            id: '1',
+            label: 'First Name',
+            validationCode: "Required",
+            validationMessage: "First name is required.",
+            order: 1,
+            value: ''
+        },
+        {
+            id: '2',
+            label: 'Second Name',
+            validationCode: "Required",
+            validationMessage: "Second name is required.",
+            order: 1,
+            value: ''
+        }
+    ],
     loading: false
 }
 
@@ -27,20 +44,12 @@ export const reducer = (state: IVisitorFormState = initState, action: IVisitorFo
                         spec.value = action.payload.newValue;
                         return spec;
                     }
-
+                    
                     return spec;
                 })
             }
 
-        case VisitorFormEvents.ERRORS: return { ...state, errors: action.payload }
-
-        case VisitorFormEvents.FETCH_SPEC:            
-            return {...state, loading: action.payload};
-
-        case VisitorFormEvents.FETCHED_SPEC:
-            const fields = action.payload;           
-            for(let i = 0; i < fields.length; i++) {fields[i].value = ''}
-            return {...state, fields: fields};
+        case VisitorFormEvents.ERRORS: return {...state, errors: action.payload}
 
         default: return state;
     }

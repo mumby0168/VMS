@@ -10,8 +10,6 @@ import { isEmailValid, isPostCodeValid } from '../services/validation'
 import { SystemViews, viewChangedAction } from '../redux/actions/systemActions'
 import { openOverlay, IconType, closeOverlay, updateOverlayAction } from '../redux/actions/overlayActions'
 import { Alert } from '@material-ui/lab'
-import {getVisitorFormSpecifications} from '../redux/api/visitors'
-import '../hoc-styles/VisitorForm.css'
 
 interface IVisitorFormProps {
     specifications: IVisitorDataSpecification[],
@@ -22,15 +20,13 @@ interface IVisitorFormProps {
     updateHandle: (index: number, newValue: string) => void;
     updateErrors: (errors: string[]) => void;    
     submitForm: (data: IVisitorDataSpecification[]) => void;
-    getFormData: () => void;
-    showLoading: (message: string) => void;
-    closeLoading: () => void;
 }
 
 class VisitorForm extends Component<IVisitorFormProps> {    
 
     componentDidMount() {
-        this.props.getFormData();
+        //TODO: Load form spec from API
+        console.log(this.props)
     }
 
     handleSubmit(e: any) {
@@ -74,9 +70,6 @@ class VisitorForm extends Component<IVisitorFormProps> {
     }
 
     render() {
-
-        this.props.loading ? this.props.showLoading('Loading ...') :
-        this.props.closeLoading()
         
 
         const entries = this.props.specifications.map((spec, index) => {
@@ -85,14 +78,14 @@ class VisitorForm extends Component<IVisitorFormProps> {
 
         const errors = this.props.errors.map((err, i) => {
             return (
-            <ListItem key={i}>
-                <Alert className='error-alert' variant='filled' severity='error'>{err}</Alert>
+            <ListItem>
+                <Alert style={{width: '100%'}} variant='filled' severity='error'>{err}</Alert>
             </ListItem>)
         });
 
         return (
-            <Container className='center root'>
-            <Paper className='root-inner'>
+            <Container>
+            <Paper style={{textAlign: 'center', padding: '1rem', width: '80%'}}>
                 <h1>Please enter your details</h1>
                 <Divider/>
                 <StaffMember staffMember={this.props.staffMember}/>
@@ -103,9 +96,9 @@ class VisitorForm extends Component<IVisitorFormProps> {
                 </List>
                 </div>                
 
-                <form  onSubmit={this.handleSubmit.bind(this)}>
+                <form onSubmit={this.handleSubmit.bind(this)}>
                     {entries}
-                    <Button className='visitor-submit' type='submit' variant='contained' color='primary'>Submit</Button>
+                    <Button type='submit' variant='contained' color='primary'>Submit</Button>
                 </form>
             </Paper>
             </Container>
@@ -146,10 +139,7 @@ const mapDispatch = (dispatch: any) => {
             newValue: newValue
         })),
         updateErrors: (errors: string[]) => dispatch(updateErrorsAction(errors)),        
-        submitForm: (data: IVisitorDataSpecification[]) => handleFormSubmit(dispatch, data),
-        getFormData: () => dispatch(getVisitorFormSpecifications()),
-        showLoading: (message: string) => dispatch(updateOverlayAction(openOverlay(message, IconType.NONE, true))),
-        closeLoading: () => dispatch(updateOverlayAction(closeOverlay()))
+        submitForm: (data: IVisitorDataSpecification[]) => handleFormSubmit(dispatch, data)
     }
 }
 
