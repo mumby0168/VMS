@@ -23,11 +23,13 @@ namespace Api.Gateway.Controllers
         private readonly HttpClient _client;
         private const string OperationHeader = "X-Operation";   
         protected IDispatcher Dispatcher { get; }
+        protected HttpClientOptions Options { get; }
 
-        protected GatewayControllerBase(IDispatcher dispatcher)
+        protected GatewayControllerBase(IDispatcher dispatcher, HttpClientOptions options)
         {
             _client = new HttpClient();
             Dispatcher = dispatcher;
+            Options = options;
         }
 
         protected Guid GetAccountId()
@@ -81,11 +83,11 @@ namespace Api.Gateway.Controllers
             switch (service)
             {
                 case Services.Common.Names.Services.Businesses:
-                    return CheckHealth("http://business:80/business/status/api/pulse", command);
+                    return CheckHealth($"{Options.Services["business"]}/pulse", command);
                 case Services.Common.Names.Services.Sites:
-                    return CheckHealth("http://sites:80/sites/status/api/pulse", command);
+                    return CheckHealth($"{Options.Services["sites"]}/pulse", command);
                 case Services.Common.Names.Services.Operations:
-                    return CheckHealth("http://operations:80/operations/status/api/pulse", command);
+                    return CheckHealth($"{Options.Services["operations"]}/pulse", command);
                 default:
                     throw new NotImplementedException();
             }
