@@ -11,6 +11,7 @@ import { SystemViews, viewChangedAction } from '../redux/actions/systemActions'
 import { openOverlay, IconType, closeOverlay, updateOverlayAction } from '../redux/actions/overlayActions'
 import { Alert } from '@material-ui/lab'
 import {getVisitorFormSpecifications} from '../redux/api/visitors'
+import '../hoc-styles/VisitorForm.css'
 
 interface IVisitorFormProps {
     specifications: IVisitorDataSpecification[],
@@ -85,13 +86,13 @@ class VisitorForm extends Component<IVisitorFormProps> {
         const errors = this.props.errors.map((err, i) => {
             return (
             <ListItem key={i}>
-                <Alert style={{width: '100%'}} variant='filled' severity='error'>{err}</Alert>
+                <Alert className='error-alert' variant='filled' severity='error'>{err}</Alert>
             </ListItem>)
         });
 
         return (
-            <Container>
-            <Paper style={{textAlign: 'center', padding: '1rem', width: '80%'}}>
+            <Container className='center root'>
+            <Paper className='root-inner'>
                 <h1>Please enter your details</h1>
                 <Divider/>
                 <StaffMember staffMember={this.props.staffMember}/>
@@ -102,9 +103,9 @@ class VisitorForm extends Component<IVisitorFormProps> {
                 </List>
                 </div>                
 
-                <form onSubmit={this.handleSubmit.bind(this)}>
+                <form  onSubmit={this.handleSubmit.bind(this)}>
                     {entries}
-                    <Button type='submit' variant='contained' color='primary'>Submit</Button>
+                    <Button className='visitor-submit' type='submit' variant='contained' color='primary'>Submit</Button>
                 </form>
             </Paper>
             </Container>
