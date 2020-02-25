@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import { IAppState } from '../redux/store'
 import { connect } from 'react-redux'
 import { IVisitorDataSpecification, visitorFormUpdatedAction, updateErrorsAction } from '../redux/actions/visitorFormActions'
-import { Paper, Divider, Container, Button } from '@material-ui/core'
+import { Paper, Divider, Container, Button, List, ListItem } from '@material-ui/core'
 import { IStaffCurrentState } from '../redux/actions/staffActioms'
 import StaffMember from '../components/visitor-form/StaffMember'
 import VisitorEntry from '../components/visitor-form/VisitorEntry'
 import { isEmailValid, isPostCodeValid } from '../services/validation'
 import { SystemViews, viewChangedAction } from '../redux/actions/systemActions'
 import { openOverlay, IconType, closeOverlay, updateOverlayAction } from '../redux/actions/overlayActions'
+import { Alert } from '@material-ui/lab'
 
 interface IVisitorFormProps {
     specifications: IVisitorDataSpecification[],
@@ -75,12 +76,26 @@ class VisitorForm extends Component<IVisitorFormProps> {
             return <VisitorEntry key={index} updateHandle={this.props.updateHandle} entry={spec} index={index} />
         })
 
+        const errors = this.props.errors.map((err, i) => {
+            return (
+            <ListItem>
+                <Alert style={{width: '100%'}} variant='filled' severity='error'>{err}</Alert>
+            </ListItem>)
+        });
+
         return (
             <Container>
             <Paper style={{textAlign: 'center', padding: '1rem', width: '80%'}}>
                 <h1>Please enter your details</h1>
                 <Divider/>
                 <StaffMember staffMember={this.props.staffMember}/>
+
+                <div className="center">
+                <List>
+                    {errors}
+                </List>
+                </div>                
+
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     {entries}
                     <Button type='submit' variant='contained' color='primary'>Submit</Button>
@@ -98,7 +113,7 @@ const handleFormSubmit = (dispatch: any, data: IVisitorDataSpecification[]) => {
     console.log('2');
     //TODO: simulating success case
     setTimeout(() => {
-        dispatch(updateOverlayAction(openOverlay('Succesfully submitted your data', IconType.TICK)));
+        dispatch(updateOverlayAction(openOverlay('Thank you! Enjoy your visit.', IconType.TICK)));
     }, 1000);
         
     setTimeout(() => {
