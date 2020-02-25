@@ -10,6 +10,7 @@ import { isEmailValid, isPostCodeValid } from '../services/validation'
 import { SystemViews, viewChangedAction } from '../redux/actions/systemActions'
 import { openOverlay, IconType, closeOverlay, updateOverlayAction } from '../redux/actions/overlayActions'
 import { Alert } from '@material-ui/lab'
+import {getVisitorFormSpecifications} from '../redux/api/visitors'
 
 interface IVisitorFormProps {
     specifications: IVisitorDataSpecification[],
@@ -20,13 +21,15 @@ interface IVisitorFormProps {
     updateHandle: (index: number, newValue: string) => void;
     updateErrors: (errors: string[]) => void;    
     submitForm: (data: IVisitorDataSpecification[]) => void;
+    getFormData: () => void;
+    showLoading: (message: string) => void;
+    closeLoading: () => void;
 }
 
 class VisitorForm extends Component<IVisitorFormProps> {    
 
     componentDidMount() {
-        //TODO: Load form spec from API
-        console.log(this.props)
+        this.props.getFormData();
     }
 
     handleSubmit(e: any) {
@@ -70,6 +73,9 @@ class VisitorForm extends Component<IVisitorFormProps> {
     }
 
     render() {
+
+        this.props.loading ? this.props.showLoading('Loading ...') :
+        this.props.closeLoading()
         
 
         const entries = this.props.specifications.map((spec, index) => {
@@ -78,7 +84,7 @@ class VisitorForm extends Component<IVisitorFormProps> {
 
         const errors = this.props.errors.map((err, i) => {
             return (
-            <ListItem>
+            <ListItem key={i}>
                 <Alert style={{width: '100%'}} variant='filled' severity='error'>{err}</Alert>
             </ListItem>)
         });
@@ -139,7 +145,10 @@ const mapDispatch = (dispatch: any) => {
             newValue: newValue
         })),
         updateErrors: (errors: string[]) => dispatch(updateErrorsAction(errors)),        
-        submitForm: (data: IVisitorDataSpecification[]) => handleFormSubmit(dispatch, data)
+        submitForm: (data: IVisitorDataSpecification[]) => handleFormSubmit(dispatch, data),
+        getFormData: () => dispatch(getVisitorFormSpecifications()),
+        showLoading: (message: string) => dispatch(updateOverlayAction(openOverlay(message, IconType.NONE, true))),
+        closeLoading: () => dispatch(updateOverlayAction(closeOverlay()))
     }
 }
 

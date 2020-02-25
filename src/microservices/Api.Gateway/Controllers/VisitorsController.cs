@@ -33,7 +33,7 @@ namespace Api.Gateway.Controllers
             return PublishCommand(new UpdateEntryOrder( GetBusinessId(), command.EntryId, command.Order));
         }
 
-        [Authorize(Roles = Roles.BusinessAdmin)]
+        [Authorize(Roles = Roles.BusinessAdmin + "," + Roles.Greeting)]
         [HttpGet("specs")]
         public async Task<ActionResult<IEnumerable<DataSpecificationDto>>> GetSpecifications() => Collection(await _client.GetDataSpecificationsForBusinessAsync(GetBusinessId()));
 
