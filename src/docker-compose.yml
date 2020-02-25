@@ -32,6 +32,7 @@ services:
         volumes: 
         - redis:/data
 
+
     api.gateway:
         container_name: gateway
         image: '${DOCKER_REGISTRY-}apigateway'

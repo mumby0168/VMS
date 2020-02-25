@@ -43,7 +43,9 @@ namespace Services.RabbitMq.Managers
 
         public void CreateConnection(IServiceBusSettings serviceBusSettings, IServiceSettings serviceSettings, bool declareExchange = true)
         {
+            //TODO: investigate these settings for better reliability.
             var factory = _serviceBusConnectionFactory.CreateConnectionFactory(serviceBusSettings.HostName);
+            factory.AutomaticRecoveryEnabled = true;
             var connection = factory.CreateConnection();
 
             _connection.RegisterConnection(connection);

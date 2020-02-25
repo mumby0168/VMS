@@ -14,6 +14,7 @@ using Services.Common.Logging;
 using Services.Common.Mongo;
 using Services.Common.Names;
 using Services.Common.Queries;
+using Services.Common.Rest;
 using Services.RabbitMq.Extensions;
 using Services.Users.Commands;
 using Services.Users.Domain;
@@ -43,6 +44,8 @@ namespace Services.Users
             services.AddUdpLogging();
 
             services.AddChronicle();
+
+            services.AddRestControllersSupport();
 
 
             ServiceRegistry.RegisterServices(services);

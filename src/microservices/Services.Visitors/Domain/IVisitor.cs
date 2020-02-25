@@ -6,15 +6,27 @@ using Services.Common.Domain;
 
 namespace Services.Visitors.Domain
 {
+
+    public enum VisitorStatus : byte
+    {
+        In = 0,
+        Out = 1,
+    }
+
     public interface IVisitor : IDomain
     {
-        Guid VisitingÍUserId { get; }
+        Guid VisitingUserId { get; }
 
         Guid VisitingBusinessId { get; }
 
         Guid VisitingSiteId { get; }
 
-        IEnumerable<IVisitorData> Data { get; }
+        VisitorStatus Status { get; }
 
+        DateTime In { get; }
+
+        DateTime? Out { get; }
+
+        IEnumerable<IVisitorData> Data { get; }
     }
 }
