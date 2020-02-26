@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Api.Gateway.Clients.Interfaces;
 using Api.Gateway.Dtos.Visitors;
 using Api.Gateway.Messages.Visitors;
+using Convey.HTTP;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Common.Jwt;
@@ -17,7 +18,7 @@ namespace Api.Gateway.Controllers
     {
         private readonly IVisitorsClient _client;
 
-        public VisitorsController(IDispatcher dispatcher, IVisitorsClient client) : base(dispatcher)
+        public VisitorsController(IDispatcher dispatcher, IVisitorsClient client, HttpClientOptions options) : base(dispatcher, options)
         {
             _client = client;
         }

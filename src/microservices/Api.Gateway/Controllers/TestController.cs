@@ -15,7 +15,7 @@ namespace Api.Gateway.Controllers
     [Route("gateway/api/test/")]
     public class TestController : GatewayControllerBase
     {
-        public TestController(IDispatcher dispatcher) : base(dispatcher)
+        public TestController(IDispatcher dispatcher, HttpClientOptions options) : base(dispatcher, options)
         {
             
         }

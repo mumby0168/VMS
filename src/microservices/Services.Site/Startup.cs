@@ -9,6 +9,7 @@ using Services.Common.Logging;
 using Services.Common.Mongo;
 using Services.Common.Names;
 using Services.Common.Queries;
+using Services.Common.Rest;
 using Services.RabbitMq.Extensions;
 using Services.Sites.Domain;
 using Services.Sites.Handlers.Command;
@@ -32,6 +33,7 @@ namespace Services.Sites
             services.AddConvey().AddHttpClient();
 
             services.AddQuerySupport();
+            services.AddRestControllersSupport();
 
             services.AddUdpLogging();
 

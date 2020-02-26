@@ -38,6 +38,7 @@ namespace Services.Users
                 .AddMongoCollection<UserStatus>();
 
             services.AddQuerySupport();
+            services.AddRestControllersSupport();
 
             services.AddConvey().AddHttpClient();
 

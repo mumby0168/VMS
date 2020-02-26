@@ -21,7 +21,7 @@ namespace Api.Gateway.Controllers
     {
         private readonly ISiteClient _siteClient;
 
-        public SiteController(IDispatcher dispatcher, ISiteClient siteClient) : base(dispatcher)
+        public SiteController(IDispatcher dispatcher, ISiteClient siteClient, HttpClientOptions options) : base(dispatcher, options)
         {
             _siteClient = siteClient;
         }

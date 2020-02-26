@@ -20,7 +20,7 @@ namespace Api.Gateway.Controllers
     {
         private readonly IBusinessClient _client;
 
-        public BusinessController(IDispatcher dispatcher, IBusinessClient client) : base(dispatcher)
+        public BusinessController(IDispatcher dispatcher, IBusinessClient client, HttpClientOptions options) : base(dispatcher, options)
         {
             _client = client;
         }

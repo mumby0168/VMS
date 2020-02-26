@@ -5,16 +5,16 @@ namespace Services.Users.Domain
 {
     public interface IUserStatus : IDomain
     {
-        public Guid UserId { get; }
+        Guid UserId { get; }
 
-        public AccessAction CurrentState { get; }
+        AccessAction CurrentState { get; }
 
         Guid SiteId { get; }
 
-        public DateTime Updated { get; }
+        DateTime Updated { get; }
 
-        public IUserStatus Create(Guid userId, AccessAction action, Guid siteId);
+        IUserStatus Create(Guid userId, AccessAction action, Guid siteId);
 
-        public void Update(AccessAction action, Guid siteId);
+        void Update(AccessAction action, Guid siteId);
     }
 }
