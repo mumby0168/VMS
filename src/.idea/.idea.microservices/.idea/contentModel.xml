@@ -1361,6 +1361,7 @@
           </e>
         </e>
         <e p="Services.Visitors.Tests.csproj" t="IncludeRecursive" />
+        <e p="VisitorFormValidatorServiceTests.cs" t="Include" />
       </e>
       <e p="microservices/Services.Visitors" t="IncludeRecursive">
         <e p="appsettings.Development.json" t="Include" />
@@ -1446,7 +1447,10 @@
         </e>
         <e p="ServiceRegistry.cs" t="Include" />
         <e p="Services" t="Include">
+          <e p="DataSpecificationValidator.cs" t="Include" />
+          <e p="IDataSpecificationValidator.cs" t="Include" />
           <e p="IVisitorFormValidatorService.cs" t="Include" />
+          <e p="VisitorFormValidatorService.cs" t="Include" />
         </e>
         <e p="Services.Visitors.csproj" t="IncludeRecursive" />
         <e p="Startup.cs" t="Include" />

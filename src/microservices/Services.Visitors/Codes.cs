@@ -24,5 +24,6 @@ namespace Services.Visitors
         public const string InvalidSiteId = "invalid_site_id";
 
         public const string InvalidAmount = "invalid_collection_count";
+        public const string ValidationError = "validation_error";
     }
 }
