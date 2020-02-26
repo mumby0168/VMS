@@ -23,6 +23,8 @@ namespace Services.Visitors
             services.AddTransient<IDataSpecificationFactory, DataSpecificationFactory>();
             services.AddTransient<IVisitorFactory, VisitorFactory>();
             services.AddTransient<IVisitorsRepository, VisitorsRepository>();
+            services.AddTransient<IUserServiceClient, UserServiceClient>();
+            services.AddTransient<ISiteServiceClient, SiteServiceClient>();
 
 
             //command handlers

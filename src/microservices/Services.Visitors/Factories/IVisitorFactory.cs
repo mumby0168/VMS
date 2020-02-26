@@ -6,7 +6,7 @@ using Services.Visitors.Domain;
 
 namespace Services.Visitors.Factories
 {
-    interface IVisitorFactory
+    public interface IVisitorFactory
     {
         IVisitorDocument Create(Guid visitingUserId, Guid visitingBusinessId, Guid visitingSiteId,
             IEnumerable<IVisitorData> data);

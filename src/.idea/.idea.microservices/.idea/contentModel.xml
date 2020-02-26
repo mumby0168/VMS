@@ -825,12 +825,14 @@
               <e p="UserCreated.cs" t="Include" />
             </e>
             <e p="Visitors" t="Include">
+              <e p="CreateVisitorRejected.cs" t="Include" />
               <e p="DataEntryDeprecated.cs" t="Include" />
               <e p="DataEntryDeprecationRejected.cs" t="Include" />
               <e p="DataSpecificationCreated.cs" t="Include" />
               <e p="DataSpecificationRejected.cs" t="Include" />
               <e p="EntryOrderUpdated.cs" t="Include" />
               <e p="EntryOrderUpdateRejected.cs" t="Include" />
+              <e p="VisitorCreated.cs" t="Include" />
             </e>
           </e>
         </e>
@@ -1349,6 +1351,7 @@
       <e p="microservices/Services.Visititors.Tests" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
         <e p="CreateDataEntryHandlerTests.cs" t="Include" />
+        <e p="CreateVisitorHandlerTests.cs" t="Include" />
         <e p="DeprecateDataEntryHandlerTests.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -1385,14 +1388,17 @@
         </e>
         <e p="Dtos" t="Include">
           <e p="DataSpecificationDto.cs" t="Include" />
+          <e p="SiteDto.cs" t="Include" />
         </e>
         <e p="events" t="Include">
+          <e p="CreateVisitorRejected.cs" t="Include" />
           <e p="DataEntryDeprecated.cs" t="Include" />
           <e p="DataEntryDeprecationRejected.cs" t="Include" />
           <e p="DataSpecificationCreated.cs" t="Include" />
           <e p="DataSpecificationRejected.cs" t="Include" />
           <e p="EntryOrderUpdated.cs" t="Include" />
           <e p="EntryOrderUpdateRejected.cs" t="Include" />
+          <e p="VisitorCreated.cs" t="Include" />
         </e>
         <e p="Factories" t="Include">
           <e p="DataSpecificationFactory.cs" t="Include" />
@@ -1431,11 +1437,17 @@
         <e p="Repositorys" t="Include">
           <e p="DataSpecificationRepository.cs" t="Include" />
           <e p="IDataSpecificationRepository.cs" t="Include" />
+          <e p="ISiteServiceClient.cs" t="Include" />
           <e p="IUserServiceClient.cs" t="Include" />
           <e p="IVisitorsRepository.cs" t="Include" />
+          <e p="SiteServiceClient.cs" t="Include" />
+          <e p="UserServiceClient.cs" t="Include" />
           <e p="VisitorsRepository.cs" t="Include" />
         </e>
         <e p="ServiceRegistry.cs" t="Include" />
+        <e p="Services" t="Include">
+          <e p="IVisitorFormValidatorService.cs" t="Include" />
+        </e>
         <e p="Services.Visitors.csproj" t="IncludeRecursive" />
         <e p="Startup.cs" t="Include" />
       </e>

@@ -5,7 +5,6 @@ using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Services.Visitors.Commands
 {
-    [MicroService(Services.Common.Names.Services.Visitors)]
     public class DeprecateDataEntry : ICommand
     {
         public Guid Id { get; }
