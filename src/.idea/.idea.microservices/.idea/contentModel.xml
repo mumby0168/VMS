@@ -1,0 +1,1497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.2.0/build/netcoreapp1.0" t="Include">
+      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
+    </e>
+    <e p="$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.3.0/build/netcoreapp1.0" t="Include">
+      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
+    </e>
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.13.0/build/netcoreapp1.0/nunit.engine.netstandard.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.13.0/build/netcoreapp1.0/NUnit3.TestAdapter.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.13.0/build/netcoreapp1.0/NUnit3.TestAdapter.pdb" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/nunit.engine.api.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/nunit.engine.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/NUnit3.TestAdapter.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/NUnit3.TestAdapter.pdb" t="Include" />
+    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+      <e p=".dockerignore" t="Include" />
+      <e p="API" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="business-portal/node_modules/@babel/parser" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@babel/types" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@emotion/hash" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@jest/console" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@jest/fake-timers" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@jest/source-map" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@jest/test-result" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@jest/types" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@material-ui/core" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@material-ui/icons" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@material-ui/lab" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@material-ui/styles" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@material-ui/system" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@material-ui/types" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@material-ui/utils" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@microsoft/signalr" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@mrmlnc/readdir-enhanced" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@nodelib/fs.stat" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@testing-library/jest-dom" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@testing-library/react" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@testing-library/user-event" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@types" t="IncludeRecursive">
+        <e p="babel__generator" t="IncludeRecursive" />
+        <e p="babel__template" t="IncludeRecursive" />
+        <e p="babel__traverse" t="IncludeRecursive" />
+        <e p="events" t="IncludeRecursive" />
+        <e p="istanbul-lib-coverage" t="IncludeRecursive" />
+        <e p="istanbul-lib-report" t="IncludeRecursive" />
+        <e p="minimatch" t="IncludeRecursive" />
+        <e p="node" t="IncludeRecursive" />
+        <e p="prop-types" t="IncludeRecursive" />
+        <e p="react" t="IncludeRecursive" />
+        <e p="react-dom" t="IncludeRecursive" />
+        <e p="testing-library__dom" t="IncludeRecursive" />
+        <e p="yargs-parser" t="IncludeRecursive" />
+      </e>
+      <e p="business-portal/node_modules/@typescript-eslint/experimental-utils" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@typescript-eslint/parser" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/@typescript-eslint/typescript-estree" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/axios" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/babel-jest" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/chalk" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/chokidar" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/clsx" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/csstype" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/dotenv" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/dotenv-expand" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/fast-glob" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/fsevents" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/is-in-browser" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/jest" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/jest-haste-map" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/jest-message-util" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/jest-mock" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/jest-resolve" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/jest-serializer" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/jest-util" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/jest-worker" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/jss" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/jss-plugin-camel-case" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/jss-plugin-default-unit" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/jss-plugin-global" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/jss-plugin-nested" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/jss-plugin-props-sort" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/jss-plugin-rule-value-function" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/jss-plugin-vendor-prefixer" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/normalize-scroll-left" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/popper.js" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/pretty-format" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/react" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/react-dom" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/react-redux" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/react-router-dom" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/react-scripts" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/realpath-native" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/redux" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/redux-logger" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/redux-thunk" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/rxjs" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/source-map" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/symbol-observable" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/tiny-warning" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/tslib" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/upath" t="IncludeRecursive" />
+      <e p="business-portal/node_modules/worker-farm" t="IncludeRecursive" />
+      <e p="core" t="Include" />
+      <e p="docker-compose.dcproj" t="IncludeRecursive" />
+      <e p="docker-compose.override.yml" t="Include" />
+      <e p="docker-compose.yml" t="Include" />
+      <e p="Domain" t="Include" />
+      <e p="greeting-system/node_modules/@babel/parser" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@babel/types" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@emotion/hash" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@jest/console" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@jest/fake-timers" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@jest/source-map" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@jest/test-result" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@jest/types" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@material-ui/core" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@material-ui/icons" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@material-ui/lab" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@material-ui/styles" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@material-ui/system" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@material-ui/types" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@material-ui/utils" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@microsoft/signalr" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@mrmlnc/readdir-enhanced" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@nodelib/fs.stat" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@testing-library/jest-dom" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@testing-library/react" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@testing-library/user-event" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@types" t="IncludeRecursive">
+        <e p="babel__generator" t="IncludeRecursive" />
+        <e p="babel__template" t="IncludeRecursive" />
+        <e p="babel__traverse" t="IncludeRecursive" />
+        <e p="events" t="IncludeRecursive" />
+        <e p="history" t="IncludeRecursive" />
+        <e p="hoist-non-react-statics" t="IncludeRecursive" />
+        <e p="istanbul-lib-coverage" t="IncludeRecursive" />
+        <e p="istanbul-lib-report" t="IncludeRecursive" />
+        <e p="jest" t="IncludeRecursive" />
+        <e p="minimatch" t="IncludeRecursive" />
+        <e p="node" t="IncludeRecursive" />
+        <e p="prop-types" t="IncludeRecursive" />
+        <e p="react" t="IncludeRecursive" />
+        <e p="react-dom" t="IncludeRecursive" />
+        <e p="react-redux" t="IncludeRecursive" />
+        <e p="react-router" t="IncludeRecursive" />
+        <e p="react-router-dom" t="IncludeRecursive" />
+        <e p="redux-logger" t="IncludeRecursive" />
+        <e p="testing-library__dom" t="IncludeRecursive" />
+        <e p="yargs-parser" t="IncludeRecursive" />
+      </e>
+      <e p="greeting-system/node_modules/@typescript-eslint/experimental-utils" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@typescript-eslint/parser" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/@typescript-eslint/typescript-estree" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/axios" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/babel-jest" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/chalk" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/chokidar" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/clsx" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/csstype" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/diff-sequences" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/dotenv" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/dotenv-expand" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/electron" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/fast-glob" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/fsevents" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/hoist-non-react-statics" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/html-webpack-plugin" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/is-in-browser" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jest" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jest-diff" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jest-get-type" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jest-haste-map" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jest-message-util" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jest-mock" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jest-resolve" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jest-serializer" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jest-util" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jest-worker" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jss" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jss-plugin-camel-case" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jss-plugin-default-unit" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jss-plugin-global" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jss-plugin-nested" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jss-plugin-props-sort" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jss-plugin-rule-value-function" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/jss-plugin-vendor-prefixer" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/normalize-scroll-left" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/popper.js" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/pretty-error" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/pretty-format" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/react" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/react-dom" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/react-redux" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/react-router" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/react-router-dom" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/react-scripts" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/realpath-native" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/redux" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/redux-devtools-extension" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/redux-logger" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/redux-thunk" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/rxjs" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/source-map" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/symbol-observable" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/tiny-warning" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/tslib" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/typescript" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/upath" t="IncludeRecursive" />
+      <e p="greeting-system/node_modules/worker-farm" t="IncludeRecursive" />
+      <e p="Libraries" t="Include" />
+      <e p="microservices/Api.Gateway" t="IncludeRecursive">
+        <e p="Api.Gateway.csproj" t="IncludeRecursive" />
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Clients" t="Include">
+          <e p="BusinessClient.cs" t="Include" />
+          <e p="Interfaces" t="Include">
+            <e p="IBusinessClient.cs" t="Include" />
+            <e p="IOperationsClient.cs" t="Include" />
+            <e p="ISiteClient.cs" t="Include" />
+            <e p="IUsersClient.cs" t="Include" />
+            <e p="IVisitorsClient.cs" t="Include" />
+          </e>
+          <e p="OperationsClient.cs" t="Include" />
+          <e p="SiteClient.cs" t="Include" />
+          <e p="UsersClient.cs" t="Include" />
+          <e p="VisitorClient.cs" t="Include" />
+        </e>
+        <e p="Controllers" t="Include">
+          <e p="BusinessController.cs" t="Include" />
+          <e p="GatewayControllerBase.cs" t="Include" />
+          <e p="OperationsController.cs" t="Include" />
+          <e p="SiteController.cs" t="Include" />
+          <e p="TestController.cs" t="Include" />
+          <e p="UsersController.cs" t="Include" />
+          <e p="VisitorsController.cs" t="Include" />
+        </e>
+        <e p="Dockerfile" t="Include" />
+        <e p="Dockerfile.original" t="Include" />
+        <e p="Dtos" t="Include">
+          <e p="Business" t="Include">
+            <e p="BusinessDto.cs" t="Include" />
+            <e p="BusinessSummaryDto.cs" t="Include" />
+            <e p="Sub" t="Include">
+              <e p="HeadContactDto.cs" t="Include" />
+              <e p="HeadOfficeDto.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Operations" t="Include">
+            <e p="OperationDto.cs" t="Include" />
+          </e>
+          <e p="Sites" t="Include">
+            <e p="FireListUserDto.cs" t="Include" />
+            <e p="SiteAvailabilityDto.cs" t="Include" />
+            <e p="SiteDto.cs" t="Include" />
+            <e p="SiteFireListDto.cs" t="Include" />
+            <e p="SiteResourceDto.cs" t="Include" />
+            <e p="SiteSummaryDto.cs" t="Include" />
+            <e p="SiteUserDto.cs" t="Include" />
+          </e>
+          <e p="Users" t="Include">
+            <e p="AccessRecordDto.cs" t="Include" />
+            <e p="LatestAccessRecordDto.cs" t="Include" />
+            <e p="SiteAccessDetailsDto.cs" t="Include" />
+            <e p="UserAccessDetailsDto.cs" t="Include" />
+            <e p="UserInfoDto.cs" t="Include" />
+            <e p="UserSnapshotDto.cs" t="Include" />
+          </e>
+          <e p="Visitors" t="Include">
+            <e p="DataSpecificationDto.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Messages" t="Include">
+          <e p="Business" t="Include">
+            <e p="CreateBusiness.cs" t="Include" />
+            <e p="UpdateBusinessDetails.cs" t="Include" />
+            <e p="UpdateHeadContact.cs" t="Include" />
+            <e p="UpdateHeadOffice.cs" t="Include" />
+          </e>
+          <e p="Sites" t="Include">
+            <e p="CreateSite.cs" t="Include" />
+            <e p="CreateSiteResource.cs" t="Include" />
+            <e p="RemoveSiteResource.cs" t="Include" />
+            <e p="UpdateSiteContact.cs" t="Include" />
+            <e p="UpdateSiteDetails.cs" t="Include" />
+          </e>
+          <e p="Test" t="Include">
+            <e p="IssuesCommand.cs" t="Include" />
+            <e p="TestCommand.cs" t="Include" />
+          </e>
+          <e p="Users" t="Include">
+            <e p="Commands" t="Include">
+              <e p="CreateAccessRecord.cs" t="Include" />
+              <e p="CreateUser.cs" t="Include" />
+              <e p="UserSignOff.cs" t="Include" />
+              <e p="UserSignOn.cs" t="Include" />
+            </e>
+            <e p="Enums" t="Include">
+              <e p="AccessAction.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Visitors" t="Include">
+            <e p="CreateDataEntry.cs" t="Include" />
+            <e p="DeprecateDataEntry.cs" t="Include" />
+            <e p="UpdateEntryOrder.cs" t="Include" />
+          </e>
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Api.Gateway.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="services.json" t="Include" />
+        <e p="Startup.cs" t="Include" />
+      </e>
+      <e p="microservices/Prototype/Services.Test" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Handlers" t="Include">
+          <e p="IssueCommandHandler.cs" t="Include" />
+          <e p="TestCommandHandler.cs" t="Include" />
+        </e>
+        <e p="Messages" t="Include">
+          <e p="Commands" t="Include">
+            <e p="IssueCommand.cs" t="Include" />
+            <e p="TestCommand.cs" t="Include" />
+          </e>
+          <e p="events" t="Include">
+            <e p="TestCommandPassed.cs" t="Include" />
+            <e p="TestCommandRejected.cs" t="Include" />
+          </e>
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Services.Test.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Services.Test.csproj" t="IncludeRecursive" />
+        <e p="Startup.cs" t="Include" />
+      </e>
+      <e p="microservices/Services.Business" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Codes.cs" t="Include" />
+        <e p="Controllers" t="Include">
+          <e p="BusinessController.cs" t="Include" />
+          <e p="BusinessRestController.cs" t="Include" />
+          <e p="BusinessStatusController.cs" t="Include" />
+        </e>
+        <e p="Dockerfile" t="Include" />
+        <e p="Dockerfile.original" t="Include" />
+        <e p="Domain" t="Include">
+          <e p="BusinessDocument.cs" t="Include" />
+          <e p="HeadContact.cs" t="Include" />
+          <e p="HeadOffice.cs" t="Include" />
+          <e p="IBusinessDocument.cs" t="Include" />
+          <e p="IHeadContact.cs" t="Include" />
+          <e p="IHeadOffice.cs" t="Include" />
+        </e>
+        <e p="Dtos" t="Include">
+          <e p="BusinessDto.cs" t="Include" />
+          <e p="BusinessSummaryDto.cs" t="Include" />
+          <e p="HeadContactDto.cs" t="Include" />
+          <e p="HeadOfficeDto.cs" t="Include" />
+        </e>
+        <e p="Factories" t="Include">
+          <e p="BusinessesFactory.cs" t="Include" />
+          <e p="IBusinessesFactory.cs" t="Include" />
+        </e>
+        <e p="Handlers" t="Include">
+          <e p="Command" t="Include">
+            <e p="CreateBusinessHandler.cs" t="Include" />
+            <e p="UpdateBusinessDetailsHandler.cs" t="Include" />
+            <e p="UpdateHeadContactHandler.cs" t="Include" />
+            <e p="UpdateHeadOfficeHandler.cs" t="Include" />
+          </e>
+          <e p="Query" t="Include">
+            <e p="BusinessesSummaryHandler.cs" t="Include" />
+            <e p="GetBusinessQueryHandler.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Messages" t="Include">
+          <e p="Commands" t="Include">
+            <e p="CreateBusiness.cs" t="Include" />
+            <e p="UpdateBusinessDetails.cs" t="Include" />
+            <e p="UpdateHeadContact.cs" t="Include" />
+            <e p="UpdateHeadOffice.cs" t="Include" />
+          </e>
+          <e p="events" t="Include">
+            <e p="BusinessContactUpdated.cs" t="Include" />
+            <e p="BusinessCreated.cs" t="Include" />
+            <e p="BusinessDetailsUpdated.cs" t="Include" />
+            <e p="BusinessOfficeUpdated.cs" t="Include" />
+            <e p="Rejected" t="Include">
+              <e p="CreateBusinessRejected.cs" t="Include" />
+              <e p="UpdateBusinessRejected.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Queries" t="Include">
+            <e p="BusinessesSummary.cs" t="Include" />
+            <e p="GetBusiness.cs" t="Include" />
+          </e>
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Services.Business.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Repositorys" t="Include">
+          <e p="BusinessRepository.cs" t="Include" />
+          <e p="IBusinessRepository.cs" t="Include" />
+        </e>
+        <e p="ServiceRegistry.cs" t="Include" />
+        <e p="Services.Business.csproj" t="IncludeRecursive" />
+        <e p="Startup.cs" t="Include" />
+      </e>
+      <e p="microservices/Services.Businesses.Tests" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Handlers" t="Include">
+          <e p="CreateBusinessHandlerTests.cs" t="Include" />
+          <e p="Query" t="Include">
+            <e p="GetBusinessQueryHandlerTests.cs" t="Include" />
+          </e>
+          <e p="UpdateBusinessDetailsHandlerTests.cs" t="Include" />
+          <e p="UpdateHeadContactHandlerTests.cs" t="Include" />
+          <e p="UpdateHeadOfficeHandlerTests.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Services.Businesses.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Services.Businesses.Tests.csproj" t="IncludeRecursive" />
+        <e p="UnitTest1.cs" t="Include" />
+      </e>
+      <e p="microservices/Services.Common" t="IncludeRecursive">
+        <e p="Base" t="Include">
+          <e p="VmsControllerBase.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Domain" t="Include">
+          <e p="IDomain.cs" t="Include" />
+        </e>
+        <e p="Exceptions" t="Include">
+          <e p="VmsException.cs" t="Include" />
+          <e p="VmsServiceDownException.cs" t="Include" />
+        </e>
+        <e p="Extensions" t="Include">
+          <e p="Extensions.cs" t="Include" />
+        </e>
+        <e p="Generation" t="Include">
+          <e p="INumberGenerator.cs" t="Include" />
+          <e p="NumberGenerator.cs" t="Include" />
+          <e p="NumberGeneratorExtensions.cs" t="Include" />
+        </e>
+        <e p="Jwt" t="Include">
+          <e p="CustomClaims.cs" t="Include" />
+          <e p="IJwtFactory.cs" t="Include" />
+          <e p="IJwtManager.cs" t="Include" />
+          <e p="IJwtToken.cs" t="Include" />
+          <e p="JwtExtensions.cs" t="Include" />
+          <e p="JwtFactory.cs" t="Include" />
+          <e p="JwtManager.cs" t="Include" />
+          <e p="JwtToken.cs" t="Include" />
+          <e p="Roles.cs" t="Include" />
+        </e>
+        <e p="Logging" t="Include">
+          <e p="ILogEncoder.cs" t="Include" />
+          <e p="IUdpLoggingClient.cs" t="Include" />
+          <e p="IVmsLogger.cs" t="Include" />
+          <e p="LogEncoder.cs" t="Include" />
+          <e p="LoggingCategories.cs" t="Include" />
+          <e p="LoggingExtensions.cs" t="Include" />
+          <e p="LogTypes.cs" t="Include" />
+          <e p="ServiceLoggingOptions.cs" t="Include" />
+          <e p="UdpLoggingClient.cs" t="Include" />
+          <e p="VmsLogger.cs" t="Include" />
+        </e>
+        <e p="Middleware" t="Include">
+          <e p="Extensions.cs" t="Include" />
+          <e p="VmsExceptionMiddleware.cs" t="Include" />
+        </e>
+        <e p="Models" t="Include">
+          <e p="VmsError.cs" t="Include" />
+        </e>
+        <e p="Mongo" t="Include">
+          <e p="IMongoManager.cs" t="Include" />
+          <e p="IMongoRepository.cs" t="Include" />
+          <e p="MongoExtensions.cs" t="Include" />
+          <e p="MongoManager.cs" t="Include" />
+          <e p="MongoRepository.cs" t="Include" />
+        </e>
+        <e p="Names" t="Include">
+          <e p="Services.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Services.Common.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Queries" t="Include">
+          <e p="IQuery.cs" t="Include" />
+          <e p="IQueryDispatcher.cs" t="Include" />
+          <e p="IQueryHandler.cs" t="Include" />
+          <e p="QueryDispatcher.cs" t="Include" />
+          <e p="QueryExtensions.cs" t="Include" />
+        </e>
+        <e p="Rest" t="Include">
+          <e p="RestControllerBase.cs" t="Include" />
+          <e p="RestExtensions.cs" t="Include" />
+        </e>
+        <e p="Services.Common.csproj" t="IncludeRecursive" />
+        <e p="Swagger" t="Include">
+          <e p="SwaggerExtensions.cs" t="Include" />
+        </e>
+        <e p="Validation" t="Include">
+          <e p="Validator.cs" t="Include" />
+        </e>
+      </e>
+      <e p="microservices/Services.Identity" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Codes.cs" t="Include" />
+        <e p="Controllers" t="Include">
+          <e p="AdminController.cs" t="Include" />
+          <e p="DevController.cs" t="Include" />
+          <e p="GreetingController.cs" t="Include" />
+          <e p="TokenController.cs" t="Include" />
+          <e p="UserController.cs" t="Include" />
+        </e>
+        <e p="Dockerfile" t="Include" />
+        <e p="Dockerfile.original" t="Include" />
+        <e p="Domain" t="Include">
+          <e p="Business.cs" t="Include" />
+          <e p="Identity.cs" t="Include" />
+          <e p="IResetRequest.cs" t="Include" />
+          <e p="PendingIdentity.cs" t="Include" />
+          <e p="RefreshToken.cs" t="Include" />
+          <e p="ResetRequest.cs" t="Include" />
+        </e>
+        <e p="Dtos" t="Include">
+          <e p="AccountInfoDto.cs" t="Include" />
+          <e p="PendingAccountDto.cs" t="Include" />
+          <e p="StandardUserAccountDto.cs" t="Include" />
+        </e>
+        <e p="Factories" t="Include">
+          <e p="IResetRequestFactory.cs" t="Include" />
+          <e p="ResetRequestFactory.cs" t="Include" />
+        </e>
+        <e p="Handlers" t="Include">
+          <e p="BusinessCreatedHandler.cs" t="Include" />
+          <e p="Query" t="Include">
+            <e p="GetAllBusinessAdminsHandler.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Managers" t="Include">
+          <e p="IPasswordManager.cs" t="Include" />
+          <e p="PasswordManager.cs" t="Include" />
+        </e>
+        <e p="Messages" t="Include">
+          <e p="Commands" t="Include">
+            <e p="CompleteAdmin.cs" t="Include" />
+            <e p="CompleteUser.cs" t="Include" />
+            <e p="CreateAdmin.cs" t="Include" />
+            <e p="CreateBusinessAdmin.cs" t="Include" />
+            <e p="CreateUserAccount.cs" t="Include" />
+            <e p="DeleteAdmin.cs" t="Include" />
+            <e p="RequestPasswordReset.cs" t="Include" />
+            <e p="ResetPassword.cs" t="Include" />
+            <e p="RevokeRefreshToken.cs" t="Include" />
+            <e p="SignIn.cs" t="Include" />
+            <e p="SignInGreetingSystem.cs" t="Include" />
+          </e>
+          <e p="events" t="Include">
+            <e p="AccountRemoved.cs" t="Include" />
+            <e p="PendingAdminCreated.cs" t="Include" />
+            <e p="PendingBusinessAdminCreated.cs" t="Include" />
+            <e p="Subscribed" t="Include">
+              <e p="BusinessCreated.cs" t="Include" />
+            </e>
+            <e p="TestEvent.cs" t="Include" />
+            <e p="UserAccountCreated.cs" t="Include" />
+          </e>
+          <e p="Query" t="Include">
+            <e p="GetAllBusinessAdmins.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Models" t="Include">
+          <e p="AuthToken.cs" t="Include" />
+          <e p="IAuthToken.cs" t="Include" />
+          <e p="IPassword.cs" t="Include" />
+          <e p="Password.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Services.Identity.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Repositorys" t="Include">
+          <e p="BusinessRepository.cs" t="Include" />
+          <e p="IBusinessRepository.cs" t="Include" />
+          <e p="IdentityRepository.cs" t="Include" />
+          <e p="IIdentityRepository.cs" t="Include" />
+          <e p="IPendingIdentityRepository.cs" t="Include" />
+          <e p="IRefreshTokenRepository.cs" t="Include" />
+          <e p="IResetRequestRepository.cs" t="Include" />
+          <e p="PendingIdentityRepository.cs" t="Include" />
+          <e p="RefreshTokenRepository.cs" t="Include" />
+          <e p="ResetRequestRepository.cs" t="Include" />
+        </e>
+        <e p="Services" t="Include">
+          <e p="AdminIdentityService.cs" t="Include" />
+          <e p="GreetingSystemService.cs" t="Include" />
+          <e p="IAdminIdentityService.cs" t="Include" />
+          <e p="IGreetingSystemService.cs" t="Include" />
+          <e p="IRefreshTokenService.cs" t="Include" />
+          <e p="IUserService.cs" t="Include" />
+          <e p="RefreshTokenService.cs" t="Include" />
+          <e p="UserService.cs" t="Include" />
+        </e>
+        <e p="Services.Identity.csproj" t="IncludeRecursive" />
+        <e p="ServicesRegistry.cs" t="Include" />
+        <e p="Startup.cs" t="Include" />
+      </e>
+      <e p="microservices/Services.Identity.Tests" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Handlers" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Services.Identity.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Services" t="Include">
+          <e p="AdminIdentityServiceTests.cs" t="Include" />
+          <e p="RefreshTokenServiceTests.cs" t="Include" />
+        </e>
+        <e p="Services.Identity.Tests.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="microservices/Services.Logs" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Controllers" t="Include">
+          <e p="LogsController.cs" t="Include" />
+        </e>
+        <e p="Decode" t="Include">
+          <e p="ILogDecoder.cs" t="Include" />
+          <e p="LogDecoder.cs" t="Include" />
+        </e>
+        <e p="Dockerfile" t="Include" />
+        <e p="Dockerfile.original" t="Include" />
+        <e p="Domain" t="Include">
+          <e p="ILog.cs" t="Include" />
+          <e p="Log.cs" t="Include" />
+        </e>
+        <e p="Dtos" t="Include">
+          <e p="LogDto.cs" t="Include" />
+        </e>
+        <e p="Extensions.cs" t="Include" />
+        <e p="Factories" t="Include">
+          <e p="ILogFactory.cs" t="Include" />
+          <e p="LogFactory.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Services.Logs.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Repositorys" t="Include">
+          <e p="ILogsRepository.cs" t="Include" />
+          <e p="LogRepository.cs" t="Include" />
+        </e>
+        <e p="Server" t="Include">
+          <e p="IUdpServer.cs" t="Include" />
+          <e p="UdpServer.cs" t="Include" />
+        </e>
+        <e p="Services.Logs.csproj" t="IncludeRecursive" />
+        <e p="Startup.cs" t="Include" />
+      </e>
+      <e p="microservices/Services.Mail" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Dockerfile" t="Include" />
+        <e p="Dockerfile.original" t="Include" />
+        <e p="Messages" t="Include">
+          <e p="events" t="Include">
+            <e p="PendingAdminCreated.cs" t="Include" />
+            <e p="PendingBusinessAdminCreated.cs" t="Include" />
+          </e>
+          <e p="Handlers" t="Include">
+            <e p="Event" t="Include">
+              <e p="PendingAdminCreatedHandler.cs" t="Include" />
+              <e p="PendingBusinessAdminCreatedHandler.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Services.Mail.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Services.Mail.csproj" t="IncludeRecursive" />
+        <e p="Startup.cs" t="Include" />
+      </e>
+      <e p="microservices/Services.Mail.Tests" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Services.Mail.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Services.Mail.Tests.csproj" t="IncludeRecursive" />
+        <e p="UnitTest1.cs" t="Include" />
+      </e>
+      <e p="microservices/Services.Operations" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Controllers" t="Include">
+          <e p="OperationsController.cs" t="Include" />
+          <e p="OperationsStatusController.cs" t="Include" />
+        </e>
+        <e p="Dockerfile" t="Include" />
+        <e p="Dockerfile.original" t="Include" />
+        <e p="Dtos" t="Include">
+          <e p="OperationDto.cs" t="Include" />
+        </e>
+        <e p="Handlers" t="Include">
+          <e p="GenericBusHandler.cs" t="Include" />
+          <e p="GenericCommandHandler.cs" t="Include" />
+        </e>
+        <e p="Messages" t="Include">
+          <e p="Commands" t="Include">
+            <e p="Test" t="Include">
+              <e p="TestCommand.cs" t="Include" />
+            </e>
+          </e>
+          <e p="events" t="Include">
+            <e p="Businesses" t="Include">
+              <e p="BusinessContactUpdated.cs" t="Include" />
+              <e p="BusinessCreated.cs" t="Include" />
+              <e p="BusinessDetailsUpdated.cs" t="Include" />
+              <e p="BusinessOfficeUpdated.cs" t="Include" />
+              <e p="CreateBusinessRejected.cs" t="Include" />
+              <e p="UpdateBusinessRejected.cs" t="Include" />
+            </e>
+            <e p="Push" t="Include">
+              <e p="OperationComplete.cs" t="Include" />
+              <e p="OperationFailed.cs" t="Include" />
+              <e p="OperationPending.cs" t="Include" />
+            </e>
+            <e p="Sites" t="Include">
+              <e p="Rejected" t="Include">
+                <e p="CreateSiteRejected.cs" t="Include" />
+                <e p="RemoveSiteResourceRejected.cs" t="Include" />
+                <e p="SiteResourceRejected.cs" t="Include" />
+                <e p="SiteUpdateRejected.cs" t="Include" />
+              </e>
+              <e p="SiteCreated.cs" t="Include" />
+              <e p="SiteResourceCreated.cs" t="Include" />
+              <e p="SiteResourceRemoved.cs" t="Include" />
+              <e p="SiteUpdated.cs" t="Include" />
+            </e>
+            <e p="Test" t="Include">
+              <e p="TestCommandPassed.cs" t="Include" />
+              <e p="TestCommandRejected.cs" t="Include" />
+              <e p="TestIssueCommand.cs" t="Include" />
+            </e>
+            <e p="Users" t="Include">
+              <e p="AccessRecordCreated.cs" t="Include" />
+              <e p="AccessRecordRejected.cs" t="Include" />
+              <e p="CreateUserRejected.cs" t="Include" />
+              <e p="UserCreated.cs" t="Include" />
+            </e>
+            <e p="Visitors" t="Include">
+              <e p="DataEntryDeprecated.cs" t="Include" />
+              <e p="DataEntryDeprecationRejected.cs" t="Include" />
+              <e p="DataSpecificationCreated.cs" t="Include" />
+              <e p="DataSpecificationRejected.cs" t="Include" />
+              <e p="EntryOrderUpdated.cs" t="Include" />
+              <e p="EntryOrderUpdateRejected.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Services.Operations.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Sagas" t="Include">
+          <e p="Extensions.cs" t="Include" />
+        </e>
+        <e p="Services" t="Include">
+          <e p="IOperationsCache.cs" t="Include" />
+          <e p="OperationsCache.cs" t="Include" />
+        </e>
+        <e p="Services.Operations.csproj" t="IncludeRecursive" />
+        <e p="Startup.cs" t="Include" />
+      </e>
+      <e p="microservices/Services.Operations.Tests" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Handlers" t="Include">
+          <e p="GenericEventHandlerTests.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Services.Operations.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Services.Operations.Tests.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="microservices/Services.Push" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Clients" t="Include">
+          <e p="ITokensClient.cs" t="Include" />
+          <e p="TokensClient.cs" t="Include" />
+        </e>
+        <e p="Dockerfile" t="Include" />
+        <e p="Dockerfile.original" t="Include" />
+        <e p="Handlers" t="Include">
+          <e p="PushServiceHandler.cs" t="Include" />
+        </e>
+        <e p="Hubs" t="Include">
+          <e p="VmsHub.cs" t="Include" />
+        </e>
+        <e p="Messages" t="Include">
+          <e p="events" t="Include">
+            <e p="OperationComplete.cs" t="Include" />
+            <e p="OperationFailed.cs" t="Include" />
+            <e p="OperationPending.cs" t="Include" />
+          </e>
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Services.Push.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Services" t="Include">
+          <e p="IPushService.cs" t="Include" />
+          <e p="PushService.cs" t="Include" />
+        </e>
+        <e p="Services.Push.csproj" t="IncludeRecursive" />
+        <e p="Startup.cs" t="Include" />
+      </e>
+      <e p="microservices/Services.Push.Tests" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Handlers" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Services.Push.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Services.Push.Tests.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="microservices/Services.RabbitMq" t="IncludeRecursive">
+        <e p="Attributes" t="Include">
+          <e p="MicroService.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Exchange" t="Include">
+          <e p="ServiceBusExchange.cs" t="Include" />
+          <e p="ServiceBusExchangeFactory.cs" t="Include" />
+        </e>
+        <e p="Extensions" t="Include">
+          <e p="ServiceBusExtensions.cs" t="Include" />
+        </e>
+        <e p="Factories" t="Include">
+          <e p="HandlerFactory.cs" t="Include" />
+          <e p="ServiceBusConnectionFactory.cs" t="Include" />
+          <e p="ServiceBusConsumerFactory.cs" t="Include" />
+        </e>
+        <e p="Interfaces" t="Include">
+          <e p="Connection" t="Include">
+            <e p="ServiceBusConnection.cs" t="Include" />
+          </e>
+          <e p="Exchange" t="Include">
+            <e p="IServiceBusExchange.cs" t="Include" />
+            <e p="IServiceBusExchangeFactory.cs" t="Include" />
+          </e>
+          <e p="Factories" t="Include">
+            <e p="IHandlerFactory.cs" t="Include" />
+            <e p="IServiceBusConnectionFactory.cs" t="Include" />
+            <e p="IServiceBusConsumerFactory.cs" t="Include" />
+          </e>
+          <e p="IServiceBusConnection.cs" t="Include" />
+          <e p="IServiceBusManager.cs" t="Include" />
+          <e p="Messaging" t="Include">
+            <e p="ICommand.cs" t="Include" />
+            <e p="ICommandDispatcher.cs" t="Include" />
+            <e p="ICommandHandler.cs" t="Include" />
+            <e p="IDispatcher.cs" t="Include" />
+            <e p="IEvent.cs" t="Include" />
+            <e p="IEventHandler.cs" t="Include" />
+            <e p="IGenericBusHandler.cs" t="Include" />
+            <e p="IGenericCommandHandler.cs" t="Include" />
+            <e p="IRejectedEvent.cs" t="Include" />
+            <e p="IRequestInfo.cs" t="Include" />
+            <e p="IServiceBusMessage.cs" t="Include" />
+          </e>
+          <e p="Queues" t="Include">
+            <e p="IServiceBusQueue.cs" t="Include" />
+            <e p="IServiceBusQueueFactory.cs" t="Include" />
+          </e>
+          <e p="Settings" t="Include">
+            <e p="IServiceBusSettings.cs" t="Include" />
+            <e p="IServiceSettings.cs" t="Include" />
+          </e>
+          <e p="Storage" t="Include">
+            <e p="HandlerStorage.cs" t="Include" />
+            <e p="IHandlerStorage.cs" t="Include" />
+          </e>
+          <e p="Wrappers" t="Include">
+            <e p="IBase64Wrapper.cs" t="Include" />
+            <e p="IJsonConvertWrapper.cs" t="Include" />
+            <e p="IUtf8Wrapper.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Managers" t="Include">
+          <e p="ServiceBusManager.cs" t="Include" />
+        </e>
+        <e p="Messages" t="Include">
+          <e p="Dispatcher.cs" t="Include" />
+          <e p="IServiceBusMessageHandler.cs" t="Include" />
+          <e p="IServiceBusMessagePublisher.cs" t="Include" />
+          <e p="IServiceBusMessageSubscriber.cs" t="Include" />
+          <e p="RequestInfo.cs" t="Include" />
+          <e p="ServiceBusMessageHandler.cs" t="Include" />
+          <e p="ServiceBusMessagePublisher.cs" t="Include" />
+          <e p="ServiceBusMessageSubscriber.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Services.RabbitMq.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Queue" t="Include">
+          <e p="ServiceBusQueue.cs" t="Include" />
+          <e p="ServiceBusQueueFactory.cs" t="Include" />
+        </e>
+        <e p="ServiceBusClassDiagram.cd" t="Include" />
+        <e p="Services.RabbitMq.csproj" t="IncludeRecursive" />
+        <e p="Settings" t="Include">
+          <e p="ServiceBusSettings.cs" t="Include" />
+          <e p="ServiceSettings.cs" t="Include" />
+        </e>
+        <e p="Wrappers" t="Include">
+          <e p="Base64Wrapper.cs" t="Include" />
+          <e p="JsonConvertWrapper.cs" t="Include" />
+          <e p="Utf8Wrapper.cs" t="Include" />
+        </e>
+      </e>
+      <e p="microservices/Services.RabbitMq.Tests" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Exchange" t="Include">
+          <e p="ServiceBusExchangeTests.cs" t="Include" />
+        </e>
+        <e p="Messages" t="Include">
+          <e p="ServiceBusMessagePublisherTests.cs" t="Include" />
+          <e p="ServiceBusMessageSubscriberTests.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.1" t="Include">
+              <e p="Services.RabbitMq.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Queue" t="Include">
+          <e p="ServiceBusQueueTests.cs" t="Include" />
+        </e>
+        <e p="ServiceBusManagerTests.cs" t="Include" />
+        <e p="Services.RabbitMq.Tests.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="microservices/Services.Site" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Codes.cs" t="Include" />
+        <e p="Controllers" t="Include">
+          <e p="SiteController.cs" t="Include" />
+          <e p="SiteRestController.cs" t="Include" />
+          <e p="SitesStatusController.cs" t="Include" />
+        </e>
+        <e p="Dockerfile" t="Include" />
+        <e p="Dockerfile.original" t="Include" />
+        <e p="Domain" t="Include">
+          <e p="Business.cs" t="Include" />
+          <e p="Contact.cs" t="Include" />
+          <e p="IBusiness.cs" t="Include" />
+          <e p="IContact.cs" t="Include" />
+          <e p="ISiteDocument.cs" t="Include" />
+          <e p="ISiteResource.cs" t="Include" />
+          <e p="SiteDocument.cs" t="Include" />
+          <e p="SiteResource.cs" t="Include" />
+        </e>
+        <e p="Dtos" t="Include">
+          <e p="FireListUserDto.cs" t="Include" />
+          <e p="LatestAccessRecordDto.cs" t="Include" />
+          <e p="OnSiteAccessRecordDto.cs" t="Include" />
+          <e p="SiteAvailabilityDto.cs" t="Include" />
+          <e p="SiteDto.cs" t="Include" />
+          <e p="SiteFireListDto.cs" t="Include" />
+          <e p="SiteResourceDto.cs" t="Include" />
+          <e p="SiteSummaryDto.cs" t="Include" />
+          <e p="SiteUserDto.cs" t="Include" />
+        </e>
+        <e p="Factories" t="Include">
+          <e p="ISiteServiceFactory.cs" t="Include" />
+          <e p="SiteServiceFactory.cs" t="Include" />
+        </e>
+        <e p="Handlers" t="Include">
+          <e p="Command" t="Include">
+            <e p="CreateSiteHandler.cs" t="Include" />
+            <e p="CreateSiteResourceHandler.cs" t="Include" />
+            <e p="RemoveSiteResourceHandler.cs" t="Include" />
+            <e p="UpdateSiteContactHandler.cs" t="Include" />
+            <e p="UpdateSiteDetailsHandler.cs" t="Include" />
+          </e>
+          <e p="events" t="Include">
+            <e p="BusinessCreatedHandler.cs" t="Include" />
+          </e>
+          <e p="Query" t="Include">
+            <e p="GetSiteAvailabilityHandler.cs" t="Include" />
+            <e p="GetSiteFireListHandler.cs" t="Include" />
+            <e p="GetSiteHandler.cs" t="Include" />
+            <e p="GetSiteResourcesHandler.cs" t="Include" />
+            <e p="GetSiteSummariesHandler.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Messages" t="Include">
+          <e p="Commands" t="Include">
+            <e p="CreateSite.cs" t="Include" />
+            <e p="CreateSiteResource.cs" t="Include" />
+            <e p="RemoveSiteResource.cs" t="Include" />
+            <e p="UpdateSiteContact.cs" t="Include" />
+            <e p="UpdateSiteDetails.cs" t="Include" />
+          </e>
+          <e p="events" t="Include">
+            <e p="BusinessCreated.cs" t="Include" />
+            <e p="Send" t="Include">
+              <e p="Rejected" t="Include">
+                <e p="CreateSiteRejected.cs" t="Include" />
+                <e p="RemoveSiteResourceRejected.cs" t="Include" />
+                <e p="SiteResourceRejected.cs" t="Include" />
+                <e p="SiteUpdateRejected.cs" t="Include" />
+              </e>
+              <e p="SiteCreated.cs" t="Include" />
+              <e p="SiteResourceCreated.cs" t="Include" />
+              <e p="SiteResourceRemoved.cs" t="Include" />
+              <e p="SiteUpdated.cs" t="Include" />
+            </e>
+          </e>
+          <e p="Queries" t="Include">
+            <e p="GetSite.cs" t="Include" />
+            <e p="GetSiteAvailability.cs" t="Include" />
+            <e p="GetSiteFireList.cs" t="Include" />
+            <e p="GetSiteResources.cs" t="Include" />
+            <e p="GetSiteSummaries.cs" t="Include" />
+          </e>
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Services.Sites.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Repositorys" t="Include">
+          <e p="BusinessRepository.cs" t="Include" />
+          <e p="IBusinessRepository.cs" t="Include" />
+          <e p="ISiteRepository.cs" t="Include" />
+          <e p="ISiteResourceRepository.cs" t="Include" />
+          <e p="SiteRepository.cs" t="Include" />
+          <e p="SiteResourceRepository.cs" t="Include" />
+        </e>
+        <e p="ServiceRegistry.cs" t="Include" />
+        <e p="Services" t="Include">
+          <e p="ISystemServices.cs" t="Include" />
+          <e p="SystemServices.cs" t="Include" />
+        </e>
+        <e p="Services.Sites.csproj" t="IncludeRecursive" />
+        <e p="Startup.cs" t="Include" />
+      </e>
+      <e p="microservices/Services.Sites.Tests" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Domain" t="Include" />
+        <e p="Handlers" t="Include">
+          <e p="Command" t="Include">
+            <e p="CreateSiteHandlerTests.cs" t="Include" />
+            <e p="CreateSiteResourceHandlerTests.cs" t="Include" />
+            <e p="RemoveSiteResourceHandlerTests.cs" t="Include" />
+            <e p="UpdateSiteContactHandlerTests.cs" t="Include" />
+            <e p="UpdateSiteDetailsHandlerTests.cs" t="Include" />
+          </e>
+          <e p="Event" t="Include">
+            <e p="BusinessCreatedHandlerTests.cs" t="Include" />
+          </e>
+          <e p="Query" t="Include">
+            <e p="GetSiteHandlerTests.cs" t="Include" />
+            <e p="GetSiteResourcesHandlerTests.cs" t="Include" />
+            <e p="GetSiteSummariesHandlerTests.cs" t="Include" />
+          </e>
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Services.Sites.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Services.Sites.Tests.csproj" t="IncludeRecursive" />
+        <e p="UnitTest1.cs" t="Include" />
+      </e>
+      <e p="microservices/Services.Tests.Mocks" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Class1.cs" t="Include" />
+        <e p="LoggerMock.cs" t="Include" />
+        <e p="Messaging" t="Include">
+          <e p="MockCommand.cs" t="Include" />
+          <e p="MockCommandHandler.cs" t="Include" />
+          <e p="MockCommandWithAttribute.cs" t="Include" />
+          <e p="MockEvent.cs" t="Include" />
+          <e p="MockEventHandler.cs" t="Include" />
+          <e p="MockQuery.cs" t="Include" />
+          <e p="MockQueryHandler.cs" t="Include" />
+          <e p="MockRejectedEvent.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Services.Tests.Mocks.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Services.Tests.Mocks.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="microservices/Services.Users" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Codes.cs" t="Include" />
+        <e p="Commands" t="Include">
+          <e p="CreateAccessRecord.cs" t="Include" />
+          <e p="CreateUser.cs" t="Include" />
+        </e>
+        <e p="Controllers" t="Include">
+          <e p="AccessRecordsController.cs" t="Include" />
+          <e p="UsersController.cs" t="Include" />
+          <e p="UsersRestController.cs" t="Include" />
+        </e>
+        <e p="Dockerfile" t="Include" />
+        <e p="Dockerfile.original" t="Include" />
+        <e p="Domain" t="Include">
+          <e p="AccessRecordDocument.cs" t="Include" />
+          <e p="Account.cs" t="Include" />
+          <e p="IAccessRecordDocument.cs" t="Include" />
+          <e p="IAccount.cs" t="Include" />
+          <e p="ISite.cs" t="Include" />
+          <e p="IUserDocument.cs" t="Include" />
+          <e p="IUserStatusDocument.cs" t="Include" />
+          <e p="Site.cs" t="Include" />
+          <e p="UserDocument.cs" t="Include" />
+          <e p="UserStatusDocument.cs" t="Include" />
+        </e>
+        <e p="Dtos" t="Include">
+          <e p="AccessRecordDto.cs" t="Include" />
+          <e p="LatestAccessRecordDto.cs" t="Include" />
+          <e p="OnSiteAccessRecordDto.cs" t="Include" />
+          <e p="SiteAccessDetailsDto.cs" t="Include" />
+          <e p="UserAccessDetailsDto.cs" t="Include" />
+          <e p="UserInfoDto.cs" t="Include" />
+          <e p="UserSnapshotDto.cs" t="Include" />
+        </e>
+        <e p="events" t="Include">
+          <e p="AccessRecordCreated.cs" t="Include" />
+          <e p="AccessRecordRejected.cs" t="Include" />
+          <e p="AccountRemoved.cs" t="Include" />
+          <e p="CreateUserRejected.cs" t="Include" />
+          <e p="SiteCreated.cs" t="Include" />
+          <e p="UserAccountCreated.cs" t="Include" />
+          <e p="UserCreated.cs" t="Include" />
+        </e>
+        <e p="Factories" t="Include">
+          <e p="AccessRecordFactory.cs" t="Include" />
+          <e p="IAccessRecordFactory.cs" t="Include" />
+          <e p="ISiteFactory.cs" t="Include" />
+          <e p="IUsersFactory.cs" t="Include" />
+          <e p="SiteFactory.cs" t="Include" />
+          <e p="UsersFactory.cs" t="Include" />
+        </e>
+        <e p="Handlers" t="Include">
+          <e p="Command" t="Include">
+            <e p="CreateAccessRecordHandler.cs" t="Include" />
+            <e p="CreateUserHandler.cs" t="Include" />
+          </e>
+          <e p="events" t="Include">
+            <e p="AccountRemovedHandler.cs" t="Include" />
+            <e p="SiteCreatedHandler.cs" t="Include" />
+            <e p="UserAccountCreatedHandler.cs" t="Include" />
+          </e>
+          <e p="Queries" t="Include">
+            <e p="GetBusinessAccessRecordsHandler.cs" t="Include" />
+            <e p="GetLatestSiteAccessRecordsHandler.cs" t="Include" />
+            <e p="GetPersonalAccessRecordsHandler.cs" t="Include" />
+            <e p="GetUserInfoHandler.cs" t="Include" />
+            <e p="GetUserSnapshotsForBusinessHandler.cs" t="Include" />
+            <e p="GetUsersOnSiteHandler.cs" t="Include" />
+          </e>
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Services.Users.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Queries" t="Include">
+          <e p="GetBusinessAccessRecords.cs" t="Include" />
+          <e p="GetLatestSiteAccessRecords.cs" t="Include" />
+          <e p="GetPersonalAccessRecords.cs" t="Include" />
+          <e p="GetUserInfo.cs" t="Include" />
+          <e p="GetUserSnapshotsForBusiness.cs" t="Include" />
+          <e p="GetUsersOnSite.cs" t="Include" />
+        </e>
+        <e p="Repositories" t="Include">
+          <e p="AccessRecordRepository.cs" t="Include" />
+          <e p="AccountRepository.cs" t="Include" />
+          <e p="IAccessRecordRepository.cs" t="Include" />
+          <e p="IAccountRepository.cs" t="Include" />
+          <e p="ISiteRepository.cs" t="Include" />
+          <e p="IUserRepository.cs" t="Include" />
+          <e p="IUserStatusRepository.cs" t="Include" />
+          <e p="SiteRepository.cs" t="Include" />
+          <e p="UserRepository.cs" t="Include" />
+          <e p="UserStatusRepository.cs" t="Include" />
+        </e>
+        <e p="ServiceRegistry.cs" t="Include" />
+        <e p="Services" t="Include">
+          <e p="Dtos" t="Include">
+            <e p="BusinessDto.cs" t="Include" />
+            <e p="SiteDto.cs" t="Include" />
+          </e>
+          <e p="IServicesRepository.cs" t="Include" />
+          <e p="IUserStatusService.cs" t="Include" />
+          <e p="ServicesRepository.cs" t="Include" />
+          <e p="UserStatusService.cs" t="Include" />
+        </e>
+        <e p="Services.Users.csproj" t="IncludeRecursive" />
+        <e p="Startup.cs" t="Include" />
+      </e>
+      <e p="microservices/Services.Users.Tests" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Command" t="Include">
+          <e p="CreateAccessRecordHandlerTests.cs" t="Include" />
+          <e p="CreateUserHandlerTests.cs" t="Include" />
+        </e>
+        <e p="Event" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Services.Users.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Query" t="Include" />
+        <e p="Services.Users.Tests.csproj" t="IncludeRecursive" />
+        <e p="UnitTest1.cs" t="Include" />
+      </e>
+      <e p="microservices/Services.Visititors.Tests" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="CreateDataEntryHandlerTests.cs" t="Include" />
+        <e p="DeprecateDataEntryHandlerTests.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Services.Visitors.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Services.Visitors.Tests.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="microservices/Services.Visitors" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Codes.cs" t="Include" />
+        <e p="Commands" t="Include">
+          <e p="CreateDataEntry.cs" t="Include" />
+          <e p="CreateVisitor.cs" t="Include" />
+          <e p="DeprecateDataEntry.cs" t="Include" />
+          <e p="UpdateEntryOrder.cs" t="Include" />
+        </e>
+        <e p="Controllers" t="Include">
+          <e p="DataSpecificationController.cs" t="Include" />
+        </e>
+        <e p="Dockerfile" t="Include" />
+        <e p="Dockerfile.original" t="Include" />
+        <e p="Domain" t="Include">
+          <e p="DataSpecificationDocument.cs" t="Include" />
+          <e p="IDataSpecificationDocument.cs" t="Include" />
+          <e p="IVisitorData.cs" t="Include" />
+          <e p="IVisitorDocument.cs" t="Include" />
+          <e p="VisitorData.cs" t="Include" />
+          <e p="VisitorDocument.cs" t="Include" />
+        </e>
+        <e p="Dtos" t="Include">
+          <e p="DataSpecificationDto.cs" t="Include" />
+        </e>
+        <e p="events" t="Include">
+          <e p="DataEntryDeprecated.cs" t="Include" />
+          <e p="DataEntryDeprecationRejected.cs" t="Include" />
+          <e p="DataSpecificationCreated.cs" t="Include" />
+          <e p="DataSpecificationRejected.cs" t="Include" />
+          <e p="EntryOrderUpdated.cs" t="Include" />
+          <e p="EntryOrderUpdateRejected.cs" t="Include" />
+        </e>
+        <e p="Factories" t="Include">
+          <e p="DataSpecificationFactory.cs" t="Include" />
+          <e p="IDataSpecificationFactory.cs" t="Include" />
+          <e p="IVisitorFactory.cs" t="Include" />
+          <e p="VisitorFactory.cs" t="Include" />
+        </e>
+        <e p="Handlers" t="Include">
+          <e p="Command" t="Include">
+            <e p="CreateDataEntryHandler.cs" t="Include" />
+            <e p="CreateVisitorHandler.cs" t="Include" />
+            <e p="DeprecateDataEntryHandler.cs" t="Include" />
+            <e p="UpdateEntryOrderHandler.cs" t="Include" />
+          </e>
+          <e p="Queries" t="Include">
+            <e p="GetBusinessDataSpecificationHandler.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Names" t="Include">
+          <e p="Validation.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Services.Visitors.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Queries" t="Include">
+          <e p="GetBusinessDataSpecifications.cs" t="Include" />
+        </e>
+        <e p="Repositorys" t="Include">
+          <e p="DataSpecificationRepository.cs" t="Include" />
+          <e p="IDataSpecificationRepository.cs" t="Include" />
+          <e p="IUserServiceClient.cs" t="Include" />
+          <e p="IVisitorsRepository.cs" t="Include" />
+          <e p="VisitorsRepository.cs" t="Include" />
+        </e>
+        <e p="ServiceRegistry.cs" t="Include" />
+        <e p="Services.Visitors.csproj" t="IncludeRecursive" />
+        <e p="Startup.cs" t="Include" />
+      </e>
+      <e p="microservices.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Prototype" t="Include" />
+      <e p="Tests" t="Include">
+        <e p="Service Tests" t="Include" />
+      </e>
+      <e p="tools/VmsLogger/vms-logger/node_modules/@babel/parser" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/@babel/types" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/@jest/console" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/@jest/fake-timers" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/@jest/source-map" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/@jest/test-result" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/@jest/types" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/@types" t="IncludeRecursive">
+        <e p="babel__generator" t="IncludeRecursive" />
+        <e p="babel__template" t="IncludeRecursive" />
+        <e p="babel__traverse" t="IncludeRecursive" />
+        <e p="istanbul-lib-coverage" t="IncludeRecursive" />
+        <e p="istanbul-lib-report" t="IncludeRecursive" />
+        <e p="yargs-parser" t="IncludeRecursive" />
+      </e>
+      <e p="tools/VmsLogger/vms-logger/node_modules/@typescript-eslint/experimental-utils" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/@typescript-eslint/parser" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/@typescript-eslint/typescript-estree" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/axios" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/babel-jest" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/chalk" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/dotenv-expand" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/jest" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/jest-haste-map" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/jest-message-util" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/jest-mock" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/jest-resolve" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/jest-serializer" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/jest-util" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/jest-worker" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/react" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/react-dom" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/react-redux" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/react-scripts" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/realpath-native" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/redux" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/redux-logger" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/redux-thunk" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/rxjs" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/source-map" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/symbol-observable" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/tslib" t="IncludeRecursive" />
+      <e p="tools/VmsLogger/vms-logger/node_modules/worker-farm" t="IncludeRecursive" />
+    </e>
+    <e p="$USER_HOME$/Library/Caches/Rider2019.2/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2019.2/resharper-host/local/Transient/ReSharperHost/v192/SolutionCaches/_microservices.713581847.00" t="ExcludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/scratches" t="IncludeRecursive" />
+  </component>
+</project>

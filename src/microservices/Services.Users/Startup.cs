@@ -31,13 +31,14 @@ namespace Services.Users
             services.AddServiceBus();
             services.AddControllers();
             services.AddMongo()
-                .AddMongoCollection<User>()
+                .AddMongoCollection<UserDocument>()
                 .AddMongoCollection<Account>()
-                .AddMongoCollection<AccessRecord>()
+                .AddMongoCollection<AccessRecordDocument>()
                 .AddMongoCollection<Site>()
-                .AddMongoCollection<UserStatus>();
+                .AddMongoCollection<UserStatusDocument>();
 
             services.AddQuerySupport();
+            services.AddRestControllersSupport();
 
             services.AddConvey().AddHttpClient();
 

@@ -11,6 +11,7 @@ using Convey.HTTP;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Common.Jwt;
+using Services.Common.Logging;
 using Services.Common.Names;
 using Services.RabbitMq.Interfaces.Messaging;
     
@@ -21,7 +22,7 @@ namespace Api.Gateway.Controllers
     {
         private readonly ISiteClient _siteClient;
 
-        public SiteController(IDispatcher dispatcher, ISiteClient siteClient) : base(dispatcher)
+        public SiteController(IDispatcher dispatcher, ISiteClient siteClient, HttpClientOptions options, IVmsLogger<GatewayControllerBase> logger) : base(dispatcher, options, logger)
         {
             _siteClient = siteClient;
         }

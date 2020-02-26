@@ -1,0 +1,32 @@
+GET http://localhost:5014/site/api/rest/
+
+###
+
+GET http://localhost:5014/api/site/rest/
+
+###
+
+GET http://localhost:5014/api/site/rest/
+
+###
+
+GET http://localhost:5014/api/sites/rest/
+
+###
+
+GET http://localhost:5014/api/sites/rest/
+
+###
+
+GET http://localhost:5014/api/sites/rest/
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+GET http://localhost:5015/api/site/rest/
+Accept: */*
+Cache-Control: no-cache
+
+###
+

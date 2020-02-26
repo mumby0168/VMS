@@ -41,8 +41,8 @@ namespace Services.Users.Handlers.Command
 
         public async Task HandleAsync(CreateAccessRecord message, IRequestInfo requestInfo)
         {
-            IUser user = await _userRepository.GetByCodeAsync(message.Code);
-            if(user is null)
+            IUserDocument userDocument = await _userRepository.GetByCodeAsync(message.Code);
+            if(userDocument is null)
             {
                 _publisher.PublishEvent(new AccessRecordRejected(Codes.InvalidId, "The code used is invalid."), requestInfo);
                 _logger.LogError($"User with code: {message.Code} could not be found.");
@@ -57,15 +57,15 @@ namespace Services.Users.Handlers.Command
                 return;
             }
 
-            await _userStatusService.Update(user.Id, message.Action, message.SiteId);
+            await _userStatusService.Update(userDocument.Id, message.Action, message.SiteId);
 
-            var record = _factory.Create(user.Id, message.SiteId, message.Action, user.BusinessId);
+            var record = _factory.Create(userDocument.Id, message.SiteId, message.Action, userDocument.BusinessId);
             await _accessRecordRepository.AddAsync(record);
             _publisher.PublishEvent(new AccessRecordCreated(), requestInfo);
 
             string action = message.Action == AccessAction.In ? "in" : "out";
 
-            _logger.LogInformation($"{user.FirstName + " " + user.SecondName} signed {action} on : {record.TimeStamp}.", LoggingCategories.Access);
+            _logger.LogInformation($"{userDocument.FirstName + " " + userDocument.SecondName} signed {action} on : {record.TimeStamp}.", LoggingCategories.Access);
         }
     }
 }

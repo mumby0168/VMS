@@ -22,7 +22,7 @@ namespace Services.Sites.Tests.Handlers.Query
         private Mock<IRequestInfo> _requestInfo;
         private Mock<IServiceBusMessagePublisher> _publisher;
         private Mock<ISiteRepository> _repository;
-        private Mock<Domain.ISite> _site;
+        private Mock<Domain.ISiteDocument> _site;
         private Mock<IContact> _contact;
 
 
@@ -32,7 +32,7 @@ namespace Services.Sites.Tests.Handlers.Query
             _requestInfo = new Mock<IRequestInfo>();
             _publisher = new Mock<IServiceBusMessagePublisher>();
             _repository = new Mock<ISiteRepository>();
-            _site = new Mock<Domain.ISite>();
+            _site = new Mock<Domain.ISiteDocument>();
             _contact = new Mock<IContact>();
             _site.Setup(o => o.GetContact()).Returns(_contact.Object);
         }

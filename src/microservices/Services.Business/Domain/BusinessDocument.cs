@@ -6,7 +6,7 @@ using Uri = System.Uri;
 
 namespace Services.Business.Domain
 {
-    public class Business : IBusiness
+    public class BusinessDocument : IBusinessDocument
     {
         public Guid Id { get; private set; }
 
@@ -19,7 +19,7 @@ namespace Services.Business.Domain
         public HeadOffice Office { get; private set; }
         public HeadContact Contact { get; private set; }
 
-        public IBusiness Setup(string name, string tradingName, string webAddress, IHeadOffice headOffice, IHeadContact headContact, int code)
+        public IBusinessDocument Setup(string name, string tradingName, string webAddress, IHeadOffice headOffice, IHeadContact headContact, int code)
         {
             Validate(name, tradingName, webAddress, code);
 

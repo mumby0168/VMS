@@ -24,8 +24,11 @@ namespace Services.Common.Logging
 
             opts.ServiceName = serviceName;
             opts.Port = 11000;
-            var addresses = Dns.GetHostAddresses("logs");
-            opts.Address = addresses[0].ToString();
+            // var addresses = Dns.GetHostAddresses("logs");
+            // opts.Address = addresses[0].ToString();
+
+            var addresses = Dns.GetHostAddresses(Dns.GetHostName());
+            opts.Address = addresses[0].MapToIPv4().ToString();
 
             var client = application.ApplicationServices.GetService<IUdpLoggingClient>();
             client.CreateConnection();

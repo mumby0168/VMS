@@ -1,47 +1,11 @@
 version: '3.7'
 
-services:    
-    mongo:
-        image: mongo:4
-        container_name: mongo
-        ports:
-        - 27017:27017
-        networks:
-        - cruncher    
-        volumes:
-        - mongo:/data/db
-
-    rabbitmq:
-        image: rabbitmq:3-management
-        container_name: rabbit
-        ports:
-        - 5672:5672
-        - 15672:15672
-        depends_on: 
-           - services.logs
-        networks:
-        - cruncher      
-
-    redis:
-        image: redis
-        container_name: redis
-        ports:
-        - 6379:6379
-        networks:
-        - cruncher  
-        volumes: 
-        - redis:/data
-            
+services:      
     services.identity:
         container_name: identity
         image: '${DOCKER_REGISTRY-}servicesidentity'
         ports:
-            - '5010:80'
-        depends_on: 
-            - mongo
-            - services.logs
-            - redis
-            - rabbitmq
+            - '5010:80'         
         build:
             context: .
             dockerfile: microservices/Services.Identity/Dockerfile      
@@ -52,12 +16,7 @@ services:
         container_name: operations
         image: '${DOCKER_REGISTRY-}servicesoperations'
         ports: 
-            - '5012:80'
-        depends_on: 
-            - mongo
-            - services.logs
-            - redis
-            - rabbitmq
+            - '5012:80'      
         build:
             context: .
             dockerfile: microservices/Services.Operations/Dockerfile
@@ -73,11 +32,6 @@ services:
             dockerfile: microservices/Services.Push/Dockerfile
         ports: 
             - '5015:80'
-        depends_on: 
-            - mongo
-            - redis
-            - rabbitmq
-            - services.logs
         networks: 
             - cruncher
 
@@ -89,9 +43,6 @@ services:
             dockerfile: microservices/Services.Logs/Dockerfile
         ports: 
             - '5016:80'
-        depends_on: 
-            - mongo
-            - redis            
         networks: 
             - cruncher
 

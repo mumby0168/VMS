@@ -16,17 +16,17 @@ namespace Services.Users.Controllers
     [Route("users/api/")]
     public class UsersController : VmsControllerBase
     {
-        private readonly IMongoRepository<User> _repository;
+        private readonly IMongoRepository<UserDocument> _repository;
         private readonly IQueryDispatcher _dispatcher;
 
-        public UsersController(IMongoRepository<User> repository, IQueryDispatcher dispatcher)
+        public UsersController(IMongoRepository<UserDocument> repository, IQueryDispatcher dispatcher)
         {
             _repository = repository;
             _dispatcher = dispatcher;
         }
 
         [HttpGet("users")]
-        public async Task<ActionResult<IEnumerable<IUser>>> Get()
+        public async Task<ActionResult<IEnumerable<IUserDocument>>> Get()
         {
             return Ok(await _repository.GetAllAsync());
         }

@@ -8,9 +8,11 @@ using Api.Gateway.Clients.Interfaces;
 using Api.Gateway.Dtos.Users;
 using Api.Gateway.Messages.Users.Commands;
 using Api.Gateway.Messages.Users.Enums;
+using Convey.HTTP;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Common.Jwt;
+using Services.Common.Logging;
 using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Api.Gateway.Controllers
@@ -20,7 +22,7 @@ namespace Api.Gateway.Controllers
     {
         private readonly IUsersClient _client;
 
-        public UsersController(IDispatcher dispatcher, IUsersClient client) : base(dispatcher)
+        public UsersController(IDispatcher dispatcher, IUsersClient client, HttpClientOptions options, IVmsLogger<GatewayControllerBase> logger) : base(dispatcher, options, logger)
         {
             _client = client;
         }

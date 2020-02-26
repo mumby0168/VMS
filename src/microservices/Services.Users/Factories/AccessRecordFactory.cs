@@ -8,14 +8,14 @@ namespace Services.Users.Factories
 {
     public class AccessRecordFactory : IAccessRecordFactory
     {
-        public IAccessRecord Create(Guid userId, Guid siteId, AccessAction action, Guid userBusinessId)
+        public IAccessRecordDocument Create(Guid userId, Guid siteId, AccessAction action, Guid userBusinessId)
         {
-            return new AccessRecord().Create(userId, siteId, action, userBusinessId);
+            return new AccessRecordDocument().Create(userId, siteId, action, userBusinessId);
         }
 
-        public IUserStatus Create(Guid userId, Guid siteId, AccessAction action)
+        public IUserStatusDocument Create(Guid userId, Guid siteId, AccessAction action)
         {
-            return new UserStatus().Create(userId, action, siteId);
+            return new UserStatusDocument().Create(userId, action, siteId);
         }
     }
 }

@@ -7,11 +7,11 @@ namespace Services.Users.Repositories
 {
     public interface IUserStatusRepository
     {
-        Task<IUserStatus> GetStatusForUserAsync(Guid userId);
+        Task<IUserStatusDocument> GetStatusForUserAsync(Guid userId);
 
-        Task AddAsync(IUserStatus status);
+        Task AddAsync(IUserStatusDocument statusDocument);
 
-        Task UpdateAsync(IUserStatus status);
-        Task<IEnumerable<IUserStatus>> GetForSiteAsync(Guid siteId);
+        Task UpdateAsync(IUserStatusDocument statusDocument);
+        Task<IEnumerable<IUserStatusDocument>> GetForSiteAsync(Guid siteId);
     }
 }

@@ -8,10 +8,10 @@ namespace Services.Users.Repositories
 {
     public interface IAccessRecordRepository
     {
-        Task AddAsync(IAccessRecord record);
-        Task<IEnumerable<IAccessRecord>> GetForUser(Guid userId);
-        Task<IEnumerable<IAccessRecord>> GetForSite(Guid siteId);
-        Task<IEnumerable<AccessRecord>> GetForBusiness(Guid businessId);
+        Task AddAsync(IAccessRecordDocument recordDocument);
+        Task<IEnumerable<IAccessRecordDocument>> GetForUser(Guid userId);
+        Task<IEnumerable<IAccessRecordDocument>> GetForSite(Guid siteId);
+        Task<IEnumerable<AccessRecordDocument>> GetForBusiness(Guid businessId);
         Task RemoveRangeByUserId(Guid userId);
     }
 }

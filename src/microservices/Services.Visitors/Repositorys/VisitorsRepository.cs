@@ -9,16 +9,16 @@ namespace Services.Visitors.Repositorys
 {
     public class VisitorsRepository : IVisitorsRepository
     {
-        private readonly IMongoRepository<Visitor> _repository;
+        private readonly IMongoRepository<VisitorDocument> _repository;
 
-        public VisitorsRepository(IMongoRepository<Visitor> repository)
+        public VisitorsRepository(IMongoRepository<VisitorDocument> repository)
         {
             _repository = repository;
         }
         
-        public Task AddAsync(IVisitor visitor)
+        public Task AddAsync(IVisitorDocument visitorDocument)
         {
-            return _repository.AddAsync(visitor as Visitor);
+            return _repository.AddAsync(visitorDocument as VisitorDocument);
         }
 
         public Task GetAsync(Guid visitorId)

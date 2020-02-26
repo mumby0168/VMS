@@ -39,6 +39,7 @@ namespace Governor.Server.Builders
                     WindowStyle = ProcessWindowStyle.Normal,
                 },
             };
+            
 
             return new Service(name, process, url);
         }

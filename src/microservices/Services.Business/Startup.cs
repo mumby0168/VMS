@@ -9,6 +9,7 @@ using Services.Common.Logging;
 using Services.Common.Mongo;
 using Services.Common.Names;
 using Services.Common.Queries;
+using Services.Common.Rest;
 using Services.RabbitMq.Extensions;
 
 namespace Services.Business
@@ -22,8 +23,9 @@ namespace Services.Business
             services.AddUdpLogging();
             services.AddServiceBus();
             services.AddControllers();
-            services.AddMongo().AddMongoCollection<Domain.Business>();
+            services.AddMongo().AddMongoCollection<Domain.BusinessDocument>();
             services.AddQuerySupport();
+            services.AddRestControllersSupport();
             services.AddNumberGenerator();
             //Adds service specific services.
             ServiceRegistry.RegisterServices(services);

@@ -8,11 +8,11 @@ namespace Services.Visitors.Repositorys
 {
     public interface IDataSpecificationRepository
     {
-        Task AddAsync(IDataSpecification specification);
+        Task AddAsync(IDataSpecificationDocument specificationDocument);
 
         Task<int> GetNextOrderNumberAsync(Guid businessId);
-        Task<IEnumerable<IDataSpecification>> GetEntriesAsync(Guid businessId);
-        Task UpdateAsync(IDataSpecification entry);
-        Task RemoveAsync(IDataSpecification spec);
+        Task<IEnumerable<IDataSpecificationDocument>> GetEntriesAsync(Guid businessId);
+        Task UpdateAsync(IDataSpecificationDocument entry);
+        Task RemoveAsync(IDataSpecificationDocument spec);
     }
 }

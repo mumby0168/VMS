@@ -8,31 +8,31 @@ namespace Services.Users.Repositories
 {
     public class UserStatusRepository : IUserStatusRepository
     {
-        private readonly IMongoRepository<UserStatus> _repository;
+        private readonly IMongoRepository<UserStatusDocument> _repository;
 
-        public UserStatusRepository(IMongoRepository<UserStatus> repository)
+        public UserStatusRepository(IMongoRepository<UserStatusDocument> repository)
         {
             _repository = repository;
         }
 
-        public Task AddAsync(IUserStatus status)
+        public Task AddAsync(IUserStatusDocument statusDocument)
         {
-            return _repository.AddAsync(status as UserStatus);
+            return _repository.AddAsync(statusDocument as UserStatusDocument);
         }
 
-        public async Task<IEnumerable<IUserStatus>> GetForSiteAsync(Guid siteId)
+        public async Task<IEnumerable<IUserStatusDocument>> GetForSiteAsync(Guid siteId)
         {
             return await _repository.FindAsync(s => s.SiteId == siteId);
         }
 
-        public async Task<IUserStatus> GetStatusForUserAsync(Guid userId)
+        public async Task<IUserStatusDocument> GetStatusForUserAsync(Guid userId)
         {
             return await _repository.GetAsync(s => s.UserId == userId);
         }
 
-        public Task UpdateAsync(IUserStatus status)
+        public Task UpdateAsync(IUserStatusDocument statusDocument)
         {
-            return _repository.UpdateAsync(status as UserStatus, status.Id);
+            return _repository.UpdateAsync(statusDocument as UserStatusDocument, statusDocument.Id);
         }
     }
 }

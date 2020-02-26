@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Services.Users.Domain
 {
-    public class AccessRecord : IAccessRecord
+    public class AccessRecordDocument : IAccessRecordDocument
     {
         public Guid Id { get; private set; }
         public Guid UserId { get; private set; }
@@ -13,17 +13,17 @@ namespace Services.Users.Domain
         public Guid BusinessId { get; private set; }
         public DateTime TimeStamp { get; private set; }
         public AccessAction Action { get; private set; }
-        public IAccessRecord Create(Guid userId, Guid siteId, AccessAction action, Guid businessId)
+        public IAccessRecordDocument Create(Guid userId, Guid siteId, AccessAction action, Guid businessId)
         {
-            return new AccessRecord(userId, siteId, action, businessId);
+            return new AccessRecordDocument(userId, siteId, action, businessId);
         }
 
-        public AccessRecord()
+        public AccessRecordDocument()
         {
             
         }
 
-        private AccessRecord(Guid userId, Guid siteId, AccessAction action, Guid businessId)
+        private AccessRecordDocument(Guid userId, Guid siteId, AccessAction action, Guid businessId)
         {
             UserId = userId;
             SiteId = siteId;

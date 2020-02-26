@@ -23,7 +23,7 @@ namespace Services.Businesses.Tests.Handlers
         private Mock<IBusinessRepository> _repository;
         private Mock<IServiceBusMessagePublisher> _publisher;
 
-        private Mock<IBusiness> _business;
+        private Mock<IBusinessDocument> _business;
         private Mock<UpdateHeadOffice> _message;
         private Mock<IHeadOffice> _office;
 
@@ -35,7 +35,7 @@ namespace Services.Businesses.Tests.Handlers
             _requestInfo = new Mock<IRequestInfo>();
             _repository = new Mock<IBusinessRepository>();
             _publisher = new Mock<IServiceBusMessagePublisher>();
-            _business = new Mock<IBusiness>();
+            _business = new Mock<IBusinessDocument>();
             _message = new Mock<UpdateHeadOffice>();
             _office = new Mock<IHeadOffice>();
             _business.Setup(o => o.GetOffice()).Returns(_office.Object);

@@ -8,7 +8,7 @@ using Services.Common.Validation;
 
 namespace Services.Sites.Domain
 {
-    public class Site : ISite
+    public class SiteDocument : ISiteDocument
     {
         public Guid Id { get; private set; }
 
@@ -22,7 +22,7 @@ namespace Services.Sites.Domain
         public string AddressLine2 { get; private set; }
         public IContact GetContact() => Contact;
 
-        public ISite Setup(Guid businessId, string name, string postCode, string addressLine1, string addressLine2, IContact contact)
+        public ISiteDocument Setup(Guid businessId, string name, string postCode, string addressLine1, string addressLine2, IContact contact)
         {
             if(string.IsNullOrWhiteSpace(name)) throw new VmsException("empty_property", "The field name must contain a value.");
             if (!Validator.IsPostCodeValid(postCode)) throw new VmsException(Codes.InvalidPostCode, $"The postcode: {postCode} is not valid in the UK ");

@@ -8,9 +8,9 @@ namespace Services.Visitors.Factories
 {
     public class DataSpecificationFactory : IDataSpecificationFactory
     {
-        public IDataSpecification Create(string label, int order, string validationMessage, string validationCode, Guid businessId)
+        public IDataSpecificationDocument Create(string label, int order, string validationMessage, string validationCode, Guid businessId)
         {
-            return new DataSpecification().Setup(label, order, validationMessage, validationCode, businessId);
+            return new DataSpecificationDocument().Setup(label, order, validationMessage, validationCode, businessId);
         }
     }
 }

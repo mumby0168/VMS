@@ -23,14 +23,14 @@ namespace Services.Sites.Tests.Handlers.Command
         private Mock<IRequestInfo> _requestInfo;
         private Mock<IServiceBusMessagePublisher> _publisher;
         private Mock<ISiteRepository> _siteRepository;
-        private Mock<ISite> _site;
+        private Mock<ISiteDocument> _site;
         private Mock<IContact> _contact;
         private Mock<UpdateSiteContact> _message;
 
         [SetUp]
         public void Setup()
         {
-            _site = new Mock<ISite>();
+            _site = new Mock<ISiteDocument>();
             _contact = new Mock<IContact>();
             _message = new Mock<UpdateSiteContact>();
             _requestInfo = new Mock<IRequestInfo>();

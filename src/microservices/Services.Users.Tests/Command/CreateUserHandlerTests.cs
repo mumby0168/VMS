@@ -33,7 +33,7 @@ namespace Services.Users.Tests.Command
         private CreateUser _createUser = new CreateUser("Fred", "Ball", "07568 675445", "01482 657434", Guid.NewGuid(),
             Guid.NewGuid(), Guid.NewGuid());
 
-        private Mock<IUser> _user;
+        private Mock<IUserDocument> _user;
 
 
         [SetUp]
@@ -45,7 +45,7 @@ namespace Services.Users.Tests.Command
             _accountRepo = new Mock<IAccountRepository>();
             _serviceRepo = new Mock<IServicesRepository>();
             _usersRepo = new Mock<IUserRepository>();
-            _user = new Mock<IUser>();
+            _user = new Mock<IUserDocument>();
         }
 
         [Test]

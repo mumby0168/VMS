@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using ISite = Services.Sites.Domain.ISite;
+using Services.Sites.Domain;
 
 namespace Services.Sites.Repositorys
 {
     public interface ISiteRepository
     {
-        Task AddAsync(ISite site);
-        Task<ISite> GetAsync(Guid id);
-        Task<IEnumerable<ISite>> GetSitesForBusinessAsync(Guid businessId);
-        Task Update(ISite site);
+        Task AddAsync(ISiteDocument siteDocument);
+        Task<ISiteDocument> GetAsync(Guid id);
+        Task<IEnumerable<ISiteDocument>> GetSitesForBusinessAsync(Guid businessId);
+        Task Update(ISiteDocument siteDocument);
         Task<bool> IsSiteIdValid(Guid siteId);
     }
 }

@@ -32,12 +32,12 @@ namespace Services.Visitors.Handlers.Command
 
         public async Task HandleAsync(CreateDataEntry message, IRequestInfo requestInfo)
         {
-            IDataSpecification specification = null;
+            IDataSpecificationDocument specificationDocument = null;
             var order = await _repository.GetNextOrderNumberAsync(message.BusinessId);
 
             try
             {
-                specification =
+                specificationDocument =
                     _factory.Create(message.Label, order, message.ValidationMessage, message.ValidationCode, message.BusinessId);
             }
             catch (VmsException e)
@@ -47,9 +47,9 @@ namespace Services.Visitors.Handlers.Command
                 return;
             }
 
-            await _repository.AddAsync(specification);
+            await _repository.AddAsync(specificationDocument);
             _publisher.PublishEvent(new DataSpecificationCreated(), requestInfo);
-            _logger.LogInformation($"Data specification labeled {message.Label} created with id: {specification.Id}");
+            _logger.LogInformation($"Data specification labeled {message.Label} created with id: {specificationDocument.Id}");
         }
     }
 }

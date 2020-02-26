@@ -8,12 +8,12 @@ using Services.Visitors.Names;
 
 namespace Services.Visitors.Domain
 {
-    public class DataSpecification : IDataSpecification
+    public class DataSpecificationDocument : IDataSpecificationDocument
     {
         public Guid Id { get; private set; }
-        public IDataSpecification Setup(string label,int order, string validationMessage, string validationCode, Guid businessId)
+        public IDataSpecificationDocument Setup(string label,int order, string validationMessage, string validationCode, Guid businessId)
         {
-            return new DataSpecification(label, order, validationMessage, validationCode, businessId);
+            return new DataSpecificationDocument(label, order, validationMessage, validationCode, businessId);
         }
 
         public void UpdateOrder(int newOrder)
@@ -33,12 +33,12 @@ namespace Services.Visitors.Domain
             IsLive = false;
         }
 
-        public DataSpecification()
+        public DataSpecificationDocument()
         {
             
         }
 
-        private DataSpecification(string label, int order, string validationMessage, string validationCode,
+        private DataSpecificationDocument(string label, int order, string validationMessage, string validationCode,
             Guid businessId)
         {
 
