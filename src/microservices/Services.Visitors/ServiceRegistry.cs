@@ -31,6 +31,7 @@ namespace Services.Visitors
 
 
             //command handlers
+            services.AddTransient<ICommandHandler<CreateVisitor>, CreateVisitorHandler>();
             services.AddTransient<ICommandHandler<CreateDataEntry>, CreateDataEntryHandler>();
             services.AddTransient<ICommandHandler<UpdateEntryOrder>, UpdateEntryOrderHandler>();
             services.AddTransient<ICommandHandler<DeprecateDataEntry>, DeprecateDataEntryHandler>();

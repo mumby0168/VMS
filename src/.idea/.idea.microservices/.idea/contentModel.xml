@@ -305,6 +305,7 @@
           </e>
           <e p="Visitors" t="Include">
             <e p="CreateDataEntry.cs" t="Include" />
+            <e p="CreateVisitor.cs" t="Include" />
             <e p="DeprecateDataEntry.cs" t="Include" />
             <e p="UpdateEntryOrder.cs" t="Include" />
           </e>

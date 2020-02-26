@@ -11,7 +11,7 @@ namespace Services.Visitors.Repositorys
         private readonly string _baseAddress;
         public SiteServiceClient(IHttpClient httpClient, HttpClientOptions options)
         {
-            _baseAddress = options.Services["sites"];
+            _baseAddress = options.Services["site"];
             _httpClient = httpClient;
         }
         

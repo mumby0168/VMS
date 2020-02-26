@@ -50,5 +50,12 @@ namespace Api.Gateway.Controllers
             return PublishCommand(new DeprecateDataEntry(command.Id, GetBusinessId()));
         }
 
+        [Authorize(Roles = Roles.Greeting)]
+        [HttpPost("create")]
+        public IActionResult SubmitForm([FromBody] CreateVisitor command)
+        {
+            return PublishCommand(command);
+        }
+
     }
 }
