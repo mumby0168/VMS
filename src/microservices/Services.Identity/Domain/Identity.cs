@@ -30,7 +30,7 @@ namespace Services.Identity.Domain
 
             if (role != Roles.SystemAdmin)
             {
-
+                throw new VmsException(Codes.InvalidCredentials, "This user registration must be a system admin.");
             }
 
 

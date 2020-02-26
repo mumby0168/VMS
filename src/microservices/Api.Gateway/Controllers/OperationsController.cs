@@ -7,6 +7,7 @@ using Api.Gateway.Clients.Interfaces;
 using Api.Gateway.Dtos.Operations;
 using Convey.HTTP;
 using Microsoft.AspNetCore.Mvc;
+using Services.Common.Logging;
 using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Api.Gateway.Controllers
@@ -21,7 +22,7 @@ namespace Api.Gateway.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<OperationDto>> Get([FromRoute]Guid id) => Single(await _operationsClient.GetAsync(id));
 
-        public OperationsController(IDispatcher dispatcher, HttpClientOptions options, IOperationsClient operationsClient) : base(dispatcher, options)
+        public OperationsController(IDispatcher dispatcher, HttpClientOptions options, IOperationsClient operationsClient, IVmsLogger<GatewayControllerBase> logger) : base(dispatcher, options, logger)
         {
             _operationsClient = operationsClient;
         }

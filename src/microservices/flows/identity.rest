@@ -112,8 +112,8 @@ POST {{url}}/api/users/complete
 Content-Type: application/json
 
 {
-    "email": "b-standard1@test.com",
-    "code": "36aca8d9-d120-465e-960f-c101aceb8a2a",
+    "email": "b-admin@test.com",
+    "code": "b4137abd-a194-4098-9a7f-7b88bdd34db4",
     "password": "Test123",
     "passwordConfirmation": "Test123"
 }

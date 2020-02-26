@@ -8,6 +8,7 @@ using Convey.HTTP;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Common.Jwt;
+using Services.Common.Logging;
 using Services.RabbitMq.Interfaces.Messaging;
 
 namespace Api.Gateway.Controllers
@@ -15,7 +16,7 @@ namespace Api.Gateway.Controllers
     [Route("gateway/api/test/")]
     public class TestController : GatewayControllerBase
     {
-        public TestController(IDispatcher dispatcher, HttpClientOptions options) : base(dispatcher, options)
+        public TestController(IDispatcher dispatcher, HttpClientOptions options, IVmsLogger<GatewayControllerBase> logger) : base(dispatcher, options, logger)
         {
             
         }

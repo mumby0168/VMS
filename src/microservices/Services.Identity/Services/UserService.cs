@@ -69,7 +69,7 @@ namespace Services.Identity.Services
                 throw new VmsException(Codes.InvalidCredentials, "The credentials are invalid.");
 
             var pword = _passwordManager.EncryptPassword(password);
-            var numberCode = await CheckCode(_numberGenerator.GenerateNumber(6), pending.BusinessId);
+            var numberCode = await GetCode(pending.BusinessId);
             var identity = new Domain.Identity(email, pword.Hash, pword.Salt, pending.Role, pending.BusinessId, numberCode);
 
             await _identityRepository.AddAsync(identity);
@@ -225,7 +225,7 @@ namespace Services.Identity.Services
             _logger.LogInformation($"Pending account removed with email address: {pendingIdentity.Email}");
         }
 
-        private async Task<int> CheckCode(int code, Guid businessid)
+        private async Task<int> GetCode(Guid businessid)
         {
             if(_checks == 6) throw new VmsException(Codes.InvalidId, "A unique code for this business could not be created.");
             var number = _numberGenerator.GenerateNumber(6);
@@ -233,7 +233,7 @@ namespace Services.Identity.Services
             {
                 _checks++;
                 number = _numberGenerator.GenerateNumber(6);
-                await CheckCode(number, businessid);
+                return await GetCode(businessid);
             }
 
             _checks = 0;
