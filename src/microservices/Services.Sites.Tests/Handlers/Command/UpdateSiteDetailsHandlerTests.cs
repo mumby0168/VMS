@@ -15,7 +15,6 @@ using Services.Sites.Messages.Events.Send;
 using Services.Sites.Messages.Events.Send.Rejected;
 using Services.Sites.Repositorys;
 using Services.Tests.Mocks;
-using ISite = Services.Sites.Domain.ISite;
 
 namespace Services.Sites.Tests.Handlers.Command
 {
@@ -25,13 +24,13 @@ namespace Services.Sites.Tests.Handlers.Command
         private Mock<IRequestInfo> _requestInfo;
         private Mock<IServiceBusMessagePublisher> _publisher;
         private Mock<ISiteRepository> _siteRepository;
-        private Mock<ISite> _site;
+        private Mock<ISiteDocument> _site;
         private Mock<UpdateSiteDetails> _message;
 
         [SetUp]
         public void Setup()
         {
-            _site = new Mock<ISite>();
+            _site = new Mock<ISiteDocument>();
             _message = new Mock<UpdateSiteDetails>();
             _siteRepository = new Mock<ISiteRepository>();
             _requestInfo = new Mock<IRequestInfo>();

@@ -3,7 +3,7 @@ using Services.Common.Domain;
 
 namespace Services.Users.Domain
 {
-    public interface IUserStatus : IDomain
+    public interface IUserStatusDocument : IDomain
     {
         Guid UserId { get; }
 
@@ -13,7 +13,7 @@ namespace Services.Users.Domain
 
         DateTime Updated { get; }
 
-        IUserStatus Create(Guid userId, AccessAction action, Guid siteId);
+        IUserStatusDocument Create(Guid userId, AccessAction action, Guid siteId);
 
         void Update(AccessAction action, Guid siteId);
     }

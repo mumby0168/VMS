@@ -5,9 +5,9 @@ using Services.Common.Rest;
 
 namespace Services.Business.Controllers
 {
-    public class BusinessRestController : RestControllerBase<Domain.Business, BusinessDto>
+    public class BusinessRestController : RestControllerBase<Domain.BusinessDocument, BusinessDto>
     {
-        public BusinessRestController(IMongoRepository<Domain.Business> repository, IMapper mapper) : base(repository, mapper)
+        public BusinessRestController(IMongoRepository<Domain.BusinessDocument> repository, IMapper mapper) : base(repository, mapper)
         {
         }
     }

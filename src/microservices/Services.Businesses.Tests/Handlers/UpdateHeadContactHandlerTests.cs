@@ -24,7 +24,7 @@ namespace Services.Businesses.Tests.Handlers
         private Mock<IServiceBusMessagePublisher> _publisher;
         private Mock<IBusinessRepository> _repository;
 
-        private Mock<IBusiness> _business;
+        private Mock<IBusinessDocument> _business;
         private Mock<IHeadContact> _contact;
         private Mock<UpdateHeadContact> _message;
 
@@ -37,7 +37,7 @@ namespace Services.Businesses.Tests.Handlers
             _repository = new Mock<IBusinessRepository>();
 
             _message = new Mock<UpdateHeadContact>();
-            _business = new Mock<IBusiness>();
+            _business = new Mock<IBusinessDocument>();
             _contact = new Mock<IHeadContact>();
             _business.Setup(o => o.GetContact()).Returns(_contact.Object);
         }

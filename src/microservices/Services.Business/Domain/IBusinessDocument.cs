@@ -6,10 +6,10 @@ using Services.Common.Domain;
 
 namespace Services.Business.Domain
 {
-    public interface IBusiness : IDomain
+    public interface IBusinessDocument : IDomain
     {
 
-        IBusiness Setup(string name, string tradingName, string webAddress, IHeadOffice headOffice, IHeadContact headContact, int code);
+        IBusinessDocument Setup(string name, string tradingName, string webAddress, IHeadOffice headOffice, IHeadContact headContact, int code);
 
         void Update(string name, string tradingName, string webAddress);
 

@@ -27,7 +27,7 @@ namespace Services.Sites.Tests.Handlers.Command
         private Mock<IServiceBusMessagePublisher> _publisher;
         private Mock<IRequestInfo> _requestInfo;
 
-        private Mock<ISite> _site;
+        private Mock<ISiteDocument> _site;
         private Mock<IContact> _contact;
         private Mock<CreateSite> _createSite;
 
@@ -40,7 +40,7 @@ namespace Services.Sites.Tests.Handlers.Command
             _repository = new Mock<ISiteRepository>();
             _publisher = new Mock<IServiceBusMessagePublisher>();
             _businessRepository = new Mock<IBusinessRepository>();
-            _site = new Mock<ISite>();
+            _site = new Mock<ISiteDocument>();
             _contact = new Mock<IContact>();
             _createSite = new Mock<CreateSite>();
             _requestInfo = new Mock<IRequestInfo>();

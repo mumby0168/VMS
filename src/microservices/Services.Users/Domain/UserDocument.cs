@@ -8,7 +8,7 @@ using Services.Common.Validation;
 
 namespace Services.Users.Domain
 {
-    public class User : IUser
+    public class UserDocument : IUserDocument
     {
         public Guid Id { get; private set; }
         public string FirstName { get; private set; }
@@ -30,15 +30,15 @@ namespace Services.Users.Domain
             AccountId = Guid.Empty;
         }
 
-        public IUser Setup(string firstName, string secondName, string email, string phoneNumber, string businessPhoneNumber,
+        public IUserDocument Setup(string firstName, string secondName, string email, string phoneNumber, string businessPhoneNumber,
             Guid basedSiteId, Guid businessId, Guid accountId, int code) =>
-            new User(firstName, secondName, email, phoneNumber, businessPhoneNumber, basedSiteId, businessId, accountId, code);
+            new UserDocument(firstName, secondName, email, phoneNumber, businessPhoneNumber, basedSiteId, businessId, accountId, code);
 
-        public User()
+        public UserDocument()
         {
             
         }
-        private User(string firstName, string secondName, string email, string phoneNumber, string businessPhoneNumber, Guid basedSiteId, Guid businessId, Guid accountId, int code)
+        private UserDocument(string firstName, string secondName, string email, string phoneNumber, string businessPhoneNumber, Guid basedSiteId, Guid businessId, Guid accountId, int code)
         {
 
             if (firstName.IsEmpty()) throw new VmsException(Codes.EmptyProperty, "The field first name cannot be empty");

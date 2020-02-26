@@ -23,13 +23,13 @@ namespace Services.Visitors.Tests
         private Mock<IServiceBusMessagePublisher> _publisher;
         private Mock<IDataSpecificationRepository> _repository;
         private Guid _targetId = Guid.NewGuid();
-        private Mock<IDataSpecification> _target;
+        private Mock<IDataSpecificationDocument> _target;
 
-        private IEnumerable<IDataSpecification> GetEntries(int count, int target)
+        private IEnumerable<IDataSpecificationDocument> GetEntries(int count, int target)
         {
             for (int i = 0; i < count; i++)
             {
-                var specMock = new Mock<IDataSpecification>();
+                var specMock = new Mock<IDataSpecificationDocument>();
                 if (i == target)
                 {
                     _target.Setup(o => o.Order).Returns(i + 1);
@@ -48,7 +48,7 @@ namespace Services.Visitors.Tests
             _requestInfo = new Mock<IRequestInfo>();
             _publisher = new Mock<IServiceBusMessagePublisher>();
             _repository = new Mock<IDataSpecificationRepository>();
-            _target = new Mock<IDataSpecification>();
+            _target = new Mock<IDataSpecificationDocument>();
             _target.Setup(o => o.Id).Returns(_targetId);
         }
 
@@ -115,7 +115,7 @@ namespace Services.Visitors.Tests
             //Assert
             for (int i = 0; i < collectionSize - 1; i++)
             {
-                _repository.Verify(o => o.UpdateAsync(It.IsAny<IDataSpecification>()));
+                _repository.Verify(o => o.UpdateAsync(It.IsAny<IDataSpecificationDocument>()));
             }
         }
 

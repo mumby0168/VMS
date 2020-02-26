@@ -19,7 +19,7 @@ namespace Services.Businesses.Tests.Handlers.Query
         private Guid _valid;
         private Guid _invalid;
 
-        private Mock<IBusiness> _business;
+        private Mock<IBusinessDocument> _business;
         private Mock<IHeadContact> _headContact;
         private Mock<IHeadOffice> _headOffice;
 
@@ -29,7 +29,7 @@ namespace Services.Businesses.Tests.Handlers.Query
         public void Setup()
         {
             _repository = new Mock<IBusinessRepository>();
-            _business = new Mock<IBusiness>();
+            _business = new Mock<IBusinessDocument>();
             _valid = Guid.NewGuid();
             _invalid = Guid.NewGuid();
             _headContact = new Mock<IHeadContact>();

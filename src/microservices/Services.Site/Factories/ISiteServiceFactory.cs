@@ -8,7 +8,7 @@ namespace Services.Sites.Factories
 {
     public interface ISiteServiceFactory
     {
-        ISite CreateSite(Guid businessId, string name, string postCode, string addressLine1, string addressLine2, IContact contact);
+        ISiteDocument CreateSite(Guid businessId, string name, string postCode, string addressLine1, string addressLine2, IContact contact);
 
         IContact CreateContact(string firstName, string secondName, string email, string number);
 

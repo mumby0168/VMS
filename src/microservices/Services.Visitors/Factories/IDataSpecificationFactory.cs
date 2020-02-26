@@ -8,6 +8,6 @@ namespace Services.Visitors.Factories
 {
     public interface IDataSpecificationFactory
     {
-        IDataSpecification Create(string label, int order, string validationMessage, string validationCode, Guid businessId);
+        IDataSpecificationDocument Create(string label, int order, string validationMessage, string validationCode, Guid businessId);
     }
 }

@@ -28,7 +28,7 @@ namespace Services.Businesses.Tests.Handlers
         private Mock<IBusinessRepository> _repo;
         private Mock<IRequestInfo> _request;
         private Mock<IBusinessesFactory> _factory;
-        private Mock<Business.Domain.Business> _business;
+        private Mock<Business.Domain.BusinessDocument> _business;
         private Mock<INumberGenerator> _numberGenerator;
 
         private const string TestCode = "TestCode";
@@ -46,7 +46,7 @@ namespace Services.Businesses.Tests.Handlers
             _request = new Mock<IRequestInfo>();
             _numberGenerator = new Mock<INumberGenerator>();
             _factory = new Mock<IBusinessesFactory>();
-            _business = new Mock<Business.Domain.Business>();
+            _business = new Mock<Business.Domain.BusinessDocument>();
             _factory.Setup(o => o.CreateBusiness(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
                 It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
                 It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>())).Returns(_business.Object);

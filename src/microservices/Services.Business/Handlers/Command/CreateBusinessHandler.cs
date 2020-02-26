@@ -34,17 +34,17 @@ namespace Services.Business.Handlers.Command
         }
         public async Task HandleAsync(CreateBusiness message, IRequestInfo requestInfo)
         {
-            IBusiness business;
+            IBusinessDocument businessDocument;
 
             try
             {
                 var code = await CheckCode(_numberGenerator.GenerateNumber(6));
-                business = _businessesFactory.CreateBusiness(message.Name, message.TradingName, message.WebAddress,
+                businessDocument = _businessesFactory.CreateBusiness(message.Name, message.TradingName, message.WebAddress,
                     message.HeadContactFirstName, message.HeadContactSecondName,
                     message.HeadContactContactNumber, message.HeadContactEmail, message.HeadOfficePostCode, message.HeadOfficeAddressLine1, message.HeadOfficeAddressLine2, code);
 
 
-                await _repository.Add(business);
+                await _repository.Add(businessDocument);
             }
             catch (VmsException e)
             {
@@ -54,7 +54,7 @@ namespace Services.Business.Handlers.Command
             }
 
             _logger.LogInformation("Create business succeeded.");
-            _publisher.PublishEvent(new BusinessCreated(business.Id, business.Code), requestInfo);
+            _publisher.PublishEvent(new BusinessCreated(businessDocument.Id, businessDocument.Code), requestInfo);
         }
 
         private async Task<int> CheckCode(int code)

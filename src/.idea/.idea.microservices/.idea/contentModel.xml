@@ -368,10 +368,10 @@
         <e p="Dockerfile" t="Include" />
         <e p="Dockerfile.original" t="Include" />
         <e p="Domain" t="Include">
-          <e p="Business.cs" t="Include" />
+          <e p="BusinessDocument.cs" t="Include" />
           <e p="HeadContact.cs" t="Include" />
           <e p="HeadOffice.cs" t="Include" />
-          <e p="IBusiness.cs" t="Include" />
+          <e p="IBusinessDocument.cs" t="Include" />
           <e p="IHeadContact.cs" t="Include" />
           <e p="IHeadOffice.cs" t="Include" />
         </e>
@@ -1060,9 +1060,9 @@
           <e p="Contact.cs" t="Include" />
           <e p="IBusiness.cs" t="Include" />
           <e p="IContact.cs" t="Include" />
-          <e p="ISite.cs" t="Include" />
+          <e p="ISiteDocument.cs" t="Include" />
           <e p="ISiteResource.cs" t="Include" />
-          <e p="Site.cs" t="Include" />
+          <e p="SiteDocument.cs" t="Include" />
           <e p="SiteResource.cs" t="Include" />
         </e>
         <e p="Dtos" t="Include">
@@ -1227,16 +1227,16 @@
         <e p="Dockerfile" t="Include" />
         <e p="Dockerfile.original" t="Include" />
         <e p="Domain" t="Include">
-          <e p="AccessRecord.cs" t="Include" />
+          <e p="AccessRecordDocument.cs" t="Include" />
           <e p="Account.cs" t="Include" />
-          <e p="IAccessRecord.cs" t="Include" />
+          <e p="IAccessRecordDocument.cs" t="Include" />
           <e p="IAccount.cs" t="Include" />
           <e p="ISite.cs" t="Include" />
-          <e p="IUser.cs" t="Include" />
-          <e p="IUserStatus.cs" t="Include" />
+          <e p="IUserDocument.cs" t="Include" />
+          <e p="IUserStatusDocument.cs" t="Include" />
           <e p="Site.cs" t="Include" />
-          <e p="User.cs" t="Include" />
-          <e p="UserStatus.cs" t="Include" />
+          <e p="UserDocument.cs" t="Include" />
+          <e p="UserStatusDocument.cs" t="Include" />
         </e>
         <e p="Dtos" t="Include">
           <e p="AccessRecordDto.cs" t="Include" />
@@ -1285,7 +1285,7 @@
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netcoreapp3.1" t="Include">
+            <e p="netcoreapp3.0" t="Include">
               <e p="Services.Users.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
@@ -1376,12 +1376,12 @@
         <e p="Dockerfile" t="Include" />
         <e p="Dockerfile.original" t="Include" />
         <e p="Domain" t="Include">
-          <e p="DataSpecification.cs" t="Include" />
-          <e p="IDataSpecification.cs" t="Include" />
-          <e p="IVisitor.cs" t="Include" />
+          <e p="DataSpecificationDocument.cs" t="Include" />
+          <e p="IDataSpecificationDocument.cs" t="Include" />
           <e p="IVisitorData.cs" t="Include" />
-          <e p="Visitor.cs" t="Include" />
+          <e p="IVisitorDocument.cs" t="Include" />
           <e p="VisitorData.cs" t="Include" />
+          <e p="VisitorDocument.cs" t="Include" />
         </e>
         <e p="Dtos" t="Include">
           <e p="DataSpecificationDto.cs" t="Include" />

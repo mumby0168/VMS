@@ -11,7 +11,7 @@ namespace Services.Users.Domain
         In,
         Out
 }
-    public interface IAccessRecord : IDomain
+    public interface IAccessRecordDocument : IDomain
     {
         Guid UserId { get; }
 
@@ -23,6 +23,6 @@ namespace Services.Users.Domain
 
         AccessAction Action { get; }
 
-        IAccessRecord Create(Guid userId, Guid siteId, AccessAction action, Guid businessId);
+        IAccessRecordDocument Create(Guid userId, Guid siteId, AccessAction action, Guid businessId);
     }
 }

@@ -8,9 +8,9 @@ using Services.Sites.Dtos;
 namespace Services.Sites.Controllers
 {
     [Route(("site/api/rest/"))]
-    public class SiteRestController : RestControllerBase<Site, SiteDto>
+    public class SiteRestController : RestControllerBase<SiteDocument, SiteDto>
     {
-        public SiteRestController(IMongoRepository<Site> repository, IMapper mapper) : base(repository, mapper)
+        public SiteRestController(IMongoRepository<SiteDocument> repository, IMapper mapper) : base(repository, mapper)
         {
         }
     }

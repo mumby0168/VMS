@@ -6,9 +6,9 @@ using Services.Common.Domain;
 
 namespace Services.Visitors.Domain
 {
-    public interface IDataSpecification : IDomain
+    public interface IDataSpecificationDocument : IDomain
     {
-        IDataSpecification Setup(string label,int order, string validationMessage, string validationCode, Guid businessId);
+        IDataSpecificationDocument Setup(string label,int order, string validationMessage, string validationCode, Guid businessId);
 
         void UpdateOrder(int newOrder);
         string Label { get; }

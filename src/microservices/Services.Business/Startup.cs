@@ -23,7 +23,7 @@ namespace Services.Business
             services.AddUdpLogging();
             services.AddServiceBus();
             services.AddControllers();
-            services.AddMongo().AddMongoCollection<Domain.Business>();
+            services.AddMongo().AddMongoCollection<Domain.BusinessDocument>();
             services.AddQuerySupport();
             services.AddRestControllersSupport();
             services.AddNumberGenerator();

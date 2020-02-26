@@ -61,10 +61,10 @@ namespace Services.Users.Handlers.Command
             }
 
 
-            IUser user = null;
+            IUserDocument userDocument = null;
             try
             {
-                user = _factory.CreateUser(message.FirstName, message.SecondName, account.Email, message.PhoneNumber,
+                userDocument = _factory.CreateUser(message.FirstName, message.SecondName, account.Email, message.PhoneNumber,
                     message.BusinessPhoneNumber, message.BasedSiteId, message.BusinessId, message.AccountId, account.Code);
             }
             catch (VmsException e)
@@ -73,9 +73,9 @@ namespace Services.Users.Handlers.Command
                 return;
             }
 
-            await _userRepository.AddAsync(user);
+            await _userRepository.AddAsync(userDocument);
             _publisher.PublishEvent(new UserCreated(), requestInfo);
-            _logger.LogInformation($"User created with id: {user.Id} and name: {user.FirstName + " " + user.SecondName}.");
+            _logger.LogInformation($"User created with id: {userDocument.Id} and name: {userDocument.FirstName + " " + userDocument.SecondName}.");
         }
     }
 }

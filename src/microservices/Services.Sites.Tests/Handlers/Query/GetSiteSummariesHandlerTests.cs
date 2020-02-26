@@ -38,7 +38,7 @@ namespace Services.Sites.Tests.Handlers.Query
             var sut = CreateSut();
 
             _repository.Setup(o => o.GetSitesForBusinessAsync(It.IsAny<Guid>())).Returns(
-                Task.FromResult(new List<ISite> {new Mock<ISite>().Object, new Mock<ISite>().Object , new Mock<ISite>().Object }.AsEnumerable()));
+                Task.FromResult(new List<ISiteDocument> {new Mock<ISiteDocument>().Object, new Mock<ISiteDocument>().Object , new Mock<ISiteDocument>().Object }.AsEnumerable()));
 
             //Act
             var res = await sut.HandleAsync(new GetSiteSummaries(Guid.NewGuid()));

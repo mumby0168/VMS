@@ -8,9 +8,9 @@ namespace Services.Visitors.Factories
 {
     public class VisitorFactory : IVisitorFactory
     {
-        public IVisitor Create(Guid visitingUserId, Guid visitingBusinessId, Guid visitingSiteId, IEnumerable<IVisitorData> data)
+        public IVisitorDocument Create(Guid visitingUserId, Guid visitingBusinessId, Guid visitingSiteId, IEnumerable<IVisitorData> data)
         {
-            return new Visitor(visitingUserId, visitingBusinessId, visitingSiteId, data);
+            return new VisitorDocument(visitingUserId, visitingBusinessId, visitingSiteId, data);
         }
     }
 }

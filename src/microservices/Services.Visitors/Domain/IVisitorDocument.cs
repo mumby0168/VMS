@@ -13,7 +13,7 @@ namespace Services.Visitors.Domain
         Out = 1,
     }
 
-    public interface IVisitor : IDomain
+    public interface IVisitorDocument : IDomain
     {
         Guid VisitingUserId { get; }
 

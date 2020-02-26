@@ -6,7 +6,7 @@ using Services.Common.Domain;
 
 namespace Services.Users.Domain
 {
-    public interface IUser : IDomain
+    public interface IUserDocument : IDomain
     {
         string FirstName { get; }
 
@@ -30,7 +30,7 @@ namespace Services.Users.Domain
 
         void SuspendAccount();
 
-        IUser Setup(string firstName, string secondName, string email, string phoneNumber, string businessPhoneNumber,
+        IUserDocument Setup(string firstName, string secondName, string email, string phoneNumber, string businessPhoneNumber,
             Guid basedSiteId, Guid businessId, Guid accountId, int code);
     }
 }

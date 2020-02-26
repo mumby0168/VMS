@@ -8,7 +8,7 @@ namespace Services.Users.Factories
 {
     public interface IUsersFactory
     {
-        IUser CreateUser(string firstName, string secondName, string email, string phoneNumber, string businessPhoneNumber,
+        IUserDocument CreateUser(string firstName, string secondName, string email, string phoneNumber, string businessPhoneNumber,
             Guid basedSiteId, Guid businessId, Guid accountId, int code);
 
         IAccount CreateAccount(Guid id, string email, int code);

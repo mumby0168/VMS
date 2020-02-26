@@ -8,17 +8,17 @@ namespace Services.Business.Repositorys
 {
     public class BusinessRepository : IBusinessRepository
     {
-        private readonly IMongoRepository<Domain.Business> _repository;
+        private readonly IMongoRepository<Domain.BusinessDocument> _repository;
 
-        public BusinessRepository(IMongoRepository<Domain.Business> repository)
+        public BusinessRepository(IMongoRepository<Domain.BusinessDocument> repository)
         {
             _repository = repository;
         }
 
-        public Task Add(IBusiness business) => _repository.AddAsync(business as Domain.Business);
-        public async Task<IEnumerable<IBusiness>> GetBusinessesAsync() => await _repository.GetAllAsync();
-        public async Task<IBusiness> GetBusinessAsync(Guid id) => await _repository.GetAsync(id);
-        public Task UpdateAsync(IBusiness business) => _repository.UpdateAsync(business as Domain.Business, business.Id);
+        public Task Add(IBusinessDocument businessDocument) => _repository.AddAsync(businessDocument as Domain.BusinessDocument);
+        public async Task<IEnumerable<IBusinessDocument>> GetBusinessesAsync() => await _repository.GetAllAsync();
+        public async Task<IBusinessDocument> GetBusinessAsync(Guid id) => await _repository.GetAsync(id);
+        public Task UpdateAsync(IBusinessDocument businessDocument) => _repository.UpdateAsync(businessDocument as Domain.BusinessDocument, businessDocument.Id);
         public async Task<bool> IsCodeInUseAsync(int number) => 
             await _repository.GetAsync(b => b.Code == number) != null;
     }

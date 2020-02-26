@@ -8,7 +8,7 @@ namespace Services.Visitors.Repositorys
 {
     public interface IVisitorsRepository
     {
-        Task AddAsync(IVisitor visitor);
+        Task AddAsync(IVisitorDocument visitorDocument);
 
         Task GetAsync(Guid visitorId);
 

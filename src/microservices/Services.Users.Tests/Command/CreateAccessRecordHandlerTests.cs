@@ -30,8 +30,8 @@ namespace Services.Users.Tests.Command
         private Mock<IUserStatusService> _userStatusService;
         private Mock<IServicesRepository> _serviceRepository;
 
-        private Mock<IUser> _user;
-        private Mock<IAccessRecord> _record; 
+        private Mock<IUserDocument> _user;
+        private Mock<IAccessRecordDocument> _record; 
 
 
         [SetUp]
@@ -42,8 +42,8 @@ namespace Services.Users.Tests.Command
             _accessFactory = new Mock<IAccessRecordFactory>();
             _accessRecordRepo = new Mock<IAccessRecordRepository>();
             _userRepo = new Mock<IUserRepository>();
-            _user = new Mock<IUser>();
-            _record = new Mock<IAccessRecord>();
+            _user = new Mock<IUserDocument>();
+            _record = new Mock<IAccessRecordDocument>();
             _userStatusService = new Mock<IUserStatusService>();
             _serviceRepository = new Mock<IServicesRepository>();
         }

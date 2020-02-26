@@ -1,15 +1,15 @@
 ﻿using System;
 namespace Services.Users.Domain
 {
-    public class UserStatus : IUserStatus
+    public class UserStatusDocument : IUserStatusDocument
     {
 
-        public UserStatus()
+        public UserStatusDocument()
         {
 
         }
 
-        private UserStatus(Guid userId, AccessAction action, Guid siteId)
+        private UserStatusDocument(Guid userId, AccessAction action, Guid siteId)
         {
             UserId = userId;
             CurrentState = action;
@@ -27,9 +27,9 @@ namespace Services.Users.Domain
 
         public Guid Id { get; private set; }
 
-        public IUserStatus Create(Guid userId, AccessAction action, Guid siteId)
+        public IUserStatusDocument Create(Guid userId, AccessAction action, Guid siteId)
         {
-            return new UserStatus(userId, action, siteId);
+            return new UserStatusDocument(userId, action, siteId);
         }
 
         public void Update(AccessAction action, Guid siteId)

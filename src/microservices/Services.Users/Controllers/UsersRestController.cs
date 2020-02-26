@@ -27,9 +27,9 @@ namespace Services.Users.Controllers
 
 
     [Route("users/api/rest/")]
-    public class UsersRestController : RestControllerBase<User, UserDto>
+    public class UsersRestController : RestControllerBase<UserDocument, UserDto>
     {
-        public UsersRestController(IMongoRepository<User> repository, IMapper mapper) : base(repository, mapper)
+        public UsersRestController(IMongoRepository<UserDocument> repository, IMapper mapper) : base(repository, mapper)
         {
         }
     }

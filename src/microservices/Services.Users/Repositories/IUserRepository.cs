@@ -8,13 +8,13 @@ namespace Services.Users.Repositories
 {
     public interface IUserRepository
     {
-        Task AddAsync(IUser user);
+        Task AddAsync(IUserDocument userDocument);
 
-        Task<IUser> GetAsync(Guid id);
-        Task<IUser> GetFromAccountId(Guid accountId);
-        Task<IEnumerable<IUser>> GetUsersByBusinessId(Guid businessId);
-        Task UpdateAsync(IUser user);
-        Task<IUser> GetByCodeAsync(int code);
+        Task<IUserDocument> GetAsync(Guid id);
+        Task<IUserDocument> GetFromAccountId(Guid accountId);
+        Task<IEnumerable<IUserDocument>> GetUsersByBusinessId(Guid businessId);
+        Task UpdateAsync(IUserDocument userDocument);
+        Task<IUserDocument> GetByCodeAsync(int code);
         
     }
 }

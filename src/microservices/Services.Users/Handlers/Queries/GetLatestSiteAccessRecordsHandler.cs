@@ -29,7 +29,7 @@ namespace Services.Users.Handlers.Queries
         public async Task<IEnumerable<LatestAccessRecordDto>> HandleAsync(GetLatestSiteAccessRecords query)
         {
 
-            IEnumerable<IUserStatus> states = await _statusRepository.GetForSiteAsync(query.SiteId);            
+            IEnumerable<IUserStatusDocument> states = await _statusRepository.GetForSiteAsync(query.SiteId);            
 
             var records = new List<LatestAccessRecordDto>();        
             

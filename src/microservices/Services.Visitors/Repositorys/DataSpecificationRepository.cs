@@ -9,15 +9,15 @@ namespace Services.Visitors.Repositorys
 {
     public class DataSpecificationRepository : IDataSpecificationRepository
     {
-        private readonly IMongoRepository<DataSpecification> _repository;
+        private readonly IMongoRepository<DataSpecificationDocument> _repository;
 
-        public DataSpecificationRepository(IMongoRepository<DataSpecification> repository)
+        public DataSpecificationRepository(IMongoRepository<DataSpecificationDocument> repository)
         {
             _repository = repository;
         }
 
-        public Task AddAsync(IDataSpecification specification) =>
-            _repository.AddAsync(specification as DataSpecification);
+        public Task AddAsync(IDataSpecificationDocument specificationDocument) =>
+            _repository.AddAsync(specificationDocument as DataSpecificationDocument);
 
         public async Task<int> GetNextOrderNumberAsync(Guid businessId)
         {
@@ -26,17 +26,17 @@ namespace Services.Visitors.Repositorys
             return item?.Order + 1 ?? 1;
         }
 
-        public async Task<IEnumerable<IDataSpecification>> GetEntriesAsync(Guid businessId)
+        public async Task<IEnumerable<IDataSpecificationDocument>> GetEntriesAsync(Guid businessId)
         {
             return await _repository.FindAsync(d => d.IsLive && d.BusinessId == businessId);
         }
 
-        public Task UpdateAsync(IDataSpecification entry)
+        public Task UpdateAsync(IDataSpecificationDocument entry)
         {
-            return _repository.UpdateAsync(entry as DataSpecification, entry.Id);
+            return _repository.UpdateAsync(entry as DataSpecificationDocument, entry.Id);
         }
 
-        public Task RemoveAsync(IDataSpecification spec)
+        public Task RemoveAsync(IDataSpecificationDocument spec)
         {
             return _repository.RemoveAsync(spec.Id);
         }

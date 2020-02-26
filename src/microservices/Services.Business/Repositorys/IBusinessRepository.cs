@@ -7,11 +7,11 @@ namespace Services.Business.Repositorys
 {
     public interface IBusinessRepository
     {
-        Task Add(IBusiness business);
+        Task Add(IBusinessDocument businessDocument);
 
-        Task<IEnumerable<IBusiness>> GetBusinessesAsync();
-        Task<IBusiness> GetBusinessAsync(Guid queryId);
-        Task UpdateAsync(IBusiness business);
+        Task<IEnumerable<IBusinessDocument>> GetBusinessesAsync();
+        Task<IBusinessDocument> GetBusinessAsync(Guid queryId);
+        Task UpdateAsync(IBusinessDocument businessDocument);
         Task<bool> IsCodeInUseAsync(int number);
     }
 }

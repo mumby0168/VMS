@@ -35,7 +35,7 @@ namespace Services.Visitors.Tests
             _repository = new Mock<IDataSpecificationRepository>();
 
             _factory.Setup(o => o.Create(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(),
-                It.IsAny<Guid>())).Returns(new Mock<IDataSpecification>().Object);
+                It.IsAny<Guid>())).Returns(new Mock<IDataSpecificationDocument>().Object);
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace Services.Visitors.Tests
 
 
             //Assert
-            _repository.Verify(o => o.AddAsync(It.IsAny<IDataSpecification>()));
+            _repository.Verify(o => o.AddAsync(It.IsAny<IDataSpecificationDocument>()));
             _publisher.Verify(o => o.PublishEvent(It.IsAny<DataSpecificationCreated>(), _requestInfo.Object));
         }
 

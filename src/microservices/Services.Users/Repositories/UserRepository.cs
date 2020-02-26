@@ -10,36 +10,36 @@ namespace Services.Users.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly IMongoRepository<User> _repository;
+        private readonly IMongoRepository<UserDocument> _repository;
 
-        public UserRepository(IMongoRepository<User> repository)
+        public UserRepository(IMongoRepository<UserDocument> repository)
         {
             _repository = repository;
         }
 
-        public Task AddAsync(IUser user)
+        public Task AddAsync(IUserDocument userDocument)
         {
-            return _repository.AddAsync(user as User);
+            return _repository.AddAsync(userDocument as UserDocument);
         }
 
-        public async Task<IUser> GetAsync(Guid id)
+        public async Task<IUserDocument> GetAsync(Guid id)
         {
             var user = await _repository.GetAsync(id);
             return user;
         }
 
-        public async Task<IUser> GetByCodeAsync(int code) => await _repository.GetAsync(u => u.Code == code);
+        public async Task<IUserDocument> GetByCodeAsync(int code) => await _repository.GetAsync(u => u.Code == code);
 
-        public async Task<IUser> GetFromAccountId(Guid accountId)
+        public async Task<IUserDocument> GetFromAccountId(Guid accountId)
         {
             return await _repository.GetAsync(u => u.AccountId == accountId);
         }
 
-        public async Task<IEnumerable<IUser>> GetUsersByBusinessId(Guid businessId) 
+        public async Task<IEnumerable<IUserDocument>> GetUsersByBusinessId(Guid businessId) 
             => await _repository.FindAsync(u => u.BusinessId == businessId && u.IsAccountValid);
         
 
-        public Task UpdateAsync(IUser user) => 
-            _repository.UpdateAsync(user as User, user.Id);
+        public Task UpdateAsync(IUserDocument userDocument) => 
+            _repository.UpdateAsync(userDocument as UserDocument, userDocument.Id);
     }
 }

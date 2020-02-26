@@ -9,24 +9,24 @@ namespace Services.Sites.Repositorys
 {
     public class SiteRepository : ISiteRepository
     {
-        private readonly IMongoRepository<Site> _repository;
+        private readonly IMongoRepository<SiteDocument> _repository;
 
-        public SiteRepository(IMongoRepository<Site> repository)
+        public SiteRepository(IMongoRepository<SiteDocument> repository)
         {
             _repository = repository;
         }
 
 
-        public Task AddAsync(ISite site) => 
-            _repository.AddAsync(site as Site);
+        public Task AddAsync(ISiteDocument siteDocument) => 
+            _repository.AddAsync(siteDocument as SiteDocument);
 
-        public async Task<ISite> GetAsync(Guid id) => 
+        public async Task<ISiteDocument> GetAsync(Guid id) => 
             await _repository.GetAsync(id);
 
-        public async Task<IEnumerable<ISite>> GetSitesForBusinessAsync(Guid businessId) =>
+        public async Task<IEnumerable<ISiteDocument>> GetSitesForBusinessAsync(Guid businessId) =>
             await _repository.FindAsync(s => s.BusinessId == businessId);
 
-        public Task Update(ISite site) => _repository.UpdateAsync(site as Site, site.Id);
+        public Task Update(ISiteDocument siteDocument) => _repository.UpdateAsync(siteDocument as SiteDocument, siteDocument.Id);
         public async Task<bool> IsSiteIdValid(Guid siteId)
         {
             var site = await _repository.GetAsync(siteId);

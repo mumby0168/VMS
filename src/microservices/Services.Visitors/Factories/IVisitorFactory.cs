@@ -8,7 +8,7 @@ namespace Services.Visitors.Factories
 {
     interface IVisitorFactory
     {
-        IVisitor Create(Guid visitingUserId, Guid visitingBusinessId, Guid visitingSiteId,
+        IVisitorDocument Create(Guid visitingUserId, Guid visitingBusinessId, Guid visitingSiteId,
             IEnumerable<IVisitorData> data);
     }
 }

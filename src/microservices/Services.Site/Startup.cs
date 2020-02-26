@@ -26,7 +26,7 @@ namespace Services.Sites
         {
             services.AddServiceBus();
             services.AddMongo()
-                .AddMongoCollection<Site>()
+                .AddMongoCollection<SiteDocument>()
                 .AddMongoCollection<Business>()
                 .AddMongoCollection<SiteResource>();
 

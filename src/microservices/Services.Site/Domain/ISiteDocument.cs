@@ -6,9 +6,9 @@ using Services.Common.Domain;
 
 namespace Services.Sites.Domain
 {
-    public interface ISite : IDomain
+    public interface ISiteDocument : IDomain
     {
-        ISite Setup(Guid businessId, string name, string postCode, string addressLine1, string addressLine2, IContact contact);
+        ISiteDocument Setup(Guid businessId, string name, string postCode, string addressLine1, string addressLine2, IContact contact);
 
         void Update(string name, string postCode, string addressLine1, string addressLine2);
 
