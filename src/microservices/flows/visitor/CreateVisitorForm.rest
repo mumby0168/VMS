@@ -1,0 +1,76 @@
+### Sign in as greeting system
+
+@identityUrl = http://localhost:5010/api
+
+
+POST {{identityUrl}}/greeting/sign-in
+Content-Type: application/json
+
+{
+    "code": "637101",
+    "email": "b-admin1@test.com",
+    "password": "Test123",
+}
+
+### variables dec
+
+@jwt = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW4xQHRlc3QuY29tIiwibmFtZWlkIjoiMjkwYjdhYTUtMmVlNC00YWM2LTg5YTUtYjk3MDc3ZDU3MDRjIiwicm9sZSI6IkdyZWV0aW5nIiwiYnVzaW5lc3NJZCI6ImE5MGI3Zjc2LTgyMDYtNDY0OS04NGM1LWIwYjE2ZGQ4ZjRlNCIsIm5iZiI6MTU4MjgxOTI0NiwiZXhwIjoxNTgyODMwMDQ2LCJpYXQiOjE1ODI4MTkyNDZ9.CnRCdOi9gpZHlbechh0KBWX6SxF9gdvQSJH2KcGsCjJqYnZm7MY4n4y3UA-G6Im122CB0xYDS0rnlMODtmWTSQ
+
+@gatewayUrl = http://localhost:5020/gateway/api
+
+# get a site id
+
+GET {{gatewayUrl}}/sites/all
+Authorization: Bearer {{jwt}}
+
+
+### Get data specs for business
+
+GET {{gatewayUrl}}/visitors/specs
+Authorization: Bearer {{jwt}}
+
+### Get User To Visit
+
+### related data
+@siteId =  d0fe07e1-b68a-44a1-bbb4-b8bcb3964912
+@visitingId = cf40880f-0167-4328-84f2-d42076a46636
+
+### related data
+
+GET {{gatewayUrl}}/users/site-state/{{siteId}}
+Authorization: Bearer {{jwt}}
+
+### create visitor
+
+
+POST {{gatewayUrl}}/visitors/create
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+    "siteId": "d0fe07e1-b68a-44a1-bbb4-b8bcb3964912",
+    "visitingId": "cf40880f-0167-4328-84f2-d42076a46636"
+}
+
+
+
+### Get Operation Status
+
+@opId = 
+
+GET {{gatewayUrl}}/operations/{{opId}}
+
+
+ "data": [
+        {
+            "fieldId": "f0ab1da6-1829-4980-9e03-3ff170ad2187",
+            "value": "Billy"
+        },
+        {
+            "fieldId": "35d7cda8-2ba3-4fdf-9d9b-adb0e3b80668",
+            "value": "Mumby"
+        }
+    ]
+
+
+

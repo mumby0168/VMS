@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson.Serialization.Serializers;
 using Services.Common.Domain;
 using Services.Common.Mongo;
 
@@ -33,10 +34,18 @@ namespace Services.Common.Rest
         public async Task<ActionResult<IEnumerable<TDomain>>> GetAll()
         {
             var results = await Repository.GetAllAsync();
-            if (results is null || !results.Any())
+            var enumerable = results.ToList();
+            if (!enumerable.Any())
                 return NoContent();
+    
+            var dtos = new List<TDto>();
 
-            var dtos = Mapper.Map<IEnumerable<TDto>>(results);
+            foreach (var result in enumerable)
+            {
+                dtos.Add(Mapper.Map<TDto>(result));
+            }
+            
+            
             return Ok(dtos);
         }
 

@@ -56,7 +56,8 @@ namespace Services.Visitors.Tests
 
             //Act
             //Assert
-            Assert.ThrowsAsync<VmsException>(() => sut.Validate(Guid.Empty, _entries));
+            var ex = Assert.ThrowsAsync<VmsException>(() => sut.Validate(Guid.Empty, _entries));
+            Assert.That(ex.Code, Is.EqualTo(Codes.InvalidBusinessId));
         }
 
         [TestCase]
@@ -69,7 +70,8 @@ namespace Services.Visitors.Tests
 
             //Act
             //Assert
-            Assert.ThrowsAsync<VmsException>(() => sut.Validate(_validBusinessId, _entries));
+            var ex = Assert.ThrowsAsync<VmsException>(() => sut.Validate(_validBusinessId, _entries));
+            Assert.That(ex.Code, Is.EqualTo(Codes.InvalidFieldCount));
         }
         
         [TestCase]
@@ -84,7 +86,8 @@ namespace Services.Visitors.Tests
             
             //Act
             //Assert
-            Assert.ThrowsAsync<VmsException>(() => sut.Validate(_validBusinessId, _entries));
+            var ex = Assert.ThrowsAsync<VmsException>(() => sut.Validate(_validBusinessId, _entries));
+            Assert.That(ex.Code, Is.EqualTo(Codes.ValidationError));
         }
 
         [TestCase]

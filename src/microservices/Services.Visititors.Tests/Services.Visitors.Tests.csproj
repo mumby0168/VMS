@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Services.Visitors\Services.Visitors.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services" />
+  </ItemGroup>
+
 </Project>

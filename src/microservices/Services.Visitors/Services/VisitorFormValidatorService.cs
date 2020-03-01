@@ -27,14 +27,23 @@ namespace Services.Visitors.Services
             var dataSpecs = await _specificationRepository.GetEntriesAsync(businessId);
 
             var dataSpecificationDocuments = dataSpecs.ToList();
+            var visitorDataEntries = data.ToList();
+            
             
             if (!dataSpecificationDocuments.Any())
             {
                 _logger.LogError($"No data specs for business with id {businessId}");
-                throw new VmsException(Codes.InvalidId, "There are no data fields for the business.");
+                throw new VmsException(Codes.InvalidBusinessId, "There are no data fields for the business.");
             }
             
-            foreach (var entry in data)
+            foreach (var dataSpecificationDocument in dataSpecificationDocuments)
+            {
+                if(visitorDataEntries.FirstOrDefault(d => d.FieldId == dataSpecificationDocument.Id) == null)
+                    throw new VmsException(Codes.InvalidFieldCount, "All the data fields have not been specified.");
+                    
+            }
+            
+            foreach (var entry in visitorDataEntries)
             {
                 var spec = dataSpecificationDocuments.FirstOrDefault(s => s.Id == entry.FieldId);
                 if (spec is null)

@@ -31,7 +31,8 @@ namespace Api.Gateway.Messages.Visitors
 
         public IEnumerable<VisitorDataEntry> Data { get; }
 
-        public CreateVisitor(Guid siteId, Guid visitingId, IEnumerable<VisitorDataEntry> data)
+        [JsonConstructor]
+        public CreateVisitor(Guid siteId, Guid visitingId, VisitorDataEntry[] data)
         {
             SiteId = siteId;
             VisitingId = visitingId;
