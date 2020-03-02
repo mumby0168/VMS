@@ -7,6 +7,6 @@ namespace Services.Visitors.Repositorys
 {
     public interface IUserServiceClient
     {
-        
+        Task<bool> ContainsUserAsync(Guid userId);
     }
 }

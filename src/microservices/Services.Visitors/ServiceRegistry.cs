@@ -12,6 +12,7 @@ using Services.Visitors.Handlers.Command;
 using Services.Visitors.Handlers.Queries;
 using Services.Visitors.Queries;
 using Services.Visitors.Repositorys;
+using Services.Visitors.Services;
 
 namespace Services.Visitors
 {
@@ -21,11 +22,15 @@ namespace Services.Visitors
         {
             services.AddTransient<IDataSpecificationRepository, DataSpecificationRepository>();
             services.AddTransient<IDataSpecificationFactory, DataSpecificationFactory>();
-            services.AddTransient<IVisitorFactory, VisitorFactory>();
             services.AddTransient<IVisitorsRepository, VisitorsRepository>();
+            services.AddTransient<IUserServiceClient, UserServiceClient>();
+            services.AddTransient<ISiteServiceClient, SiteServiceClient>();
+            services.AddTransient<IDataSpecificationValidator, DataSpecificationValidator>();
+            services.AddTransient<IVisitorFormValidatorService, VisitorFormValidatorService>();
 
 
             //command handlers
+            services.AddTransient<ICommandHandler<CreateVisitor>, CreateVisitorHandler>();
             services.AddTransient<ICommandHandler<CreateDataEntry>, CreateDataEntryHandler>();
             services.AddTransient<ICommandHandler<UpdateEntryOrder>, UpdateEntryOrderHandler>();
             services.AddTransient<ICommandHandler<DeprecateDataEntry>, DeprecateDataEntryHandler>();

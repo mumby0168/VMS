@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Convey;
+using Convey.HTTP;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -21,14 +23,14 @@ namespace Services.Visitors
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMongo()
-                .AddMongoCollection<DataSpecificationDocument>()
-                .AddMongoCollection<VisitorDocument>();
+            services.AddVisitorDomain()
+                .AddMongoCollection<DataSpecificationDocument>();
 
             services.AddControllers();
             services.AddServiceBus();
             services.AddUdpLogging();
             services.AddQuerySupport();
+            services.AddConvey().AddHttpClient();
 
             ServiceRegistry.RegisterServices(services);
         }
@@ -46,7 +48,8 @@ namespace Services.Visitors
             app.UseServiceBus(Common.Names.Services.Visitors)
                 .SubscribeCommand<CreateDataEntry>()
                 .SubscribeCommand<UpdateEntryOrder>()
-                .SubscribeCommand<DeprecateDataEntry>();
+                .SubscribeCommand<DeprecateDataEntry>()
+                .SubscribeCommand<CreateVisitor>();
 
             app.UseRouting();
 

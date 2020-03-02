@@ -10,6 +10,7 @@ export interface IStaffCurrentState {
     action: string;
     timeStamp: Date;
     id: string;
+    userId: string;
 }
 
 export const fetchSiteStaffStateAction = makeAction<StaffEvents.FETCH_STAFF_STATE, boolean>(StaffEvents.FETCH_STAFF_STATE);

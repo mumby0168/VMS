@@ -107,7 +107,11 @@
       <e p="docker-compose.dcproj" t="IncludeRecursive" />
       <e p="docker-compose.override.yml" t="Include" />
       <e p="docker-compose.yml" t="Include" />
-      <e p="Domain" t="Include" />
+      <e p="Domain" t="Include">
+        <e p="Visitors" t="Include">
+          <e p="src" t="Include" />
+        </e>
+      </e>
       <e p="greeting-system/node_modules/@babel/parser" t="IncludeRecursive" />
       <e p="greeting-system/node_modules/@babel/types" t="IncludeRecursive" />
       <e p="greeting-system/node_modules/@emotion/hash" t="IncludeRecursive" />
@@ -305,6 +309,7 @@
           </e>
           <e p="Visitors" t="Include">
             <e p="CreateDataEntry.cs" t="Include" />
+            <e p="CreateVisitor.cs" t="Include" />
             <e p="DeprecateDataEntry.cs" t="Include" />
             <e p="UpdateEntryOrder.cs" t="Include" />
           </e>
@@ -343,7 +348,7 @@
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netcoreapp3.0" t="Include">
+            <e p="netcoreapp3.1" t="Include">
               <e p="Services.Test.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
@@ -825,12 +830,14 @@
               <e p="UserCreated.cs" t="Include" />
             </e>
             <e p="Visitors" t="Include">
+              <e p="CreateVisitorRejected.cs" t="Include" />
               <e p="DataEntryDeprecated.cs" t="Include" />
               <e p="DataEntryDeprecationRejected.cs" t="Include" />
               <e p="DataSpecificationCreated.cs" t="Include" />
               <e p="DataSpecificationRejected.cs" t="Include" />
               <e p="EntryOrderUpdated.cs" t="Include" />
               <e p="EntryOrderUpdateRejected.cs" t="Include" />
+              <e p="VisitorCreated.cs" t="Include" />
             </e>
           </e>
         </e>
@@ -1137,6 +1144,9 @@
             </e>
           </e>
         </e>
+        <e p="Profiles" t="Include">
+          <e p="DomainProfiles.cs" t="Include" />
+        </e>
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />
@@ -1290,6 +1300,9 @@
             </e>
           </e>
         </e>
+        <e p="Profiles" t="Include">
+          <e p="DomainProfile.cs" t="Include" />
+        </e>
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />
@@ -1349,6 +1362,7 @@
       <e p="microservices/Services.Visititors.Tests" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
         <e p="CreateDataEntryHandlerTests.cs" t="Include" />
+        <e p="CreateVisitorHandlerTests.cs" t="Include" />
         <e p="DeprecateDataEntryHandlerTests.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -1357,7 +1371,9 @@
             </e>
           </e>
         </e>
+        <e p="Services" t="Include" />
         <e p="Services.Visitors.Tests.csproj" t="IncludeRecursive" />
+        <e p="VisitorFormValidatorServiceTests.cs" t="Include" />
       </e>
       <e p="microservices/Services.Visitors" t="IncludeRecursive">
         <e p="appsettings.Development.json" t="Include" />
@@ -1378,27 +1394,24 @@
         <e p="Domain" t="Include">
           <e p="DataSpecificationDocument.cs" t="Include" />
           <e p="IDataSpecificationDocument.cs" t="Include" />
-          <e p="IVisitorData.cs" t="Include" />
-          <e p="IVisitorDocument.cs" t="Include" />
-          <e p="VisitorData.cs" t="Include" />
-          <e p="VisitorDocument.cs" t="Include" />
         </e>
         <e p="Dtos" t="Include">
           <e p="DataSpecificationDto.cs" t="Include" />
+          <e p="SiteDto.cs" t="Include" />
         </e>
         <e p="events" t="Include">
+          <e p="CreateVisitorRejected.cs" t="Include" />
           <e p="DataEntryDeprecated.cs" t="Include" />
           <e p="DataEntryDeprecationRejected.cs" t="Include" />
           <e p="DataSpecificationCreated.cs" t="Include" />
           <e p="DataSpecificationRejected.cs" t="Include" />
           <e p="EntryOrderUpdated.cs" t="Include" />
           <e p="EntryOrderUpdateRejected.cs" t="Include" />
+          <e p="VisitorCreated.cs" t="Include" />
         </e>
         <e p="Factories" t="Include">
           <e p="DataSpecificationFactory.cs" t="Include" />
           <e p="IDataSpecificationFactory.cs" t="Include" />
-          <e p="IVisitorFactory.cs" t="Include" />
-          <e p="VisitorFactory.cs" t="Include" />
         </e>
         <e p="Handlers" t="Include">
           <e p="Command" t="Include">
@@ -1431,11 +1444,20 @@
         <e p="Repositorys" t="Include">
           <e p="DataSpecificationRepository.cs" t="Include" />
           <e p="IDataSpecificationRepository.cs" t="Include" />
+          <e p="ISiteServiceClient.cs" t="Include" />
           <e p="IUserServiceClient.cs" t="Include" />
           <e p="IVisitorsRepository.cs" t="Include" />
+          <e p="SiteServiceClient.cs" t="Include" />
+          <e p="UserServiceClient.cs" t="Include" />
           <e p="VisitorsRepository.cs" t="Include" />
         </e>
         <e p="ServiceRegistry.cs" t="Include" />
+        <e p="Services" t="Include">
+          <e p="DataSpecificationValidator.cs" t="Include" />
+          <e p="IDataSpecificationValidator.cs" t="Include" />
+          <e p="IVisitorFormValidatorService.cs" t="Include" />
+          <e p="VisitorFormValidatorService.cs" t="Include" />
+        </e>
         <e p="Services.Visitors.csproj" t="IncludeRecursive" />
         <e p="Startup.cs" t="Include" />
       </e>
@@ -1443,6 +1465,43 @@
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />
       <e p="Prototype" t="Include" />
+      <e p="Services.Test.Domain" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="IPersonAggregate.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Services.Test.Domain.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Person.cs" t="Include" />
+        <e p="PersonAggregate.cs" t="Include" />
+        <e p="Services.Test.Domain.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="Services.Visitors.Domain" t="IncludeRecursive">
+        <e p="Aggregate" t="Include">
+          <e p="IVisitorAggregate.cs" t="Include" />
+          <e p="VisitorAggregate.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Domain" t="Include">
+          <e p="VIsitor" t="Include">
+            <e p="VisitorData.cs" t="Include" />
+            <e p="VisitorDocument.cs" t="Include" />
+            <e p="VisitorStatus.cs" t="Include" />
+          </e>
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Services.Visitors.Domain.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Services.Visitors.Domain.csproj" t="IncludeRecursive" />
+        <e p="VisitorDomainExtensions.cs" t="Include" />
+      </e>
       <e p="Tests" t="Include">
         <e p="Service Tests" t="Include" />
       </e>

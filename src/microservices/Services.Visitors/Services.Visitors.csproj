@@ -9,10 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Convey.HTTP" Version="0.4.258" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Services.Visitors.Domain\Services.Visitors.Domain.csproj" />
     <ProjectReference Include="..\Services.Common\Services.Common.csproj" />
     <ProjectReference Include="..\Services.RabbitMq\Services.RabbitMq.csproj" />
   </ItemGroup>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Services.Common.Mongo;
 using Services.Visitors.Domain;
+using Services.Visitors.Domain.Domain.Visitor;
 
 namespace Services.Visitors.Repositorys
 {
@@ -16,7 +17,7 @@ namespace Services.Visitors.Repositorys
             _repository = repository;
         }
         
-        public Task AddAsync(IVisitorDocument visitorDocument)
+        public Task AddAsync(VisitorDocument visitorDocument)
         {
             return _repository.AddAsync(visitorDocument as VisitorDocument);
         }

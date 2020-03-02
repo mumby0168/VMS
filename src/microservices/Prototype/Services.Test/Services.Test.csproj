@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Services.Test.Domain\Services.Test.Domain.csproj" />
     <ProjectReference Include="..\..\Services.Common\Services.Common.csproj" />
     <ProjectReference Include="..\..\Services.RabbitMq\Services.RabbitMq.csproj" />
   </ItemGroup>

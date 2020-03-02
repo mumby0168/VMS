@@ -35,7 +35,7 @@ namespace Api.Gateway.Controllers
         [HttpGet("summaries/{businessId}")]
         public async Task<ActionResult<IEnumerable<SiteSummaryDto>>> GetSummaries([FromRoute] Guid businessId) => Collection(await _siteClient.GetSites(businessId));
 
-        [Authorize(Roles = Roles.PortalUser)]
+        [Authorize(Roles = Roles.PortalUser + "," + Roles.Greeting)]
         [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<SiteSummaryDto>>> GetSiteSummariesForBusiness()
         {
