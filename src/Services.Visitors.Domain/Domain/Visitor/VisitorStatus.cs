@@ -1,4 +1,8 @@
-$HEADER$namespace $NAMESPACE$
+namespace Services.Visitors.Domain.Domain.Visitor
 {
-  public class $CLASS$ {$END$}
+    public enum VisitorStatus : byte
+    {
+        In = 0,
+        Out = 1,
+    }
 }

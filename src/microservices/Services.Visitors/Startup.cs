@@ -23,9 +23,8 @@ namespace Services.Visitors
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMongo()
-                .AddMongoCollection<DataSpecificationDocument>()
-                .AddMongoCollection<VisitorDocument>();
+            services.AddVisitorDomain()
+                .AddMongoCollection<DataSpecificationDocument>();
 
             services.AddControllers();
             services.AddServiceBus();

@@ -13,7 +13,7 @@ export default function StaffResult({ staffMemeber, navigate, updateSelected }: 
     
 
     const handleClick = () => {        
-        updateSelected(staffMemeber.id);
+        updateSelected(staffMemeber.userId);
         navigate(SystemViews.VISITOR_FORM);
     }
 

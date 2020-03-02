@@ -1144,6 +1144,9 @@
             </e>
           </e>
         </e>
+        <e p="Profiles" t="Include">
+          <e p="DomainProfiles.cs" t="Include" />
+        </e>
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />
@@ -1297,6 +1300,9 @@
             </e>
           </e>
         </e>
+        <e p="Profiles" t="Include">
+          <e p="DomainProfile.cs" t="Include" />
+        </e>
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />
@@ -1388,10 +1394,6 @@
         <e p="Domain" t="Include">
           <e p="DataSpecificationDocument.cs" t="Include" />
           <e p="IDataSpecificationDocument.cs" t="Include" />
-          <e p="IVisitorData.cs" t="Include" />
-          <e p="IVisitorDocument.cs" t="Include" />
-          <e p="VisitorData.cs" t="Include" />
-          <e p="VisitorDocument.cs" t="Include" />
         </e>
         <e p="Dtos" t="Include">
           <e p="DataSpecificationDto.cs" t="Include" />
@@ -1410,8 +1412,6 @@
         <e p="Factories" t="Include">
           <e p="DataSpecificationFactory.cs" t="Include" />
           <e p="IDataSpecificationFactory.cs" t="Include" />
-          <e p="IVisitorFactory.cs" t="Include" />
-          <e p="VisitorFactory.cs" t="Include" />
         </e>
         <e p="Handlers" t="Include">
           <e p="Command" t="Include">
@@ -1480,10 +1480,17 @@
         <e p="Services.Test.Domain.csproj" t="IncludeRecursive" />
       </e>
       <e p="Services.Visitors.Domain" t="IncludeRecursive">
-        <e p="Aggregate" t="Include" />
+        <e p="Aggregate" t="Include">
+          <e p="IVisitorAggregate.cs" t="Include" />
+          <e p="VisitorAggregate.cs" t="Include" />
+        </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="Domain" t="Include">
-          <e p="Visitor.cs" t="Include" />
+          <e p="VIsitor" t="Include">
+            <e p="VisitorData.cs" t="Include" />
+            <e p="VisitorDocument.cs" t="Include" />
+            <e p="VisitorStatus.cs" t="Include" />
+          </e>
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -1493,6 +1500,7 @@
           </e>
         </e>
         <e p="Services.Visitors.Domain.csproj" t="IncludeRecursive" />
+        <e p="VisitorDomainExtensions.cs" t="Include" />
       </e>
       <e p="Tests" t="Include">
         <e p="Service Tests" t="Include" />

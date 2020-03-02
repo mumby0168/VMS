@@ -7,6 +7,8 @@ using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 using Services.Visitors.Commands;
 using Services.Visitors.Domain;
+using Services.Visitors.Domain.Aggregate;
+using Services.Visitors.Domain.Domain.Visitor;
 using Services.Visitors.Events;
 using Services.Visitors.Factories;
 using Services.Visitors.Repositorys;
@@ -20,17 +22,17 @@ namespace Services.Visitors.Handlers.Command
         private readonly IVisitorsRepository _visitorsRepository;
         private readonly IUserServiceClient _userServiceClient;
         private readonly ISiteServiceClient _siteServiceClient;
-        private readonly IVisitorFactory _visitorFactory;
+        private readonly IVisitorAggregate _visitorAggregate;
         private readonly IServiceBusMessagePublisher _messagePublisher;
         private readonly IVisitorFormValidatorService _validatorService;
 
-        public CreateVisitorHandler(IVmsLogger<CreateVisitorHandler> logger, IVisitorsRepository visitorsRepository, IUserServiceClient userServiceClient, ISiteServiceClient siteServiceClient, IVisitorFactory visitorFactory, IServiceBusMessagePublisher messagePublisher, IVisitorFormValidatorService validatorService)
+        public CreateVisitorHandler(IVmsLogger<CreateVisitorHandler> logger, IVisitorsRepository visitorsRepository, IUserServiceClient userServiceClient, ISiteServiceClient siteServiceClient, IVisitorAggregate visitorAggregate, IServiceBusMessagePublisher messagePublisher, IVisitorFormValidatorService validatorService)
         {
             _logger = logger;
             _visitorsRepository = visitorsRepository;
             _userServiceClient = userServiceClient;
             _siteServiceClient = siteServiceClient;
-            _visitorFactory = visitorFactory;
+            _visitorAggregate = visitorAggregate;
             _messagePublisher = messagePublisher;
             _validatorService = validatorService;
         }
@@ -64,12 +66,12 @@ namespace Services.Visitors.Handlers.Command
             
             //TODO: create service to validate data entrys
 
-            var visitorData = new List<IVisitorData>();
+            var visitorData = new List<VisitorData>();
             
-            foreach (var visitorDataEntry in message.Data)
-                visitorData.Add(new VisitorData(visitorDataEntry.FieldId, visitorDataEntry.Value));
+            foreach (var visitorDataEntry in message.Data) visitorData.Add(_visitorAggregate.CreateData(visitorDataEntry.FieldId, visitorDataEntry.Value));
 
-            var visitor = _visitorFactory.Create(message.VisitingId, site.BusinessId, message.SiteId, visitorData);
+            var visitor = _visitorAggregate.Create(message.VisitingId, site.BusinessId, message.SiteId, visitorData);
+            
             await _visitorsRepository.AddAsync(visitor);
             
             _messagePublisher.PublishEvent(new VisitorCreated(), requestInfo);

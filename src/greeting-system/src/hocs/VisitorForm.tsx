@@ -9,19 +9,22 @@ import VisitorEntry from '../components/visitor-form/VisitorEntry'
 import { isEmailValid, isPostCodeValid } from '../services/validation'
 import { SystemViews, viewChangedAction } from '../redux/actions/systemActions'
 import { openOverlay, IconType, closeOverlay, updateOverlayAction } from '../redux/actions/overlayActions'
+import {submitVisitorForm} from '../redux/api/visitors'
 import { Alert } from '@material-ui/lab'
 import {getVisitorFormSpecifications} from '../redux/api/visitors'
 import '../hoc-styles/VisitorForm.css'
+import { operationsAggregator } from '../operations/operationsAggregator'
 
 interface IVisitorFormProps {
     specifications: IVisitorDataSpecification[],
     errors: string[],
     loading: boolean;
+    siteId: string;
     //TODO: figure out how to better avoid this
     staffMember: IStaffCurrentState | undefined;
     updateHandle: (index: number, newValue: string) => void;
     updateErrors: (errors: string[]) => void;    
-    submitForm: (data: IVisitorDataSpecification[]) => void;
+    submitForm: (data: IVisitorDataSpecification[], visitingId: string, siteId: string) => void;
     getFormData: () => void;
     showLoading: (message: string) => void;
     closeLoading: () => void;
@@ -58,19 +61,22 @@ class VisitorForm extends Component<IVisitorFormProps> {
 
         if(errors.length !== 0)
         {
-            this.props.updateErrors(errors);
+            this.props.updateErrors(errors);            
             return;
         } 
         
         this.props.updateErrors([]);
         
-        //TODO: submit form to API.
-
+        //TODO: submit form to API.                                
+         
+        if(this.props.staffMember) {
+            this.props.submitForm(this.props.specifications, this.props.staffMember.userId, this.props.siteId);
+        }
 
         for (let i = 0; i < this.props.specifications.length; i++) {            
             this.props.updateHandle(i, '');            
-        }        
-        this.props.submitForm(this.props.specifications);
+        }       
+        
     }
 
     render() {
@@ -113,20 +119,24 @@ class VisitorForm extends Component<IVisitorFormProps> {
     }
 }
 
-const handleFormSubmit = (dispatch: any, data: IVisitorDataSpecification[]) => {
+const handleFormSubmit = (dispatch: any, data: IVisitorDataSpecification[], siteId: string, visitingId: string) => {
     console.log('1');
     dispatch(updateOverlayAction(openOverlay('Submitting your data', IconType.NONE, true)));
 
-    console.log('2');
-    //TODO: simulating success case
-    setTimeout(() => {
-        dispatch(updateOverlayAction(openOverlay('Thank you! Enjoy your visit.', IconType.TICK)));
-    }, 1000);
+    submitVisitorForm(siteId, visitingId, data).then((id) => {
+        operationsAggregator.listen(id, () => {
+            dispatch(updateOverlayAction(openOverlay('Thank you! Enjoy your visit.', IconType.TICK)));
+            
+            setTimeout(() => {
+                dispatch(updateOverlayAction(closeOverlay()));
+                dispatch(viewChangedAction(SystemViews.INIT_SIGN_IN));
+            }, 1000)
         
-    setTimeout(() => {
-        dispatch(updateOverlayAction(closeOverlay()));
-        dispatch(viewChangedAction(SystemViews.INIT_SIGN_IN));
-    }, 3000)
+        },
+        (op) => {
+            dispatch(updateOverlayAction(openOverlay(op.reason ?? "Oops something went wrong", IconType.ERROR, false, true)))
+        })
+    });
 }
 
 
@@ -135,7 +145,8 @@ const mapStateToProps = (state: IAppState)  => {
         specifications: state.visitorForm.fields,
         errors: state.visitorForm.errors,
         loading: state.visitorForm.loading,
-        staffMember: state.staff.states.find(s => s.id === state.staffSearch.selectedId)
+        staffMember: state.staff.states.find(s => s.userId === state.staffSearch.selectedId),
+        siteId: state.system.site.id        
     }   
 }
 
@@ -146,7 +157,7 @@ const mapDispatch = (dispatch: any) => {
             newValue: newValue
         })),
         updateErrors: (errors: string[]) => dispatch(updateErrorsAction(errors)),        
-        submitForm: (data: IVisitorDataSpecification[]) => handleFormSubmit(dispatch, data),
+        submitForm: (data: IVisitorDataSpecification[], visitingId: string, siteId: string) => handleFormSubmit(dispatch, data, siteId, visitingId),
         getFormData: () => dispatch(getVisitorFormSpecifications()),
         showLoading: (message: string) => dispatch(updateOverlayAction(openOverlay(message, IconType.NONE, true))),
         closeLoading: () => dispatch(updateOverlayAction(closeOverlay()))

@@ -11,7 +11,7 @@ namespace Services.Common.Rest
     {
         public static IServiceCollection AddRestControllersSupport(this IServiceCollection services)
         {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(Assembly.GetEntryAssembly());
 
             return services;
         }
