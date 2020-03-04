@@ -57,5 +57,11 @@ namespace Api.Gateway.Controllers
             return PublishCommand(command);
         }
 
+
+        [HttpGet("site/{siteId}")]
+        public async Task<ActionResult<IEnumerable<VisitorDto>>> Get([FromRoute] Guid siteId)
+        {
+            return Collection(await _client.GetVisitorsForSiteAsync(siteId));
+        }
     }
 }

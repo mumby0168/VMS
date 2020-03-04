@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Services.Common.Mongo;
+using Services.Visitors.Commands;
 using Services.Visitors.Domain;
 using Services.Visitors.Domain.Domain.Visitor;
 
@@ -32,9 +33,9 @@ namespace Services.Visitors.Repositorys
             return _repository.FindAsync(v => v.VisitingSiteId == siteId && v.Status == VisitorStatus.In);
         }
 
-        public Task GetForSiteAsync(Guid siteId)
+        public Task<IEnumerable<VisitorDocument>> GetForSiteAsync(Guid siteId)
         {
-            return _repository.FindAsync(v => v.VisitingUserId == siteId);
+            return _repository.FindAsync(v => v.VisitingSiteId == siteId && v.Status == VisitorStatus.In);
         }
     }
 }

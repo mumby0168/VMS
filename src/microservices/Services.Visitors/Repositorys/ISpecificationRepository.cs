@@ -15,5 +15,6 @@ namespace Services.Visitors.Repositorys
         Task<IEnumerable<SpecificationDocument>> GetEntriesAsync(Guid businessId);
         Task UpdateAsync(SpecificationDocument entry);
         Task RemoveAsync(SpecificationDocument spec);
+        Task<Guid> GetNameSpecIdForBusinessAsync(Guid businessId);
     }
 }

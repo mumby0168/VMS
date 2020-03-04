@@ -25,5 +25,7 @@ namespace Api.Gateway.Clients
         public Task<IEnumerable<string>> GetDataSpecificationValidatorsAsync() =>
             _client.GetAsync<IEnumerable<string>>($"{_baseAddress}/spec/validators/");
 
+        public Task<IEnumerable<VisitorDto>> GetVisitorsForSiteAsync(Guid siteId) =>
+            _client.GetAsync<IEnumerable<VisitorDto>>($"{_baseAddress}/site/{siteId}");
     }
 }

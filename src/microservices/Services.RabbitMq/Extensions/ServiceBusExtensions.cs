@@ -50,35 +50,13 @@ namespace Services.RabbitMq.Extensions
 
         public static IServiceCollection AddAllHandlers(this IServiceCollection services)
         {
-            var assembly = Assembly.GetEntryAssembly();
-            var types = assembly.GetTypes();
+            services.Scan(selector =>
+                selector.FromAssemblies(Assembly.GetEntryAssembly())
+                
+                    .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>))).AsImplementedInterfaces().WithTransientLifetime()
+                    .AddClasses(c => c.AssignableTo(typeof(IEventHandler<>))).AsImplementedInterfaces().WithTransientLifetime()
+                    );
 
-            var handlers = new List<Type>();
-
-            foreach (var type in types)
-            {
-                if(type.Namespace.Contains("Handlers")) handlers.Add(type);
-            }
-
-            foreach (var handler in handlers)
-            {
-                if (handler.Namespace.Contains("Command"))
-                {
-                    var commandHandler = typeof(ICommandHandler<>);
-                    var implements = handler.GetInterfaces().First();
-                    var arguments = implements.GetGenericArguments();
-                    var def = commandHandler.MakeGenericType(arguments);
-                    services.AddTransient(def, handler);
-
-                }
-                else if (handler.Namespace.Contains("Event"))
-                {
-                    var commandHandler = typeof(IEventHandler<>);
-                    var arguments = handler.GetGenericArguments();
-                    var def = commandHandler.MakeGenericType(arguments);
-                    services.AddTransient(def, handler);
-                }
-            }
             return services;
         }
 

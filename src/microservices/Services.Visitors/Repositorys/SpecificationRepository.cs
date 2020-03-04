@@ -41,5 +41,11 @@ namespace Services.Visitors.Repositorys
         {
             return _repository.RemoveAsync(spec.Id);
         }
+
+        public async Task<Guid> GetNameSpecIdForBusinessAsync(Guid businessId)
+        {
+            var spec = await _repository.GetAsync(s => s.BusinessId == businessId && s.Label == "Full Name");
+            return spec.Id;
+        }
     }
 }

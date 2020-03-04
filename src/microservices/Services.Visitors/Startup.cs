@@ -32,7 +32,8 @@ namespace Services.Visitors
                 .AddMongoCollection<SpecificationDocument>();
 
             services.AddControllers();
-            services.AddServiceBus();
+            services.AddServiceBus()
+                .AddAllHandlers();
             services.AddUdpLogging();
             services.AddQuerySupport();
             services.AddConvey().AddHttpClient();

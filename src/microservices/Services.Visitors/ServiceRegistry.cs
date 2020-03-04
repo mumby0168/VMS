@@ -22,22 +22,8 @@ namespace Services.Visitors
             services.AddTransient<IVisitorsRepository, VisitorsRepository>();
             services.AddTransient<IUserServiceClient, UserServiceClient>();
             services.AddTransient<ISiteServiceClient, SiteServiceClient>();
-            services.AddTransient<IDataSpecificationValidator, DataSpecificationValidator>();
+            services.AddTransient<IDataSpecificationValidator, DataSpecificationValidator>(); 
             services.AddTransient<IVisitorFormValidatorService, VisitorFormValidatorService>();
-
-            services.AddTransient<IEventHandler<BusinessCreated>, BusinessCreatedHandler>();
-
-
-            //command handlers
-            services.AddTransient<ICommandHandler<CreateVisitor>, CreateVisitorHandler>();
-            services.AddTransient<ICommandHandler<CreateDataEntry>, CreateDataEntryHandler>();
-            services.AddTransient<ICommandHandler<UpdateEntryOrder>, UpdateEntryOrderHandler>();
-            services.AddTransient<ICommandHandler<DeprecateDataEntry>, DeprecateDataEntryHandler>();
-
-            //query handlers 
-            services
-                .AddTransient<IQueryHandler<GetBusinessDataSpecifications, IEnumerable<DataSpecificationDto>>,
-                    GetBusinessDataSpecificationHandler>();
         }
     }
 }

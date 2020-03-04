@@ -15,6 +15,6 @@ namespace Services.Visitors.Repositorys
 
         Task GetInForSiteAsync(Guid siteId);
 
-        Task GetForSiteAsync(Guid siteId);
+        Task<IEnumerable<VisitorDocument>> GetForSiteAsync(Guid siteId);
     }
 }
