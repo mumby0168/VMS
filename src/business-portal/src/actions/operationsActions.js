@@ -32,9 +32,13 @@ export function getOperationStatus(handler) {
         get(`${urls.gatewayBaseUrl}operations/${handler.id}`)
         .then((res) => {
             if(res.status === 200) {
+                console.log("Got OK res from HTTP Operations endpoint.");
                 dispatch({type: "REMOVE_HANDLE", payload: handler});                
                 dispatch(hideSiteSpinner());
-                dispatch(handler.action);                
+                dispatch(handler.action);
+                if(handler.completeAction) {
+                    dispatch(handler.completeAction());
+                }
             }
         })
         .catch(err => {
