@@ -1379,7 +1379,6 @@
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
-        <e p="Codes.cs" t="Include" />
         <e p="Commands" t="Include">
           <e p="CreateDataEntry.cs" t="Include" />
           <e p="CreateVisitor.cs" t="Include" />
@@ -1391,10 +1390,6 @@
         </e>
         <e p="Dockerfile" t="Include" />
         <e p="Dockerfile.original" t="Include" />
-        <e p="Domain" t="Include">
-          <e p="DataSpecificationDocument.cs" t="Include" />
-          <e p="IDataSpecificationDocument.cs" t="Include" />
-        </e>
         <e p="Dtos" t="Include">
           <e p="DataSpecificationDto.cs" t="Include" />
           <e p="SiteDto.cs" t="Include" />
@@ -1407,11 +1402,10 @@
           <e p="DataSpecificationRejected.cs" t="Include" />
           <e p="EntryOrderUpdated.cs" t="Include" />
           <e p="EntryOrderUpdateRejected.cs" t="Include" />
+          <e p="Subscribed" t="Include">
+            <e p="BusinessCreated.cs" t="Include" />
+          </e>
           <e p="VisitorCreated.cs" t="Include" />
-        </e>
-        <e p="Factories" t="Include">
-          <e p="DataSpecificationFactory.cs" t="Include" />
-          <e p="IDataSpecificationFactory.cs" t="Include" />
         </e>
         <e p="Handlers" t="Include">
           <e p="Command" t="Include">
@@ -1420,13 +1414,14 @@
             <e p="DeprecateDataEntryHandler.cs" t="Include" />
             <e p="UpdateEntryOrderHandler.cs" t="Include" />
           </e>
+          <e p="events" t="Include">
+            <e p="BusinessCreatedHandler.cs" t="Include" />
+          </e>
           <e p="Queries" t="Include">
             <e p="GetBusinessDataSpecificationHandler.cs" t="Include" />
           </e>
         </e>
-        <e p="Names" t="Include">
-          <e p="Validation.cs" t="Include" />
-        </e>
+        <e p="Names" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -1442,12 +1437,12 @@
           <e p="GetBusinessDataSpecifications.cs" t="Include" />
         </e>
         <e p="Repositorys" t="Include">
-          <e p="DataSpecificationRepository.cs" t="Include" />
-          <e p="IDataSpecificationRepository.cs" t="Include" />
           <e p="ISiteServiceClient.cs" t="Include" />
+          <e p="ISpecificationRepository.cs" t="Include" />
           <e p="IUserServiceClient.cs" t="Include" />
           <e p="IVisitorsRepository.cs" t="Include" />
           <e p="SiteServiceClient.cs" t="Include" />
+          <e p="SpecificationRepository.cs" t="Include" />
           <e p="UserServiceClient.cs" t="Include" />
           <e p="VisitorsRepository.cs" t="Include" />
         </e>
@@ -1481,11 +1476,17 @@
       </e>
       <e p="Services.Visitors.Domain" t="IncludeRecursive">
         <e p="Aggregate" t="Include">
+          <e p="ISpecificationAggregate.cs" t="Include" />
           <e p="IVisitorAggregate.cs" t="Include" />
+          <e p="SpecificationAggregate.cs" t="Include" />
           <e p="VisitorAggregate.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />
+        <e p="Codes.cs" t="Include" />
         <e p="Domain" t="Include">
+          <e p="Specification" t="Include">
+            <e p="SpecificationDocument.cs" t="Include" />
+          </e>
           <e p="VIsitor" t="Include">
             <e p="VisitorData.cs" t="Include" />
             <e p="VisitorDocument.cs" t="Include" />
@@ -1500,6 +1501,7 @@
           </e>
         </e>
         <e p="Services.Visitors.Domain.csproj" t="IncludeRecursive" />
+        <e p="Validation.cs" t="Include" />
         <e p="VisitorDomainExtensions.cs" t="Include" />
       </e>
       <e p="Tests" t="Include">

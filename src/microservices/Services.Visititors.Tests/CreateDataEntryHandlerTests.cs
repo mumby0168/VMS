@@ -12,7 +12,6 @@ using Services.Visitors.Domain;
 using Services.Visitors.Events;
 using Services.Visitors.Factories;
 using Services.Visitors.Handlers.Command;
-using Services.Visitors.Names;
 using Services.Visitors.Repositorys;
 
 namespace Services.Visitors.Tests
@@ -23,7 +22,7 @@ namespace Services.Visitors.Tests
         private Mock<IRequestInfo> _requestInfo;
         private Mock<IServiceBusMessagePublisher> _publisher;
         private Mock<IDataSpecificationFactory> _factory;
-        private Mock<IDataSpecificationRepository> _repository;
+        private Mock<ISpecificationRepository> _repository;
 
 
         [SetUp]
@@ -32,10 +31,10 @@ namespace Services.Visitors.Tests
             _requestInfo = new Mock<IRequestInfo>();
             _publisher = new Mock<IServiceBusMessagePublisher>();
             _factory = new Mock<IDataSpecificationFactory>();
-            _repository = new Mock<IDataSpecificationRepository>();
+            _repository = new Mock<ISpecificationRepository>();
 
             _factory.Setup(o => o.Create(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(),
-                It.IsAny<Guid>())).Returns(new Mock<IDataSpecificationDocument>().Object);
+                It.IsAny<Guid>())).Returns(new Mock<ISpecificationDocument>().Object);
         }
 
         [Test]
@@ -80,7 +79,7 @@ namespace Services.Visitors.Tests
 
 
             //Assert
-            _repository.Verify(o => o.AddAsync(It.IsAny<IDataSpecificationDocument>()));
+            _repository.Verify(o => o.AddAsync(It.IsAny<ISpecificationDocument>()));
             _publisher.Verify(o => o.PublishEvent(It.IsAny<DataSpecificationCreated>(), _requestInfo.Object));
         }
 

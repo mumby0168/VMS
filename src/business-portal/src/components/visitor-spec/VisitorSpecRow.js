@@ -21,6 +21,34 @@ export default function VisitorSpecRow(props) {
 
     const open = Boolean(anchorToElement);
 
+    const operations = props.spec.isMandatory ? <p>Mandatory Field</p> :
+        <React.Fragment>
+            <Tooltip title="Deprecate">
+                <Fab onClick={deprecate} color="primary">
+                    <Delete />
+                </Fab>
+            </Tooltip>
+            <Tooltip title="Change order">
+                <Fab onClick={showPopup} color="primary">
+                    <Reorder />
+                </Fab>
+            </Tooltip>
+            <Popover
+                open={open}
+                onClose={closePopup}
+                anchorEl={anchorToElement}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                }}
+            >
+                <ReorderSpec id={props.spec.id} current={props.spec.order} updateOrder={props.updateOrder} max={props.maxOrder}/>
+            </Popover>
+        </React.Fragment>
 
 
     return (
@@ -38,31 +66,7 @@ export default function VisitorSpecRow(props) {
                 {props.spec.validationMessage}
             </TableCell>
             <TableCell>
-                <Tooltip title="Deprecate">
-                    <Fab onClick={deprecate} color="primary">
-                        <Delete />
-                    </Fab>
-                </Tooltip>
-                <Tooltip title="Change order">
-                    <Fab onClick={showPopup} color="primary">
-                        <Reorder />
-                    </Fab>
-                </Tooltip>
-                <Popover
-                    open={open}
-                    onClose={closePopup}
-                    anchorEl={anchorToElement}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'center',
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
-                    }}
-                >
-                    <ReorderSpec id={props.spec.id} current={props.spec.order} updateOrder={props.updateOrder} max={props.maxOrder}/>
-                </Popover>
+                {operations}
             </TableCell>
         </TableRow>
     )

@@ -10,6 +10,7 @@ using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 using Services.Visitors.Commands;
 using Services.Visitors.Domain;
+using Services.Visitors.Domain.Aggregate;
 using Services.Visitors.Events;
 using Services.Visitors.Repositorys;
 
@@ -19,13 +20,15 @@ namespace Services.Visitors.Handlers.Command
     {
         private readonly IVmsLogger<UpdateEntryOrderHandler> _logger;
         private readonly IServiceBusMessagePublisher _publisher;
-        private readonly IDataSpecificationRepository _repository;
+        private readonly ISpecificationRepository _repository;
+        private readonly ISpecificationAggregate _specificationAggregate;
 
-        public UpdateEntryOrderHandler(IVmsLogger<UpdateEntryOrderHandler> logger, IServiceBusMessagePublisher publisher, IDataSpecificationRepository repository)
+        public UpdateEntryOrderHandler(IVmsLogger<UpdateEntryOrderHandler> logger, IServiceBusMessagePublisher publisher, ISpecificationRepository repository, ISpecificationAggregate specificationAggregate)
         {
             _logger = logger;
             _publisher = publisher;
             _repository = repository;
+            _specificationAggregate = specificationAggregate;
         }
 
 
@@ -45,8 +48,8 @@ namespace Services.Visitors.Handlers.Command
 
             var replacing = specifications.FirstOrDefault(s => s.Order == message.Order);
             int oldOrder = updating.Order;
-            updating.UpdateOrder(message.Order);
-            replacing.UpdateOrder(oldOrder);
+            _specificationAggregate.UpdateOrder(updating, message.Order);
+            _specificationAggregate.UpdateOrder(replacing, oldOrder);
 
             await _repository.UpdateAsync(updating);
             await _repository.UpdateAsync(replacing);

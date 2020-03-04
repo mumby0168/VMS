@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Services.Common.Base;
 using Services.Common.Queries;
+using Services.Visitors.Domain;
 using Services.Visitors.Dtos;
-using Services.Visitors.Names;
 using Services.Visitors.Queries;
 
 namespace Services.Visitors.Controllers

@@ -16,5 +16,7 @@ namespace Services.Visitors.Dtos
         public string ValidationMessage { get; set; }
 
         public int Order { get; set; }
+        
+        public bool IsMandatory { get; set; }
     }
 }

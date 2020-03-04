@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using Services.Common.Queries;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.Visitors.Commands;
 using Services.Visitors.Dtos;
-using Services.Visitors.Factories;
+using Services.Visitors.Events.Subscribed;
 using Services.Visitors.Handlers.Command;
+using Services.Visitors.Handlers.Events;
 using Services.Visitors.Handlers.Queries;
 using Services.Visitors.Queries;
 using Services.Visitors.Repositorys;
@@ -20,13 +18,14 @@ namespace Services.Visitors
     {
         public static void RegisterServices(IServiceCollection services)
         {
-            services.AddTransient<IDataSpecificationRepository, DataSpecificationRepository>();
-            services.AddTransient<IDataSpecificationFactory, DataSpecificationFactory>();
+            services.AddTransient<ISpecificationRepository, SpecificationRepository>();
             services.AddTransient<IVisitorsRepository, VisitorsRepository>();
             services.AddTransient<IUserServiceClient, UserServiceClient>();
             services.AddTransient<ISiteServiceClient, SiteServiceClient>();
             services.AddTransient<IDataSpecificationValidator, DataSpecificationValidator>();
             services.AddTransient<IVisitorFormValidatorService, VisitorFormValidatorService>();
+
+            services.AddTransient<IEventHandler<BusinessCreated>, BusinessCreatedHandler>();
 
 
             //command handlers

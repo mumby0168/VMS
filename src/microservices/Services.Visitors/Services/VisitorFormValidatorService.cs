@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Services.Common.Exceptions;
 using Services.Common.Logging;
 using Services.Visitors.Commands;
-using Services.Visitors.Names;
+using Services.Visitors.Domain;
 using Services.Visitors.Repositorys;
 
 namespace Services.Visitors.Services
@@ -13,10 +13,10 @@ namespace Services.Visitors.Services
     public class VisitorFormValidatorService : IVisitorFormValidatorService
     {
         private readonly IVmsLogger<VisitorFormValidatorService> _logger;
-        private readonly IDataSpecificationRepository _specificationRepository;
+        private readonly ISpecificationRepository _specificationRepository;
         private readonly IDataSpecificationValidator _specificationValidator;
 
-        public VisitorFormValidatorService(IVmsLogger<VisitorFormValidatorService> logger, IDataSpecificationRepository specificationRepository, IDataSpecificationValidator specificationValidator)
+        public VisitorFormValidatorService(IVmsLogger<VisitorFormValidatorService> logger, ISpecificationRepository specificationRepository, IDataSpecificationValidator specificationValidator)
         {
             _logger = logger;
             _specificationRepository = specificationRepository;

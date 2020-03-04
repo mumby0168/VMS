@@ -6,7 +6,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         padding: theme.spacing(2)
     }
-}))
+}));
 
 export default function ReorderSpec(props) {
 
@@ -30,7 +30,7 @@ export default function ReorderSpec(props) {
                         width: "100px",
                         marginBottom: "1rem"
                     }}                    
-                    InputProps={{ inputProps: { min: 1, max: max } }}
+                    InputProps={{ inputProps: { min: 2, max: max } }}
                     />     
                     <br/>           
                 <Button variant="contained" color="secondary" onClick={() => updateOrder(count, id)}>Update</Button>

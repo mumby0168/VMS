@@ -13,5 +13,7 @@ namespace Api.Gateway.Dtos.Visitors
         public string ValidationMessage { get; set; }
 
         public int Order { get; set; }
+        
+        public bool IsMandatory { get; set; }
     }
 }

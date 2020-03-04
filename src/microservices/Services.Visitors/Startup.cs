@@ -14,8 +14,13 @@ using Services.Common.Mongo;
 using Services.Common.Names;
 using Services.Common.Queries;
 using Services.RabbitMq.Extensions;
+using Services.RabbitMq.Interfaces.Messaging;
+using Services.RabbitMq.Messages;
 using Services.Visitors.Commands;
 using Services.Visitors.Domain;
+using Services.Visitors.Domain.Aggregate;
+using Services.Visitors.Domain.Domain.Specification;
+using Services.Visitors.Events.Subscribed;
 
 namespace Services.Visitors
 {
@@ -24,7 +29,7 @@ namespace Services.Visitors
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddVisitorDomain()
-                .AddMongoCollection<DataSpecificationDocument>();
+                .AddMongoCollection<SpecificationDocument>();
 
             services.AddControllers();
             services.AddServiceBus();
