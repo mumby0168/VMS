@@ -313,6 +313,7 @@
             <e p="CreateVisitor.cs" t="Include" />
             <e p="DeprecateDataEntry.cs" t="Include" />
             <e p="UpdateEntryOrder.cs" t="Include" />
+            <e p="VisitorSignOut.cs" t="Include" />
           </e>
         </e>
         <e p="obj" t="ExcludeRecursive">
@@ -839,6 +840,8 @@
               <e p="EntryOrderUpdated.cs" t="Include" />
               <e p="EntryOrderUpdateRejected.cs" t="Include" />
               <e p="VisitorCreated.cs" t="Include" />
+              <e p="VisitorSignedOut.cs" t="Include" />
+              <e p="VisitorSignOutRejected.cs" t="Include" />
             </e>
           </e>
         </e>
@@ -1385,6 +1388,7 @@
           <e p="CreateVisitor.cs" t="Include" />
           <e p="DeprecateDataEntry.cs" t="Include" />
           <e p="UpdateEntryOrder.cs" t="Include" />
+          <e p="VisitorSignOut.cs" t="Include" />
         </e>
         <e p="Controllers" t="Include">
           <e p="DataSpecificationController.cs" t="Include" />
@@ -1409,6 +1413,8 @@
             <e p="BusinessCreated.cs" t="Include" />
           </e>
           <e p="VisitorCreated.cs" t="Include" />
+          <e p="VisitorSignedOut.cs" t="Include" />
+          <e p="VisitorSignOutRejected.cs" t="Include" />
         </e>
         <e p="Handlers" t="Include">
           <e p="Command" t="Include">
@@ -1416,6 +1422,7 @@
             <e p="CreateVisitorHandler.cs" t="Include" />
             <e p="DeprecateDataEntryHandler.cs" t="Include" />
             <e p="UpdateEntryOrderHandler.cs" t="Include" />
+            <e p="VIsitorSignOutHandler.cs" t="Include" />
           </e>
           <e p="events" t="Include">
             <e p="BusinessCreatedHandler.cs" t="Include" />

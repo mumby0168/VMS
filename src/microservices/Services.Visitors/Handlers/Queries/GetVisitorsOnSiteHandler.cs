@@ -42,7 +42,8 @@ namespace Services.Visitors.Handlers.Queries
             return visitorDocuments.Select(v => new VisitorDto
             {
                 Id = v.Id,
-                Name = v.Data.First(spec => spec.DataSpecificationId == nameSpecId).Value
+                Name = v.Data.First(spec => spec.DataSpecificationId == nameSpecId).Value,
+                InAt = v.In.ToShortTimeString()
             });
         }
     }

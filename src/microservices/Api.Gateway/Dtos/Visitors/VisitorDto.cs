@@ -7,5 +7,7 @@ namespace Api.Gateway.Dtos.Visitors
         public Guid Id { get; set; }
         
         public string Name { get; set; }
+        
+        public string InAt { get; set; }
     }
 }

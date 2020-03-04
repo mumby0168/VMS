@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Services.Common.Base;
+using Services.Common.Jwt;
 using Services.Common.Queries;
 using Services.Visitors.Dtos;
 using Services.Visitors.Queries;

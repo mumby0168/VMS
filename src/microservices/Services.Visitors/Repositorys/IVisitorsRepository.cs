@@ -11,10 +11,11 @@ namespace Services.Visitors.Repositorys
     {
         Task AddAsync(VisitorDocument visitorDocument);
 
-        Task GetAsync(Guid visitorId);
+        Task<VisitorDocument> GetAsync(Guid visitorId);
 
         Task GetInForSiteAsync(Guid siteId);
 
         Task<IEnumerable<VisitorDocument>> GetForSiteAsync(Guid siteId);
+        Task UpdateAsync(VisitorDocument visitor);
     }
 }
