@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { Paper } from '@material-ui/core'
-import { IStaffCurrentState } from '../../redux/actions/staffActioms'
+import { IStaffCurrentState } from '../../redux/actions/staffActions'
 import StaffResult from './StaffResult';
 import { SystemViews } from '../../redux/actions/systemActions';
 

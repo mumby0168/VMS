@@ -8,6 +8,7 @@ export enum SystemViews {
     STAFF_SELECT = 1,
     STAFF_KEYPAD = 2,
     VISITOR_FORM = 3,
+    VISITOR_OUT = 4
 }
 
 export const authObtained = makeAction<SystemEvents.AUTH_OBTAINED, IAuthTokenReponse>(SystemEvents.AUTH_OBTAINED);

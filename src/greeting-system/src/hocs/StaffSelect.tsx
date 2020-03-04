@@ -5,7 +5,7 @@ import { IAppState } from '../redux/store'
 import StaffSearchHeader from '../components/staff-search/StaffSearchHeader'
 import { updateSearchTermAction, updateSelectionStaff } from '../redux/actions/staffSearchActions'
 import StaffResultsView from '../components/staff-search/StaffResultsView'
-import { IStaffCurrentState } from '../redux/actions/staffActioms'
+import { IStaffCurrentState } from '../redux/actions/staffActions'
 import { getStaffState } from '../redux/api/user'
 import { SystemViews, viewChangedAction } from '../redux/actions/systemActions'
 

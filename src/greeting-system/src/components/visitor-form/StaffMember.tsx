@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { IStaffCurrentState } from '../../redux/actions/staffActioms'
+import { IStaffCurrentState } from '../../redux/actions/staffActions'
 import { Divider } from '@material-ui/core'
 
 interface Props {

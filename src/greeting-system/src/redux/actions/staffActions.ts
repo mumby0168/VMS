@@ -24,6 +24,6 @@ const action = {
     fetchedSiteStaffStateAction,
     fetchSiteStaffStateAction,
     rejectedFetchingStaffStateAction
-}
+};
 
 export type IStaffActions = IActionUnion<typeof action>;

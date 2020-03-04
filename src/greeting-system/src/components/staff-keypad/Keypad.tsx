@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { updateCodeAction } from '../../redux/actions/staffKeypadActions';
 import { userInOut, UserAccess } from '../../redux/api/user'
 import { operationsAggregator } from '../../operations/operationsAggregator';
-import { IStaffCurrentState } from '../../redux/actions/staffActioms';
+import { IStaffCurrentState } from '../../redux/actions/staffActions';
 
 interface IKeypadProps {
     code: string;

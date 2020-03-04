@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { IStaffCurrentState } from '../../redux/actions/staffActioms'
+import { IStaffCurrentState } from '../../redux/actions/staffActions'
 import { Card, CardActionArea, Avatar, Divider, Chip } from '@material-ui/core'
 import { SystemViews } from '../../redux/actions/systemActions';
 

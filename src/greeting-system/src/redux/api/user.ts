@@ -1,6 +1,6 @@
 import { gatewayClient, IFailedRequestResponse } from "./helpers";
 import { AxiosError } from "axios";
-import {rejectedFetchingStaffStateAction, IStaffCurrentState, fetchedSiteStaffStateAction, fetchSiteStaffStateAction} from '../actions/staffActioms'
+import {rejectedFetchingStaffStateAction, IStaffCurrentState, fetchedSiteStaffStateAction, fetchSiteStaffStateAction} from '../actions/staffActions'
 
 export enum UserAccess {
     IN,
