@@ -1,6 +1,7 @@
 import { fetchVisitorFormSpecAction, fetchedVisitorFormSpecAction, rejectedVisitorFormSpecAction, IVisitorDataSpecification } from '../actions/visitorFormActions'
 import { gatewayClient, IFailedRequestResponse } from '../api/helpers'
 import { AxiosError } from 'axios';
+import {fetchedVisitors, fetchVisitors, IVisitor, rejectedVisitors} from "../actions/visitorActions";
 
 
 export const getVisitorFormSpecifications = () => {
@@ -75,4 +76,52 @@ export const submitVisitorForm = async (siteId: string, visitingId: string, data
     }
 
     return "";
-}
+};
+
+
+export const getSignedInVisitors = (siteId: string) =>  {
+    return async (dispatch: any) => {
+        dispatch(fetchVisitors(true));
+
+        try {
+            const result = await gatewayClient().get<IVisitor[]>(`visitors/site/${siteId}`);
+
+            if(result.status === 200) {
+                dispatch(fetchedVisitors(result.data));
+            }
+        }
+        catch (error) {
+            if (error && error.response) {
+                const errorResponse = error as AxiosError<IFailedRequestResponse>
+                if (errorResponse.response) {
+                    console.error(errorResponse.response);
+                    dispatch(rejectedVisitors(errorResponse.response.data.Reason));
+                }
+            }
+            else {
+                console.error('The response was not handled and failed. (no error response)');
+            }
+        }
+
+
+    }
+};
+
+
+export const signOut = async (id: string): Promise<string> => {
+
+    try {
+        const response = await gatewayClient().post(`visitors/out/`, {
+            visitorId: id
+        });
+        if(response.status === 202) {
+            return response.headers['X-Operation'];
+        }
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+
+    return "";
+};

@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.2.0/build/netcoreapp1.0" t="Include">
+      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
+    </e>
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/nunit.engine.api.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/nunit.engine.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/NUnit3.TestAdapter.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/NUnit3.TestAdapter.pdb" t="Include" />
+    <e p="$PROJECT_DIR$/../../External/BlazorLoadingFork/src/Blazor.LoadingIndicator" t="IncludeRecursive">
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="Blazor.LoadingIndicator.csproj" t="IncludeRecursive" />
+      <e p="content" t="Include">
+        <e p="styles.css" t="Include" />
+      </e>
+      <e p="DefaultTemplate.razor" t="Include" />
+      <e p="Extensions.cs" t="Include" />
+      <e p="ILoadingService.cs" t="Include" />
+      <e p="Indicator.razor" t="Include" />
+      <e p="ITaskStatus.cs" t="Include" />
+      <e p="LoadingIndicatorTemplateBase.cs" t="Include" />
+      <e p="LoadingService.cs" t="Include" />
+      <e p="obj" t="ExcludeRecursive">
+        <e p="Debug" t="Include">
+          <e p="netstandard2.0" t="Include">
+            <e p="Blazor.LoadingIndicator.AssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+    </e>
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="App" t="IncludeRecursive">
+        <e p="_Imports.razor" t="Include" />
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Extensions.cs" t="Include" />
+        <e p="Manager.csproj" t="IncludeRecursive" />
+        <e p="Names" t="Include">
+          <e p="Roles.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Manager.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Pages" t="Include">
+          <e p="_Host.cshtml" t="Include" />
+          <e p="Counter.razor" t="Include" />
+          <e p="Error.razor" t="Include" />
+          <e p="Index.razor" t="Include" />
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Shared" t="Include">
+          <e p="MainLayout.razor" t="Include" />
+          <e p="NavMenu.razor" t="Include" />
+          <e p="TopBar.razor" t="Include" />
+        </e>
+        <e p="Startup.cs" t="Include" />
+        <e p="SystemAdmin.razor" t="Include" />
+        <e p="SystemAdminAuthenticationStateProvider.cs" t="Include" />
+        <e p="wwwroot" t="Include">
+          <e p="css" t="Include">
+            <e p="bootstrap" t="Include">
+              <e p="bootstrap.min.css" t="Include" />
+              <e p="bootstrap.min.css.map" t="Include" />
+            </e>
+            <e p="material-kit.css" t="Include" />
+            <e p="material-kit.css.map" t="Include" />
+            <e p="open-iconic" t="Include">
+              <e p="font" t="Include">
+                <e p="css" t="Include">
+                  <e p="open-iconic-bootstrap.min.css" t="Include" />
+                </e>
+                <e p="fonts" t="Include">
+                  <e p="open-iconic.eot" t="Include" />
+                  <e p="open-iconic.otf" t="Include" />
+                  <e p="open-iconic.svg" t="Include" />
+                  <e p="open-iconic.ttf" t="Include" />
+                  <e p="open-iconic.woff" t="Include" />
+                </e>
+              </e>
+              <e p="FONT-LICENSE" t="Include" />
+              <e p="ICON-LICENSE" t="Include" />
+              <e p="README.md" t="Include" />
+            </e>
+            <e p="site.css" t="Include" />
+          </e>
+          <e p="favicon.ico" t="Include" />
+        </e>
+      </e>
+      <e p="App.Account" t="IncludeRecursive">
+        <e p="_Imports.razor" t="Include" />
+        <e p="Account.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Components" t="Include">
+          <e p="CompleteAdmin.razor" t="Include" />
+          <e p="CreateAdmin.razor" t="Include" />
+          <e p="SystemAdminLogin.razor" t="Include" />
+        </e>
+        <e p="Extensions.cs" t="Include" />
+        <e p="Jwt" t="Include">
+          <e p="TokenStorageService.cs" t="Include" />
+        </e>
+        <e p="Models" t="Include">
+          <e p="JwtToken.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Account.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Services" t="Include">
+          <e p="AccountService.cs" t="Include" />
+        </e>
+        <e p="ViewModels" t="Include">
+          <e p="CompleteAdminViewModel.cs" t="Include" />
+          <e p="CreateAdminViewModel.cs" t="Include" />
+          <e p="LoginViewModel.cs" t="Include" />
+        </e>
+        <e p="wwwroot" t="Include">
+          <e p="background.png" t="Include" />
+          <e p="exampleJsInterop.js" t="Include" />
+          <e p="styles.css" t="Include" />
+        </e>
+      </e>
+      <e p="App.Account.Interfaces" t="IncludeRecursive">
+        <e p="Account.Interfaces.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Jwt" t="Include">
+          <e p="ITokenStorageService.cs" t="Include" />
+        </e>
+        <e p="Models" t="Include">
+          <e p="IJwtToken.cs" t="Include" />
+          <e p="TokenResponse.cs" t="Include" />
+        </e>
+        <e p="Names" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Account.Interfaces.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="App.Businesses" t="IncludeRecursive">
+        <e p="_Imports.razor" t="Include" />
+        <e p="App.Businesses.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Components" t="Include">
+          <e p="AdminAccounts.razor" t="Include" />
+          <e p="BusinessProfileHeader.razor" t="Include" />
+          <e p="BusinessSummaries.razor" t="Include" />
+          <e p="Forms" t="Include">
+            <e p="CreateBusinessAdmin.razor" t="Include" />
+            <e p="CreateBusinessForm.razor" t="Include" />
+            <e p="UpdateBusinessContact.razor" t="Include" />
+            <e p="UpdateBusinessDetails.razor" t="Include" />
+            <e p="UpdateBusinessOffice.razor" t="Include" />
+          </e>
+        </e>
+        <e p="Extensions.cs" t="Include" />
+        <e p="Models" t="Include">
+          <e p="AccountInfo.cs" t="Include" />
+          <e p="Business.cs" t="Include" />
+          <e p="BusinessSummary.cs" t="Include" />
+          <e p="HeadContact.cs" t="Include" />
+          <e p="HeadOffice.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="App.Businesses.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Pages" t="Include">
+          <e p="Businesses.razor" t="Include" />
+          <e p="BusinessProfile.razor" t="Include" />
+          <e p="CreateBusiness.razor" t="Include" />
+        </e>
+        <e p="Services" t="Include">
+          <e p="AdminAccountService.cs" t="Include" />
+          <e p="BusinessService.cs" t="Include" />
+          <e p="IAdminAccountService.cs" t="Include" />
+        </e>
+        <e p="ViewModels" t="Include">
+          <e p="CreateBusinessAdminViewModel.cs" t="Include" />
+          <e p="CreateBusinessViewModel.cs" t="Include" />
+          <e p="UpdateBusinessDetailsViewModel.cs" t="Include" />
+          <e p="UpdateBusinessOfficeViewModel.cs" t="Include" />
+          <e p="UpdateContactDetailsViewModel.cs" t="Include" />
+        </e>
+        <e p="wwwroot" t="Include">
+          <e p="background.png" t="Include" />
+          <e p="exampleJsInterop.js" t="Include" />
+          <e p="styles.css" t="Include" />
+        </e>
+      </e>
+      <e p="App.Shared" t="IncludeRecursive">
+        <e p="_Imports.razor" t="Include" />
+        <e p="App.Shared.csproj" t="IncludeRecursive" />
+        <e p="Auth" t="Include">
+          <e p="Restricted.razor" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Component1.razor" t="Include" />
+        <e p="Context" t="Include">
+          <e p="IUserContext.cs" t="Include" />
+          <e p="UserContext.cs" t="Include" />
+        </e>
+        <e p="Events" t="Include">
+          <e p="LoginSuccesfulEvent.cs" t="Include" />
+          <e p="UpdateBusinessProfile.cs" t="Include" />
+          <e p="UpdateRestrictedViewsEvent.cs" t="Include" />
+          <e p="UpdateSiteProfile.cs" t="Include" />
+        </e>
+        <e p="ExampleJsInterop.cs" t="Include" />
+        <e p="Exceptions" t="Include">
+          <e p="InternalHttpRequestException.cs" t="Include" />
+          <e p="OperationNotFoundException.cs" t="Include" />
+        </e>
+        <e p="Extensions" t="Include">
+          <e p="HttpResponseExtensions.cs" t="Include" />
+        </e>
+        <e p="Http" t="Include">
+          <e p="Endpoints.cs" t="Include" />
+          <e p="JsonMessage.cs" t="Include" />
+        </e>
+        <e p="Models" t="Include">
+          <e p="IPubSubEvent.cs" t="Include" />
+          <e p="ServiceError.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="App.Shared.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Operations" t="Include">
+          <e p="IOperationsClient.cs" t="Include" />
+          <e p="IOperationsManager.cs" t="Include" />
+          <e p="IOperationsService.cs" t="Include" />
+          <e p="Models" t="Include">
+            <e p="IOperationMessage.cs" t="Include" />
+            <e p="IOperationMessageFailed.cs" t="Include" />
+            <e p="OperationMessage.cs" t="Include" />
+            <e p="OperationMessageFailed.cs" t="Include" />
+          </e>
+          <e p="OperationsClient.cs" t="Include" />
+          <e p="OperationsManager.cs" t="Include" />
+          <e p="OperationsService.cs" t="Include" />
+        </e>
+        <e p="Services" t="Include">
+          <e p="CustomHttpClient.cs" t="Include" />
+          <e p="HttpExecutor.cs" t="Include" />
+          <e p="IHttpClient.cs" t="Include" />
+          <e p="IHttpExecutor.cs" t="Include" />
+          <e p="IPubSubService.cs" t="Include" />
+          <e p="PubSubService.cs" t="Include" />
+        </e>
+        <e p="Settings" t="Include">
+          <e p="DevelopmentSettings.cs" t="Include" />
+        </e>
+        <e p="SharedExtensions.cs" t="Include" />
+        <e p="wwwroot" t="Include">
+          <e p="background.png" t="Include" />
+          <e p="exampleJsInterop.js" t="Include" />
+          <e p="styles.css" t="Include" />
+        </e>
+      </e>
+      <e p="App.Shared.Tests" t="IncludeRecursive">
+        <e p="App.Shared.Tests.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="App.Shared.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Operations" t="Include">
+          <e p="OperationsManagerTests.cs" t="Include" />
+        </e>
+        <e p="UnitTest1.cs" t="Include" />
+      </e>
+      <e p="App.Sites" t="IncludeRecursive">
+        <e p="_Imports.razor" t="Include" />
+        <e p="App.Sites.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Component1.razor" t="Include" />
+        <e p="Components" t="Include">
+          <e p="AddressForm.razor" t="Include" />
+          <e p="ContactForm.razor" t="Include" />
+          <e p="CreateResourceForm.razor" t="Include" />
+          <e p="ResourceManager.razor" t="Include" />
+          <e p="SiteProfile.razor" t="Include" />
+        </e>
+        <e p="ExampleJsInterop.cs" t="Include" />
+        <e p="Extensions.cs" t="Include" />
+        <e p="Models" t="Include">
+          <e p="Site.cs" t="Include" />
+          <e p="SiteResource.cs" t="Include" />
+          <e p="SiteSummary.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="App.Sites.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Pages" t="Include">
+          <e p="CreateSite.razor" t="Include" />
+        </e>
+        <e p="Services" t="Include">
+          <e p="SiteService.cs" t="Include" />
+        </e>
+        <e p="ViewModels" t="Include">
+          <e p="AddressFormViewModel.cs" t="Include" />
+          <e p="ContactFormViewModel.cs" t="Include" />
+          <e p="CreateSiteResourceViewModel.cs" t="Include" />
+          <e p="CreateSiteViewModel.cs" t="Include" />
+        </e>
+        <e p="wwwroot" t="Include">
+          <e p="background.png" t="Include" />
+          <e p="exampleJsInterop.js" t="Include" />
+          <e p="styles.css" t="Include" />
+        </e>
+      </e>
+      <e p="External" t="Include" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="SystemAdmin.sln" t="IncludeFlat" />
+      <e p="Tests" t="Include" />
+    </e>
+    <e p="$USER_HOME$/Library/Caches/Rider2019.2/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2019.2/resharper-host/local/Transient/ReSharperHost/v192/SolutionCaches/_SystemAdmin.-541316808.00" t="ExcludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/scratches" t="IncludeRecursive" />
+  </component>
+</project>

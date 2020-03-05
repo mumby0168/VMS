@@ -57,5 +57,19 @@ namespace Api.Gateway.Controllers
             return PublishCommand(command);
         }
 
+        
+        [Authorize(Roles = Roles.Greeting)]
+        [HttpGet("site/{siteId}")]
+        public async Task<ActionResult<IEnumerable<VisitorDto>>> Get([FromRoute] Guid siteId)
+        {
+            return Collection(await _client.GetVisitorsForSiteAsync(siteId));
+        }
+        
+        [Authorize(Roles = Roles.Greeting)]
+        [HttpPost("out")]
+        public IActionResult SignOut([FromBody] VisitorSignOut command)
+        {
+            return PublishCommand(command);
+        }
     }
 }

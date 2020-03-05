@@ -1,15 +1,16 @@
 import React from 'react'
-import { Paper, Grid, Card, Button } from '@material-ui/core'
-import { Time, } from '../main/Time'
-import { ISite } from '../../redux/reducers/systemReducer'
-import { IAppState } from '../../redux/store'
-import { connect } from 'react-redux'
-import { SystemViews, viewChangedAction } from '../../redux/actions/systemActions'
-import { InitialSignIn } from '../../hocs/InitialSignIn'
+import {Button, Card, Grid, Paper} from '@material-ui/core'
+import {Time,} from '../main/Time'
+import {ISite} from '../../redux/reducers/systemReducer'
+import {IAppState} from '../../redux/store'
+import {connect} from 'react-redux'
+import {SystemViews, viewChangedAction} from '../../redux/actions/systemActions'
+import {InitialSignIn} from '../../hocs/InitialSignIn'
 import StaffKeypad from '../../hocs/StaffKeypad'
 import StaffSelect from '../../hocs/StaffSelect'
 import Overlay from './Overlay'
 import VisitorForm from '../../hocs/VisitorForm'
+import VisitorOut from "../../hocs/VisitorOut";
 
 interface IMainProps {
     site: ISite
@@ -23,9 +24,10 @@ interface IMainProps {
     renderInternals() {
         switch(this.props.view) {
             case SystemViews.INIT_SIGN_IN: return <InitialSignIn naviagate={this.props.navigate}/>
-            case SystemViews.STAFF_KEYPAD: return <StaffKeypad/>
-            case SystemViews.STAFF_SELECT: return <StaffSelect/>
-            case SystemViews.VISITOR_FORM: return <VisitorForm/>
+            case SystemViews.STAFF_KEYPAD: return <StaffKeypad/>;
+            case SystemViews.STAFF_SELECT: return <StaffSelect/>;
+            case SystemViews.VISITOR_FORM: return <VisitorForm/>;
+            case SystemViews.VISITOR_OUT: return <VisitorOut/>;
             default: return <h1>404 Not Found</h1>
         }
     }

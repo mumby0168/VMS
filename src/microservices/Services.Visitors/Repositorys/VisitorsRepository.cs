@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Services.Common.Mongo;
+using Services.Visitors.Commands;
 using Services.Visitors.Domain;
 using Services.Visitors.Domain.Domain.Visitor;
 
@@ -22,7 +23,7 @@ namespace Services.Visitors.Repositorys
             return _repository.AddAsync(visitorDocument as VisitorDocument);
         }
 
-        public Task GetAsync(Guid visitorId)
+        public Task<VisitorDocument> GetAsync(Guid visitorId)
         {
             return _repository.GetAsync(visitorId);
         }
@@ -32,9 +33,14 @@ namespace Services.Visitors.Repositorys
             return _repository.FindAsync(v => v.VisitingSiteId == siteId && v.Status == VisitorStatus.In);
         }
 
-        public Task GetForSiteAsync(Guid siteId)
+        public Task<IEnumerable<VisitorDocument>> GetForSiteAsync(Guid siteId)
         {
-            return _repository.FindAsync(v => v.VisitingUserId == siteId);
+            return _repository.FindAsync(v => v.VisitingSiteId == siteId && v.Status == VisitorStatus.In);
+        }
+
+        public Task UpdateAsync(VisitorDocument visitor)
+        {
+            return _repository.UpdateAsync(visitor, visitor.Id);
         }
     }
 }

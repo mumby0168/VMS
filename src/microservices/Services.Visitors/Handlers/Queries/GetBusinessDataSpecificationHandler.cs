@@ -13,9 +13,9 @@ namespace Services.Visitors.Handlers.Queries
     public class GetBusinessDataSpecificationHandler : IQueryHandler<GetBusinessDataSpecifications, IEnumerable<DataSpecificationDto>>
     {
         private readonly IVmsLogger<GetBusinessDataSpecificationHandler> _logger;
-        private readonly IDataSpecificationRepository _repository;
+        private readonly ISpecificationRepository _repository;
 
-        public GetBusinessDataSpecificationHandler(IVmsLogger<GetBusinessDataSpecificationHandler> logger, IDataSpecificationRepository repository)
+        public GetBusinessDataSpecificationHandler(IVmsLogger<GetBusinessDataSpecificationHandler> logger, ISpecificationRepository repository)
         {
             _logger = logger;
             _repository = repository;
@@ -33,7 +33,8 @@ namespace Services.Visitors.Handlers.Queries
                     Order = dataSpecification.Order,
                     ValidationCode = dataSpecification.ValidationCode,
                     ValidationMessage = dataSpecification.ValidationMessage,
-                    Label = dataSpecification.Label
+                    Label = dataSpecification.Label,
+                    IsMandatory = dataSpecification.IsMandatory
                 });
             }
 

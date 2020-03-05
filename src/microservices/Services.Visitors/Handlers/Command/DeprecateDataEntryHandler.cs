@@ -6,6 +6,8 @@ using Services.Common.Logging;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 using Services.Visitors.Commands;
+using Services.Visitors.Domain;
+using Services.Visitors.Domain.Aggregate;
 using Services.Visitors.Events;
 using Services.Visitors.Repositorys;
 
@@ -15,13 +17,15 @@ namespace Services.Visitors.Handlers.Command
     {
         private readonly IVmsLogger<DeprecateDataEntryHandler> _logger;
         private readonly IServiceBusMessagePublisher _publisher;
-        private readonly IDataSpecificationRepository _repository;
+        private readonly ISpecificationRepository _repository;
+        private readonly ISpecificationAggregate _specificationAggregate;
 
-        public DeprecateDataEntryHandler(IVmsLogger<DeprecateDataEntryHandler> logger,IServiceBusMessagePublisher publisher, IDataSpecificationRepository repository)
+        public DeprecateDataEntryHandler(IVmsLogger<DeprecateDataEntryHandler> logger,IServiceBusMessagePublisher publisher, ISpecificationRepository repository, ISpecificationAggregate specificationAggregate)
         {
             _logger = logger;
             _publisher = publisher;
             _repository = repository;
+            _specificationAggregate = specificationAggregate;
         }
 
         public async Task HandleAsync(DeprecateDataEntry message, IRequestInfo requestInfo)
@@ -43,15 +47,23 @@ namespace Services.Visitors.Handlers.Command
                 _publisher.PublishEvent(new DataEntryDeprecationRejected(Codes.InvalidId, $"Entry with the id {message.Id} could not be found."), requestInfo);
                 return;
             }
+            
+            if (spec.IsMandatory)
+            {
+                _logger.LogInformation($"{spec.Label} is  set as mandatory and cannot be deprecated.");
+                _publisher.PublishEvent(new DataEntryDeprecationRejected(Codes.InvalidId, $"{spec.Label} is  set as mandatory and cannot be deprecated."), requestInfo);
+                return;
+            }
 
-            spec.Deprecate();
+            _specificationAggregate.Deprecate(spec);
             await _repository.UpdateAsync(spec);
             dataSpecifications.Remove(spec);
+            dataSpecifications = dataSpecifications.Where(s => s.IsMandatory == false).ToList();
 
             var ordered = dataSpecifications.OrderBy(d => d.Order).ToList();
             for (int i = 0; i < ordered.Count; i++)
             {
-                ordered[i].UpdateOrder(i + 1);
+                _specificationAggregate.UpdateOrder(ordered[i], i + 1);
                 await _repository.UpdateAsync(ordered[i]);
             }
 

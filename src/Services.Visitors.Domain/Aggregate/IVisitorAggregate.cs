@@ -13,5 +13,6 @@ namespace Services.Visitors.Domain.Aggregate
             IEnumerable<VisitorData> visitorData);
 
         VisitorData CreateData(Guid specId, string value);
+        void SignOut(VisitorDocument visitor);
     }
 }

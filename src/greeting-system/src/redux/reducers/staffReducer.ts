@@ -1,5 +1,5 @@
 
-import {IStaffActions, IStaffCurrentState} from '../actions/staffActioms'
+import {IStaffActions, IStaffCurrentState} from '../actions/staffActions'
 import { StaffEvents } from '../events/staffEvents';
 
 

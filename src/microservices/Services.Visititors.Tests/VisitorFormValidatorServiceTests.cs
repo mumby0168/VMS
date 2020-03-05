@@ -15,7 +15,7 @@ namespace Services.Visitors.Tests
     public class VisitorFormValidatorServiceTests
     {
         private AutoMocker _autoMocker;
-        private Mock<IDataSpecificationRepository> _repo;
+        private Mock<ISpecificationRepository> _repo;
         private Mock<IDataSpecificationValidator> _validator;
 
         private Guid _validSpec = Guid.NewGuid();
@@ -23,26 +23,26 @@ namespace Services.Visitors.Tests
         private Guid _validBusinessId = Guid.NewGuid();
 
         private List<VisitorDataEntry> _entries;    
-        private List<IDataSpecificationDocument> _specs;
+        private List<ISpecificationDocument> _specs;
         
         
         [SetUp]
         public void SetUp()
         {
             _autoMocker = new AutoMocker();
-            _repo = new Mock<IDataSpecificationRepository>();
+            _repo = new Mock<ISpecificationRepository>();
             _validator = new Mock<IDataSpecificationValidator>();
             _autoMocker.Use(_validator);
             _autoMocker.Use(_repo);
             
             _entries = new List<VisitorDataEntry>();
-            var validMock = new Mock<IDataSpecificationDocument>();
+            var validMock = new Mock<ISpecificationDocument>();
             validMock.SetupGet(o => o.Id).Returns(_validSpec);
             
-            _specs = new List<IDataSpecificationDocument>();
+            _specs = new List<ISpecificationDocument>();
             _specs.Add(validMock.Object);
 
-            _repo.Setup(o => o.GetEntriesAsync(_validBusinessId)).Returns(Task.FromResult<IEnumerable<IDataSpecificationDocument>>(_specs));
+            _repo.Setup(o => o.GetEntriesAsync(_validBusinessId)).Returns(Task.FromResult<IEnumerable<ISpecificationDocument>>(_specs));
         }
 
         [TestCase]
@@ -52,7 +52,7 @@ namespace Services.Visitors.Tests
             var sut = CreateSut();
 
             _repo.Setup(o => o.GetEntriesAsync(It.IsAny<Guid>())).Returns(
-                Task.FromResult<IEnumerable<IDataSpecificationDocument>>(new List<IDataSpecificationDocument>()));
+                Task.FromResult<IEnumerable<ISpecificationDocument>>(new List<ISpecificationDocument>()));
 
             //Act
             //Assert

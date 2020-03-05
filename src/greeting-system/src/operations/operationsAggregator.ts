@@ -20,7 +20,7 @@ class OperationsAggregator {
         operationsHub.startConnection(jwt);
     }
 
-    public listen(id: string, handleSucess: (op: IOperation) => void, handleFailure: (op: IOperation) => void = this.defaultFailureHandler) {
+    public listen(id: string, handleSuccess: (op: IOperation) => void, handleFailure: (op: IOperation) => void = this.defaultFailureHandler) {
         
         var counter = 0;
         const intervalId = setInterval(() => {
@@ -28,7 +28,7 @@ class OperationsAggregator {
             if(counter > 3000) {
                 clearInterval(intervalId);
                 console.log("Handling response using http connection.")
-                handleWithHttp(id, handleSucess, handleFailure)
+                handleWithHttp(id, handleSuccess, handleFailure)
             }
 
             const op = this.operations.find(op => op.id === id);
@@ -37,7 +37,7 @@ class OperationsAggregator {
                 const index = this.operations.indexOf(op);
                 this.operations.splice(index);
 
-                op.status === OperationStatus.Completed ? handleSucess(op) : handleFailure(op);                
+                op.status === OperationStatus.Completed ? handleSuccess(op) : handleFailure(op);
 
                 clearInterval(intervalId);
             }

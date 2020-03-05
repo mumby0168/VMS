@@ -26,5 +26,11 @@ namespace Services.Visitors.Domain.Aggregate
                 Value = value
             };
         }
+
+        public void SignOut(VisitorDocument visitor)
+        {
+            visitor.Out = DateTime.Now;
+            visitor.Status = VisitorStatus.Out;
+        }
     }
 }

@@ -8,7 +8,7 @@ import { viewChangedAction, SystemViews } from '../redux/actions/systemActions'
 import { updateCodeAction } from '../redux/actions/staffKeypadActions'
 import { updateOverlayAction, IconType, closeOverlay, openOverlay } from '../redux/actions/overlayActions'
 import { getStaffState } from '../redux/api/user'
-import { IStaffCurrentState } from '../redux/actions/staffActioms'
+import { IStaffCurrentState } from '../redux/actions/staffActions'
 
 interface IStaffKeypadProps {
     staffCode: string;

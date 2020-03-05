@@ -33,7 +33,7 @@ export default function VisitorSpecTable(props) {
                         <TableCell>Label</TableCell>
                         <TableCell>Validation Type</TableCell>
                         <TableCell>Validation Message</TableCell>
-                        <TableCell></TableCell>
+                        <TableCell>Operations</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

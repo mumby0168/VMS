@@ -6,6 +6,7 @@ import {reducer as overReducer} from './reducers/overlayReducer'
 import {reducer as staffReducer} from './reducers/staffReducer'
 import {reducer as staffSearchReducer} from './reducers/staffSearchReducer'
 import {reducer as visitorFormReducer} from './reducers/visitorFormReducer'
+import {reducer as visitorsReducer} from './reducers/visitorsReducer'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
@@ -20,7 +21,8 @@ const reducers = combineReducers({
     overlay: overReducer,
     staff: staffReducer,
     staffSearch: staffSearchReducer,
-    visitorForm: visitorFormReducer
+    visitorForm: visitorFormReducer,
+    visitors: visitorsReducer
 });
 
 export type IAppState = ReturnType<typeof reducers>

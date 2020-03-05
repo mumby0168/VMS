@@ -8,13 +8,14 @@ import { store } from './redux/store';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core';
 import { indigo, blue } from '@material-ui/core/colors';
 
-const theme = createMuiTheme({
+export const theme = createMuiTheme({
     palette: {
         primary: blue,
         secondary: indigo,
         type: "dark"
     }
-})
+});
+
 
 
 ReactDOM.render(

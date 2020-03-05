@@ -3,7 +3,7 @@ import { IAppState } from '../redux/store'
 import { connect } from 'react-redux'
 import { IVisitorDataSpecification, visitorFormUpdatedAction, updateErrorsAction } from '../redux/actions/visitorFormActions'
 import { Paper, Divider, Container, Button, List, ListItem } from '@material-ui/core'
-import { IStaffCurrentState } from '../redux/actions/staffActioms'
+import { IStaffCurrentState } from '../redux/actions/staffActions'
 import StaffMember from '../components/visitor-form/StaffMember'
 import VisitorEntry from '../components/visitor-form/VisitorEntry'
 import { isEmailValid, isPostCodeValid } from '../services/validation'
@@ -26,21 +26,22 @@ interface IVisitorFormProps {
     updateErrors: (errors: string[]) => void;    
     submitForm: (data: IVisitorDataSpecification[], visitingId: string, siteId: string) => void;
     getFormData: () => void;
-    showLoading: (message: string) => void;
-    closeLoading: () => void;
 }
 
 class VisitorForm extends Component<IVisitorFormProps> {    
 
     componentDidMount() {
+        for (let i = 0; i < this.props.specifications.length; i++) {
+            this.props.updateHandle(i, '');
+        }
         this.props.getFormData();
     }
 
     handleSubmit(e: any) {
-        console.log('submitted')
+        console.log('submitted');
         e.preventDefault();
         
-        const errors: string[] = []
+        const errors: string[] = [];
 
         for (let i = 0; i < this.props.specifications.length; i++) {
             const spec = this.props.specifications[i];
@@ -72,22 +73,12 @@ class VisitorForm extends Component<IVisitorFormProps> {
         if(this.props.staffMember) {
             this.props.submitForm(this.props.specifications, this.props.staffMember.userId, this.props.siteId);
         }
-
-        for (let i = 0; i < this.props.specifications.length; i++) {            
-            this.props.updateHandle(i, '');            
-        }       
-        
     }
 
     render() {
-
-        this.props.loading ? this.props.showLoading('Loading ...') :
-        this.props.closeLoading()
-        
-
         const entries = this.props.specifications.map((spec, index) => {
             return <VisitorEntry key={index} updateHandle={this.props.updateHandle} entry={spec} index={index} />
-        })
+        });
 
         const errors = this.props.errors.map((err, i) => {
             return (
@@ -120,8 +111,9 @@ class VisitorForm extends Component<IVisitorFormProps> {
 }
 
 const handleFormSubmit = (dispatch: any, data: IVisitorDataSpecification[], siteId: string, visitingId: string) => {
-    console.log('1');
-    dispatch(updateOverlayAction(openOverlay('Submitting your data', IconType.NONE, true)));
+
+
+    dispatch(updateOverlayAction(openOverlay('Signing you in', IconType.NONE, true)));
 
     submitVisitorForm(siteId, visitingId, data).then((id) => {
         operationsAggregator.listen(id, () => {
@@ -137,7 +129,7 @@ const handleFormSubmit = (dispatch: any, data: IVisitorDataSpecification[], site
             dispatch(updateOverlayAction(openOverlay(op.reason ?? "Oops something went wrong", IconType.ERROR, false, true)))
         })
     });
-}
+};
 
 
 const mapStateToProps = (state: IAppState)  => {
@@ -159,10 +151,8 @@ const mapDispatch = (dispatch: any) => {
         updateErrors: (errors: string[]) => dispatch(updateErrorsAction(errors)),        
         submitForm: (data: IVisitorDataSpecification[], visitingId: string, siteId: string) => handleFormSubmit(dispatch, data, siteId, visitingId),
         getFormData: () => dispatch(getVisitorFormSpecifications()),
-        showLoading: (message: string) => dispatch(updateOverlayAction(openOverlay(message, IconType.NONE, true))),
-        closeLoading: () => dispatch(updateOverlayAction(closeOverlay()))
     }
-}
+};
 
 
 
