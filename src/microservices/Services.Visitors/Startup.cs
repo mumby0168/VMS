@@ -55,7 +55,8 @@ namespace Services.Visitors
                 .SubscribeCommand<CreateDataEntry>()
                 .SubscribeCommand<UpdateEntryOrder>()
                 .SubscribeCommand<DeprecateDataEntry>()
-                .SubscribeCommand<CreateVisitor>();
+                .SubscribeCommand<CreateVisitor>()
+                .SubscribeCommand<VisitorSignOut>();
 
             app.UseRouting();
 
