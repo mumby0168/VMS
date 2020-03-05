@@ -5,12 +5,13 @@ import {IVisitor} from "../../redux/actions/visitorActions";
 
 interface IVisitorListItemProps {
     visitor: IVisitor;
+    selectVisitor: (id: string, name: string) => void;
 }
 
-export function VisitorListItem({visitor}: IVisitorListItemProps) {
+export function VisitorListItem({visitor, selectVisitor}: IVisitorListItemProps) {
     return (
     <React.Fragment>
-    <ListItem button alignItems="flex-start">
+    <ListItem onClick={(e) => selectVisitor(visitor.id, visitor.name)} button alignItems="flex-start">
         <ListItemAvatar>
             <Avatar>
                 <PersonPinIcon/>

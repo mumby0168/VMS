@@ -106,3 +106,22 @@ export const getSignedInVisitors = (siteId: string) =>  {
 
     }
 };
+
+
+export const signOut = async (id: string): Promise<string> => {
+
+    try {
+        const response = await gatewayClient().post(`visitors/out/`, {
+            visitorId: id
+        });
+        if(response.status === 202) {
+            return response.headers['X-Operation'];
+        }
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+
+    return "";
+};

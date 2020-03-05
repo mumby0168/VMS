@@ -3,8 +3,8 @@ import React from 'react'
 import { Card, CardActionArea, Typography } from '@material-ui/core'
 import '../hoc-styles/InitialSignIn.css'
 import { SystemViews } from '../redux/actions/systemActions';
-import EventAvailableIcon from '@material-ui/icons/EventAvailable';
-import EventBusyIcon from '@material-ui/icons/EventBusy';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 
 
@@ -24,10 +24,10 @@ export const InitialSignIn = (props: IInitSignInProps) => {
                 <Card className='card-button'>
                     <CardActionArea onClick={(e) => props.naviagate(SystemViews.STAFF_SELECT)} style={{ height: '100%' }}>
                         <div className="ta">
-                            <EventAvailableIcon style={{ fontSize: 100, color: 'green' }}></EventAvailableIcon>
                             <Typography variant="h2">
-                                Sign In
+                                SIGN IN
                             </Typography>
+                            <ExpandLessIcon style={{ fontSize: 100, color: 'green' }}/>
                         </div>
                     </CardActionArea>
                 </Card>
@@ -36,10 +36,10 @@ export const InitialSignIn = (props: IInitSignInProps) => {
                 <Card className='card-button'>
                     <CardActionArea onClick={(e) => props.naviagate(SystemViews.VISITOR_OUT)} style={{ height: '100%' }}>
                         <div className="ta">
-                            <EventBusyIcon style={{ fontSize: 100, color: 'red' }}/>
                             <Typography variant="h2">
-                                Sign Out
+                                SIGN OUT
                             </Typography>
+                            <ExpandMoreIcon style={{ fontSize: 100, color: 'red' }}/>
                         </div>
                     </CardActionArea>
                 </Card>
@@ -57,7 +57,7 @@ export const InitialSignIn = (props: IInitSignInProps) => {
                             <div className="ta">
                                 <SupervisedUserCircleIcon style={{ fontSize: 75}}/>
                                 <Typography variant="h3">
-                                    Staff
+                                    STAFF
                                 </Typography>
                             </div>
                         </CardActionArea>
