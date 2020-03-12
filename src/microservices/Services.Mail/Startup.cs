@@ -37,7 +37,7 @@ namespace Services.Mail
             services.AddUdpLogging();
             services.AddTransient<VmsExceptionMiddleware>();
             services.AddTransient<IEventHandler<PendingAdminCreated>, PendingAdminCreatedHandler>();
-            services.AddTransient<IEventHandler<PendingBusinessAdminCreated>, PendingBusinessAdminCreatedHandler>();
+            services.AddTransient<IEventHandler<PendingBusinessAdminCreated>, PendingBusinessAdminCreatedHandler>();   
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

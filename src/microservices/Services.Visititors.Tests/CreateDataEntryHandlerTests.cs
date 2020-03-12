@@ -9,6 +9,8 @@ using Services.RabbitMq.Messages;
 using Services.Tests.Mocks;
 using Services.Visitors.Commands;
 using Services.Visitors.Domain;
+using Services.Visitors.Domain.Aggregate;
+using Services.Visitors.Domain.Domain.Specification;
 using Services.Visitors.Events;
 using Services.Visitors.Factories;
 using Services.Visitors.Handlers.Command;
@@ -21,7 +23,7 @@ namespace Services.Visitors.Tests
 
         private Mock<IRequestInfo> _requestInfo;
         private Mock<IServiceBusMessagePublisher> _publisher;
-        private Mock<IDataSpecificationFactory> _factory;
+        private Mock<IVisitorAggregate> _aggregate;
         private Mock<ISpecificationRepository> _repository;
 
 
@@ -30,11 +32,8 @@ namespace Services.Visitors.Tests
         {
             _requestInfo = new Mock<IRequestInfo>();
             _publisher = new Mock<IServiceBusMessagePublisher>();
-            _factory = new Mock<IDataSpecificationFactory>();
+            _aggregate = new Mock<IVisitorAggregate>();
             _repository = new Mock<ISpecificationRepository>();
-
-            _factory.Setup(o => o.Create(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(),
-                It.IsAny<Guid>())).Returns(new Mock<ISpecificationDocument>().Object);
         }
 
         [Test]
@@ -56,7 +55,7 @@ namespace Services.Visitors.Tests
         {
             //Arrange
             var sut = CreateSut();
-            _factory.Setup(o => o.Create(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(),
+            _aggregate.Setup(o => o.Create(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(),
                 It.IsAny<Guid>())).Throws(new VmsException("code", "reason"));
 
             //Act
@@ -79,11 +78,11 @@ namespace Services.Visitors.Tests
 
 
             //Assert
-            _repository.Verify(o => o.AddAsync(It.IsAny<ISpecificationDocument>()));
+            _repository.Verify(o => o.AddAsync(It.IsAny<SpecificationDocument>()));
             _publisher.Verify(o => o.PublishEvent(It.IsAny<DataSpecificationCreated>(), _requestInfo.Object));
         }
 
-        public CreateDataEntryHandler CreateSut() => new CreateDataEntryHandler(LoggerMock.CreateVms<CreateDataEntryHandler>(), _publisher.Object, _factory.Object,
+        public CreateDataEntryHandler CreateSut() => new CreateDataEntryHandler(LoggerMock.CreateVms<CreateDataEntryHandler>(), _publisher.Object, _aggregate.Object,
             _repository.Object);
     }
 }

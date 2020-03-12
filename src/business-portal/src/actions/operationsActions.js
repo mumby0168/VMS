@@ -37,7 +37,7 @@ export function getOperationStatus(handler) {
                 dispatch(hideSiteSpinner());
                 dispatch(handler.action);
                 if(handler.completeAction) {
-                    dispatch(handler.completeAction());
+                    dispatch(handler.completeAction);
                 }
             }
         })

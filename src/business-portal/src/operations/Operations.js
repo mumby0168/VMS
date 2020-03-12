@@ -55,7 +55,7 @@ class Operations extends Component {
                         }
                         if (handler.completionAction !== null && result.status !== "failed") {
                             console.log("Complete action being called.");
-                            handler.completionAction();
+                            this.props.dispatch(handler.completionAction);
                         }
                         this.props.dispatch(hideSiteSpinner());
                         this.props.dispatch(handler.action);
