@@ -24,6 +24,10 @@ using Services.Visitors.Events.Subscribed;
 
 namespace Services.Visitors
 {
+    public class BusinessDto
+    {
+        public Guid Id { get; set; }
+    }
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)

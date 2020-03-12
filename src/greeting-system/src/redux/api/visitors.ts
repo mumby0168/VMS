@@ -89,6 +89,9 @@ export const getSignedInVisitors = (siteId: string) =>  {
             if(result.status === 200) {
                 dispatch(fetchedVisitors(result.data));
             }
+            else if(result.status === 204) {
+                dispatch(fetchedVisitors([]));
+            }
         }
         catch (error) {
             if (error && error.response) {
