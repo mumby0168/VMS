@@ -57,11 +57,9 @@ export async function postCallback(url, data, dispatchHandle, onStarting, onComp
     }
 }
 
-export async function deleteCallback(url, data, toastMessage, dispatchHandle, loadingMessage = null, completionAction = null) {
+export async function deleteCallback(url, data, dispatchHandle, onStarting, onCompletion, onFailure) {
 
-    if (loadingMessage !== null) {
-        dispatchHandle(showSiteSpinner(loadingMessage));
-    }
+    dispatchHandle(onStarting());
 
     var result = await deleteCall(url, data);
 
@@ -72,8 +70,10 @@ export async function deleteCallback(url, data, toastMessage, dispatchHandle, lo
         dispatchHandle({
             type: "HANDLE_ADDED", payload: {
                 id: id,
-                action: showToast(toastMessage),
-                completionAction: completionAction
+                action: {
+                    onCompletion: onCompletion,
+                    onFailure: onFailure
+                }
             }
         });
     }

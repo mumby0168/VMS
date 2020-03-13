@@ -78,10 +78,14 @@ export function createDataSpec(dispatch, label, validationMessage, validationCod
 export function deprecateDataSpec(dispatch, id) {
     deleteCallback(`${urls.gatewayBaseUrl}visitors/spec/deprecate`, {
         id,       
-    }, "Succesfully deprecated data specification", dispatch, "Deprecating data specification ...", 
-    () => {
-        dispatch(getBusinessSpecifications());        
-    })
+    }, dispatch,() => (dispatch) => {
+        dispatch(showSiteSpinner("Deprecating your data specification ..."))
+    }, (op) => (dispatch) => {
+        dispatch(showToast("Successfully deprecated data specification."));
+        dispatch(getBusinessSpecifications());
+    }, (op) => (dispatch) => {
+        dispatch(showToast(op.reason, true));
+    });
 }
 
 
