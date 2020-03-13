@@ -1,5 +1,6 @@
-import { get, handleErrorWithToast, postCallback, deleteCallback } from "../utils/httpClient";
+import {get, handleErrorWithToast, postCallback, deleteCallback, showToast} from "../utils/httpClient";
 import * as urls from '../names/urls'
+import {showSiteSpinner} from "./uiActions";
 
 export function getBusinessSpecifications() {
     return (dispatch) => {
@@ -59,22 +60,32 @@ export function createDataSpec(dispatch, label, validationMessage, validationCod
         label,
         validationCode,
         validationMessage
-    }, "Succesfully created data specification", dispatch, "Creating data specification ...", 
-    () => {
-        dispatch(getBusinessSpecifications());
-        dispatch(clearAddSpecForm());
-        dispatch(closeAdd());
-    })
+        },
+        dispatch,
+        () => (dispatch) => {
+            dispatch(showSiteSpinner("Creating your data specification ..."))
+        }, (op) => (dispatch) => {
+            dispatch(showToast("Successfully created data specification."));
+            dispatch(getBusinessSpecifications());
+            dispatch(clearAddSpecForm());
+            dispatch(closeAdd());
+        }, (op) => (dispatch) => {
+            dispatch(showToast(op.reason, true));
+        });
 }
 
 
 export function deprecateDataSpec(dispatch, id) {
     deleteCallback(`${urls.gatewayBaseUrl}visitors/spec/deprecate`, {
         id,       
-    }, "Succesfully deprecated data specification", dispatch, "Deprecating data specification ...", 
-    () => {
-        dispatch(getBusinessSpecifications());        
-    })
+    }, dispatch,() => (dispatch) => {
+        dispatch(showSiteSpinner("Deprecating your data specification ..."))
+    }, (op) => (dispatch) => {
+        dispatch(showToast("Successfully deprecated data specification."));
+        dispatch(getBusinessSpecifications());
+    }, (op) => (dispatch) => {
+        dispatch(showToast(op.reason, true));
+    });
 }
 
 
@@ -95,7 +106,12 @@ export function updateSpecOrder(id, order, dispatch) {
     postCallback(`${urls.gatewayBaseUrl}visitors/spec/reorder`, {
         entryId: id,
         order
-    }, "Succesfully updated order.", dispatch, "Updating order", () => {
+    }, dispatch,  () => (dispatch) => {
+        dispatch(showSiteSpinner("Updating your data specification order ..."))
+    }, (op) => (dispatch) => {
+        dispatch(showToast("Successfully updated data specification order."));
         dispatch(getBusinessSpecifications());
-    })
+    }, (op) => (dispatch) => {
+        dispatch(showToast(op.reason, true));
+    });
 }

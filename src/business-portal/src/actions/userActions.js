@@ -1,6 +1,7 @@
-import {get, handleErrorWithCritical, postCallback} from '../utils/httpClient';
+import {get, handleErrorWithCritical, postCallback, showToast} from '../utils/httpClient';
 import * as urls from '../names/urls'
 import { showSiteSpinner, hideSiteSpinner } from './uiActions';
+import {clearAddSpecForm, closeAdd, getBusinessSpecifications} from "./specificationActions";
 
 export function userInformationNotPresent() {
     return {
@@ -42,6 +43,15 @@ export function createUser(accountId, businessId, siteId, firstName, secondName,
             businessPhoneNumber: businessPhone,
             basedSiteId: siteId,
             businessId: businessId
-        }, "Saving your personal details", dispatch, "Saving your infromation.", {type: "USER_CREATION_COMPLETE"});
+        }, dispatch, () => (dispatch) => {
+            dispatch(showSiteSpinner("Saving your information ..."))
+        }, (op) => (dispatch) => {
+            dispatch(showToast("Successfully saved your information."));
+            dispatch({type: "USER_CREATION_COMPLETE"});
+            dispatch({type: "USER_CREATION_COMPLETE"});
+            dispatch(getUserInfo())
+        }, (op) => (dispatch) => {
+            dispatch(showToast(op.reason, true));
+        });
     }
 }

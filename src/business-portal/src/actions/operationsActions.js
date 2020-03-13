@@ -33,14 +33,14 @@ export function getOperationStatus(handler) {
         .then((res) => {
             if(res.status === 200) {
                 console.log("Got OK res from HTTP Operations endpoint.");
-                dispatch({type: "REMOVE_HANDLE", payload: handler});                
-                dispatch(hideSiteSpinner());
-                dispatch(handler.action);
-                if(handler.completeAction) {
-                    dispatch(handler.completeAction);
+                if(res.data.state === "complete") {
+                    dispatch(handler.action.onCompletion(res.data))
+                }
+                else {
+                    dispatch(handler.action.onFailure(res.data));
                 }
             }
-        })
+    })
         .catch(err => {
             dispatch(hideSiteSpinner());
             handleErrorWithCritical(dispatch, err, "REJECTED_OPERATION");

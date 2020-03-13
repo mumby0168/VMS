@@ -25,8 +25,10 @@ namespace Services.Users.Handlers.Command
         private readonly IUserRepository _userRepository;
         private readonly IServiceBusMessagePublisher _publisher;
         private readonly IServicesRepository _servicesRepository;
+        private readonly IUserStatusRepository _repository;
+        private readonly IAccessRecordFactory _recordFactory;
 
-        public CreateUserHandler(IVmsLogger<CreateUserHandler> logger, IUsersFactory factory, IAccountRepository accountRepository, IUserRepository userRepository, IServiceBusMessagePublisher publisher, IServicesRepository servicesRepository)
+        public CreateUserHandler(IVmsLogger<CreateUserHandler> logger, IUsersFactory factory, IAccountRepository accountRepository, IUserRepository userRepository, IServiceBusMessagePublisher publisher, IServicesRepository servicesRepository, IUserStatusRepository repository, IAccessRecordFactory recordFactory)
         {
             _logger = logger;
             _factory = factory;
@@ -34,6 +36,8 @@ namespace Services.Users.Handlers.Command
             _userRepository = userRepository;
             _publisher = publisher;
             _servicesRepository = servicesRepository;
+            _repository = repository;
+            _recordFactory = recordFactory;
         }
 
         public async Task HandleAsync(CreateUser message, IRequestInfo requestInfo)
@@ -74,6 +78,8 @@ namespace Services.Users.Handlers.Command
             }
 
             await _userRepository.AddAsync(userDocument);
+            var state = _recordFactory.Create(userDocument.Id, userDocument.BasedSiteId, AccessAction.Out);
+            await _repository.AddAsync(state);
             _publisher.PublishEvent(new UserCreated(), requestInfo);
             _logger.LogInformation($"User created with id: {userDocument.Id} and name: {userDocument.FirstName + " " + userDocument.SecondName}.");
         }

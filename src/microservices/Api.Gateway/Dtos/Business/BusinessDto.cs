@@ -20,6 +20,8 @@ namespace Api.Gateway.Dtos.Business
 
         public string WebAddress { get; set; }
         
+        public string Code { get; set; }
+        
         public HeadOfficeDto Office { get; set; }
 
         public HeadContactDto Contact { get; set; }

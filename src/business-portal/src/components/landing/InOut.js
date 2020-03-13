@@ -1,23 +1,57 @@
 import React from 'react'
 import {ButtonGroup, Button} from '@material-ui/core'
-import {postCallback} from '../../utils/httpClient'
+import {postCallback, showToast} from '../../utils/httpClient'
 import * as urls from '../../names/urls'
 import { getPersonalAccessRecords } from '../../actions/accessRecordActions'
+import {useDispatch} from "react-redux";
+import {hideSiteSpinner, showSiteSpinner} from "../../actions/uiActions";
 
 export default function InOut(props) {
 
+    const dispatch = useDispatch();
+
     const inHandle = async function(e) {
         var body = {
-            userId: props.userId
+            userId: props.userId,
+            code: props.userCode,
+            siteId: props.siteId
         }
-        await postCallback(`${urls.gatewayBaseUrl}users/in`, body, "You have succesfully signed in.", props.dispatchHandle, "Signing you in ...", getPersonalAccessRecords());        
+        await postCallback(`${urls.gatewayBaseUrl}users/in`, body,dispatch,
+            () => (dispatch) => {
+                dispatch(showSiteSpinner("Signing you in ..."))
+            },
+            (op) => (dispatch) => {
+                dispatch(hideSiteSpinner())
+                dispatch(showToast("You have you singed in successfully"))
+                dispatch(getPersonalAccessRecords())
+            },
+            () => (dispatch) => {
+                dispatch(hideSiteSpinner());
+                dispatch(showToast("Sign in failed", true));
+            });
     }
 
     const outHandle = async function(e) {
         var body = {
-            userId: props.userId
+            userId: props.userId,
+            code: props.userCode,
+            siteId: props.siteId
         }
-        await postCallback(`${urls.gatewayBaseUrl}users/out`, body, "You have succesfully signed out.", props.dispatchHandle, "Signing you out ...", getPersonalAccessRecords());        
+        await postCallback(`${urls.gatewayBaseUrl}users/out`, body, dispatch,
+            () => (dispatch) => {
+            dispatch(showSiteSpinner("Signing you out ..."))
+        },
+        (op) => (dispatch) => {
+                dispatch(hideSiteSpinner())
+                dispatch(showToast("You have you singed out successfully"))
+                dispatch(getPersonalAccessRecords())
+            },
+            (op) => (dispatch) => {
+                dispatch(hideSiteSpinner());
+                dispatch(showToast("Sign out failed", true));
+                console.log(op);
+            });
+
     }
   
 

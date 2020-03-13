@@ -16,6 +16,8 @@ namespace Services.Business.Dtos
        
         public string TradingName { get; set; }
         
+        public string Code { get; set; }
+        
 
         public string WebAddress { get; set; }
         

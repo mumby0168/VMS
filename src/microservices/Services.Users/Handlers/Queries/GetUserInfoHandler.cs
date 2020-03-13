@@ -36,6 +36,7 @@ namespace Services.Users.Handlers.Queries
                 FirstName = user.FirstName,
                 SecondName = user.SecondName,
                 BasedSiteId = user.BasedSiteId,
+                Code = user.Code.ToString()
             };
         }
     }
