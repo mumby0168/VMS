@@ -38,6 +38,7 @@ namespace Services.Business.Handlers.Query
                 Name = domain.Name,
                 TradingName = domain.TradingName,
                 WebAddress = domain.WebAddress?.ToString(),
+                Code = domain.Code.ToString(),
                 Contact = new HeadContactDto()
                 {
                     ContactNumber = domain.GetContact()?.ContactNumber, Email = domain.GetContact()?.Email,
