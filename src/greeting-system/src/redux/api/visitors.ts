@@ -105,8 +105,6 @@ export const getSignedInVisitors = (siteId: string) =>  {
                 console.error('The response was not handled and failed. (no error response)');
             }
         }
-
-
     }
 };
 
