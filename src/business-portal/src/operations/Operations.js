@@ -49,16 +49,14 @@ class Operations extends Component {
                     if (result !== undefined || null) {
                         clearInterval(callback);
                         if (result.status === "failed") {
-                            console.log('operation failed');
-                            handler.action.payload.message = result.reason;
-                            handler.action.payload.failed = true;
+                            this.props.dispatch(handler.action.onFailure(result));
                         }
-                        if (handler.completionAction !== null && result.status !== "failed") {
+                        else {
+                            this.props.dispatch(handler.action.onCompletion(result))
                             console.log("Complete action being called.");
-                            this.props.dispatch(handler.completionAction);
                         }
+
                         this.props.dispatch(hideSiteSpinner());
-                        this.props.dispatch(handler.action);
                         this.props.dispatch({type: "REMOVE_HANDLE", payload: callback});
                     }
                 }, 1000);

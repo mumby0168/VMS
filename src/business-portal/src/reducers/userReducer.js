@@ -22,7 +22,8 @@ export default (state = initialState, { type, payload }) => {
             secondName: payload.secondName, 
             initials: extractInitials(payload.firstName, payload.secondName),
             basedSiteId: payload.basedSiteId,
-            isAvailable: true
+            isAvailable: true,
+            code: payload.code,
         };
     case "REJECTED_USER_INFO":
         return {...state, loading: false};

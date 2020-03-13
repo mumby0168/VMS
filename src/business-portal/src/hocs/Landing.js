@@ -52,7 +52,7 @@ class Landing extends Component {
                     </Grid>
 
                     <Grid item md={4}>
-                        <InOut userId={this.props.userId} dispatchHandle={this.props.dispatch} />
+                        <InOut siteId={this.props.siteId} userId={this.props.userId} userCode={this.props.userCode} dispatchHandle={this.props.dispatch} />
                     </Grid>
 
                 </Grid>
@@ -82,6 +82,8 @@ const mapStateToProps = (state) => {
         businesId: state.account.userDetails.businessId,
         name: state.user.firstName + " " + state.user.secondName,
         userId: state.user.id,
+        userCode: state.user.code,
+        siteId: state.user.basedSiteId,
         userDataAvailable: state.user.isAvailable,
         accountId: state.account.userDetails.id,
     }

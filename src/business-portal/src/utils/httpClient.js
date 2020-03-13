@@ -23,11 +23,11 @@ export function deleteCall(url, data, authenticated = true) {
     })
 }
 
-export function showToast(message) {
+export function showToast(message, failed = false) {
     return {
         type: "SHOW_TOAST",
         payload: {
-            failed: false,
+            failed: failed,
             message: message,
             handled: false
         }
@@ -35,11 +35,9 @@ export function showToast(message) {
 }
 
 
-export async function postCallback(url, data, toastMessage, dispatchHandle, loadingMessage = null, completionAction = null) {
+export async function postCallback(url, data, dispatchHandle, onStarting, onCompletion, onFailure) {
 
-    if (loadingMessage !== null) {
-        dispatchHandle(showSiteSpinner(loadingMessage));
-    }
+    dispatchHandle(onStarting());
 
     var result = await post(url, data);
 
@@ -50,8 +48,10 @@ export async function postCallback(url, data, toastMessage, dispatchHandle, load
         dispatchHandle({
             type: "HANDLE_ADDED", payload: {
                 id: id,
-                action: showToast(toastMessage),
-                completionAction: completionAction
+                action: {
+                    onCompletion: onCompletion,
+                    onFailure: onFailure
+                }
             }
         });
     }

@@ -10,5 +10,7 @@ namespace Services.Users.Dtos
 
         public string SecondName { get; set; }
         public Guid BasedSiteId { get; set; }
+        
+        public string Code { get; set; }
     }
 }
