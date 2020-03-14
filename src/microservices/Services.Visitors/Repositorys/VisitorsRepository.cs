@@ -42,5 +42,10 @@ namespace Services.Visitors.Repositorys
         {
             return _repository.UpdateAsync(visitor, visitor.Id);
         }
+
+        public Task<IEnumerable<VisitorDocument>> GetVistorsForBusinessAsync(Guid businessId)
+        {
+            return _repository.FindAsync(v => v.VisitingBusinessId == businessId);
+        }
     }
 }

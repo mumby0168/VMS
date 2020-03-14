@@ -279,6 +279,7 @@
           <e p="Visitors" t="Include">
             <e p="DataSpecificationDto.cs" t="Include" />
             <e p="VisitorDto.cs" t="Include" />
+            <e p="VisitorRecordDto.cs" t="Include" />
           </e>
         </e>
         <e p="Messages" t="Include">

@@ -71,5 +71,10 @@ namespace Api.Gateway.Controllers
         {
             return PublishCommand(command);
         }
+
+        [Authorize(Roles = Roles.BusinessAdmin)]
+        [Route("business/{businessId}")]
+        public async Task<ActionResult<IEnumerable<VisitorRecordDto>>> GetVisitorsForBusinessAsync([FromRoute] Guid businessId) 
+            => Collection(await _client.GetVisitorsForBusinessAsync(businessId));
     }
 }

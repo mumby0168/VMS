@@ -8,6 +8,8 @@ namespace Api.Gateway.Clients.Interfaces
 {
     public interface IVisitorsClient
     {
+
+        Task<IEnumerable<VisitorRecordDto>> GetVisitorsForBusinessAsync(Guid businessId);
         Task<IEnumerable<DataSpecificationDto>> GetDataSpecificationsForBusinessAsync(Guid businessId);
         Task<IEnumerable<string>> GetDataSpecificationValidatorsAsync();
         Task<IEnumerable<VisitorDto>> GetVisitorsForSiteAsync(Guid siteId);

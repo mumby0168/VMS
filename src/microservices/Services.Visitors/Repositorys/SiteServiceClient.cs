@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Convey.HTTP;
 using Services.Visitors.Dtos;
@@ -18,6 +19,11 @@ namespace Services.Visitors.Repositorys
         public Task<SiteDto> GetSiteAsync(Guid siteId)
         {
             return _httpClient.GetAsync<SiteDto>($"{_baseAddress}/rest/{siteId}");
+        }
+
+        public Task<IEnumerable<SiteDto>> GetSitesForBusinessAsync(Guid businessId)
+        {
+            return _httpClient.GetAsync<IEnumerable<SiteDto>>($"{_baseAddress}/summaries/{businessId}");
         }
     }
 }

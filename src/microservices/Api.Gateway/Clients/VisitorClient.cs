@@ -27,5 +27,8 @@ namespace Api.Gateway.Clients
 
         public Task<IEnumerable<VisitorDto>> GetVisitorsForSiteAsync(Guid siteId) =>
             _client.GetAsync<IEnumerable<VisitorDto>>($"{_baseAddress}/site/{siteId}");
+
+        public Task<IEnumerable<VisitorRecordDto>> GetVisitorsForBusinessAsync(Guid businessId) =>
+            _client.GetAsync<IEnumerable<VisitorRecordDto>>($"{_baseAddress}/business/{businessId}");
     }
 }

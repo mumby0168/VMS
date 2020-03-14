@@ -1,6 +1,6 @@
 using System;
 
-namespace Services.Visitors.Dtos
+namespace Api.Gateway.Dtos.Visitors
 {
     public class VisitorRecordDto
     {

@@ -14,6 +14,7 @@ import employee from './employeesReducer'
 import completeUser from './forms/completeUserReducer'
 import completeAccount from './forms/completeAccountReducer'
 import specs from './visitorSpecReducer'
+import visitors from "./visitorsReducer";
 
 export default combineReducers({
     ui,
@@ -30,5 +31,6 @@ export default combineReducers({
     employee,    
     completeUser,
     completeAccount,
-    specs
+    specs,
+    visitors
 })
