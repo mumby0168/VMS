@@ -34,7 +34,7 @@ namespace Services.Visitors.Handlers.Command
 
         public async Task HandleAsync(UpdateEntryOrder message, IRequestInfo requestInfo)
         {
-            var entries = await _repository.GetEntriesAsync(message.BusinessId);
+            var entries = await _repository.GetLiveEntriesAsync(message.BusinessId);
 
             var specifications = entries.OrderBy(s => s.Order).ToList();
 

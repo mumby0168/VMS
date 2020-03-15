@@ -13,5 +13,6 @@ namespace Api.Gateway.Clients.Interfaces
         Task<IEnumerable<DataSpecificationDto>> GetDataSpecificationsForBusinessAsync(Guid businessId);
         Task<IEnumerable<string>> GetDataSpecificationValidatorsAsync();
         Task<IEnumerable<VisitorDto>> GetVisitorsForSiteAsync(Guid siteId);
+        Task<IEnumerable<VisitorInformationDto>> GetDataForVisitorAsync(Guid visitorId);
     }
 }   

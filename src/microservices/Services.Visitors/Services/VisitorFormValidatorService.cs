@@ -24,7 +24,7 @@ namespace Services.Visitors.Services
         }
         public async Task Validate(Guid businessId, IEnumerable<VisitorDataEntry> data)
         {
-            var dataSpecs = await _specificationRepository.GetEntriesAsync(businessId);
+            var dataSpecs = await _specificationRepository.GetLiveEntriesAsync(businessId);
 
             var dataSpecificationDocuments = dataSpecs.ToList();
             var visitorDataEntries = data.ToList();

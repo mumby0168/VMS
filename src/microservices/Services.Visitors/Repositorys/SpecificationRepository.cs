@@ -27,7 +27,7 @@ namespace Services.Visitors.Repositorys
             return item?.Order + 1 ?? 2;
         }
 
-        public async Task<IEnumerable<SpecificationDocument>> GetEntriesAsync(Guid businessId)
+        public async Task<IEnumerable<SpecificationDocument>> GetLiveEntriesAsync(Guid businessId)
         {
             return await _repository.FindAsync(d => d.IsLive && d.BusinessId == businessId);
         }
@@ -46,6 +46,11 @@ namespace Services.Visitors.Repositorys
         {
             var spec = await _repository.GetAsync(s => s.BusinessId == businessId && s.Label == "Full Name");
             return spec.Id;
+        }
+
+        public Task<IEnumerable<SpecificationDocument>> GetEntriesForBusinessAsync(Guid businessId)
+        {
+            return _repository.FindAsync(s => s.BusinessId == businessId);
         }
     }
 }

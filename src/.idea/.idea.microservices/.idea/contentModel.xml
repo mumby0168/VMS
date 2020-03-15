@@ -279,6 +279,7 @@
           <e p="Visitors" t="Include">
             <e p="DataSpecificationDto.cs" t="Include" />
             <e p="VisitorDto.cs" t="Include" />
+            <e p="VisitorInformationDto.cs" t="Include" />
             <e p="VisitorRecordDto.cs" t="Include" />
           </e>
         </e>
@@ -1406,6 +1407,7 @@
           <e p="DataSpecificationDto.cs" t="Include" />
           <e p="SiteDto.cs" t="Include" />
           <e p="VisitorDto.cs" t="Include" />
+          <e p="VisitorInformationDto.cs" t="Include" />
           <e p="VisitorRecordDto.cs" t="Include" />
         </e>
         <e p="events" t="Include">
@@ -1437,6 +1439,7 @@
           <e p="Queries" t="Include">
             <e p="GetBusinessDataSpecificationHandler.cs" t="Include" />
             <e p="GetVisitorsOnSiteHandler.cs" t="Include" />
+            <e p="VisitorInformationHandler.cs" t="Include" />
             <e p="VisitorRecordsForBusinessHandler.cs" t="Include" />
           </e>
         </e>
@@ -1454,6 +1457,7 @@
         <e p="Queries" t="Include">
           <e p="GetBusinessDataSpecifications.cs" t="Include" />
           <e p="GetVisitorsOnSite.cs" t="Include" />
+          <e p="VisitorInformation.cs" t="Include" />
           <e p="VisitorRecordsForBusiness.cs" t="Include" />
         </e>
         <e p="Repositorys" t="Include">

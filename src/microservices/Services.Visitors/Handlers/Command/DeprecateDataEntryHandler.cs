@@ -30,7 +30,7 @@ namespace Services.Visitors.Handlers.Command
 
         public async Task HandleAsync(DeprecateDataEntry message, IRequestInfo requestInfo)
         {
-            var entries = await _repository.GetEntriesAsync(message.BusinessId);
+            var entries = await _repository.GetLiveEntriesAsync(message.BusinessId);
             var dataSpecifications = entries.ToList();
 
             if (!dataSpecifications.Any())

@@ -71,7 +71,7 @@ namespace Services.Visitors.Tests
             //Arrange
             var sut = CreateSut();
 
-            _repository.Setup(o => o.GetEntriesAsync(It.IsAny<Guid>())).Returns(Task.FromResult(GetEntries(10, -1)));
+            _repository.Setup(o => o.GetLiveEntriesAsync(It.IsAny<Guid>())).Returns(Task.FromResult(GetEntries(10, -1)));
 
             //Act
             await sut.HandleAsync(new DeprecateDataEntry(Guid.NewGuid(), Guid.NewGuid()), _requestInfo.Object);
@@ -86,7 +86,7 @@ namespace Services.Visitors.Tests
             //Arrange
             var sut = CreateSut();
 
-            _repository.Setup(o => o.GetEntriesAsync(It.IsAny<Guid>())).Returns(Task.FromResult(GetEntries(10, 4)));
+            _repository.Setup(o => o.GetLiveEntriesAsync(It.IsAny<Guid>())).Returns(Task.FromResult(GetEntries(10, 4)));
 
             //Act
             await sut.HandleAsync(new DeprecateDataEntry(_targetId, Guid.NewGuid()), _requestInfo.Object);
@@ -106,7 +106,7 @@ namespace Services.Visitors.Tests
 
             var entries = GetEntries(collectionSize, targetLocation);
 
-            _repository.Setup(o => o.GetEntriesAsync(It.IsAny<Guid>())).Returns(Task.FromResult(entries));
+            _repository.Setup(o => o.GetLiveEntriesAsync(It.IsAny<Guid>())).Returns(Task.FromResult(entries));
 
 
             //Act
@@ -129,7 +129,7 @@ namespace Services.Visitors.Tests
 
             var entries = GetEntries(collectionSize, targetLocation);
 
-            _repository.Setup(o => o.GetEntriesAsync(It.IsAny<Guid>())).Returns(Task.FromResult(entries));
+            _repository.Setup(o => o.GetLiveEntriesAsync(It.IsAny<Guid>())).Returns(Task.FromResult(entries));
 
 
             //Act

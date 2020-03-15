@@ -22,7 +22,7 @@ namespace Services.Visitors.Handlers.Queries
         }
         public async Task<IEnumerable<DataSpecificationDto>> HandleAsync(GetBusinessDataSpecifications query)
         {
-            var specifications = await _repository.GetEntriesAsync(query.BusinessId);
+            var specifications = await _repository.GetLiveEntriesAsync(query.BusinessId);
             var ret = new List<DataSpecificationDto>();
 
             foreach (var dataSpecification in specifications)

@@ -42,7 +42,7 @@ namespace Services.Visitors.Tests
             _specs = new List<ISpecificationDocument>();
             _specs.Add(validMock.Object);
 
-            _repo.Setup(o => o.GetEntriesAsync(_validBusinessId)).Returns(Task.FromResult<IEnumerable<ISpecificationDocument>>(_specs));
+            _repo.Setup(o => o.GetLiveEntriesAsync(_validBusinessId)).Returns(Task.FromResult<IEnumerable<ISpecificationDocument>>(_specs));
         }
 
         [TestCase]
@@ -51,7 +51,7 @@ namespace Services.Visitors.Tests
             //Arrange
             var sut = CreateSut();
 
-            _repo.Setup(o => o.GetEntriesAsync(It.IsAny<Guid>())).Returns(
+            _repo.Setup(o => o.GetLiveEntriesAsync(It.IsAny<Guid>())).Returns(
                 Task.FromResult<IEnumerable<ISpecificationDocument>>(new List<ISpecificationDocument>()));
 
             //Act

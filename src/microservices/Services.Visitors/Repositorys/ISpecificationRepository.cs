@@ -12,9 +12,10 @@ namespace Services.Visitors.Repositorys
         Task AddAsync(SpecificationDocument specificationDocument);
 
         Task<int> GetNextOrderNumberAsync(Guid businessId);
-        Task<IEnumerable<SpecificationDocument>> GetEntriesAsync(Guid businessId);
+        Task<IEnumerable<SpecificationDocument>> GetLiveEntriesAsync(Guid businessId);
         Task UpdateAsync(SpecificationDocument entry);
         Task RemoveAsync(SpecificationDocument spec);
         Task<Guid> GetNameSpecIdForBusinessAsync(Guid businessId);
+        Task<IEnumerable<SpecificationDocument>> GetEntriesForBusinessAsync(Guid visitorVisitingBusinessId);
     }
 }

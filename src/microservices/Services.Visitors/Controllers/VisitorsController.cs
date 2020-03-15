@@ -29,6 +29,11 @@ namespace Services.Visitors.Controllers
         [HttpGet("business/{businessId}")]
         public async Task<ActionResult<IEnumerable<VisitorRecordDto>>> GetVisitorsForSite([FromRoute] Guid businessId) =>
             Collection(await _queryDispatcher.Dispatch<VisitorRecordsForBusiness, IEnumerable<VisitorRecordDto>>(
-                new VisitorRecordsForBusiness {BusinessId = businessId}));
+                new VisitorRecordsForBusiness {BusinessId = businessId}));    
+        
+        [HttpGet("info/{visitorId}")]
+        public async Task<ActionResult<IEnumerable<VisitorInformationDto>>> GetVisitorInformation([FromRoute] Guid visitorId) =>
+            Collection(await _queryDispatcher.Dispatch<VisitorInformation, IEnumerable<VisitorInformationDto>>(
+                new VisitorInformation {VisitorId = visitorId}));
     }
 }
