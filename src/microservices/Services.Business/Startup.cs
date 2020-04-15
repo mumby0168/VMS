@@ -7,7 +7,6 @@ using Services.Business.Messages.Commands;
 using Services.Common.Generation;
 using Services.Common.Logging;
 using Services.Common.Mongo;
-using Services.Common.Names;
 using Services.Common.Queries;
 using Services.Common.Rest;
 using Services.RabbitMq.Extensions;
@@ -38,11 +37,11 @@ namespace Services.Business
             {
                 app.UseDeveloperExceptionPage();
             }
-
-
-
+            
             app.UseUdpLogging(Common.Names.Services.Businesses);
+            
             app.UseMongo(Common.Names.Services.Businesses);
+            
             app.UseServiceBus(Common.Names.Services.Businesses)
                 .SubscribeCommand<CreateBusiness>()
                 .SubscribeCommand<UpdateBusinessDetails>()

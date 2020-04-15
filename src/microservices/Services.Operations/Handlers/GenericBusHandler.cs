@@ -56,15 +56,15 @@ namespace Services.Operations.Handlers
 
             switch (message)
             {
+                case ICommand _:
+                    _logger.LogInformation($"Operation [{requestInfo.OperationId}]: PENDING");
+                    await _operationsCache.SaveAsync(requestInfo.OperationId, RequestState.Pending.ToString());
+                    break;
                 case IRejectedEvent rejected:
                     requestInfo.Fail();
                     _logger.LogInformation($"Operation [{requestInfo.OperationId}]: Rejected Event code: [{rejected.Code}] Reason: {rejected.Reason}");
                     await _operationsCache.SaveAsync(requestInfo.OperationId, requestInfo.State.ToString().ToLower(), rejected.Code, rejected.Reason);
                     _publisher.PublishEvent(new OperationFailed(rejected.Code, rejected.Reason), requestInfo);
-                    break;
-                case ICommand _:
-                    _logger.LogInformation($"Operation [{requestInfo.OperationId}]: PENDING");
-                    await _operationsCache.SaveAsync(requestInfo.OperationId, RequestState.Pending.ToString());
                     break;
                 case IEvent _:
                     requestInfo.Complete();

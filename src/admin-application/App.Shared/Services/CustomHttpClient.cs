@@ -8,26 +8,46 @@ using System.Text;
 namespace App.Shared.Services
 {
     public class CustomHttpClient : IHttpClient
-    {       
+    {      
+
+        private readonly HttpClient _baseClient; 
+        private readonly HttpClient _identityClient; 
+
+        private readonly IUserContext _userContext;
         public CustomHttpClient(IHttpClientFactory factory, IUserContext context, Endpoints endpoints)
         {
             var baseClient = factory.CreateClient();
             var identityClient = factory.CreateClient();
             baseClient.BaseAddress = new Uri(endpoints.Gateway);
-            identityClient.BaseAddress = new Uri(endpoints.Identity);
+            identityClient.BaseAddress = new Uri(endpoints.Identity);            
 
-            string auth = $"Bearer {context.Token}";
-
-            baseClient.DefaultRequestHeaders.Add("Authorization", auth);
-            identityClient.DefaultRequestHeaders.Add("Authorization", auth);
-
-            GatewayClient = baseClient;
-            IdentityClient = identityClient;
+            _baseClient = baseClient;
+            _identityClient = identityClient;
+            _userContext = context;
         }
 
 
-        public HttpClient GatewayClient { get; }
+        public HttpClient GatewayClient  
+        {
+            get {
+                string auth = $"Bearer {_userContext.Token}";
 
-        public HttpClient IdentityClient { get; }
+                _baseClient.DefaultRequestHeaders.Add("Authorization", auth);                
+
+                return _baseClient;
+            }
+        }
+
+        public HttpClient IdentityClient
+        {
+            get {
+                string auth = $"Bearer {_userContext.Token}";
+                
+                _identityClient.DefaultRequestHeaders.Add("Authorization", auth);
+
+                return _identityClient;
+            }
+        }
+
     }
 }

@@ -15,7 +15,7 @@ export default class OperationsManager {
 
         this.connection.start().then(() => {
             console.log("connected");
-            this.connection.invoke("connect", "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJuYW1laWQiOiIwM2I0NTIxYi0wYmQ1LTQ1M2UtOGIwZC03NGUwYTVlMThkMDkiLCJyb2xlIjoiU3lzdGVtQWRtaW4iLCJuYmYiOjE1NzU1MzkwNzUsImV4cCI6MTU3NTU0OTg3NSwiaWF0IjoxNTc1NTM5MDc1fQ.KOiGeiCugnUpNBSZKWL6LvBk4Q2k4aYIcaFLYnEIS1IEnZUrLnGmW7_x3mb9WjhQNbJam4_Et8rtMQPzw1RRUw").then(() => console.log("Sending connect messsage")).catch(err => console.log(err));
+            this.connection.invoke("connect", "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImItYWRtaW5AdGVzdC5jb20iLCJuYW1laWQiOiI4MGZlMDBmMy01ZDQ5LTQzODEtOTgzNS00ZjFiZGUzY2VjY2IiLCJyb2xlIjoiQnVzaW5lc3NBZG1pbiIsImJ1c2luZXNzSWQiOiI4NjFhNTcyZS1mZDg5LTQ5YWEtYmRlMC05OWJmZDY0ZDhmZWIiLCJuYmYiOjE1ODQzNjY4MDUsImV4cCI6MTU4NDM3NzYwNSwiaWF0IjoxNTg0MzY2ODA1fQ.nBusPJ1M98lcGGPMFhd6HtuottwRnRWM1FNAptCJZmegCqJaEMuYEAZPLO1nblT6S50dG4K_AlQFrnrlz84H6w").then(() => console.log("Sending connect messsage")).catch(err => console.log(err));
         }).catch(err => console.log(err));
 
         this.connection.on("operationComplete", (op) => {

@@ -73,12 +73,12 @@ namespace Api.Gateway.Controllers
         }
 
         [Authorize(Roles = Roles.BusinessAdmin)]
-        [Route("business/{businessId}")]
+        [HttpGet("business/{businessId}")]
         public async Task<ActionResult<IEnumerable<VisitorRecordDto>>> GetVisitorsForBusinessAsync([FromRoute] Guid businessId) 
             => Collection(await _client.GetVisitorsForBusinessAsync(businessId));
 
         [Authorize(Roles = Roles.BusinessAdmin)]
-        [Route("info/{visitorId}")]
+        [HttpGet("info/{visitorId}")]
         public async Task<ActionResult<IEnumerable<VisitorInformationDto>>>
             GetVisitorDetails([FromRoute] Guid visitorId) =>
             Collection(await _client.GetDataForVisitorAsync(visitorId));
