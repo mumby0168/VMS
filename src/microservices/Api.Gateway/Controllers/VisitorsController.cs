@@ -82,5 +82,11 @@ namespace Api.Gateway.Controllers
         public async Task<ActionResult<IEnumerable<VisitorInformationDto>>>
             GetVisitorDetails([FromRoute] Guid visitorId) =>
             Collection(await _client.GetDataForVisitorAsync(visitorId));
+
+        [Authorize(Roles.PortalUser)]
+        [HttpGet("user/{userId}")]
+        public async Task<ActionResult<IEnumerable<VisitorRecordDto>>> GetVisitorsForUser(Guid userId) =>
+            Collection(await _client.GetVisitorsForUserAsync(userId));
+
     }
 }

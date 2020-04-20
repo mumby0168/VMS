@@ -69,9 +69,12 @@ namespace Services.Users.Tests.Command
         {
             //Arrange
             var sut = CreateSut();
-            _userRepo.Setup(o => o.GetAsync(It.IsAny<Guid>())).Returns(Task.FromResult(_user.Object));
-            _accessFactory.Setup(o => o.Create(It.IsAny<Guid>(), It.IsAny<Guid>(), action, It.IsAny<Guid>()))
+            _userRepo.Setup(o => o.GetByCodeAsync(It.IsAny<int>())).Returns(Task.FromResult(_user.Object));
+            _accessFactory.Setup(o => 
+                    o.Create(It.IsAny<Guid>(), It.IsAny<Guid>(), action, It.IsAny<Guid>()))
                 .Returns(_record.Object);
+
+            _serviceRepository.Setup(o => o.IsSiteIdValid(It.IsAny<Guid>())).Returns(Task.FromResult(true));
 
             //Act
             await sut.HandleAsync(new CreateAccessRecord(It.IsAny<int>(), action, It.IsAny<Guid>()), _requestInfo.Object);

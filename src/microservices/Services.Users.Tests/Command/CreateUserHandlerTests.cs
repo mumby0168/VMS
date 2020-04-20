@@ -29,6 +29,8 @@ namespace Services.Users.Tests.Command
         private Mock<IAccountRepository> _accountRepo;
         private Mock<IServicesRepository> _serviceRepo;
         private Mock<IUserRepository> _usersRepo;
+        private Mock<IUserStatusRepository> _userStatusRepo;
+        private Mock<IAccessRecordFactory> _accessRepo;
 
         private CreateUser _createUser = new CreateUser("Fred", "Ball", "07568 675445", "01482 657434", Guid.NewGuid(),
             Guid.NewGuid(), Guid.NewGuid());
@@ -46,6 +48,8 @@ namespace Services.Users.Tests.Command
             _serviceRepo = new Mock<IServicesRepository>();
             _usersRepo = new Mock<IUserRepository>();
             _user = new Mock<IUserDocument>();
+            _accessRepo = new Mock<IAccessRecordFactory>();
+            _userStatusRepo = new Mock<IUserStatusRepository>();
         }
 
         [Test]
@@ -132,6 +136,6 @@ namespace Services.Users.Tests.Command
             _usersRepo.Verify(o => o.AddAsync(_user.Object));
         }
 
-        public CreateUserHandler CreateSut() => new CreateUserHandler(LoggerMock.CreateVms<CreateUserHandler>(), _userFactory.Object, _accountRepo.Object, _usersRepo.Object, _publisher.Object, _serviceRepo.Object);
+        public CreateUserHandler CreateSut() => new CreateUserHandler(LoggerMock.CreateVms<CreateUserHandler>(), _userFactory.Object, _accountRepo.Object, _usersRepo.Object, _publisher.Object, _serviceRepo.Object, _userStatusRepo.Object, _accessRepo.Object);
     }
 }

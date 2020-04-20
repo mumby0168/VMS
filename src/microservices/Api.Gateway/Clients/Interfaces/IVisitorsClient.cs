@@ -14,5 +14,6 @@ namespace Api.Gateway.Clients.Interfaces
         Task<IEnumerable<string>> GetDataSpecificationValidatorsAsync();
         Task<IEnumerable<VisitorDto>> GetVisitorsForSiteAsync(Guid siteId);
         Task<IEnumerable<VisitorInformationDto>> GetDataForVisitorAsync(Guid visitorId);
+        Task<IEnumerable<VisitorRecordDto>> GetVisitorsForUserAsync(Guid userId);
     }
 }   

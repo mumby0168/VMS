@@ -8,11 +8,9 @@ using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 using Services.Tests.Mocks;
 using Services.Visitors.Commands;
-using Services.Visitors.Domain;
 using Services.Visitors.Domain.Aggregate;
 using Services.Visitors.Domain.Domain.Specification;
 using Services.Visitors.Events;
-using Services.Visitors.Factories;
 using Services.Visitors.Handlers.Command;
 using Services.Visitors.Repositorys;
 
@@ -23,7 +21,7 @@ namespace Services.Visitors.Tests
 
         private Mock<IRequestInfo> _requestInfo;
         private Mock<IServiceBusMessagePublisher> _publisher;
-        private Mock<IVisitorAggregate> _aggregate;
+        private Mock<ISpecificationAggregate> _aggregate;
         private Mock<ISpecificationRepository> _repository;
 
 
@@ -32,7 +30,7 @@ namespace Services.Visitors.Tests
         {
             _requestInfo = new Mock<IRequestInfo>();
             _publisher = new Mock<IServiceBusMessagePublisher>();
-            _aggregate = new Mock<IVisitorAggregate>();
+            _aggregate = new Mock<ISpecificationAggregate>();
             _repository = new Mock<ISpecificationRepository>();
         }
 
@@ -41,6 +39,8 @@ namespace Services.Visitors.Tests
         {
             //Arrange
             var sut = CreateSut();
+            _aggregate.Setup(o => o.Create(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(),
+                It.IsAny<Guid>(), false)).Returns(new Mock<SpecificationDocument>().Object);
 
             //Act
             await sut.HandleAsync(new CreateDataEntry("Test", "message", "Required",
@@ -56,7 +56,7 @@ namespace Services.Visitors.Tests
             //Arrange
             var sut = CreateSut();
             _aggregate.Setup(o => o.Create(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(),
-                It.IsAny<Guid>())).Throws(new VmsException("code", "reason"));
+                It.IsAny<Guid>(), false)).Throws(new VmsException("code", "reason"));
 
             //Act
             await sut.HandleAsync(new CreateDataEntry("Test", "message", "Required",
@@ -71,6 +71,9 @@ namespace Services.Visitors.Tests
         {
             //Arrange
             var sut = CreateSut();
+
+            _aggregate.Setup(o => o.Create(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(),
+                It.IsAny<Guid>(), false)).Returns(new Mock<SpecificationDocument>().Object);
 
             //Act
             await sut.HandleAsync(new CreateDataEntry("Test", "message", "Required",

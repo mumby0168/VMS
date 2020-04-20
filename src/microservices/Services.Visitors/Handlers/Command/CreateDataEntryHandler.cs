@@ -27,7 +27,7 @@ namespace Services.Visitors.Handlers.Command
         }
 
 
-        public async Task HandleAsync(CreateDataEntry message, IRequestInfo requestInfo)
+        public async Task HandleAsync(CreateDataEntry message, IRequestInfo requestInfo)    
         {
             SpecificationDocument specificationDocument;
             var order = await _repository.GetNextOrderNumberAsync(message.BusinessId);

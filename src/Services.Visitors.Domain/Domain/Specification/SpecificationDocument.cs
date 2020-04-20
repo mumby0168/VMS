@@ -5,10 +5,10 @@ namespace Services.Visitors.Domain.Domain.Specification
 {
     public class SpecificationDocument : IDomain
     {
-        public Guid Id { get; internal set; }
+        public virtual Guid Id { get; internal set; }
         
         public string Label { get; internal set; }
-        public int Order { get; internal set; }
+        public virtual int Order { get; internal set; }
         public string ValidationMessage { get; internal set; }
         public string ValidationCode { get; internal set; }
         public bool IsLive { get; internal set; }

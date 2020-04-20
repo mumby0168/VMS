@@ -746,11 +746,13 @@
           <e p="events" t="Include">
             <e p="PendingAdminCreated.cs" t="Include" />
             <e p="PendingBusinessAdminCreated.cs" t="Include" />
+            <e p="UserAccountCreated.cs" t="Include" />
           </e>
           <e p="Handlers" t="Include">
             <e p="Event" t="Include">
               <e p="PendingAdminCreatedHandler.cs" t="Include" />
               <e p="PendingBusinessAdminCreatedHandler.cs" t="Include" />
+              <e p="UserAccountCreatedHandler.cs" t="Include" />
             </e>
           </e>
           <e p="Mail" t="Include">

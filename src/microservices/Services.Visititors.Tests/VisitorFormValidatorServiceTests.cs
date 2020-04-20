@@ -7,6 +7,7 @@ using NUnit.Framework;
 using Services.Common.Exceptions;
 using Services.Visitors.Commands;
 using Services.Visitors.Domain;
+using Services.Visitors.Domain.Domain.Specification;
 using Services.Visitors.Repositorys;
 using Services.Visitors.Services;
 
@@ -23,7 +24,7 @@ namespace Services.Visitors.Tests
         private Guid _validBusinessId = Guid.NewGuid();
 
         private List<VisitorDataEntry> _entries;    
-        private List<ISpecificationDocument> _specs;
+        private List<SpecificationDocument> _specs;
         
         
         [SetUp]
@@ -36,13 +37,13 @@ namespace Services.Visitors.Tests
             _autoMocker.Use(_repo);
             
             _entries = new List<VisitorDataEntry>();
-            var validMock = new Mock<ISpecificationDocument>();
+            var validMock = new Mock<SpecificationDocument>();
             validMock.SetupGet(o => o.Id).Returns(_validSpec);
             
-            _specs = new List<ISpecificationDocument>();
+            _specs = new List<SpecificationDocument>();
             _specs.Add(validMock.Object);
 
-            _repo.Setup(o => o.GetLiveEntriesAsync(_validBusinessId)).Returns(Task.FromResult<IEnumerable<ISpecificationDocument>>(_specs));
+            _repo.Setup(o => o.GetLiveEntriesAsync(_validBusinessId)).Returns(Task.FromResult<IEnumerable<SpecificationDocument>>(_specs));
         }
 
         [TestCase]
@@ -52,7 +53,7 @@ namespace Services.Visitors.Tests
             var sut = CreateSut();
 
             _repo.Setup(o => o.GetLiveEntriesAsync(It.IsAny<Guid>())).Returns(
-                Task.FromResult<IEnumerable<ISpecificationDocument>>(new List<ISpecificationDocument>()));
+                Task.FromResult<IEnumerable<SpecificationDocument>>(new List<SpecificationDocument>()));
 
             //Act
             //Assert

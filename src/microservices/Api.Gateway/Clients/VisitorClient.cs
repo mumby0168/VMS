@@ -31,6 +31,11 @@ namespace Api.Gateway.Clients
         public Task<IEnumerable<VisitorInformationDto>> GetDataForVisitorAsync(Guid visitorId)
             => _client.GetAsync<IEnumerable<VisitorInformationDto>>($"{_baseAddress}/info/{visitorId}");
 
+        public Task<IEnumerable<VisitorRecordDto>> GetVisitorsForUserAsync(Guid userId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<IEnumerable<VisitorRecordDto>> GetVisitorsForBusinessAsync(Guid businessId) =>
             _client.GetAsync<IEnumerable<VisitorRecordDto>>($"{_baseAddress}/business/{businessId}");
     }

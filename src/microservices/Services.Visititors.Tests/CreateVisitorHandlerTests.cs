@@ -8,10 +8,10 @@ using Services.Common.Exceptions;
 using Services.RabbitMq.Interfaces.Messaging;
 using Services.RabbitMq.Messages;
 using Services.Visitors.Commands;
-using Services.Visitors.Domain;
+using Services.Visitors.Domain.Aggregate;
+using Services.Visitors.Domain.Domain.Visitor;
 using Services.Visitors.Dtos;
 using Services.Visitors.Events;
-using Services.Visitors.Factories;
 using Services.Visitors.Handlers.Command;
 using Services.Visitors.Repositorys;
 using Services.Visitors.Services;
@@ -28,7 +28,7 @@ namespace Services.Visitors.Tests
         private Mock<ISiteServiceClient> _siteClient;
         private Mock<IVisitorFormValidatorService> _validationService;
         private Mock<IVisitorsRepository> _repo;
-        private Mock<IVisitorFactory> _factory;
+        private Mock<IVisitorAggregate> _factory;
         private Guid _validUserGuid = Guid.NewGuid();
         private Guid _validSiteGuid = Guid.NewGuid();
         private Mock<SiteDto> _siteDto;
@@ -42,7 +42,7 @@ namespace Services.Visitors.Tests
             _siteClient = new Mock<ISiteServiceClient>();
             _userClient = new Mock<IUserServiceClient>();
             _publisher = new Mock<IServiceBusMessagePublisher>();
-            _factory = new Mock<IVisitorFactory>();
+            _factory = new Mock<IVisitorAggregate>();
             _repo = new Mock<IVisitorsRepository>();
             _validationService = new Mock<IVisitorFormValidatorService>();
             _mocker = new AutoMocker();
@@ -54,7 +54,7 @@ namespace Services.Visitors.Tests
             _mocker.Use(_factory);
 
             _factory.Setup(o => o.Create(It.IsAny<Guid>(), It.IsAny<Guid>(), It.IsAny<Guid>(),
-                It.IsAny<IEnumerable<VisitorData>>())).Returns(new Mock<IVisitorDocument>().Object);
+                It.IsAny<IEnumerable<VisitorData>>())).Returns(new Mock<VisitorDocument>().Object);
 
             _userClient.Setup(o => o.ContainsUserAsync(_validUserGuid)).Returns(Task.FromResult(true));
             _siteClient.Setup(o => o.GetSiteAsync(_validSiteGuid)).Returns(Task.FromResult(_siteDto.Object));
@@ -118,7 +118,7 @@ namespace Services.Visitors.Tests
             await  sut.HandleAsync(new CreateVisitor(_validSiteGuid, _validUserGuid, new List<VisitorDataEntry>()), new Mock<IRequestInfo>().Object);
 
             //Assert
-            _repo.Verify(o => o.AddAsync(It.IsAny<IVisitorDocument>()));
+            _repo.Verify(o => o.AddAsync(It.IsAny<VisitorDocument>()));
             _publisher.Verify(o => o.PublishEvent(It.IsAny<VisitorCreated>(), It.IsAny<IRequestInfo>()));
         }
         

@@ -46,7 +46,7 @@ namespace Services.Users.Handlers.Command
             {
                 _publisher.PublishEvent(new AccessRecordRejected(Codes.InvalidId, "The code used is invalid."), requestInfo);
                 _logger.LogError($"User with code: {message.Code} could not be found.");
-                return;
+                return;  
             }
 
             

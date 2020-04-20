@@ -41,19 +41,13 @@ namespace Services.Mail
             services.AddTransient<VmsExceptionMiddleware>();
             services.AddTransient<IEventHandler<PendingAdminCreated>, PendingAdminCreatedHandler>();
             services.AddTransient<IEventHandler<PendingBusinessAdminCreated>, PendingBusinessAdminCreatedHandler>();
+            services.AddTransient<IEventHandler<UserAccountCreated>, UserAccountCreatedHandler>();
             services.AddSingleton<IMailManager, MailManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            
-            
-            var manager = new MailManager();
-            manager.SendAsync("Test Email",
-                "Hello there this is your email to say your account has been setup and can be found at http://localhost:3000/ .",
-                "billy.mumby@outlook.com");
-            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -65,7 +59,8 @@ namespace Services.Mail
             app.UseRouting();
             app.UseServiceBus(Common.Names.Services.Mail)
                 .SubscribeEvent<PendingAdminCreated>()
-                .SubscribeEvent<PendingBusinessAdminCreated>();
+                .SubscribeEvent<PendingBusinessAdminCreated>()
+                .SubscribeEvent<UserAccountCreated>();
 
             app.UseEndpoints(endpoints =>
             {
