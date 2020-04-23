@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using System.Threading.Tasks;    
 using Services.Common.Logging;
 using Services.Mail.Config;
 using Services.Mail.Messages.Events;
@@ -22,9 +22,9 @@ namespace Services.Mail.Messages.Handlers.Event
         
         public async Task HandleAsync(UserAccountCreated message, IRequestInfo requestInfo)
         {
-            await _mailManager.SendAsync("Account Setup", $@"Your account has been setup for access to your visitor management system please complete your signup here: {_clientsAddresses.Portal}complete/{message.Code}", message.Email);
+            await _mailManager.SendAsync("Account Setup", $@"Your account has been setup for access to your visitor management system please complete your signup here: {_clientsAddresses.Portal}complete/{message.Id}", message.Email);
             
-            _logger.LogInformation($"Email sent to user to setup account with code: {message.Code}");
+            _logger.LogInformation($"Email sent to user to setup account with email: {message.Email}");
         }
     }
 }

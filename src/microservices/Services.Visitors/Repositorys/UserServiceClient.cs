@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Convey.HTTP;
 using Services.Common.Logging;
+using Services.Visitors.Dtos;
 
 namespace Services.Visitors.Repositorys
 {
@@ -21,9 +22,15 @@ namespace Services.Visitors.Repositorys
 
         public async Task<bool> ContainsUserAsync(Guid userId)
         {
-            var site = await _client.GetAsync($"{_baseAddress}/rest/{userId}");
-            _vmsLogger.LogInformation($"Checked user service for id: {userId} got response {site.StatusCode}");
-            return site.StatusCode == HttpStatusCode.OK;
+            var user = await _client.GetAsync($"{_baseAddress}/rest/{userId}");
+            _vmsLogger.LogInformation($"Checked user service for id: {userId} got response {user.StatusCode}");
+            return user.StatusCode == HttpStatusCode.OK;
+        }
+
+        public async Task<UserDto> GetUserAsync(Guid visitingId)
+        {
+            var user = await _client.GetAsync<UserDto>($"{_baseAddress}/rest/{visitingId}");
+            return user;
         }
     }
 }

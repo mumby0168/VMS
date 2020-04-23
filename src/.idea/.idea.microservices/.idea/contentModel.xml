@@ -747,12 +747,14 @@
             <e p="PendingAdminCreated.cs" t="Include" />
             <e p="PendingBusinessAdminCreated.cs" t="Include" />
             <e p="UserAccountCreated.cs" t="Include" />
+            <e p="VisitorSignedIn.cs" t="Include" />
           </e>
           <e p="Handlers" t="Include">
             <e p="Event" t="Include">
               <e p="PendingAdminCreatedHandler.cs" t="Include" />
               <e p="PendingBusinessAdminCreatedHandler.cs" t="Include" />
               <e p="UserAccountCreatedHandler.cs" t="Include" />
+              <e p="VisitorSignedInHandler.cs" t="Include" />
             </e>
           </e>
           <e p="Mail" t="Include">
@@ -1414,6 +1416,7 @@
         <e p="Dtos" t="Include">
           <e p="DataSpecificationDto.cs" t="Include" />
           <e p="SiteDto.cs" t="Include" />
+          <e p="UserDto.cs" t="Include" />
           <e p="VisitorDto.cs" t="Include" />
           <e p="VisitorInformationDto.cs" t="Include" />
           <e p="VisitorRecordDto.cs" t="Include" />
@@ -1430,6 +1433,7 @@
             <e p="BusinessCreated.cs" t="Include" />
           </e>
           <e p="VisitorCreated.cs" t="Include" />
+          <e p="VisitorSignedIn.cs" t="Include" />
           <e p="VisitorSignedOut.cs" t="Include" />
           <e p="VisitorSignOutRejected.cs" t="Include" />
         </e>

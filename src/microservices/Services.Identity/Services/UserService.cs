@@ -74,7 +74,6 @@ namespace Services.Identity.Services
 
             await _identityRepository.AddAsync(identity);
             await _pendingIdentityRepository.RemoveAsync(pending);
-            _publisher.PublishEvent(new UserAccountCreated(identity.Id, identity.Email, identity.Code), RequestInfo.Empty);
         }
 
         public async Task<IAuthToken> SignIn(string email, string password)
@@ -168,7 +167,8 @@ namespace Services.Identity.Services
             var pending = new PendingIdentity(Guid.NewGuid(), email, Roles.StandardPortalUser, businessId);
             await _pendingIdentityRepository.AddAsync(pending);
             _logger.LogInformation($"User account registration created with code: {pending.Id}. for user with email: {pending.Email}");
-            //TODO: Send email to user through email Service.
+            
+            _publisher.PublishEvent(new UserAccountCreated(pending.Id, pending.Email), RequestInfo.Empty);
         }
 
         public async IAsyncEnumerable<StandardUserAccountDto> GetStandardAccountsForBusiness(Guid businessId)

@@ -43,6 +43,7 @@ namespace Services.Mail
             services.AddTransient<IEventHandler<PendingBusinessAdminCreated>, PendingBusinessAdminCreatedHandler>();
             services.AddTransient<IEventHandler<UserAccountCreated>, UserAccountCreatedHandler>();
             services.AddSingleton<IMailManager, MailManager>();
+            services.AddTransient<IEventHandler<VisitorSignedIn>, VisitorSignedInHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,7 +61,8 @@ namespace Services.Mail
             app.UseServiceBus(Common.Names.Services.Mail)
                 .SubscribeEvent<PendingAdminCreated>()
                 .SubscribeEvent<PendingBusinessAdminCreated>()
-                .SubscribeEvent<UserAccountCreated>();
+                .SubscribeEvent<UserAccountCreated>()
+                .SubscribeEvent<VisitorSignedIn>();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,18 +1,14 @@
-﻿using System;
+using System;
 
-namespace Services.Users.Dtos
+namespace Services.Visitors.Dtos
 {
-    public class UserInfoDto
+    public class UserDto
     {
         public Guid Id { get; set; }
 
         public string FirstName { get; set; }
 
         public string SecondName { get; set; }
-        
         public string Email { get; set; }
-        public Guid BasedSiteId { get; set; }
-        
-        public string Code { get; set; }
     }
 }
